@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio Interactivo de Instrumentación Geotécnica | Universidad EAFIT</title>
+  
+  <!-- Metadatos SEO -->
+  <meta name="description" content="Plataforma web interactiva para el análisis computacional de sensores geotécnicos con Python y Pandas. Caso de estudio real de Ancón Norte (Copacabana - SIATA).">
+  <meta name="author" content="M.Eng. Federico Gómez, M.Eng. Juliana Álvarez - Universidad EAFIT">
+  <meta name="keywords" content="Instrumentación Geotécnica, Python, Pandas, Matplotlib, Geotecnia, Sensores, Ancón Norte, SIATA, Deslizamientos, EAFIT">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Laboratorio Interactivo de Instrumentación Geotécnica">
+  <meta property="og:description" content="Aprende análisis de sensores geotécnicos con Python interactivo directamente en el navegador.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CodeMirror CSS & Themes (IDE Syntax Highlighting) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
+</head>
+<body>
+
+  <!-- =======================================================================
+       ENCABEZADO PRINCIPAL (HEADER)
+       ======================================================================= -->
+  <header class="site-header">
+    <div class="header-container">
+      
+      <!-- Marca / Logo -->
+      <div class="brand-wrapper">
+        <div class="brand-icon">🏔️</div>
+        <div class="brand-text">
+          <h1>Instrumentación Geotécnica</h1>
+          <p>Universidad EAFIT | Laboratorio Computacional</p>
+        </div>
+      </div>
+
+      <!-- Pestañas de Navegación -->
+      <nav class="nav-tabs" aria-label="Navegación del Curso">
+        <button class="nav-tab-btn active" data-target="teoria" id="nav-btn-teoria">
+          <span>📖</span> Caso Ancón & Teoría
+        </button>
+        <button class="nav-tab-btn" data-target="modulo1" id="nav-btn-m1">
+          <span>🐍</span> Módulo 1: Python
+        </button>
+        <button class="nav-tab-btn" data-target="modulo2" id="nav-btn-m2">
+          <span>📊</span> Módulo 2: Gráficos
+        </button>
+        <button class="nav-tab-btn" data-target="modulo3" id="nav-btn-m3">
+          <span>🔬</span> Módulo 3: Análisis
+        </button>
+        <button class="nav-tab-btn" data-target="sandbox" id="nav-btn-sandbox">
+          <span>🧪</span> Sandbox Libre
+        </button>
+      </nav>
+
+      <!-- Estado de Pyodide, Selector de Tema y Enlace a GitHub -->
+      <div class="header-actions">
+        <!-- Botón Modo Claro / Oscuro -->
+        <button class="btn-theme" id="btn-theme-toggle" title="Cambiar a Modo Claro / Oscuro" aria-label="Alternar modo claro u oscuro">
+          🌓
+        </button>
+        <div class="pyodide-status-badge loading" id="pyodide-status" title="Estado del motor de Python WebAssembly en tu navegador">
+          <span class="status-dot"></span>
+          <span id="pyodide-status-text">Iniciando Python...</span>
+        </div>
+        <a href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" rel="noopener noreferrer" class="github-link" title="Ver repositorio en GitHub">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       CONTENEDOR PRINCIPAL Y BARRA DE PROGRESO
+       ======================================================================= -->
+  <main class="main-container">
+    
+    <!-- Cinta de Progreso -->
+    <section class="progress-ribbon" aria-label="Progreso del estudiante">
+      <div class="progress-info">
+        <span>🚀 Tu Progreso Práctico:</span>
+        <strong id="progress-count">0 / 12 ejercicios (0%)</strong>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+    </section>
+
+    <!-- Espacio de Trabajo Dividido (Teoría a la izquierda, Editor a la derecha) -->
+    <div class="workspace-grid">
+      
+      <!-- Panel Izquierdo: Conceptos, Teoría y Ejercicios -->
+      <section class="theory-pane" id="theory-pane" aria-label="Contenido pedagógico y enunciados">
+        <!-- Rellenado dinámicamente por app.js -->
+      </section>
+
+      <!-- Panel Derecho: Editor Interactivo de Python y Consola -->
+      <section class="editor-pane" id="editor-pane" aria-label="Editor de código y consola interactiva">
+        
+        <!-- Tarjeta del Editor de Código -->
+        <div class="editor-card">
+          <div class="editor-toolbar">
+            <div class="editor-title">
+              <span>🐍</span> editor.py &bull; <small style="color:var(--text-dim)">Python 3 WebAssembly</small>
+            </div>
+            <div class="editor-actions">
+              <button class="btn-tool" id="btn-reset" title="Reiniciar código inicial">
+                <span>🔄</span> Reiniciar
+              </button>
+              <button class="btn-tool" id="btn-hint" title="Ver pista para resolver el ejercicio">
+                <span>💡</span> Pista
+              </button>
+              <button class="btn-tool" id="btn-solution" title="Mostrar la solución sugerida">
+                <span>👁️</span> Solución
+              </button>
+              <button class="btn-run" id="btn-run" disabled title="Ejecutar código en el navegador (Ctrl+Enter)">
+                <span>▶</span> Ejecutar Código
+              </button>
+            </div>
+          </div>
+
+          <!-- Pistas Desplegables -->
+          <div class="accordion-box hint-accordion" id="hint-box" style="display:none; margin: 0.5rem 1rem 0;">
+            <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
+              <span class="accordion-title">💡 Pista de Ayuda</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-body open" id="hint-content"></div>
+          </div>
+
+          <!-- Solución Desplegable -->
+          <div class="accordion-box solution-accordion" id="solution-box" style="display:none; margin: 0.5rem 1rem 0;">
+            <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
+              <span class="accordion-title">👁️ Solución Sugerida</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-body open">
+              <pre id="solution-content" class="solution-code"></pre>
+            </div>
+          </div>
+
+          <!-- Área de Código con Números de Línea -->
+          <div class="code-area-wrapper">
+            <div class="line-numbers" id="line-numbers" aria-hidden="true"></div>
+            <textarea 
+              class="code-textarea" 
+              id="code-input" 
+              spellcheck="false" 
+              aria-label="Editor de código Python"
+              placeholder="Escribe tu código Python aquí..."></textarea>
+          </div>
+        </div>
+
+        <!-- Banner de Validación Exitosa -->
+        <div class="validation-banner" id="validation-banner">
+          🎉 ¡Excelente trabajo! Ejercicio completado con éxito.
+        </div>
+
+        <!-- Tarjeta de Consola de Resultados y Gráficos -->
+        <div class="console-card">
+          <div class="console-header">
+            <div class="console-tabs">
+              <button class="console-tab-btn active" id="tab-console">Terminal (Texto)</button>
+              <button class="console-tab-btn" id="tab-plot">Gráfico Matplotlib 📊</button>
+            </div>
+            <button class="clear-btn" id="btn-clear-console" title="Limpiar salida de consola">Limpiar</button>
+          </div>
+
+          <!-- Salida de Texto -->
+          <div class="console-output-area" id="console-output" aria-live="polite">
+            Esperando ejecución de código... Haz clic en "Ejecutar Código" o presiona Ctrl + Enter.
+          </div>
+
+          <!-- Salida de Gráficos Matplotlib -->
+          <div class="plot-display-area" id="plot-display" aria-label="Visualización de gráficos">
+            <p style="color:var(--text-dim); font-size:0.85rem;">No hay gráficos generados aún. Llama a <code>plt.show()</code> en tu código.</p>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- =======================================================================
+       PIE DE PÁGINA (FOOTER)
+       ======================================================================= -->
+  <footer class="site-footer">
+    <p>
+      Curso de <strong>Instrumentación Geotécnica</strong> &bull; Departamento de Ingeniería Civil &bull; <strong>Universidad EAFIT</strong>
+    </p>
+    <p style="margin-top:0.35rem; font-size:0.78rem;">
+      Docentes: M.Eng. Federico Gómez (<a href="mailto:fjgomezc@eafit.edu.co">fjgomezc@eafit.edu.co</a>) &amp; M.Eng. Juliana Álvarez (<a href="mailto:jalvarezz@eafit.edu.co">jalvarezz@eafit.edu.co</a>)
+    </p>
+  </footer>
+
+  <!-- CodeMirror JS (IDE Editor Engine) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+
+  <!-- Scripts: Datos del curso, Pyodide Runner y Lógica de Aplicación -->
+  <script src="js/course-data.js"></script>
+  <script src="js/pyodide-runner.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

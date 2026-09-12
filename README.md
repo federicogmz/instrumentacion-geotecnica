@@ -1,134 +1,156 @@
 # Curso de Instrumentación Geotécnica | Universidad EAFIT
+### 💻 Laboratorio Práctico y Análisis Computacional de Sensores
 
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)  
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg) ![Jupyter Notebooks](https://img.shields.io/badge/Notebooks-Jupyter-orange) ![Data Science](https://img.shields.io/badge/Focus-Data%20Science-green)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
+![Jupyter Notebooks](https://img.shields.io/badge/Notebooks-Jupyter-orange.svg)
+![Geotechnical Monitoring](https://img.shields.io/badge/Focus-Geotechnical%20Monitoring-darkgreen.svg)
+[![Plataforma Web Interactiva](https://img.shields.io/badge/Web-Curso%20Interactivo-blueviolet.svg)](https://federicogmz.github.io/instrumentacion-geotecnica/)
+[![Guía de Inicio Rápido](https://img.shields.io/badge/Docs-Gu%C3%ADa%20de%20Inicio-brightgreen.svg)](GUIA_INICIO_RAPIDO.md)
 
 ---
 
 ### Docentes
-- **M.Eng. Federico Gómez**  
-  [fjgomezc@eafit.edu.co](mailto:fjgomezc@eafit.edu.co)
-- **M.Eng. Juliana Álvarez**  
-  [jalvarezz@eafit.edu.co](mailto:jalvarezz@eafit.edu.co)
+- **M.Eng. Federico Gómez** — [fjgomezc@eafit.edu.co](mailto:fjgomezc@eafit.edu.co)
+- **M.Eng. Juliana Álvarez** — [jalvarezz@eafit.edu.co](mailto:jalvarezz@eafit.edu.co)
 
 ---
 
-## Descripción General
-
-Este curso está diseñado para introducir a los estudiantes en el mundo de la instrumentación geotécnica, combinando conceptos teóricos con aplicaciones prácticas y el uso de herramientas modernas de análisis de datos. A través de casos de estudio reales y el manejo de sensores, los participantes aprenderán a leer, analizar y visualizar datos relevantes para la ingeniería geotécnica.
-
-Para facilitar tu aprendizaje, puedes abrir y ejecutar los notebooks interactivos directamente en Google Colab:
-
-[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/)
-
-## Objetivos del Curso
-
-- Comprender los principios básicos de la instrumentación geotécnica y su importancia en la ingeniería civil.
-- Familiarizarse con los principales tipos de sensores utilizados en monitoreo geotécnico.
-- Desarrollar habilidades en el manejo y análisis de datos utilizando Python.
-- Aplicar técnicas de visualización para interpretar resultados y tomar decisiones informadas.
-- Analizar un caso de estudio real integrando diferentes fuentes de información.
-
-## Contenido teórico del curso
-
-### Módulo 1: Conceptos básicos de la Instrumentación Geotécnica
-La instrumentación geotécnica es esencial para anticipar riesgos y garantizar la estabilidad de estructuras y suelos. Este módulo sienta las bases técnicas y conceptuales, desde su importancia hasta las herramientas clave para implementarla.
-- ¿Por qué es fundamental la instrumentación geotécnica?
-- ¿Qué debemos monitorear?
-- Escalas de monitoreo
-- Tipos de sensores
-- Riesgo a partir de amenazas
-
-### Módulo 2: Variables hidrometeorológicas
-El agua, en sus distintas formas, es un agente crítico en la geotecnia. Este módulo analiza cómo fenómenos como la lluvia influyen en fallas geotécnicas y qué métodos emplear para monitorearlos.
-- ¿Por qué se producen fallas en estructuras, suelo o rocas?
-- Factores de falla: condicionantes, pre-detonantes y detonantes
-- La lluvia como factor detonante
-- ¿Cómo estudiar y entender la lluvia?
-- Monitoreo de la lluvia
-- Pluviómetros, radares y satélites
-
-### Módulo 3: El agua en el suelo
-El equilibrio hídrico del suelo determina su estabilidad. Este módulo explora el papel del agua en fallas geotécnicas, desde la infiltración hasta tecnologías para medir su impacto.
-- ¿Por qué se producen fallas en estructuras, suelo o rocas?
-- La lluvia y la humedad como factores pre-detonantes y detonantes
-- Impacto del agua en los suelos desde una perspectiva geotécnica
-- Infiltración: ¿Cómo afecta la estabilidad interna del suelo?
-- Monitoreo de la humedad del suelo
-- Sensores de humedad, tensiómetros, piezómetros, lisímetros y satélites
-
-### Módulo 4: Medición de deformaciones
-Las deformaciones son indicadores silenciosos de posibles colapsos. Este módulo aborda su origen, relevancia y las tecnologías para detectarlas, desde métodos tradicionales hasta innovaciones satelitales.
-- Deformaciones en suelos y estructuras
-- Importancia de medir y monitorear deformaciones
-- ¿Qué causa las deformaciones?
-- Relación entre esfuerzos y deformaciones
-- Instrumentos para medir deformaciones
-- Extensómetros, acelerómetros, inclinómetros, TDR, drones y satélites
-
-### Módulo 5: Interpretación y análisis de datos en instrumentación geotécnica
-Los datos sin análisis son solo números. Este módulo enseña a transformar información cruda en decisiones, integrando técnicas estadísticas, modelos teóricos y protocolos de acción.
-- Interpretación de datos
-- Etapas de la interpretación de datos
-  - Pre-procesamiento
-  - Análisis de tendencias
-  - Comparación de modelos teóricos
-  - Análisis espacial
-  - Evaluación de desempeño estructural
-- Criterios de alarma y acción
-
-## Contenido práctico del curso
-
-### Módulo 1: Introducción a Python
-- Configuración del entorno de trabajo: uso de Jupyter Notebooks, Google Colab o VSCode para escribir y ejecutar código Python.
-- Sintaxis básica de Python: declaración de variables, tipos de datos (números, texto, booleanos), operaciones matemáticas y condicionales (`if`, `else`).
-- Estructura y uso de funciones simples con `def` para reutilizar código.
-- Manipulación de datos con listas y pandas: creación de listas, acceso a elementos, operaciones básicas y uso de pandas para leer y analizar datos en tablas (DataFrames).
-- Consulta de apéndice en el notebook para ejemplos rápidos de funciones y comandos útiles.
-
-### Módulo 2: Visualización de Datos
-- Carga, integración y limpieza de datos reales de sensores usando pandas.
-- Gráficas de líneas simples y multivariables para análisis temporal y comparativo.
-- Remuestreo y agregación de datos para análisis por día, semana, etc.
-- Boxplots para detección visual de dispersión y valores atípicos (outliers), con explicación interpretativa.
-- Detección de anomalías mediante líneas de referencia (media, cuartiles, límites de boxplot).
-- Histogramas para analizar la distribución de variables.
-- Gráficas con doble eje para comparar variables con diferentes escalas (ejemplo: humedad vs. precipitación).
-
-### Módulo 3: Análisis y Manejo de Datos Temporales
-- Limpieza y transformación de datos: manejo de valores nulos, interpolación lineal y comparación con otros métodos.
-- Identificación de valores atípicos (outliers) y anomalías en todas las series y escalas mediante Z-Score y método de Tukey (boxplot).
-- Análisis exploratorio: estadísticas descriptivas, visualización de acumulados, tasas de cambio y boxplots.
-- Descomposición de series temporales: obtención de tendencia, estacionalidad y residuos para cada variable y escala.
-- Comparación de tendencias y análisis de periodos críticos, especialmente en presencia de anomalías.
-- Análisis de correlación y correlación rezagada entre variables para identificar influencias y periodos de interés.
-
-## Sensores y Equipos Utilizados
-
-- **Pluviómetro:** Medición de precipitación para evaluar la influencia de la lluvia en la estabilidad del terreno.
-- **Acelerómetro:** Detección de movimientos del suelo.
-- **Extensómetro:** Monitoreo de deformaciones y desplazamientos en el terreno.
-- **Sensor de Humedad:** Evaluación del contenido de agua en el suelo.
-- **TDR (Reflectometría en el Dominio del Tiempo):** Medición de deformaciones en el subsuelo.
-- **Cámaras y Drones:** Inspección visual, generación de mapas de cambios y perfiles topográficos.
-
-## Recursos del Curso
-
-- Notebooks interactivos en la carpeta `notebooks/` para cada módulo.
-- Datos reales en la carpeta `data/` para análisis y ejercicios prácticos.
-- Documentos de referencia y material complementario.
-
-## Recomendaciones para el Estudio
-
-- Explora y ejecuta los notebooks para afianzar los conceptos.
-- Analiza los datos de sensores y experimenta con diferentes visualizaciones.
-- Consulta la bibliografía recomendada y los recursos adicionales.
-- Participa activamente en las discusiones y plantea tus dudas.
-
-## Contacto
-
-Para preguntas, sugerencias o acompañamiento durante el curso, no dudes en escribirnos a los correos de los docentes.
+> [!TIP]
+> 🌐 **¡Plataforma Web Interactiva en Vivo (GitHub Pages)!**  
+> Puedes estudiar la teoría y programar en Python directamente en tu navegador sin instalar nada:  
+> 👉 **[Entrar a la Plataforma Web Interactiva](https://federicogmz.github.io/instrumentacion-geotecnica/)**  
+> *(Incluye explicaciones interactivas, quizzes con retroalimentación inmediata, editor de Python con ejecución en WebAssembly y laboratorio libre)*.
 
 ---
 
-¡Te damos la bienvenida y te deseamos una experiencia de aprendizaje enriquecedora y exitosa en instrumentación geotécnica!
+## 🎯 Sobre este Repositorio (Componente Práctico)
+
+El curso de **Instrumentación Geotécnica** de la Universidad EAFIT se estructura en dos componentes complementarios:
+
+1. **Etapa Teórica (Cátedra):** Fundamentos geomecánicos, principios físicos de transducción y sensores, factores detonantes/condicionantes de inestabilidad y diseño de redes de monitoreo.
+2. **Etapa Práctica (Este Repositorio):** Laboratorios computacionales aplicados. Aquí aprenderás a procesar, depurar, integrar y analizar datos reales de instrumentación de campo utilizando Python.
+
+> [!IMPORTANT]
+> **¿No tienes conocimientos previos de programación?**  
+> ¡No te preocupes! El material práctico está diseñado desde cero, con explicaciones paso a paso pensadas para ingenieros civiles, geotecnistas y geólogos. Consulta la [**Guía de Inicio Rápido y Supervivencia en Python**](GUIA_INICIO_RAPIDO.md) para familiarizarte con las herramientas básicas.
+
+---
+
+## 🚀 Acceso Directo a los Módulos Prácticos (Google Colab)
+
+Puedes ejecutar los cuadernos de trabajo directamente en tu navegador sin instalar nada en tu computador haciendo clic en las insignias:
+
+| Módulo | Contenido Principal | Ejecutar en la Nube |
+| :--- | :--- | :---: |
+| **Módulo 1**<br/>`Introducción a Python para Geotecnia` | Variables, estructuras de datos, condicionales, funciones y primeros pasos con Pandas usando lecturas reales de lluvia y humedad. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/federicogmz/instrumentacion-geotecnica/blob/main/notebooks/Modulo_1_Introduccion_Python.ipynb) |
+| **Módulo 2**<br/>`Visualización de Datos de Sensores` | Creación de series temporales multivariables con Matplotlib, remuestreo temporal diario/semanal, boxplots para dispersión y gráficos con doble eje. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/federicogmz/instrumentacion-geotecnica/blob/main/notebooks/Modulo_2_Visualizacion_Datos.ipynb) |
+| **Módulo 3**<br/>`Análisis Temporal y Detección de Anomalías` | Diagnóstico e interpolación de datos faltantes, detección de outliers (Z-Score y Tukey), cálculo de acumulados móviles, tasas de cambio y correlaciones rezagadas. | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/federicogmz/instrumentacion-geotecnica/blob/main/notebooks/Modulo_3_Analisis_Datos.ipynb) |
+
+---
+
+## 🏔️ Caso de Estudio: Movimiento en Masa Ancón Norte (Copacabana, Antioquia)
+
+Todas las prácticas del curso se desarrollan con base en un caso de estudio real monitoreado por el **Sistema de Alerta Temprana de Medellín y el Valle de Aburrá (SIATA)**:
+
+- **Ubicación:** Vía Medellín-Girardota km 18 (Copacabana).
+- **Morfodinámica:** Movimiento en masa complejo con superficies de falla identificadas a profundidades de **11 m, 16 m y 22 m**, afectando un área de aproximadamente 7 hectáreas.
+- **Elementos expuestos:** Viviendas del barrio Ancón Norte, calzada principal de acceso vial, redes de acueducto y energía, y el Poliducto Medellín-Cisneros.
+- **Documento técnico detallado:** Consulta el reporte completo en [data/Caso Estudio.pdf](data/Caso%20Estudio.pdf).
+
+### Sensores y Variables Monitoreadas
+
+```mermaid
+graph TD
+    A[Monitoreo Ancón Norte - SIATA] --> B[Pluviómetro<br/>Lluvia acumulada mm]
+    A --> C[Sensor de Humedad<br/>Contenido volumétrico %]
+    A --> D[Extensómetro<br/>Apertura de grietas mm]
+    A --> E[Acelerómetro / Tiltímetro<br/>Cabeceo C1 y Balanceo B1 en °]
+```
+
+| Variable / Columna | Sensor | Unidad | Rol en la Evaluación Geotécnica |
+| :--- | :--- | :---: | :--- |
+| `p1`, `p2`, `p` | Pluviómetro de balancín | $\text{mm}$ | Detonante principal. Se registran canales duplicados para garantizar la integridad del dato ante eventuales obstrucciones. |
+| `sh1` | Sonda de humedad en suelo | $\%$ | Monitorea la saturación del perfil del terreno y el avance del frente húmedo tras precipitaciones. |
+| `DE1` | Extensómetro de hilo/varilla | $\text{mm}$ | Cuantifica la cinemática superficial y apertura progresiva de grietas de tracción en la corona del deslizamiento. |
+| `C1`, `B1` | Acelerómetro / Tiltímetro biaxial | $\text{grados}$ | Registra la inclinación o pérdida de verticalidad del terreno: `C1` (Cabeceo / Pitch) y `B1` (Balanceo / Roll). |
+| `Tem_1` | Sensor de temperatura | $^\circ\text{C}$ | Utilizado para correcciones por dilatación térmica instrumental y análisis ambiental. |
+
+---
+
+## 🛠️ Instalación y Uso en Entorno Local
+
+Si prefieres trabajar de forma local en tu propia máquina (con VS Code o JupyterLab):
+
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/federicogmz/instrumentacion-geotecnica.git
+   cd instrumentacion-geotecnica
+   ```
+
+2. **Crea y activa un entorno virtual (recomendado):**
+   ```bash
+   # En Windows
+   python -m venv venv
+   .\venv\Scripts\activate
+
+   # En macOS / Linux
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+3. **Instala las dependencias:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Inicia JupyterLab:**
+   ```bash
+   jupyter lab
+   ```
+
+---
+
+## 📁 Estructura del Repositorio
+
+```text
+instrumentacion-geotecnica/
+├── index.html                  # Plataforma web interactiva para GitHub Pages
+├── GUIA_INICIO_RAPIDO.md       # Guía paso a paso para estudiantes principiantes
+├── README.md                   # Presentación del componente práctico
+├── requirements.txt            # Librerías de Python requeridas
+├── LICENSE                     # Licencia de uso (CC BY-NC-SA 4.0)
+│
+├── css/                        # Estilos y diseño responsivo del laboratorio web
+│   └── styles.css
+│
+├── js/                         # Lógica interactiva y motor de cómputo en el navegador
+│   ├── app.js                  # Orquestación de interfaz, lecciones y progreso
+│   ├── course-data.js          # Contenidos teóricos, ejercicios, pistas y soluciones
+│   └── pyodide-runner.js       # Motor Python WebAssembly (NumPy, Pandas, Matplotlib)
+│
+├── data/                       # Datos reales de sensores y documentación de campo
+│   ├── Caso Estudio.pdf        # Informe del movimiento en masa de Ancón Norte (SIATA)
+│   ├── TDR.png                 # Esquema y registros de reflectometría en el dominio del tiempo
+│   ├── acelerometro.csv        # Series de aceleración / inclinación (C1, B1, Tem_1)
+│   ├── df_ancon.csv            # Serie diaria consolidada y curada para análisis
+│   ├── extensometro.csv        # Serie de alta frecuencia de deformación superficial (DE1)
+│   ├── humedad.csv             # Serie temporal de contenido de agua en el suelo (sh1)
+│   └── pluviometro.csv         # Serie temporal de precipitación (p1, p2)
+│
+└── notebooks/                  # Cuadernos interactivos de laboratorio (Jupyter / Colab)
+    ├── Modulo_1_Introduccion_Python.ipynb    # Fundamentos de Python y Pandas aplicados
+    ├── Modulo_2_Visualizacion_Datos.ipynb    # Visualización con Matplotlib y remuestreo
+    └── Modulo_3_Analisis_Datos.ipynb         # Feature engineering, anomalías y correlaciones
+```
+```
+
+---
+
+## 💡 Consejos para Aprovechar el Curso
+
+- **Experimenta:** Cambia los rangos de fechas, prueba diferentes ventanas de remuestreo (semanal, mensual) y observa el impacto en las señales.
+- **Relaciona los datos con el terreno:** Los picos y saltos en las curvas no son simples números; representan lluvia intensa, saturación del suelo o reactivaciones cinemáticas del deslizamiento.
+- **Apóyate en los docentes:** Ante cualquier inquietud técnica o conceptual, contáctanos a través de los correos institucionales.
+
+¡Muchos éxitos en tu aprendizaje de la instrumentación geotécnica computacional!

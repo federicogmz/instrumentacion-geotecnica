@@ -105,5 +105,16 @@ cython_debug/
 # Ignore data/DSM directory
 data/DSM/
 
-# Vitual environment directories
+# Virtual environment directories
 venv/
+.venv/
+env/
+ENV/
+
+# macOS files
+.DS_Store
+**/.DS_Store
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
