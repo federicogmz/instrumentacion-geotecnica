@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05. Interpretación y Análisis de Datos en Instrumentación Geotécnica | EAFIT</title>
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  
+  <!-- Tema Institucional EAFIT -->
+  <link rel="stylesheet" href="css/presentation-theme.css">
+</head>
+<body>
+
+  <!-- Barra Superior Institucional -->
+  <header class="presentation-header">
+    <div class="header-brand">
+      <img src="img/brand/eafit_logo.png" alt="EAFIT" class="header-logo" onerror="this.style.display='none'">
+      <span class="header-title">Instrumentación Geotécnica</span>
+      <span class="header-badge">05 &bull; Análisis de Datos y Umbrales</span>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
+      <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
+      <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
+      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+    </div>
+  </header>
+
+  <!-- Contenedor Reveal.js -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section class="slide-cover">
+        <div class="cover-badge">Universidad EAFIT &bull; Departamento de Ingeniería Civil</div>
+        <h1>Interpretación y Análisis de Datos en Instrumentación Geotécnica</h1>
+        <h3 style="color: var(--eafit-yellow-text); margin-top: 15px">Curso de Instrumentación Geotécnica</h3>
+        
+        <div class="cover-meta" style="margin-top: 40px">
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Profesores</span>
+            <span class="cover-meta-value">Federico Gómez, MSc. &bull; Juliana Álvarez, MSc.</span>
+          </div>
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Módulo</span>
+            <span class="cover-meta-value">05 &bull; De los Sensores a la Toma de Decisiones</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS DE LA INTERPRETACIÓN -->
+      <section>
+        <h2>Interpretación de datos</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.3em; margin-top: 8px;">
+          Objetivos principales
+        </h3>
+
+        <div class="card card-highlight" style="margin-top: 25px; padding: 25px;">
+          <ul class="bullet-list" style="font-size: 1.15em; line-height: 1.8;">
+            <li><strong>Validar el comportamiento esperado</strong> del terreno o estructura.</li>
+            <li><strong>Detectar desviaciones significativas</strong> que puedan indicar fallas potenciales.</li>
+            <li><strong>Ajustar modelos predictivos</strong> o planes de monitoreo.</li>
+            <li><strong>Tomar decisiones preventivas o correctivas</strong> con base en las tendencias observadas.</li>
+            <li>Ayudar a <strong>prevenir catástrofes</strong> en estructuras críticas como presas, túneles, o edificios altos.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: ETAPAS DE LA INTERPRETACIÓN -->
+      <section>
+        <h2>Etapas de la interpretación de datos</h2>
+        <div class="grid-3" style="margin-top: 35px; gap: 20px;">
+          
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-blue);">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">1️⃣</span>
+              <span>Pre-procesamiento</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Validación de datos, interpolación de faltantes, filtrado de ruido y correcciones ambientales.
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-cyan);">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">2️⃣</span>
+              <span>Análisis de Datos</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Series temporales, detección de tendencias, análisis de desviaciones y correlaciones.
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">3️⃣</span>
+              <span>Análisis Espacial</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Integración de variables sobre modelos digitales de terreno (DSM, ortofotos y NDVI).
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-yellow-text);">
+            <div class="card-title" style="color: var(--eafit-yellow-text);">
+              <span class="card-icon">4️⃣</span>
+              <span>Modelos Teóricos</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Comparación del desempeño real con el diseño y recalibración de modelos.
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">5️⃣</span>
+              <span>Criterios de Alarma</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Definición de umbrales críticos, niveles de alerta y protocolos de acción operativa.
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid #8b5cf6;">
+            <div class="card-title" style="color: #8b5cf6;">
+              <span class="card-icon">6️⃣</span>
+              <span>Informe Técnico</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Síntesis estructurada, evidencia gráfica, conclusiones clave y recomendaciones.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 4: ¿QUÉ ES UNA SERIE TEMPORAL? -->
+      <section>
+        <h2>Etapas de la interpretación de datos</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Qué es una serie temporal?
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1.05em; line-height: 1.6;">
+                Una <strong>serie temporal</strong> es una secuencia de datos recolectados a lo largo del tiempo. En geotecnia, representan el comportamiento de una variable como <strong>desplazamiento, presión de poros o lluvia</strong>.
+              </p>
+
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--eafit-blue);">Componentes clave de una serie temporal:</strong>
+                <ul class="bullet-list" style="margin-top: 8px; font-size: 0.95em;">
+                  <li><strong>Tendencia:</strong> cambio a largo plazo (ej. desplazamiento progresivo).</li>
+                  <li><strong>Estacionalidad:</strong> variación cíclica (ej. mayor presión de poros en temporada de lluvias).</li>
+                  <li><strong>Eventos:</strong> cambios súbitos (ej. aceleración de una ladera ante una tormenta).</li>
+                  <li><strong>Ruido:</strong> variaciones aleatorias sin causa física clara.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p05/image2.png" alt="Descomposición de Serie Temporal" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 5: PRE-PROCESAMIENTO: VALIDACIÓN E INTERPOLACIÓN -->
+      <section>
+        <h2>Etapas de la interpretación de datos</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Pre-procesamiento
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🔍</span>
+              <span>1. Validación de datos:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li>Definir procedimientos para identificar errores comunes (sensores dañados, errores de transmisión, valores fuera de rango).</li>
+              <li><strong>Acciones recomendadas:</strong> verificación del estado de los equipos y comparación cruzada con datos de múltiples sensores.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">⚙️</span>
+              <span>2. Interpolación y filtrado:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li><strong>Interpolación:</strong> técnica para estimar valores faltantes en la serie temporal sin distorsionar la señal física.</li>
+              <li><strong>Filtrado:</strong> eliminar el ruido de alta frecuencia de la señal sin perder la información cinemática relevante.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 6: ANÁLISIS DE TENDENCIAS (GRÁFICA) -->
+      <section>
+        <h2>Etapas de la interpretación: Análisis de Tendencias</h2>
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 25px;">
+          <img src="img/p05/image3.png" alt="Tendencias Temporales 1" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p05/image4.png" alt="Tendencias Temporales 2" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 7: PRE-PROCESAMIENTO: CORRECCIONES AMBIENTALES -->
+      <section>
+        <h2>Etapas de la interpretación: Pre-procesamiento</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          3. Correcciones ambientales
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              Muchos sensores geotécnicos (cuerda vibrante, galgas, extensómetros) son sensibles a los <strong>cambios térmicos diarios y estacionales</strong>.
+            </p>
+            <div class="callout callout-warning" style="margin-top: 15px;">
+              <span class="callout-icon">🌡️</span>
+              <div class="callout-content" style="font-size: 0.95em;">
+                <strong>Ejemplo:</strong> Cómo los sensores pueden estar afectados por la temperatura ambiental; es imperativo <strong>aplicar correcciones térmicas</strong> para compensar estos efectos y aislar la verdadera deformación mecánica.
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p05/image5.png" alt="Efecto Térmico en Sensores" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 8: ANÁLISIS DE DATOS: HERRAMIENTAS ESTADÍSTICAS -->
+      <section>
+        <h2>Etapas de la interpretación: Análisis de Datos</h2>
+        <p style="font-size: 1.05em; margin-top: 6px;">
+          El análisis inicial permite entender el comportamiento, identificar anomalías y definir umbrales. <strong>La estadística es nuestra mejor aliada.</strong>
+        </p>
+
+        <div class="grid-2" style="margin-top: 20px; gap: 18px;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 0.95em;">
+              <li><strong>Histogramas:</strong> ver la distribución y frecuencias de los valores.</li>
+              <li><strong>KDE (Estimación de Densidad):</strong> forma suave y continua de la distribución.</li>
+              <li><strong>Diagramas de dispersión:</strong> relación entre variables (ej. lluvia vs. desplazamiento).</li>
+              <li><strong>Correlación:</strong> qué tan fuerte es la relación entre variables.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 0.95em;">
+              <li><strong>Media móvil (suavizado):</strong> elimina el ruido de alta frecuencia.</li>
+              <li><strong>Derivadas temporales:</strong> cálculo de velocidad y aceleración de la deformación.</li>
+              <li><strong>Acumulados:</strong> muy útil en precipitación (ej. lluvia acumulada a 3, 7 o 15 días).</li>
+              <li><strong>Normalización:</strong> para comparar y cruzar variables de distinta magnitud o unidades.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 9: ANÁLISIS TEMPORAL Y DESVIACIONES -->
+      <section>
+        <h2>Etapas de la interpretación: Análisis de Datos</h2>
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">⏱️</span>
+              <span>1. Análisis temporal:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.92em;">
+              <li><strong>Evaluación de series temporales:</strong> uso de gráficos para observar cómo evolucionan las variables (deformaciones, presiones) con el tiempo.</li>
+              <li><strong>Tendencias:</strong> diferenciar entre comportamientos lineales (constantes en el tiempo, crecientes o decrecientes) y no lineales (aceleraciones o desaceleraciones).</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">📊</span>
+              <span>2. Análisis de desviaciones:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.92em;">
+              <li><strong>Identificación de anomalías:</strong> uso de histogramas, gráficos de bigotes (boxplots) o de dispersión para identificar valores fuera del comportamiento esperado.</li>
+              <li><strong>Respuesta ante desviaciones:</strong> evaluar estacionalidad (variación periódica) y estacionariedad (propiedades estadísticas constantes en el tiempo).</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 10: ANÁLISIS DE TENDENCIAS (GRÁFICA 2) -->
+      <section>
+        <h2>Etapas de la interpretación: Análisis de Tendencias</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p05/image6.jpeg" alt="Registro de Aceleración de Deformación" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 11: RELACIONES Y DISPERSIÓN -->
+      <section>
+        <h2>Etapas de la interpretación: Relaciones</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 6px;">
+          3. Relaciones y Correlaciones
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1em; line-height: 1.6;">
+                Una <strong>relación</strong> indica que dos variables cambian juntas, pero no necesariamente de forma proporcional o lineal. Puede ser visual, causal o indirecta.
+              </p>
+              <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+                <li>Se explora a través de <strong>diagramas de dispersión (scatter plots)</strong>.</li>
+                <li>Permite observar patrones (lineales, curvilíneos, umbrales).</li>
+                <li>Es el <strong>primer paso</strong> para entender cómo interactúan los fenómenos.</li>
+              </ul>
+            </div>
+            <p style="font-size: 0.8em; color: var(--text-dim); margin-top: 10px;">
+              Relación entre la precipitación media mensual del Valle de Aburrá y los movimientos en masa (1960-2018).
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p05/image7.png" alt="Relación Dispersión Valle de Aburrá" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 12: CORRELACIÓN VS CAUSALIDAD -->
+      <section>
+        <h2>Etapas de la interpretación: Correlaciones</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">📈</span>
+                <span>Coeficiente de correlación</span>
+              </div>
+              <p style="margin-top: 10px; font-size: 0.95em; line-height: 1.55;">
+                La correlación es una medida estadística que cuantifica la fuerza y dirección de una relación lineal entre dos variables. Se expresa con un coeficiente entre -1 y 1:
+              </p>
+              <ul class="bullet-list" style="margin-top: 10px; font-size: 0.9em;">
+                <li><strong>+1:</strong> relación lineal positiva perfecta.</li>
+                <li><strong>0:</strong> sin relación lineal.</li>
+                <li><strong>-1:</strong> relación lineal negativa perfecta.</li>
+              </ul>
+            </div>
+
+            <div class="callout callout-danger" style="margin-top: 15px;">
+              <span class="callout-icon">⚠️</span>
+              <div class="callout-content" style="font-size: 1.1em; font-weight: 800;">
+                Importante: Correlación &ne; Causalidad
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p05/image8.png" alt="Matriz y Gráficos de Correlación" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 13: QUÉ BUSCAR EN LOS DATOS -->
+      <section>
+        <h2>¿Qué buscar en los datos de sensores geotécnicos?</h2>
+        <div class="card card-highlight" style="max-width: 850px; margin: 25px auto 0 auto; padding: 25px;">
+          <ul class="bullet-list" style="font-size: 1.15em; line-height: 1.7;">
+            <li>
+              <strong>Cambios de pendiente en las curvas:</strong> aceleración cinemática del terreno.
+            </li>
+            <li>
+              <strong>Saltos bruscos:</strong> desprendimiento localizado, rotura interna o asentamiento súbito.
+            </li>
+            <li>
+              <strong>Estancamiento o reducción inesperada:</strong> posible daño en el instrumento, pérdida de señal o bloqueo mecánico.
+            </li>
+            <li>
+              <strong>Comportamientos repetitivos:</strong> respuesta cíclica o estacional ante temporadas de lluvias.
+            </li>
+            <li>
+              <strong>Correlaciones visibles entre variables:</strong> por ejemplo, un pico de lluvia intensa seguido por incremento en presión de poros y subsiguiente deformación.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: ANÁLISIS ESPACIAL: DISTRIBUCIÓN -->
+      <section>
+        <h2>Etapas de la interpretación: Análisis espacial</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">🗺️</span>
+                <span>1. Distribución de variables:</span>
+              </div>
+              <p style="margin-top: 10px; font-size: 0.95em; line-height: 1.6;">
+                Integrar mapas con las variables medidas (presión de poros, desplazamiento, deformación) para <strong>visualizar áreas críticas</strong>. Siempre será necesario correlacionar variables e identificar patrones de comportamiento espaciales.
+              </p>
+
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--accent-cyan);">Herramientas de análisis:</strong>
+                <ul class="bullet-list" style="margin-top: 8px; font-size: 0.9em;">
+                  <li>Gráficas de dispersión y series temporales.</li>
+                  <li>Histogramas.</li>
+                  <li>Análisis de correlación espacial.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p05/image9.png" alt="Mapa de Distribución Espacial de Variables" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 15: ANÁLISIS ESPACIAL: MODELOS Y ORTOFOTOS -->
+      <section>
+        <h2>Etapas de la interpretación: Análisis espacial</h2>
+        <div style="display: flex; gap: 15px; justify-content: center; align-items: center; margin-top: 25px;">
+          <img src="img/p05/image10.jpeg" alt="Mapa Geotécnico Espacial 1" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p05/image11.jpeg" alt="Mapa Geotécnico Espacial 2" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p05/image12.jpeg" alt="Mapa Geotécnico Espacial 3" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 16: EVALUACIÓN DEL DESEMPEÑO ESTRUCTURAL -->
+      <section>
+        <h2>Evaluación del Desempeño Estructural</h2>
+        <div class="card card-highlight" style="max-width: 850px; margin: 25px auto 0 auto; padding: 30px;">
+          <h3 style="color: var(--eafit-blue); font-size: 1.3em; margin-bottom: 15px;">
+            1. Evaluación del comportamiento de la estructura o terreno:
+          </h3>
+
+          <ul class="bullet-list" style="font-size: 1.1em; line-height: 1.7;">
+            <li>
+              <strong>Comparar las mediciones con los límites aceptables</strong> de deformación o desplazamiento definidos en el diseño de ingeniería.
+            </li>
+            <li>
+              <strong>Detección de fallas o comportamientos anómalos:</strong> identificación temprana de fallos estructurales incipientes a través de las tendencias en las mediciones.
+            </li>
+          </ul>
+
+          <div class="callout callout-danger" style="margin-top: 20px;">
+            <span class="callout-icon">⚡</span>
+            <div class="callout-content" style="font-size: 1.05em; font-weight: 600;">
+              De ser necesario se deben tomar <strong>medidas radicales a partir del contraste de esta información</strong> y la comparación con los modelos teóricos.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: COMPARACIÓN CON MODELOS TEÓRICOS -->
+      <section>
+        <h2>Comparación con Modelos Teóricos</h2>
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📐</span>
+              <span>Modelos en Diseño Geotécnico</span>
+            </div>
+            <p style="margin-top: 12px; font-size: 1.05em; line-height: 1.6;">
+              En el diseño geotécnico se desarrollan modelos que predicen el comportamiento de una estructura o terreno (por ejemplo, un modelo de deformaciones para un muro de contención o talud).
+            </p>
+            <p style="margin-top: 10px; font-size: 1.05em; line-height: 1.6; color: var(--accent-cyan); font-weight: 600;">
+              Estos modelos son cruciales para la interpretación de la instrumentación.
+            </p>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">⚖️</span>
+              <span>1. Comparación real vs. modelo:</span>
+            </div>
+            <p style="margin-top: 12px; font-size: 1.05em; line-height: 1.6;">
+              Presentar gráficos comparativos entre el comportamiento real medido y el esperado según el modelo teórico.
+            </p>
+            <div class="callout callout-warning" style="margin-top: 15px;">
+              <span class="callout-icon">💡</span>
+              <div class="callout-content" style="font-size: 0.95em;">
+                Las diferencias significativas implican la <strong>necesidad de recalibrar el modelo</strong> o tomar medidas correctivas en las estructuras.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 18: ¿QUÉ SON LOS UMBRALES? -->
+      <section>
+        <h2>Criterios de Alarma y Acción: Umbrales</h2>
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">🚨</span>
+              <span>¿Qué son los umbrales?</span>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.95em; line-height: 1.55;">
+              <strong>Límites críticos</strong> que indican la necesidad de acciones preventivas o correctivas. Son valores predefinidos que, cuando se superan, sugieren riesgo potencial de falla o daño en la estructura.
+            </p>
+            <p style="margin-top: 10px; font-size: 0.95em; line-height: 1.55; color: var(--text-muted);">
+              Permiten establecer niveles de alerta y actuar antes del colapso (ej. inclinación acercándose a umbral crítico activa mitigación).
+            </p>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📋</span>
+              <span>Tipos de Umbrales:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 12px; font-size: 0.95em;">
+              <li>
+                <strong>Empíricos:</strong> definidos con base en eventos y observaciones anteriores.
+              </li>
+              <li>
+                <strong>Estadísticos:</strong> calculados mediante percentiles (ej. percentil 90 o 95) o desviaciones estándar ($\mu \pm 2\sigma$).
+              </li>
+              <li>
+                <strong>Modelados:</strong> umbrales críticos de lluvia o deformación definidos en la fase de diseño numérico.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 19: DEFINICIÓN DE UMBRALES Y PLAN DE ACCIÓN -->
+      <section>
+        <h2>Criterios de Alarma y Acción</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">🚨</span>
+                <span>1. Definir umbrales de alerta:</span>
+              </div>
+              <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5;">
+                Establecer valores límite para cada sensor (inclinómetros, piezómetros, etc.) que, si se superan, activan una alarma.
+              </p>
+
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--accent-rose);">Definir un plan de acción:</strong>
+                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.5;">
+                  Protocolo de respuesta en caso de que las mediciones superen los límites: <strong>evacuación, refuerzo estructural o paralización de la obra</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p05/image13.png" alt="Esquema de Umbrales y Niveles de Alerta" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 20: METODOLOGÍAS: ENFOQUES EMPÍRICOS -->
+      <section>
+        <h2>Metodologías para definir umbrales</h2>
+        <h3 style="color: var(--eafit-blue); font-size: 1.25em; margin-top: 8px;">
+          Enfoques empíricos
+        </h3>
+
+        <div class="card card-highlight" style="max-width: 850px; margin: 20px auto 0 auto; padding: 25px;">
+          <p style="font-size: 1.05em; line-height: 1.6;">
+            Basados en la <strong>observación y experiencia acumulada</strong> en proyectos anteriores. Se utilizan datos históricos de un sitio en particular para definir umbrales a partir del comportamiento de eventos pasados.
+          </p>
+
+          <div class="callout callout-info" style="margin-top: 15px;">
+            <span class="callout-icon">📌</span>
+            <div class="callout-content" style="font-size: 0.95em;">
+              <strong>Ejemplo:</strong> Si en una zona ha habido fallos de talud cuando las lluvias superan los <strong>100 mm en 24 horas</strong>, ese valor se puede utilizar como umbral crítico de alerta.
+            </div>
+          </div>
+
+          <div class="split-2" style="margin-top: 20px; gap: 20px;">
+            <div style="color: var(--accent-emerald); font-size: 0.95em;">
+              <strong>✅ Ventaja:</strong> Permite una rápida implementación, especialmente cuando hay datos históricos disponibles.
+            </div>
+            <div style="color: var(--accent-rose); font-size: 0.95em;">
+              <strong>⚠️ Desventaja:</strong> No siempre se adapta a condiciones cambiantes o situaciones nuevas.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: METODOLOGÍAS: ENFOQUES ESTADÍSTICOS O MODELADOS -->
+      <section>
+        <h2>Metodologías para definir umbrales</h2>
+        <h3 style="color: var(--accent-cyan); font-size: 1.25em; margin-top: 8px;">
+          Enfoques Estadísticos o Modelados
+        </h3>
+
+        <div class="card card-highlight" style="max-width: 850px; margin: 20px auto 0 auto; padding: 25px;">
+          <p style="font-size: 1.05em; line-height: 1.6;">
+            Estos enfoques se basan en <strong>modelos matemáticos o numéricos</strong> que simulan el comportamiento de la estructura en diferentes escenarios.
+          </p>
+          <p style="font-size: 1em; line-height: 1.6; margin-top: 10px; color: var(--text-muted);">
+            Se utilizan técnicas de simulación para determinar cómo una estructura responde a diferentes cargas o condiciones climáticas, permitiendo establecer umbrales de manera más precisa.
+          </p>
+
+          <div class="split-2" style="margin-top: 20px; gap: 20px;">
+            <div style="color: var(--accent-emerald); font-size: 0.95em;">
+              <strong>✅ Ventaja:</strong> Ofrece mayor precisión al considerar múltiples variables y condiciones acopladas.
+            </div>
+            <div style="color: var(--accent-rose); font-size: 0.95em;">
+              <strong>⚠️ Desventaja:</strong> Requiere más tiempo, recursos computacionales y habilidades técnicas avanzadas.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22: METODOLOGÍAS: DATOS NORMATIVOS -->
+      <section>
+        <h2>Metodologías para definir umbrales</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Datos normativos
+        </h3>
+
+        <div class="card card-highlight" style="max-width: 850px; margin: 25px auto 0 auto; padding: 30px;">
+          <p style="font-size: 1.1em; line-height: 1.65;">
+            En algunos casos, los umbrales son establecidos por <strong>normativas y regulaciones locales o internacionales</strong>.
+          </p>
+          <p style="font-size: 1.05em; line-height: 1.65; margin-top: 15px; color: var(--text-muted);">
+            Estas normativas suelen indicar valores límite aceptables de deformación o presión en proyectos geotécnicos, basados en investigaciones previas y estudios a gran escala.
+          </p>
+
+          <div class="callout callout-info" style="margin-top: 25px;">
+            <span class="callout-icon">🇨🇴</span>
+            <div class="callout-content" style="font-size: 1.1em; font-weight: 700;">
+              En Colombia: NSR-10 (Norma Sismo Resistente, Título H - Estudios Geotécnicos).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: RANGOS ADMISIBLES -->
+      <section>
+        <h2>Criterios de Alarma y Acción</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Qué son los Rangos admisibles?
+        </h3>
+
+        <div class="card card-highlight" style="max-width: 850px; margin: 20px auto 0 auto; padding: 25px;">
+          <p style="font-size: 1.05em; line-height: 1.6;">
+            Los <strong>rangos admisibles</strong> son los límites dentro de los cuales las variables medidas por los sensores pueden fluctuar <strong>sin que esto represente un riesgo inmediato</strong>.
+          </p>
+          <p style="font-size: 1.05em; line-height: 1.6; margin-top: 12px;">
+            Fuera de estos rangos, la estructura puede comenzar a mostrar signos de inestabilidad o daño irreversible.
+          </p>
+          
+          <div class="callout callout-warning" style="margin-top: 20px;">
+            <span class="callout-icon">⚙️</span>
+            <div class="callout-content" style="font-size: 0.95em;">
+              Para cada sensor instalado se deben establecer límites admisibles de acuerdo con las condiciones del sitio y las especificaciones técnicas del sensor (basado en datos históricos, simulaciones o normativas, muchas veces <strong>definido por el proveedor del instrumento</strong>).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 24: INFORME TÉCNICO Y CIERRE -->
+      <section class="slide-cover">
+        <div class="cover-badge">Módulo 05 &bull; Entrega Final</div>
+        <h2 style="font-size: 2.3em; margin-top: 20px;">
+          Informe técnico: Ver ejemplo
+        </h2>
+        <p style="font-size: 1.15em; color: var(--text-muted); margin-top: 20px; max-width: 700px; margin-left: auto; margin-right: auto;">
+          Consolidación de objetivos, esquema de monitoreo, análisis temporal y espacial, propuesta de umbrales y conclusiones operativas.
+        </p>
+
+        <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center;">
+          <a href="00_presentacion_curso.html#/10" class="header-btn" style="display: inline-flex; font-size: 1em; padding: 12px 24px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
+            <span>📋</span> Ver Estructura del Reporte (Clase 00)
+          </a>
+          <a href="et_avenidas_torrenciales.html" class="header-btn" style="display: inline-flex; font-size: 1em; padding: 12px 24px; background: var(--eafit-yellow); color: var(--eafit-blue-deep); border-radius: 8px; text-decoration: none; font-weight: 700;">
+            <span>🌊</span> Módulo Especial &bull; Avenidas Torrenciales
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Barra Inferior de Información y Atajos -->
+  <footer class="presentation-footer">
+    <div class="footer-credits">
+      <strong>EAFIT</strong> &bull; Instrumentación Geotécnica &bull; Docentes: Federico Gómez, MSc. & Juliana Álvarez, MSc.
+    </div>
+    <div class="footer-shortcuts">
+      <span>Espacio</span> Avanzar &bull; <span>←</span> Retroceder &bull; <span>F</span> Pantalla Completa &bull; <span>T</span> Modo Claro/Oscuro &bull; <span>Esc</span> Cuadrícula
+    </div>
+  </footer>
+
+  <!-- Scripts Reveal.js y Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.min.js"></script>
+  <script src="js/presentation-core.js"></script>
+
+</body>
+</html>

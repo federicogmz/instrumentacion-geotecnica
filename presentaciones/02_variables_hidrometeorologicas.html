@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02. Variables Hidrometeorológicas | Instrumentación Geotécnica - EAFIT</title>
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  
+  <!-- Tema Institucional EAFIT -->
+  <link rel="stylesheet" href="css/presentation-theme.css">
+</head>
+<body>
+
+  <!-- Barra Superior Institucional -->
+  <header class="presentation-header">
+    <div class="header-brand">
+      <img src="img/brand/eafit_logo.png" alt="EAFIT" class="header-logo" onerror="this.style.display='none'">
+      <span class="header-title">Instrumentación Geotécnica</span>
+      <span class="header-badge">02 &bull; Variables Hidrometeorológicas</span>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
+      <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
+      <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
+      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+    </div>
+  </header>
+
+  <!-- Contenedor Reveal.js -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section class="slide-cover">
+        <div class="cover-badge">Universidad EAFIT &bull; Departamento de Ingeniería Civil</div>
+        <h1>Variables Hidrometeorológicas</h1>
+        <h3 style="color: var(--eafit-yellow-text); margin-top: 15px">Curso de Instrumentación Geotécnica</h3>
+        
+        <div class="cover-meta" style="margin-top: 40px">
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Profesores</span>
+            <span class="cover-meta-value">Federico Gómez, MSc. &bull; Juliana Álvarez, MSc.</span>
+          </div>
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Módulo</span>
+            <span class="cover-meta-value">02 &bull; La Lluvia y su Monitoreo</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: POR QUÉ SE PRODUCEN LAS FALLAS -->
+      <section>
+        <h2>¿Por qué se producen las fallas en estructuras, en el suelo o en las rocas?</h2>
+        <div class="grid-3" style="margin-top: 20px; gap: 15px;">
+          
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-blue);">
+            <div class="card-title" style="color: var(--eafit-blue); font-size: 1.05em;">
+              <span>⛰️ Estáticos (Condicionantes)</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.88em; margin-top: 8px;">
+              <li>Pendiente del terreno.</li>
+              <li>Geología y tipo de suelo.</li>
+              <li>Uso del suelo.</li>
+              <li>Geomorfología.</li>
+              <li>Hidrogeología.</li>
+              <li>Tipo de materiales de construcción.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-yellow-text);">
+            <div class="card-title" style="color: var(--eafit-yellow-text); font-size: 1.05em;">
+              <span>⏳ Pre-detonantes</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.88em; margin-top: 8px;">
+              <li>Humedad del suelo.</li>
+              <li>Lluvia antecedente o humedad del suelo.</li>
+              <li>Cambio de coberturas.</li>
+              <li>Deformaciones pequeñas en estructuras.</li>
+              <li>Drenajes deficientes.</li>
+              <li>Sobre carga en estructuras.</li>
+              <li>Componente antrópico.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose); font-size: 1.05em;">
+              <span>⚡ Dinámicos (Detonantes)</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.88em; margin-top: 8px;">
+              <li><strong>Lluvia</strong></li>
+              <li>Sismos.</li>
+              <li>Sobre carga en estructura o en el terreno.</li>
+              <li>Componente antrópico.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LA LLUVIA COMO FACTOR DETONANTE - TERZAGHI -->
+      <section>
+        <h2>La lluvia como factor detonante</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div>
+            <div class="card card-highlight">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">📐</span>
+                <span>Ley de Terzaghi y Resistencia al Corte</span>
+              </div>
+              <p style="margin-top: 10px; font-size: 1.05em;">
+                La resistencia al corte de un suelo viene dada por:
+              </p>
+              <div style="text-align: center; font-size: 1.4em; padding: 15px; margin: 12px 0; background: rgba(0,75,133,0.06); border-radius: 8px; font-family: var(--font-mono);">
+                98849	au = c' + (\sigma - u) 	an\phi'98849
+              </div>
+              <p style="font-size: 0.95em; color: var(--text-muted);">
+                Donde '$ y $\phi'$ son parámetros intrínsecos del suelo, mientras que $\sigma' = \sigma - u$ dependerá de las variaciones de los esfuerzos totales debidos al efecto de la presión de poros ($).
+              </p>
+            </div>
+
+            <div class="callout callout-warning" style="margin-top: 15px;">
+              <span class="callout-icon">💧</span>
+              <div class="callout-content" style="font-size: 0.95em;">
+                A medida que aumenta el contenido de agua, <strong>disminuye el esfuerzo efectivo</strong>, lo que reduce la resistencia al corte del suelo y, en consecuencia, su estabilidad.
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image2.jpeg" alt="Esfuerzos y Presión de Poros" style="max-height: 350px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 4: EN RESUMEN -->
+      <section>
+        <h2>La lluvia como factor detonante</h2>
+        <div class="card card-highlight" style="max-width: 850px; margin: 30px auto 0 auto; padding: 30px;">
+          <h3 style="color: var(--eafit-yellow-text); font-size: 1.5em; margin-bottom: 20px;">En resumen…</h3>
+          
+          <ul class="bullet-list" style="font-size: 1.2em; line-height: 1.8;">
+            <li>La lluvia <strong>disminuye el esfuerzo efectivo</strong> (como lo predice la ecuación de Terzaghi).</li>
+            <li><strong>Disminuye la fricción interna</strong> entre las partículas del suelo.</li>
+            <li>Esto significa que el suelo pierde gran parte de su capacidad para resistir deslizamientos o fallas.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: PRECIPITACIÓN MEDIA Y MOVIMIENTOS EN MASA -->
+      <section>
+        <h2>La lluvia como factor detonante</h2>
+        <p style="font-size: 1.15em; margin-top: 10px; color: var(--text-main); font-weight: 600;">
+          Relación entre la precipitación media mensual del Valle de Aburrá y los movimientos en masa en un período entre 1960-2018.
+        </p>
+
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p02/image7.png" alt="Relación Lluvia y Deslizamientos Valle de Aburrá" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 6: MALPASSET Y LLUVIA -->
+      <section>
+        <h2>Rotura de la Presa de Malpasset, Francia, 1959</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">🔍</span>
+              <span>Supuestos factores que influyeron en el fallo:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
+              <li>Terreno inestable y con deformaciones.</li>
+              <li>Fracturas y grietas sobre la estructura de la presa.</li>
+              <li>Filtraciones.</li>
+              <li>Erosión de la base o fundación.</li>
+              <li><strong style="color: var(--accent-rose);">Lluvias intensas previas a la ocurrencia del fallo.</strong></li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image8.png" alt="Presa Malpasset" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 7: UMBRALES CRÍTICOS SIATA -->
+      <section>
+        <h2>Umbrales Críticos de Lluvia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Cómo estudiar y entender la lluvia?
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card card-highlight">
+              <p style="font-size: 1.1em; line-height: 1.6;">
+                En la práctica, se utilizan <strong>datos históricos de lluvias y correlaciones con eventos de fallas</strong> para definir umbrales críticos de lluvia que pueden desencadenar deslizamientos.
+              </p>
+            </div>
+
+            <div class="callout callout-warning" style="margin-top: 20px;">
+              <span class="callout-icon">⚡</span>
+              <div class="callout-content" style="font-size: 1.05em;">
+                ¡Esto requiere tanto datos históricos como en tiempo real para poder determinar si un evento de lluvia puede generar afectaciones!
+              </div>
+            </div>
+            <p style="font-size: 0.8em; color: var(--text-dim); margin-top: 10px;">Tomado de SIATA</p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image9.png" alt="Umbrales Críticos SIATA" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 8: ESCALAS DE MONITOREO DE LLUVIA -->
+      <section>
+        <h2>Monitoreo de la lluvia</h2>
+        <p style="font-size: 1.15em; margin-top: 10px;">
+          La lluvia también se puede monitorear a diferentes escalas temporales y espaciales.
+        </p>
+
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--eafit-blue); padding: 30px;">
+            <div class="card-title" style="color: var(--eafit-blue); font-size: 1.3em;">
+              <span class="card-icon">📍</span>
+              <span>Sensores en sitio:</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 1.2em; margin-top: 20px;">
+              <li><strong>Pluviómetros</strong></li>
+            </ul>
+            <div style="text-align: center; margin-top: 20px;">
+              <img src="img/p02/image10.png" alt="Pluviómetro" style="max-height: 140px; width: auto;">
+            </div>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-cyan); padding: 30px;">
+            <div class="card-title" style="color: var(--accent-cyan); font-size: 1.3em;">
+              <span class="card-icon">📡</span>
+              <span>Sensores remotos:</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 1.2em; margin-top: 20px;">
+              <li><strong>Radares meteorológicos</strong></li>
+              <li><strong>Satélites</strong></li>
+            </ul>
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+              <img src="img/p02/image11.png" alt="Radar" style="max-height: 140px; width: auto;">
+              <img src="img/p02/image12.png" alt="Satélite" style="max-height: 140px; width: auto;">
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 9: PLUVIÓMETRO: DEFINICIÓN Y CARACTERÍSTICAS -->
+      <section>
+        <h2>Monitoreo de la lluvia: Pluviómetro</h2>
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1.05em; line-height: 1.55;">
+                Es el instrumento tradicional más utilizado para medir la cantidad de lluvia que cae en un área específica durante un período de tiempo determinado.
+              </p>
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--eafit-blue);">¿Qué mide?</strong>
+                <p style="margin-top: 5px; font-size: 0.95em;">
+                  Mide la cantidad de precipitación acumulada en milímetros (mm) durante un período de tiempo. <strong>1 mm de precipitación equivale a 1 litro de agua caída sobre una superficie de 1 metro cuadrado.</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div class="card" style="border-left: 4px solid var(--accent-emerald);">
+              <strong style="color: var(--accent-emerald);">Ventajas</strong>
+              <ul class="bullet-list" style="font-size: 0.9em; margin-top: 8px;">
+                <li>Alta precisión local.</li>
+                <li>Fácil instalación y mantenimiento.</li>
+                <li>Son económicos.</li>
+                <li>Pueden dar datos en tiempo real.</li>
+              </ul>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--accent-rose);">
+              <strong style="color: var(--accent-rose);">Limitaciones</strong>
+              <ul class="bullet-list" style="font-size: 0.9em; margin-top: 8px;">
+                <li>Cobertura limitada (puntual).</li>
+                <li>Vulnerabilidad a obstrucciones.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 10: MECANISMO DE PLUVIÓMETRO -->
+      <section>
+        <h2>Monitoreo de la lluvia: Pluviómetro</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              Los pluviómetros son ideales para proyectos geotécnicos en sitios específicos, donde se requiere un <strong>monitoreo preciso de la lluvia que cae directamente sobre una zona propensa a deslizamientos</strong>, o zonas con estructuras geotécnicas.
+            </p>
+
+            <div class="callout callout-info" style="margin-top: 20px;">
+              <span class="callout-icon">💧</span>
+              <div class="callout-content" style="font-size: 1em;">
+                La medición se expresa en milímetros.<br>
+                <strong>1 mm equivale a 1 litro de agua por metro cuadrado.</strong>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image13.png" alt="Mecanismo Pluviómetro de Balancín" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 8px;">Mecanismo de funcionamiento de un pluviómetro</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 11: VARIABLES OBTENIDAS CON PLUVIÓMETRO (PARTE 1) -->
+      <section>
+        <h2>Monitoreo de la lluvia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Qué variables se pueden obtener con un Pluviómetro?
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">📊</span>
+                <span>Precipitación acumulada</span>
+              </div>
+              <p style="margin-top: 10px; font-size: 1.05em;">
+                La cantidad total de agua caída en un período específico.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="color: var(--accent-rose);">
+                <span class="card-icon">⚡</span>
+                <span>Intensidad de precipitación</span>
+              </div>
+              <p style="margin-top: 10px; font-size: 1.05em;">
+                La cantidad de agua que cae en una unidad de tiempo (mm/h). Esta variable es <strong>crítica para predecir posibles inundaciones o deslizamientos</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image15.png" alt="Datos de Pluviómetro SIATA" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 8px;">Datos típicos de un pluviómetro. Tomado de SIATA.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 12: VARIABLES OBTENIDAS CON PLUVIÓMETRO (PARTE 2) -->
+      <section>
+        <h2>Monitoreo de la lluvia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Qué variables se pueden obtener con un Pluviómetro? (Continuación)
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div class="card">
+              <div class="card-title">
+                <span class="card-icon">🔄</span>
+                <span>Frecuencia de precipitación</span>
+              </div>
+              <p style="margin-top: 6px;">La cantidad de eventos de lluvia en un período determinado.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <span class="card-icon">⏱️</span>
+                <span>Duración de la precipitación</span>
+              </div>
+              <p style="margin-top: 6px;">El tiempo durante el cual ocurre la precipitación.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <span class="card-icon">📈</span>
+                <span>Distribución temporal de la lluvia</span>
+              </div>
+              <p style="margin-top: 6px;">Los patrones de cómo la precipitación varía durante un evento de lluvia.</p>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image15.png" alt="Datos de Pluviómetro SIATA" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 8px;">Datos típicos de un pluviómetro. Tomado de SIATA.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 13: RADAR METEOROLÓGICO: INTRODUCCIÓN -->
+      <section>
+        <h2>Monitoreo de la lluvia: Radar meteorológico</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div class="card card-highlight">
+            <ul class="bullet-list" style="font-size: 1.15em; line-height: 1.7;">
+              <li>
+                Los <strong>radares meteorológicos</strong> son útiles para tener una visión general de las lluvias en una región.
+              </li>
+              <li>
+                Son esenciales en la creación de <strong>sistemas de alerta temprana</strong> para deslizamientos o inundaciones.
+              </li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image16.png" alt="Torre Radar Meteorológico SIATA" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 14: RADAR METEOROLÓGICO: ¿QUÉ MIDE? -->
+      <section>
+        <h2>Monitoreo de la lluvia: Radar meteorológico</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📡</span>
+              <span>¿Qué mide?</span>
+            </div>
+            <p style="margin-top: 12px; font-size: 1.05em; line-height: 1.6;">
+              El radar meteorológico emite <strong>pulsos de ondas de radio</strong> hacia la atmósfera. Estas ondas viajan hasta encontrar partículas (como gotas de lluvia o nieve), que reflejan parte de la energía de vuelta hacia el radar.
+            </p>
+            <p style="margin-top: 12px; font-size: 1.05em; line-height: 1.6;">
+              El <strong>tiempo</strong> que tardan las ondas en regresar permite calcular la <strong>distancia</strong> a la que se encuentran las partículas, mientras que la <strong>intensidad del eco</strong> refleja la cantidad y tamaño de las partículas.
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image11.png" alt="Radar Principio de Emisión" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 15: RADAR: VENTAJAS Y LIMITACIONES -->
+      <section>
+        <h2>Monitoreo de la lluvia: Radar meteorológico</h2>
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">✅</span>
+              <span>Ventajas</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
+              <li><strong>Cobertura espacial amplia</strong> (decenas de kilómetros a la redonda).</li>
+              <li>Monitoreo en <strong>tiempo real</strong>.</li>
+              <li>Detección de intensidad, ubicación y tipos de precipitación.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚠️</span>
+              <span>Limitaciones</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
+              <li>Resolución limitada.</li>
+              <li>Alto costo de adquisición y operación.</li>
+              <li>Difícil mantenimiento.</li>
+              <li>Medición en atmósfera (no en suelo directo).</li>
+              <li>Efectos de apantallamiento en zonas montañosas.</li>
+              <li>Es un <strong>proxy de precipitación</strong>.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 16: RADAR: RECEPCIÓN, DISTANCIA, DOPPLER -->
+      <section>
+        <h2>Monitoreo de la lluvia: Radar meteorológico</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 8px;">
+          Recepción y análisis de los datos
+        </h3>
+
+        <div class="grid-3" style="margin-top: 20px; gap: 20px;">
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📏</span>
+              <span>Distancia</span>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.95em;">
+              Se calcula midiendo el tiempo que tarda el eco en regresar al radar.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">📶</span>
+              <span>Intensidad</span>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.95em;">
+              Cuanta más energía es reflejada, mayor es la densidad de las partículas, lo que indica precipitación más intensa.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">🌪️</span>
+              <span>Movimiento (Doppler)</span>
+            </div>
+            <p style="margin-top: 10px; font-size: 0.95em;">
+              Detecta si las partículas se acercan o se alejan, permitiendo calcular la velocidad del viento dentro de las tormentas.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 25px;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-content" style="font-size: 0.95em; line-height: 1.5;">
+            <strong>NOTA:</strong> El <strong>efecto Doppler</strong> es un fenómeno físico que se produce cuando una onda (sonora, luminosa o de radio) cambia de frecuencia debido al movimiento relativo entre la fuente que emite la onda y el observador que la recibe.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 17: MAPAS DE LLUVIA SIATA E IDEAM -->
+      <section>
+        <h2>Radar meteorológico - Mapas de lluvia</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div style="text-align: center;">
+            <img src="img/p02/image17.png" alt="Evento de precipitación SIATA" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 8px;">Evento de precipitación. Tomado de SIATA.</p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image18.png" alt="Composición Radares IDEAM" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 8px;">En Colombia existe una composición de radares. Tomado del IDEAM.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 18: VARIABLES DEL RADAR -->
+      <section>
+        <h2>Radar meteorológico - Mapas de lluvia</h2>
+        <div class="grid-2" style="margin-top: 25px; gap: 20px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">📡</span>
+              <span>Reflectividad</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              La variable más importante que mide un radar meteorológico. Indica la cantidad de energía reflejada por las partículas. Se mide en decibelios (dBZ), donde valores más altos corresponden a lluvias más intensas.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">💨</span>
+              <span>Velocidad radial (m/s)</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Mediante el efecto Doppler, el radar mide la velocidad de las partículas que se mueven hacia o desde el radar, lo que ayuda a determinar la dirección y fuerza del viento dentro de una tormenta.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">🌧️</span>
+              <span>Acumulación de precipitación</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Se puede estimar la cantidad total de lluvia acumulada en un área al integrar las mediciones de reflectividad a lo largo del tiempo.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-yellow-text);">
+              <span class="card-icon">❄️</span>
+              <span>Tipo de precipitación</span>
+            </div>
+            <p style="font-size: 0.95em; margin-top: 8px;">
+              Diferentes patrones de reflexión pueden ayudar a distinguir entre tipos de precipitación (lluvia, nieve, granizo).
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 19: ESTRATIFORME VS CONVECTIVA -->
+      <section>
+        <h2>Radar meteorológico - Mapas de lluvia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 6px;">
+          Tipo de eventos de precipitación
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div style="text-align: center;">
+            <h4 style="color: var(--eafit-blue); margin-bottom: 8px;">Estratiforme</h4>
+            <img src="img/p02/image19.png" alt="Precipitación Estratiforme" style="max-height: 330px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 6px;">Sur - Norte</p>
+          </div>
+
+          <div style="text-align: center;">
+            <h4 style="color: var(--accent-rose); margin-bottom: 8px;">Convectiva</h4>
+            <img src="img/p02/image20.png" alt="Precipitación Convectiva" style="max-height: 330px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 6px;">Célula aislada intensa</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 20: SATÉLITES: ¿QUÉ MIDEN? -->
+      <section>
+        <h2>Monitoreo de la lluvia: Satélites</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1em; line-height: 1.55;">
+                Los sensores satelitales de precipitaciones miden diversas características de la lluvia y otros tipos de precipitación (como nieve o granizo) desde el espacio.
+              </p>
+              <ul class="bullet-list" style="font-size: 0.9em; margin-top: 12px;">
+                <li>
+                  <strong>Radiómetros de microondas:</strong> Detectan radiación emitida por la atmósfera y las gotas de lluvia, lo que permite estimar la cantidad y distribución de la precipitación.
+                </li>
+                <li>
+                  <strong>Radar de precipitación:</strong> Utilizan ondas de radar para detectar el tamaño y la velocidad de las gotas de lluvia.
+                </li>
+                <li>
+                  <strong>Lidar y láseres:</strong> En satélites avanzados se pueden utilizar para medir la estructura de las nubes y la precipitación.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image12.png" alt="Satélite de Precipitación" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 21: SATÉLITES: PARÁMETROS Y EJEMPLOS -->
+      <section>
+        <h2>Monitoreo de la lluvia: Satélites</h2>
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🛰️</span>
+              <span>¿Qué miden?</span>
+            </div>
+            <p style="font-size: 0.95em; line-height: 1.6; margin-top: 12px;">
+              Tasa de precipitación (cantidad de lluvia por tiempo), la distribución espacial (dónde ocurren y cómo se distribuyen), y la intensidad (fuerza de las lluvias).
+            </p>
+            <p style="font-size: 0.95em; line-height: 1.6; margin-top: 10px;">
+              También distinguen la fase de la precipitación (líquida o sólida), la altura de las nubes, el perfil vertical (estructura de la precipitación en la atmósfera) y la temperatura de las nubes.
+            </p>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">🌍</span>
+              <span>Misiones y Sistemas Ejemplo:</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.95em; margin-top: 12px;">
+              <li><strong>GPM:</strong> Global Precipitation Measurement (NASA / JAXA)</li>
+              <li><strong>TRMM:</strong> Tropical Rainfall Measuring Mission (NASA / JAXA)</li>
+              <li><strong>CloudSat</strong> y <strong>Sentinel-1</strong> (ESA)</li>
+              <li>
+                <strong>CHIRPS:</strong> (Climate Hazards Group InfraRed Precipitation with Station data) combina datos satelitales con observaciones en estaciones terrestres.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 22: SATÉLITES: VENTAJAS Y LIMITACIONES -->
+      <section>
+        <h2>Monitoreo de la lluvia: Satélites</h2>
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div class="card" style="border-left: 4px solid var(--accent-emerald);">
+            <strong style="color: var(--accent-emerald); font-size: 1.1em;">Ventajas</strong>
+            <ul class="bullet-list" style="font-size: 0.95em; margin-top: 10px;">
+              <li><strong>Cobertura global</strong> (áreas remotas o sin instrumentación terrestre).</li>
+              <li>Monitoreo de largo plazo.</li>
+              <li>Detección de lluvias ligeras y severas.</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-left: 4px solid var(--accent-rose);">
+            <strong style="color: var(--accent-rose); font-size: 1.1em;">Limitaciones</strong>
+            <ul class="bullet-list" style="font-size: 0.95em; margin-top: 10px;">
+              <li>Resolución limitada (espacial y temporal).</li>
+              <li>Su interpretación depende de modelos de inversión.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 25px;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-content" style="font-size: 0.95em; line-height: 1.55;">
+            Los sensores satelitales son especialmente útiles en áreas remotas o poco instrumentadas donde no hay una red densa de pluviómetros o radares. Además, ofrecen un monitoreo continuo, ideal para la prevención y gestión de riesgos en zonas amplias, como cuencas hidrográficas, donde los deslizamientos y las inundaciones son comunes.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 23: SATÉLITE GOES -->
+      <section>
+        <h2>Monitoreo de la lluvia: Satélites GOES</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Geostationary Operational Environmental Satellites
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 1.05em; line-height: 1.6;">
+              <li>Son la flota más avanzada de <strong>satélites meteorológicos geoestacionarios</strong>.</li>
+              <li>
+                Giran en una órbita (sobre el mismo plano del Ecuador) cuya velocidad es igual a la de la rotación de la Tierra por lo que <strong>pareciera que permanecen en una posición fija en el cielo</strong> con respecto a un punto en la Tierra.
+              </li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p02/image21.png" alt="Satélite GOES" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 6px;">Satélite GOES</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 24: IMÁGENES GOES 1 -->
+      <section>
+        <h2>Monitoreo de la lluvia: Satélites GOES</h2>
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 25px;">
+          <img src="img/p02/image22.png" alt="Canal Infrarrojo GOES" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p02/image23.png" alt="Vapor de Agua GOES" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 25: IMÁGENES GOES 2 -->
+      <section>
+        <h2>Monitoreo de la lluvia: Satélites</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p02/image24.png" alt="Satélite GOES Cobertura Continental" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 8px;">Satélite GOES</p>
+        </div>
+      </section>
+
+      <!-- SLIDE 26: INTEGRACIÓN DE SENSORES -->
+      <section class="slide-cover">
+        <div class="cover-badge">Módulo 02 &bull; Síntesis e Integración</div>
+        <h2 style="font-size: 2.1em; margin-top: 15px;">
+          Integración de Sensores y su Importancia en la Evaluación Geotécnica
+        </h2>
+        
+        <div class="grid-3" style="margin-top: 30px; text-align: left;">
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📍</span>
+              <span>Pluviómetros</span>
+            </div>
+            <p style="font-size: 0.95em;">Proporcionan datos precisos en puntos específicos.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">📡</span>
+              <span>Radares</span>
+            </div>
+            <p style="font-size: 0.95em;">Vista en tiempo real de la distribución y la intensidad sobre una región.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">🛰️</span>
+              <span>Satélites</span>
+            </div>
+            <p style="font-size: 0.95em;">Cobertura global y capacidad de monitorear áreas inaccesibles.</p>
+          </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 25px; text-align: left;">
+          <span class="callout-icon">🚨</span>
+          <div class="callout-content" style="font-size: 1.05em;">
+            Estos sistemas, cuando se integran, son fundamentales para <strong>establecer umbrales críticos de precipitación</strong> que desencadenen alertas tempranas en áreas propensas a deslizamientos o inestabilidad del suelo.
+          </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+          <a href="03_agua_en_el_suelo.html" class="header-btn" style="display: inline-flex; font-size: 1.05em; padding: 10px 22px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
+            <span>💧</span> Ir al Módulo 3 &bull; El Agua en el Suelo
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Barra Inferior de Información y Atajos -->
+  <footer class="presentation-footer">
+    <div class="footer-credits">
+      <strong>EAFIT</strong> &bull; Instrumentación Geotécnica &bull; Docentes: Federico Gómez, MSc. & Juliana Álvarez, MSc.
+    </div>
+    <div class="footer-shortcuts">
+      <span>Espacio</span> Avanzar &bull; <span>←</span> Retroceder &bull; <span>F</span> Pantalla Completa &bull; <span>T</span> Modo Claro/Oscuro &bull; <span>Esc</span> Cuadrícula
+    </div>
+  </footer>
+
+  <!-- Scripts Reveal.js y Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.min.js"></script>
+  <script src="js/presentation-core.js"></script>
+
+</body>
+</html>

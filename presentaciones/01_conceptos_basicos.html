@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01. Conceptos Básicos de la Instrumentación Geotécnica | EAFIT</title>
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  
+  <!-- Tema Institucional EAFIT -->
+  <link rel="stylesheet" href="css/presentation-theme.css">
+</head>
+<body>
+
+  <!-- Barra Superior Institucional -->
+  <header class="presentation-header">
+    <div class="header-brand">
+      <img src="img/brand/eafit_logo.png" alt="EAFIT" class="header-logo" onerror="this.style.display='none'">
+      <span class="header-title">Instrumentación Geotécnica</span>
+      <span class="header-badge">01 &bull; Conceptos Básicos</span>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
+      <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
+      <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
+      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+    </div>
+  </header>
+
+  <!-- Contenedor Reveal.js -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section class="slide-cover">
+        <div class="cover-badge">Universidad EAFIT &bull; Departamento de Ingeniería Civil</div>
+        <h1>Conceptos básicos de la Instrumentación Geotécnica</h1>
+        <h3 style="color: var(--eafit-yellow-text); margin-top: 15px">Curso de Instrumentación Geotécnica</h3>
+        
+        <div class="cover-meta" style="margin-top: 40px">
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Profesores</span>
+            <span class="cover-meta-value">Federico Gómez, MSc. &bull; Juliana Álvarez, MSc.</span>
+          </div>
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Módulo</span>
+            <span class="cover-meta-value">01 &bull; Fundamentos y Escalas</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: PREGUNTAS FUNDAMENTALES -->
+      <section>
+        <h2>Preguntas fundamentales del curso:</h2>
+        <div class="grid-2" style="margin-top: 35px; gap: 25px;">
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">❓</span>
+              <span>Propósito y Utilidad</span>
+            </div>
+            <p style="font-size: 1.25em; font-weight: 600; line-height: 1.5; margin-top: 15px;">
+              ¿Para qué sirve la instrumentación geotécnica?
+            </p>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">🎯</span>
+              <span>Criterio Técnico</span>
+            </div>
+            <p style="font-size: 1.25em; font-weight: 600; line-height: 1.5; margin-top: 15px;">
+              ¿Cómo se define la pertinencia de la instrumentación geotécnica?
+            </p>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">📊</span>
+              <span>Análisis de Información</span>
+            </div>
+            <p style="font-size: 1.25em; font-weight: 600; line-height: 1.5; margin-top: 15px;">
+              ¿Cómo se interpretan los datos obtenidos de los instrumentos geotécnicos?
+            </p>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-yellow-text);">
+              <span class="card-icon">🛡️</span>
+              <span>Gestión del Riesgo</span>
+            </div>
+            <p style="font-size: 1.25em; font-weight: 600; line-height: 1.5; margin-top: 15px;">
+              ¿Qué papel juega la instrumentación geotécnica en la prevención de desastres?
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: CASO MALPASSET 1 -->
+      <section>
+        <h2>Rotura de la Presa de Malpasset, Francia, 1959</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚠️</span>
+              <span>Datos del Desastre</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
+              <li><strong>Año de finalización e inicio de operación:</strong> 1952</li>
+              <li><strong>Año de la falla:</strong> 1959</li>
+              <li><strong>Pérdidas humanas:</strong> 421 personas</li>
+              <li><strong>Pérdidas económicas:</strong> 70 millones de dólares</li>
+              <li><strong>Impacto:</strong> Destrucción de la ciudad de Fréjus</li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p01/image2.png" alt="Presa de Malpasset Antes y Después" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <div style="display: flex; justify-content: space-around; margin-top: 10px; font-weight: 700; color: var(--text-muted);">
+              <span>Antes</span>
+              <span>Después</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 4: CASO MALPASSET 2 -->
+      <section>
+        <h2>Rotura de la Presa de Malpasset, Francia, 1959</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: stretch;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🔍</span>
+              <span>Supuestos factores que influyeron en el fallo:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px;">
+              <li>Terreno inestable y con deformaciones.</li>
+              <li>Fracturas y grietas sobre la estructura de la presa.</li>
+              <li>Filtraciones.</li>
+              <li>Erosión de la base o fundación.</li>
+              <li>Lluvias intensas previas a la ocurrencia del fallo.</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="text-align: center;">
+              <img src="img/p01/image3.png" alt="Malpasset Vista Fallada" style="max-height: 250px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            </div>
+
+            <div class="callout callout-info" style="margin-top: 15px;">
+              <span class="callout-icon">💡</span>
+              <div class="callout-content" style="font-size: 1.05em; line-height: 1.5;">
+                <strong>Conclusión:</strong> La instrumentación geotécnica es clave para la seguridad y estabilidad de proyectos de ingeniería y juega un papel clave en la gestión del riesgo de desastres.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 5: MONITOREAR PARA PREVENIR (SIATA) -->
+      <section>
+        <h2>Monitorear para prevenir</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.3em; margin-top: 10px;">
+          ¿Por qué es fundamental la Instrumentación Geotécnica?
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div class="card card-highlight">
+            <ul class="bullet-list" style="font-size: 1.15em; line-height: 1.7;">
+              <li>
+                <strong>Datos continuos</strong> sobre las condiciones del terreno, las estructuras y factores detonantes.
+              </li>
+              <li>
+                <strong>Detección de cambios</strong> antes de que se conviertan en problemas críticos.
+              </li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p01/image4.jpeg" alt="Monitoreo SIATA" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 8px;">Tomado de SIATA</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 6: TÚNEL DE LA LÍNEA -->
+      <section>
+        <h2>Monitorear para prevenir</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Por qué es fundamental la Instrumentación Geotécnica? &bull; Caso Túnel de la Línea
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">🚇</span>
+                <span>Túnel de la Línea, Colombia</span>
+              </div>
+              <ul class="bullet-list" style="margin-top: 10px;">
+                <li>Túnel carretero más largo de Latinoamérica.</li>
+                <li>Cruza la cordillera Central.</li>
+                <li>Múltiples y severas zonas de falla (<strong>Falla San Jerónimo y Falla Palestina</strong>).</li>
+              </ul>
+            </div>
+
+            <div class="callout callout-info" style="margin-top: 15px;">
+              <span class="callout-icon">💬</span>
+              <div class="callout-content" style="font-size: 0.95em; font-style: italic; line-height: 1.5;">
+                "En el túnel de la Línea se instaló un programa de monitoreo de instrumentación geotécnica muy riguroso y un proceso de excavación controlado, con avances cortos y una rápida instalación del soporte. De esta forma fue posible superar exitosamente todas las zonas de falla existentes a lo largo del túnel"
+              </div>
+            </div>
+            <p style="font-size: 0.75em; color: var(--text-dim); margin-top: 6px;">
+              Tomado de la Revista Infraestructura y Desarrollo, Cámara Colombiana de la Infraestructura, edición No. 96 (nov 2020 – feb 2021).
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p01/image5.png" alt="Túnel de la Línea" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 7: CASO SAN ANTONIO DE PRADO -->
+      <section>
+        <h2>Monitorear para prevenir</h2>
+        <h3 style="color: var(--accent-rose); font-size: 1.2em; margin-top: 8px;">
+          Movimiento en masa Las playas, San Antonio de Prado, Medellín
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 1.05em; line-height: 1.6;">
+              <li><strong>Año de la falla:</strong> 2022</li>
+              <li><strong>Pérdidas humanas:</strong> 2 personas</li>
+              <li><strong>Pérdidas económicas:</strong> Empresa avícola</li>
+              <li><strong>Consecuencia adicional:</strong> Obstrucción del cauce de la quebrada Doña María.</li>
+            </ul>
+
+            <div class="callout callout-warning" style="margin-top: 20px;">
+              <span class="callout-icon">❓</span>
+              <div class="callout-content" style="font-weight: 700; font-size: 1.05em;">
+                ¿Realmente se pudo alertar o prevenir a través de instrumentación?
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 15px; justify-content: center;">
+            <img src="img/p01/image6.png" alt="Las Playas Vista 1" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 8px;">
+            <img src="img/p01/image7.png" alt="Las Playas Vista 2" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 8px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 8: QUÉ DEBEMOS MONITOREAR (PARTE 1) -->
+      <section>
+        <h2>Monitorear para prevenir</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.3em; margin-top: 10px;">
+          ¿Qué debemos monitorear?
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div style="display: flex; flex-direction: column; gap: 18px;">
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">📏</span>
+                <span>1. Deformaciones</span>
+              </div>
+              <p style="font-size: 1.05em; margin-top: 8px;">
+                Cambios en la forma, posición o inclinación de una estructura o del terreno.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="color: var(--accent-cyan);">
+                <span class="card-icon">📉</span>
+                <span>2. Asentamientos</span>
+              </div>
+              <p style="font-size: 1.05em; margin-top: 8px;">
+                Descenso vertical del terreno o de una estructura debido a la compresión del suelo o la consolidación.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="color: var(--accent-emerald);">
+                <span class="card-icon">💧</span>
+                <span>3. Presión o cantidad de agua en los poros</span>
+              </div>
+              <p style="font-size: 1.05em; margin-top: 8px;">
+                El exceso puede reducir la resistencia del suelo. Aplica para deslizamientos, cimentaciones, túneles y presas.
+              </p>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p01/image8.png" alt="Monitoreo Geotécnico Ilustración" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 9: QUÉ DEBEMOS MONITOREAR (PARTE 2) -->
+      <section>
+        <h2>Monitorear para prevenir</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.3em; margin-top: 10px;">
+          ¿Qué debemos monitorear? (Continuación)
+        </h3>
+
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🏗️</span>
+              <span>4. Carga y tensión en elementos estructurales</span>
+            </div>
+            <p style="font-size: 1.1em; line-height: 1.6; margin-top: 15px;">
+              Fuerzas a las que están sometidos los componentes de una estructura (vigas, pilotes, anclajes).
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">🌧️</span>
+              <span>5. Factores detonantes (Variables meteorológicas)</span>
+            </div>
+            <p style="font-size: 1.1em; line-height: 1.6; margin-top: 15px;">
+              Principalmente variables meteorológicas: por ejemplo, cantidad de lluvia o agua fluyendo sobre o bajo el terreno.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 35px;">
+          <span class="callout-icon">❓</span>
+          <div class="callout-content" style="font-size: 1.2em; font-weight: 600;">
+            ¿A qué escala y con qué frecuencia nos interesan o podemos obtener estas variables?
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: ESCALAS DE OBSERVACIÓN - TABLA LLORET -->
+      <section>
+        <h2>Escala de observación en geotecnia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Qué escalas podemos monitorear?
+        </h3>
+
+        <div class="grid-2" style="margin-top: 25px; gap: 20px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--eafit-blue);">
+            <div class="card-title">
+              <span class="card-icon">🏔️</span>
+              <span>Geológica (~100 m)</span>
+            </div>
+            <p style="font-size: 1.1em; color: var(--text-muted); margin-top: 10px;">
+              Escala regional y de grandes unidades geológicas.
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-cyan);">
+            <div class="card-title">
+              <span class="card-icon">⛰️</span>
+              <span>Geotécnica o Ingenieril (~10 m)</span>
+            </div>
+            <p style="font-size: 1.1em; color: var(--text-muted); margin-top: 10px;">
+              Por ejemplo, estabilidad de taludes, laderas y estructuras de cimentación.
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title">
+              <span class="card-icon">🧪</span>
+              <span>De laboratorio (~10 cm)</span>
+            </div>
+            <p style="font-size: 1.1em; color: var(--text-muted); margin-top: 10px;">
+              Muestras de laboratorio típicamente de 7 &times; 15 cm.
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--eafit-yellow-text);">
+            <div class="card-title">
+              <span class="card-icon">🔬</span>
+              <span>Microscópica (~1 &mu;m)</span>
+            </div>
+            <p style="font-size: 1.1em; color: var(--text-muted); margin-top: 10px;">
+              Estructura intergranular, microfábrica y enlaces minerales.
+            </p>
+          </div>
+
+        </div>
+
+        <p style="font-size: 0.8em; color: var(--text-dim); text-align: center; margin-top: 20px;">
+          Imágenes Tomadas de Curso A. Lloret (UPC)
+        </p>
+      </section>
+
+      <!-- SLIDE 11: ESCALA REGIONAL VS DETALLE -->
+      <section>
+        <h2>Escala de observación en geotecnia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Qué escalas podemos monitorear?
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🗺️</span>
+              <span>Geológica o regional (~100 m)</span>
+            </div>
+            <p style="font-size: 1.05em; margin-top: 10px;">
+              Visión global de cuencas, formaciones y macizos.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">🏗️</span>
+              <span>Geotécnica o de detalle (~10 m)</span>
+            </div>
+            <p style="font-size: 1.05em; margin-top: 10px;">
+              <strong>Caben todo tipo de estructuras y/o proyectos.</strong>
+            </p>
+          </div>
+
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 25px;">
+          <span class="callout-icon">⏱️</span>
+          <div class="callout-content" style="font-size: 1.05em; line-height: 1.6;">
+            <strong>Escala Temporal:</strong> La frecuencia (escala temporal) del monitoreo depende del tipo de variable, el riesgo y las condiciones del terreno (escala espacial).<br>
+            <em>Algunas variables requieren monitoreo continuo, mientras que otras pueden ser monitoreadas de manera periódica.</em>
+          </div>
+        </div>
+
+        <p style="font-size: 0.8em; color: var(--text-dim); text-align: center; margin-top: 15px;">
+          Imágenes Tomadas de Curso A. Lloret (UPC)
+        </p>
+      </section>
+
+      <!-- SLIDE 12: SENSORES EN SITIO VS REMOTOS -->
+      <section>
+        <h2>Escala de observación en geotecnia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Sensores en sitio vs. Sensores remotos
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📍</span>
+              <span>Sensores en sitio</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 12px;">
+              <li><strong>Alta precisión</strong> en mediciones directas.</li>
+              <li>Cubren áreas limitadas (puntuales).</li>
+              <li>Requieren mantenimiento continuo.</li>
+              <li>Acceso inmediato a los datos.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">🛰️</span>
+              <span>Sensores remotos</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 12px;">
+              <li><strong>Cobertura amplia</strong> a nivel de cuenca o ladera.</li>
+              <li>Menor resolución temporal y espacial.</li>
+              <li>Monitoreo no invasivo.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="callout callout-success" style="margin-top: 20px;">
+          <span class="callout-icon">🤝</span>
+          <div class="callout-content" style="font-size: 1.05em;">
+            <strong>Complementariedad:</strong> Estos dos tipos de monitoreo se integran de manera complementaria para proporcionar un panorama más completo y detallado. El factor económico también es determinante.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: SAN ANTONIO DE PRADO - ANÁLISIS MULTITEMPORAL -->
+      <section>
+        <h2>Monitorear para prevenir – Escala de observación</h2>
+        <h3 style="color: var(--accent-rose); font-size: 1.2em; margin-top: 6px;">
+          Movimiento en masa Las playas, San Antonio de Prado, Medellín (Año de la falla: 2022)
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="callout callout-warning">
+              <span class="callout-icon">❓</span>
+              <div class="callout-content" style="font-size: 1em;">
+                ¿Realmente se pudo alertar o prevenir a través de instrumentación tradicional? <strong>Tal vez no. 9883298832</strong>
+              </div>
+            </div>
+
+            <div class="callout callout-info" style="margin-top: 15px;">
+              <span class="callout-icon">🛰️</span>
+              <div class="callout-content" style="font-size: 1em;">
+                ¿Se pudo alertar o prevenir a través de <strong>otras estrategias de monitoreo</strong> (sensores remotos / imágenes satelitales multitemporales)?
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+              <div style="text-align: center;">
+                <img src="img/p01/image10.png" alt="Año 2001" style="max-height: 200px; width: auto; border-radius: 6px;">
+                <div style="font-size: 0.9em; font-weight: 700; margin-top: 4px;">Año 2001</div>
+              </div>
+              <div style="text-align: center;">
+                <img src="img/p01/image11.png" alt="Año 2012" style="max-height: 200px; width: auto; border-radius: 6px;">
+                <div style="font-size: 0.9em; font-weight: 700; margin-top: 4px;">Año 2012</div>
+              </div>
+            </div>
+            <p style="font-size: 0.75em; color: var(--text-dim); text-align: center; margin-top: 8px;">Fuente: Google Earth</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 14: VARIABLES SEGÚN ESCALA -->
+      <section>
+        <h2>Escala de observación en geotecnia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 6px;">
+          ¿Qué variables se pueden tener a las diferentes escalas espaciales?
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📍</span>
+              <span>Escala de detalle (Sensores en sitio)</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li>Deformación y desplazamiento del terreno.</li>
+              <li>Aceleraciones del terreno.</li>
+              <li>Presión de poros o cantidad de agua en el suelo.</li>
+              <li>Tensiones en estructuras.</li>
+              <li>Variables Hidrológicas (para control de estructuras).</li>
+              <li>Variables meteorológicas o climáticas.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">🛰️</span>
+              <span>Escala regional (Monitoreo remoto)</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li>Deformación y desplazamiento superficial a gran escala.</li>
+              <li>Cambios topográficos.</li>
+              <li>Saturación del terreno (contenido de humedad).</li>
+              <li>Variables Hidrológicas.</li>
+              <li>Variables Climáticas.</li>
+              <li>Variables de Vegetación (análisis de estabilidad).</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 15: DEFINICIÓN DE RIESGO -->
+      <section>
+        <h2>¿Cuándo se habla de riesgo?</h2>
+        
+        <div class="card card-highlight" style="margin-top: 20px; text-align: center; padding: 25px;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 1.5em; font-weight: 800;">
+            <span style="color: var(--accent-rose);">Amenaza</span>
+            <span style="color: var(--text-muted); font-size: 1.2em;">&times;</span>
+            <span style="color: var(--accent-cyan);">Exposición / Vulnerabilidad</span>
+            <span style="color: var(--text-muted); font-size: 1.2em;">=</span>
+            <span style="color: var(--eafit-yellow-text); font-size: 1.2em;">Riesgo</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 25px;">
+          <div style="text-align: center;">
+            <img src="img/p01/image13.png" alt="Año 2020" style="max-height: 220px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <div style="font-weight: 700; color: var(--text-main); margin-top: 6px;">Año 2020</div>
+          </div>
+          <div style="text-align: center;">
+            <img src="img/p01/image14.png" alt="Año 2022" style="max-height: 220px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <div style="font-weight: 700; color: var(--accent-rose); margin-top: 6px;">Año 2022</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 16: CIERRE / PREGUNTA DE TRANSICIÓN -->
+      <section class="slide-cover">
+        <div class="cover-badge">Módulo 01 &bull; Transición al Análisis de Datos</div>
+        <h2 style="font-size: 2.3em; margin-top: 25px; line-height: 1.4;">
+          ¿Cómo procesar, analizar y concluir sobre los datos o variables medidas?
+        </h2>
+        <p style="font-size: 1.2em; color: var(--text-muted); margin-top: 25px;">
+          A continuación: variables hidrometeorológicas y su relación con las fallas geotécnicas.
+        </p>
+        <div style="margin-top: 40px;">
+          <a href="02_variables_hidrometeorologicas.html" class="header-btn" style="display: inline-flex; font-size: 1.1em; padding: 12px 24px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
+            <span>🌧️</span> Ir al Módulo 2 &bull; Variables Hidrometeorológicas
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Barra Inferior de Información y Atajos -->
+  <footer class="presentation-footer">
+    <div class="footer-credits">
+      <strong>EAFIT</strong> &bull; Instrumentación Geotécnica &bull; Docentes: Federico Gómez, MSc. & Juliana Álvarez, MSc.
+    </div>
+    <div class="footer-shortcuts">
+      <span>Espacio</span> Avanzar &bull; <span>←</span> Retroceder &bull; <span>F</span> Pantalla Completa &bull; <span>T</span> Modo Claro/Oscuro &bull; <span>Esc</span> Cuadrícula
+    </div>
+  </footer>
+
+  <!-- Scripts Reveal.js y Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.min.js"></script>
+  <script src="js/presentation-core.js"></script>
+
+</body>
+</html>

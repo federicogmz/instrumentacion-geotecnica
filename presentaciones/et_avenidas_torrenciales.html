@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo Especial: Avenidas Torrenciales | Estabilidad de Taludes - EAFIT</title>
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  
+  <!-- Tema Institucional EAFIT -->
+  <link rel="stylesheet" href="css/presentation-theme.css">
+</head>
+<body>
+
+  <!-- Barra Superior Institucional -->
+  <header class="presentation-header">
+    <div class="header-brand">
+      <img src="img/brand/eafit_logo.png" alt="EAFIT" class="header-logo" onerror="this.style.display='none'">
+      <span class="header-title">Estabilidad de Taludes</span>
+      <span class="header-badge">Módulo Especial &bull; Avenidas Torrenciales</span>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
+      <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
+      <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
+      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+    </div>
+  </header>
+
+  <!-- Contenedor Reveal.js -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section class="slide-cover">
+        <div class="cover-badge">Universidad EAFIT &bull; Departamento de Ingeniería Civil</div>
+        <h1>Caracterización y propagación de avenidas torrenciales</h1>
+        <h3 style="color: var(--eafit-yellow-text); margin-top: 15px">Curso de Estabilidad de Taludes</h3>
+        
+        <div class="cover-meta" style="margin-top: 40px">
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Profesor</span>
+            <span class="cover-meta-value">Federico Gómez, MSc.</span>
+          </div>
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Enfoque</span>
+            <span class="cover-meta-value">Morfometría, Detonantes y Modelación Numérica</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: OBJETIVOS: DÓNDE Y CUÁNDO -->
+      <section>
+        <h2>Objetivos</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div class="card card-highlight" style="border-left: 4px solid var(--eafit-blue);">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">📍</span>
+                <span>Dónde</span>
+              </div>
+              <p style="font-size: 1.05em; font-weight: 600; margin-top: 6px;">
+                Cuencas propensas a presentar avenidas torrenciales.
+              </p>
+            </div>
+
+            <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose);">
+              <div class="card-title" style="color: var(--accent-rose);">
+                <span class="card-icon">⏱️</span>
+                <span>Cuándo</span>
+              </div>
+              <p style="font-size: 0.95em; margin-top: 6px;"><strong>Factores detonantes:</strong></p>
+              <ul class="bullet-list" style="font-size: 0.9em; margin-top: 4px;">
+                <li>Disponibilidad de sedimentos.</li>
+                <li>
+                  Disponibilidad de agua:
+                  <ul style="margin-top: 2px;">
+                    <li>Lluvia antecedente &bull; Humedad en la cuenca &bull; Lluvias detonantes.</li>
+                    <li>Rotura de presas o diques naturales &bull; Deshielo.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image2.png" alt="Cuenca Torrencial Esquema" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 3: OBJETIVOS: AFECTACIONES -->
+      <section>
+        <h2>Objetivos: Afectaciones</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Estimación de la propagación y potenciales afectaciones
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          <div class="card">
+            <p style="font-size: 1.15em; line-height: 1.7;">
+              Determinar la <strong>distancia de viaje (runout)</strong>, las alturas de flujo, las velocidades máximas y las fuerzas de impacto sobre elementos expuestos a lo largo del cono de deyección.
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image3.png" alt="Impacto de Avenida Torrencial en Abanico" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: QUÉ ES UNA AVENIDA TORRENCIAL -->
+      <section>
+        <h2>¿Qué es una avenida torrencial?</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div class="card card-highlight" style="padding: 30px;">
+            <p style="font-size: 1.25em; line-height: 1.7; color: var(--text-main); font-weight: 500;">
+              Las <strong>avenidas torrenciales</strong> son flujos compuestos por una <strong>mezcla de agua y sedimentos en diferentes proporciones</strong>, que se desplazan a gran velocidad por cauces empinados.
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image4.png" alt="Avenida Torrencial Flujo Bifásico" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 5: DIFERENCIAS CON OTROS FENÓMENOS -->
+      <section>
+        <h2>¿Qué es una avenida torrencial?</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Diferencias con otros fenómenos
+        </h3>
+
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p_et/image5.png" alt="Clasificación de Flujos y Concentración de Sedimentos" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 6: MORFOMETRÍA 1 -->
+      <section>
+        <h2>¿Dónde pueden ocurrir las avenidas torrenciales?</h2>
+        <h3 style="color: var(--eafit-blue); font-size: 1.25em; margin-top: 8px;">
+          Análisis de susceptibilidad a partir de morfometría
+        </h3>
+
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 25px;">
+          <img src="img/p_et/image6.png" alt="Morfometría Cuenca 1" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p_et/image7.png" alt="Morfometría Cuenca 2" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 7: MORFOMETRÍA - ARANGO ET AL. 2020 -->
+      <section>
+        <h2>¿Dónde pueden ocurrir las avenidas torrenciales?</h2>
+        <h3 style="color: var(--eafit-blue); font-size: 1.25em; margin-top: 8px;">
+          Análisis de susceptibilidad a partir de morfometría
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📖</span>
+              <span>Metodología Morfométrica</span>
+            </div>
+            <p style="font-size: 1.1em; margin-top: 10px; line-height: 1.6;">
+              Evaluación morfométrica de cuencas de montaña y tipificación de susceptibilidad torrencial.
+            </p>
+            <p style="font-size: 0.9em; color: var(--text-dim); margin-top: 15px;">
+              Arango et al. (2020)
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image8.png" alt="Arango et al 2020 Metodología" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: MORFOMETRÍA 3 -->
+      <section>
+        <h2>¿Dónde pueden ocurrir las avenidas torrenciales?</h2>
+        <h3 style="color: var(--eafit-blue); font-size: 1.2em; margin-top: 6px;">
+          Parámetros morfométricos y pendientes
+        </h3>
+
+        <div style="display: flex; gap: 15px; justify-content: center; align-items: center; margin-top: 20px;">
+          <img src="img/p_et/image9.jpeg" alt="Parámetros Morfométricos 1" style="max-height: 380px; width: auto; border-radius: 8px;">
+          <img src="img/p_et/image10.jpeg" alt="Parámetros Morfométricos 2" style="max-height: 380px; width: auto; border-radius: 8px;">
+        </div>
+      </section>
+
+      <!-- SLIDE 9: MORFOMETRÍA - ILINCA 2021 -->
+      <section>
+        <h2>¿Dónde pueden ocurrir las avenidas torrenciales?</h2>
+        <h3 style="color: var(--eafit-blue); font-size: 1.2em; margin-top: 6px;">
+          Metodología basada en Arango et al. (2020) e Ilinca (2021)
+        </h3>
+
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 25px;">
+          <img src="img/p_et/image11.jpeg" alt="Ilinca 2021 Metodología" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p_et/image12.png" alt="Clasificación de Cuencas" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 10: MAPA DE SUSCEPTIBILIDAD -->
+      <section>
+        <h2>¿Dónde pueden ocurrir las avenidas torrenciales?</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Mapa de susceptibilidad a partir de morfometría
+        </h3>
+
+        <div style="text-align: center; margin-top: 20px;">
+          <img src="img/p_et/image13.jpeg" alt="Mapa de Susceptibilidad Torrencial Regional" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 11: CUÁNDO: MODELOS LLUVIA-ESCORRENTÍA -->
+      <section>
+        <h2>¿Cuándo puede ocurrir una avenida torrencial?</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card card-highlight">
+              <p style="font-size: 1.1em; line-height: 1.6;">
+                Se utilizan <strong>modelos lluvia-escorrentía</strong> para encontrar caudales asociados a eventos de <strong>precipitación crítica</strong>.
+              </p>
+            </div>
+
+            <div class="card" style="margin-top: 15px;">
+              <div class="card-title" style="color: var(--accent-rose);">
+                <span class="card-icon">⚡</span>
+                <span>Factores detonantes:</span>
+              </div>
+              <ul class="bullet-list" style="margin-top: 8px; font-size: 0.9em;">
+                <li>Disponibilidad de sedimentos en laderas y cauce.</li>
+                <li>
+                  Disponibilidad de agua:
+                  <ul>
+                    <li>Lluvia antecedente &bull; Humedad en la cuenca.</li>
+                    <li>Lluvias detonantes intensas.</li>
+                    <li>Rotura de presas o taponamientos naturales &bull; Deshielo.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image14.png" alt="Hidrograma Caudal Crítico" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 12: IMPACTO: CONCENTRACIÓN DE DAÑOS -->
+      <section>
+        <h2>¿Cuál es el impacto de una avenida torrencial?</h2>
+        <h3 style="color: var(--accent-rose); font-size: 1.2em; margin-top: 6px;">
+          Afectaciones: estimación de la propagación
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <p style="font-size: 1.1em; line-height: 1.65;">
+              Es un fenómeno que se <strong>estudia a nivel de cuenca</strong>, pero sus afectaciones no se dan en toda la cuenca.
+            </p>
+            <div class="callout callout-warning" style="margin-top: 15px;">
+              <span class="callout-icon">📍</span>
+              <div class="callout-content" style="font-size: 1em;">
+                Se concentran en el <strong>cauce, márgenes, llanura de inundación y zona de abanico (depositación)</strong>.
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image3.png" alt="Zona de Afectación en Abanico" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 13: IMPACTO: DAÑOS EN CAMPO -->
+      <section>
+        <h2>¿Cuál es el impacto de una avenida torrencial?</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p_et/image15.png" alt="Daños en Infraestructura y Vías por Flujo Torrencial" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 14: METODOLOGÍAS DE TRÁNSITO -->
+      <section>
+        <h2>Metodologías para evaluar el tránsito de un flujo</h2>
+        <div class="grid-3" style="margin-top: 40px; gap: 25px;">
+          
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-blue); text-align: center; padding: 30px;">
+            <span style="font-size: 3em;">📊</span>
+            <div class="card-title" style="justify-content: center; color: var(--eafit-blue); font-size: 1.3em; margin-top: 10px;">
+              Empírico
+            </div>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.05em;">
+              Modelos de dispersión y pasos aleatorios basados en energía y pendiente.
+            </p>
+            <div class="header-badge" style="margin-top: 15px; background: rgba(0,75,133,0.1); color: var(--eafit-blue);">Flow-R</div>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-cyan); text-align: center; padding: 30px;">
+            <span style="font-size: 3em;">🌊</span>
+            <div class="card-title" style="justify-content: center; color: var(--accent-cyan); font-size: 1.3em; margin-top: 10px;">
+              Hidráulico
+            </div>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.05em;">
+              Ecuaciones de aguas poco profundas bidimensionales en terreno real.
+            </p>
+            <div class="header-badge" style="margin-top: 15px; background: rgba(56,189,248,0.1); color: var(--accent-cyan);">Iber</div>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-rose); text-align: center; padding: 30px;">
+            <span style="font-size: 3em;">🪨</span>
+            <div class="card-title" style="justify-content: center; color: var(--accent-rose); font-size: 1.3em; margin-top: 10px;">
+              Tránsito de Masas
+            </div>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.05em;">
+              Modelos bifásicos de mezclas heterogéneas de sólidos y agua con erosión.
+            </p>
+            <div class="header-badge" style="margin-top: 15px; background: rgba(244,63,94,0.1); color: var(--accent-rose);">r.avaflow</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 15: EMPÍRICO: CONCEPTO -->
+      <section>
+        <h2>Metodologías para evaluar el tránsito – Empírico</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card card-highlight">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              Los <strong>modelos empíricos de propagación de masas</strong> se usan para simular el movimiento y dispersión de partículas en una superficie.
+            </p>
+            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
+              La idea básica es que las partículas o masas se desplazan a través de una <strong>serie de pasos aleatorios</strong>, lo que permite modelar cómo se propagan a través de un espacio topográfico definido.
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image16.jpeg" alt="Dispersión Empírica de Masas" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 16: EMPÍRICO: PASOS ALEATORIOS (FLOW-R) -->
+      <section>
+        <h2>Metodologías para evaluar el tránsito – Empírico</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 1em; line-height: 1.6;">
+              <li>Cada partícula o masa comienza en una <strong>posición inicial</strong>.</li>
+              <li>En cada paso, la partícula se mueve a una posición nueva en una <strong>dirección aleatoria gobernada por la topografía</strong>.</li>
+              <li>Con el tiempo, la acumulación de muchos movimientos aleatorios permite observar una <strong>distribución espacial de probabilidad</strong>.</li>
+              <li>El movimiento está sujeto a restricciones energéticas (ángulo de fricción límite / línea de sombra).</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <img src="img/p_et/image17.png" alt="Flow-R Pasos 1" style="max-height: 340px; width: auto; border-radius: 6px;">
+            <img src="img/p_et/image18.png" alt="Flow-R Pasos 2" style="max-height: 340px; width: auto; border-radius: 6px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 17: HIDRÁULICO: CONCEPTO -->
+      <section>
+        <h2>Metodologías para evaluar el tránsito – Hidráulico</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card card-highlight">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              Los <strong>modelos hidráulicos</strong> se centran en simular el <strong>flujo de agua en cauces, ríos y sistemas fluviales</strong>.
+            </p>
+            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
+              Son software de simulación numérica que utiliza modelos uni o bidimensionales para representar el comportamiento de corrientes superficiales. Permiten simular la inundación y calcular los parámetros principales: <strong>profundidad, velocidad y presión</strong>.
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image19.jpeg" alt="Modelo Hidráulico Fluvial" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 18: HIDRÁULICO: IBER -->
+      <section>
+        <h2>Metodologías para evaluar el tránsito – Hidráulico</h2>
+        <h3 style="color: var(--accent-cyan); font-size: 1.25em; margin-top: 8px;">
+          Software Iber
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 1.05em; line-height: 1.65;">
+              <li>
+                <strong>Iber</strong> utiliza las <strong>ecuaciones de aguas poco profundas (Saint-Venant 2D)</strong>, donde la longitud horizontal es mucho mayor que la profundidad vertical.
+              </li>
+              <li>
+                Se basa en una malla de terreno precisa, permitiendo estudiar cómo el flujo se adapta a las variaciones topográficas.
+              </li>
+              <li>
+                Iber se utiliza principalmente en el <strong>estudio de inundaciones fluviales</strong> y roturas de balsas o presas.
+              </li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image20.png" alt="Simulación Iber 2D" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 19: MASAS: CONCEPTO -->
+      <section>
+        <h2>Metodologías para evaluar el tránsito – Masas</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card card-highlight">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              Los <strong>modelos de tránsito de masas</strong> están diseñados para simular <strong>flujos de material sólido y agua combinados</strong> (flujos de escombros, detritos y lodo), típicos en avenidas torrenciales que transportan bloques, grava, limo y restos leñosos.
+            </p>
+            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
+              Este tipo de modelo es útil para predecir la trayectoria, el espesor de depósito y la extensión de eventos en los que las partículas sólidas interactúan activamente con el agua.
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image21.jpeg" alt="Flujo de Escombros Masas" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 20: MASAS: r.avaflow -->
+      <section>
+        <h2>Metodologías para evaluar el tránsito – Masas</h2>
+        <h3 style="color: var(--accent-rose); font-size: 1.25em; margin-top: 8px;">
+          r.avaflow
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 1em; line-height: 1.65;">
+              <li>
+                A diferencia de Iber, <strong>r.avaflow simula una mezcla heterogénea bifásica</strong> de sólidos (rocas, detritos) y líquidos (agua).
+              </li>
+              <li>
+                Utiliza <strong>ecuaciones de conservación de momento y masa</strong> acopladas para ambas fases, modelando la interacción grano-fluido.
+              </li>
+              <li>
+                Considera el <strong>impacto del flujo en el lecho, la socavación/erosión progresiva y el depósito</strong> de materiales a lo largo de la trayectoria.
+              </li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p_et/image22.png" alt="r.avaflow Simulación Bifásica" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 21: COMPARACIÓN: FLOW-R vs IBER vs r.avaflow -->
+      <section>
+        <h2>Metodologías – Comparación</h2>
+        <div class="grid-3" style="margin-top: 20px; gap: 15px; text-align: center;">
+          
+          <div class="card">
+            <div class="card-title" style="justify-content: center; color: var(--eafit-blue);">Flow R</div>
+            <img src="img/p_et/image23.png" alt="Flow R" style="max-height: 220px; width: auto; margin-top: 10px; border-radius: 6px;">
+            <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 6px;">Empírico / Regional</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="justify-content: center; color: var(--accent-cyan);">Iber</div>
+            <img src="img/p_et/image24.png" alt="Iber" style="max-height: 220px; width: auto; margin-top: 10px; border-radius: 6px;">
+            <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 6px;">Hidráulico 2D</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="justify-content: center; color: var(--accent-rose);">r.avaflow</div>
+            <img src="img/p_et/image25.png" alt="r.avaflow" style="max-height: 220px; width: auto; margin-top: 10px; border-radius: 6px;">
+            <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 6px;">Masa Bifásica</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 22: COMPARACIÓN: RESULTADOS FLOW-R -->
+      <section>
+        <h2>Metodologías – Comparación: Flow R</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p_et/image26.png" alt="Resultados de Propagación Flow R" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 23: COMPARACIÓN: RESULTADOS IBER -->
+      <section>
+        <h2>Metodologías – Comparación: Iber</h2>
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 25px;">
+          <img src="img/p_et/image27.png" alt="Calados Máximos Iber" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p_et/image28.png" alt="Velocidades Máximas Iber" style="max-height: 380px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 24: COMPARACIÓN: IBER vs r.avaflow Y CIERRE -->
+      <section class="slide-cover">
+        <div class="cover-badge">Módulo Especial &bull; Síntesis Comparativa</div>
+        <h2 style="font-size: 1.9em; margin-top: 15px;">
+          Comparación de Resultados: Iber vs. r.avaflow
+        </h2>
+
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 20px;">
+          <div style="text-align: center;">
+            <h4 style="color: var(--accent-cyan); margin-bottom: 6px;">Iber (Hidráulico)</h4>
+            <img src="img/p_et/image29.png" alt="Resultado Iber" style="max-height: 250px; width: auto; border-radius: 6px; box-shadow: var(--card-shadow);">
+          </div>
+          <div style="text-align: center;">
+            <h4 style="color: var(--accent-rose); margin-bottom: 6px;">r.avaflow (Bifásico)</h4>
+            <img src="img/p_et/image30.png" alt="Resultado r.avaflow" style="max-height: 250px; width: auto; border-radius: 6px; box-shadow: var(--card-shadow);">
+          </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+          <a href="index.html" class="header-btn" style="display: inline-flex; font-size: 1.05em; padding: 10px 24px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
+            <span>🏠</span> Volver al Portal de Presentaciones
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Barra Inferior de Información y Atajos -->
+  <footer class="presentation-footer">
+    <div class="footer-credits">
+      <strong>EAFIT</strong> &bull; Estabilidad de Taludes &bull; Docente: Federico Gómez, MSc.
+    </div>
+    <div class="footer-shortcuts">
+      <span>Espacio</span> Avanzar &bull; <span>←</span> Retroceder &bull; <span>F</span> Pantalla Completa &bull; <span>T</span> Modo Claro/Oscuro &bull; <span>Esc</span> Cuadrícula
+    </div>
+  </footer>
+
+  <!-- Scripts Reveal.js y Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.min.js"></script>
+  <script src="js/presentation-core.js"></script>
+
+</body>
+</html>

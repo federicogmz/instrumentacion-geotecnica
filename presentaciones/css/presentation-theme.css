@@ -1,0 +1,1015 @@
+/* ==========================================================================
+   Universidad EAFIT - Instrumentación Geotécnica
+   Reveal.js Presentation Theme & Design System
+   Manual de Identidad Visual Oficial (Azul EAFIT #004B85, Amarillo #FFB903)
+   Soporte Integral para MODO CLARO (Default) y MODO OSCURO (Técnico)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   1. VARIABLES DE TEMA: MODO CLARO (DEFAULT INSTITUCIONAL EAFIT)
+   ========================================================================== */
+:root {
+  /* Paleta Oficial EAFIT */
+  --eafit-blue: #004B85;          /* Pantone 294C (Azul Institucional Primario) */
+  --eafit-blue-dark: #002855;     /* Navy Institucional Profundo */
+  --eafit-blue-deep: #001A49;     /* Fondo de Contraste */
+  --eafit-yellow: #FFB903;        /* Pantone 123C (Amarillo Institucional) */
+  --eafit-yellow-text: #D97706;   /* Amarillo/Ámbar con alto contraste para texto en fondo claro */
+  --eafit-yellow-glow: rgba(255, 185, 3, 0.3);
+
+  /* Superficies en Modo Claro (EAFIT Oficial) */
+  --bg-presentation: #F8FAFC;
+  --bg-presentation-gradient: 
+    radial-gradient(circle at 10% 15%, rgba(0, 75, 133, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 90% 85%, rgba(255, 185, 3, 0.08) 0%, transparent 50%),
+    #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F1F5F9;
+  --bg-accent-soft: rgba(0, 75, 133, 0.06);
+
+  /* Bordes y Sombras en Modo Claro */
+  --border-subtle: rgba(0, 75, 133, 0.12);
+  --border-card: rgba(0, 75, 133, 0.16);
+  --border-highlight: var(--eafit-blue);
+  --card-shadow: 0 10px 28px -6px rgba(0, 75, 133, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 16px 36px -6px rgba(0, 75, 133, 0.16), 0 6px 16px -2px rgba(0, 0, 0, 0.06);
+
+  /* Acentos Semánticos */
+  --accent-cyan: #0284c7;
+  --accent-emerald: #059669;
+  --accent-rose: #e11d48;
+  --accent-amber: #d97706;
+  --accent-purple: #7c3aed;
+
+  /* Tipografía en Modo Claro (Máximo Contraste y Legibilidad) */
+  --text-main: #0B192C;          /* Azul marino profundo, máxima legibilidad */
+  --text-body: #1E293B;          /* Pizarra oscuro para párrafos y listas */
+  --text-muted: #475569;         /* Pizarra medio para subtítulos y metadatos */
+  --text-dim: #64748B;           /* Texto secundario */
+  --font-sans: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Barras de Interfaz en Modo Claro */
+  --bar-bg: rgba(255, 255, 255, 0.94);
+  --bar-border: rgba(0, 75, 133, 0.14);
+  --bar-text: #334155;
+  --btn-bg: #F1F5F9;
+  --btn-border: #CBD5E1;
+  --btn-text: #0F172A;
+  --logo-filter: none;           /* El logo es azul oscuro (0,0,102), perfecto sobre fondo blanco */
+
+  /* Tablas y Fórmulas en Modo Claro */
+  --table-bg: #FFFFFF;
+  --table-header-bg: #004B85;
+  --table-header-text: #FFFFFF;
+  --table-border: #E2E8F0;
+  --table-row-hover: rgba(0, 75, 133, 0.04);
+  --formula-bg: #F1F5F9;
+  --formula-border: rgba(0, 75, 133, 0.22);
+  --formula-text: #002855;
+}
+
+/* ==========================================================================
+   2. VARIABLES DE TEMA: MODO OSCURO (TÉCNICO / AUDITORIO OSCURO)
+   ========================================================================== */
+[data-theme="dark"] {
+  /* Superficies en Modo Oscuro */
+  --bg-presentation: #060D1F;
+  --bg-presentation-gradient: 
+    radial-gradient(circle at 10% 20%, rgba(0, 75, 133, 0.28) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(0, 26, 73, 0.45) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 185, 3, 0.04) 0%, transparent 60%),
+    #060D1F;
+  --bg-surface: #0A142C;
+  --bg-card: rgba(15, 29, 58, 0.88);
+  --bg-card-hover: rgba(23, 41, 80, 0.96);
+  --bg-accent-soft: rgba(0, 75, 133, 0.35);
+
+  /* Bordes y Sombras en Modo Oscuro */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-card: rgba(56, 189, 248, 0.22);
+  --border-highlight: var(--eafit-yellow);
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  --card-shadow-hover: 0 15px 35px -5px rgba(0, 75, 133, 0.4);
+
+  /* Acentos Semánticos */
+  --accent-cyan: #38bdf8;
+  --accent-emerald: #10b981;
+  --accent-rose: #f43f5e;
+  --accent-amber: #fbbf24;
+  --accent-purple: #a855f7;
+  --eafit-yellow-text: #FFB903;
+
+  /* Tipografía en Modo Oscuro */
+  --text-main: #FFFFFF;
+  --text-body: #E2E8F0;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+
+  /* Barras de Interfaz en Modo Oscuro */
+  --bar-bg: rgba(6, 13, 31, 0.9);
+  --bar-border: rgba(255, 255, 255, 0.1);
+  --bar-text: #94A3B8;
+  --btn-bg: rgba(255, 255, 255, 0.08);
+  --btn-border: rgba(255, 255, 255, 0.15);
+  --btn-text: #E2E8F0;
+  --logo-filter: brightness(0) invert(1); /* Convierte el logo azul oscuro a blanco puro */
+
+  /* Tablas y Fórmulas en Modo Oscuro */
+  --table-bg: var(--bg-card);
+  --table-header-bg: #004B85;
+  --table-header-text: #FFFFFF;
+  --table-border: rgba(255, 255, 255, 0.08);
+  --table-row-hover: rgba(255, 255, 255, 0.05);
+  --formula-bg: #040915;
+  --formula-border: rgba(56, 189, 248, 0.35);
+  --formula-text: #FFFFFF;
+}
+
+/* ==========================================================================
+   3. ESTILOS BASE DE REVEAL.JS Y CALIBRACIÓN DE TIPOGRAFÍA GRANDE (38px)
+   ========================================================================== */
+.reveal {
+  font-family: var(--font-sans);
+  font-size: 38px;                  /* CALIBRADO: Letra visible y cómoda desde cualquier distancia */
+  font-weight: 400;
+  color: var(--text-body);
+  background-color: var(--bg-presentation);
+  background-image: var(--bg-presentation-gradient);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+/* Distribución Vertical y Horizontal en el Lienzo 1920x1080 */
+.reveal .slides > section {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 38px 60px !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.reveal .slides > section.slide-cover {
+  justify-content: center;
+  text-align: left;
+  padding: 50px 80px !important;
+}
+
+/* ==========================================================================
+   4. JERARQUÍA DE ENCABEZADOS (HEADINGS)
+   ========================================================================== */
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: none;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.4em 0;
+  line-height: 1.18;
+}
+
+.reveal h1 {
+  font-size: 2.4em;                 /* ~91px */
+  font-weight: 800;
+  color: var(--eafit-blue);
+  line-height: 1.15;
+}
+
+[data-theme="dark"] .reveal h1 {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #FFFFFF 40%, var(--eafit-yellow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.reveal h2 {
+  font-size: 1.65em;                /* ~63px */
+  color: var(--eafit-blue);
+  border-bottom: 4px solid var(--eafit-yellow);
+  padding-bottom: 6px;
+  display: inline-block;
+  margin-bottom: 0.45em;
+  font-weight: 800;
+}
+
+[data-theme="dark"] .reveal h2 {
+  color: #FFFFFF;
+}
+
+.reveal h3 {
+  font-size: 1.3em;                 /* ~49px */
+  color: var(--eafit-blue-dark);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .reveal h3 {
+  color: var(--accent-cyan);
+}
+
+.reveal h4 {
+  font-size: 1.15em;                /* ~44px */
+  color: var(--eafit-yellow-text);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .reveal h4 {
+  color: var(--eafit-yellow);
+}
+
+.reveal p {
+  font-size: 1.02em;                /* ~39px */
+  line-height: 1.55;
+  margin-bottom: 0.75em;
+  color: var(--text-body);
+}
+
+.reveal strong {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.reveal em {
+  color: var(--eafit-blue);
+  font-style: italic;
+}
+
+[data-theme="dark"] .reveal em {
+  color: var(--accent-cyan);
+}
+
+.reveal a {
+  color: var(--eafit-blue);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .reveal a {
+  color: var(--accent-cyan);
+}
+
+.reveal a:hover {
+  color: var(--eafit-yellow-text);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   5. BARRA SUPERIOR (HEADER) E INFERIOR (FOOTER)
+   ========================================================================== */
+.presentation-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--bar-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--bar-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 100;
+  font-size: 15px;
+  color: var(--bar-text);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+  filter: var(--logo-filter);
+  transition: filter 0.3s ease;
+}
+
+.header-title {
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  font-size: 16px;
+}
+
+.header-badge {
+  background: var(--eafit-blue);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--eafit-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-btn {
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  color: var(--btn-text);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.header-btn:hover {
+  background: var(--eafit-blue);
+  color: #FFFFFF;
+  border-color: var(--eafit-yellow);
+  text-decoration: none;
+}
+
+.header-btn-theme {
+  background: rgba(0, 75, 133, 0.08);
+  border-color: rgba(0, 75, 133, 0.2);
+  color: var(--eafit-blue);
+}
+
+[data-theme="dark"] .header-btn-theme {
+  background: rgba(255, 185, 3, 0.15);
+  border-color: var(--eafit-yellow);
+  color: var(--eafit-yellow);
+}
+
+.presentation-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--bar-bg);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--bar-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 100;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.footer-credits strong {
+  color: var(--text-main);
+}
+
+.footer-shortcuts span {
+  display: inline-block;
+  background: rgba(0, 75, 133, 0.08);
+  padding: 2px 7px;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  color: var(--eafit-blue);
+  font-weight: 700;
+  margin: 0 2px;
+}
+
+[data-theme="dark"] .footer-shortcuts span {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent-cyan);
+}
+
+/* ==========================================================================
+   6. DISTRIBUCIÓN Y CONTENEDORES (GRIDS & SPLITS)
+   ========================================================================== */
+.slide-content {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.split-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+  flex: 1;
+  margin-top: 18px;
+}
+
+.split-2-1 {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 40px;
+  align-items: stretch;
+  flex: 1;
+  margin-top: 18px;
+}
+
+.split-1-2 {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 40px;
+  align-items: stretch;
+  flex: 1;
+  margin-top: 18px;
+}
+
+.split-3,
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+  flex: 1;
+  margin-top: 18px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  align-items: stretch;
+  flex: 1;
+  margin-top: 18px;
+}
+
+/* ==========================================================================
+   7. TARJETAS (CARDS)
+   ========================================================================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 28px 34px;
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.card:hover {
+  border-color: var(--eafit-blue);
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.card-highlight {
+  border-left: 6px solid var(--eafit-yellow) !important;
+  background: var(--bg-card);
+}
+
+[data-theme="light"] .card-highlight {
+  background: linear-gradient(135deg, #FFFFFF 75%, rgba(0, 75, 133, 0.04) 100%);
+}
+
+.card-title {
+  font-size: 1.12em;                /* ~42.5px */
+  font-weight: 800;
+  color: var(--eafit-blue);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.25;
+}
+
+[data-theme="dark"] .card-title {
+  color: #FFFFFF;
+}
+
+.card-icon {
+  font-size: 1.2em;
+}
+
+.card p,
+.reveal .card p {
+  font-size: 0.96em !important;     /* ~36.5px */
+  line-height: 1.55;
+  margin-bottom: 12px;
+  color: var(--text-body);
+}
+
+/* ==========================================================================
+   8. LISTAS CON ICONOS (FEATURE LISTS)
+   ========================================================================== */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-list li,
+.reveal .feature-list li {
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 16px;
+  line-height: 1.55;
+  font-size: 0.96em !important;     /* ~36.5px */
+  color: var(--text-body);
+}
+
+.feature-list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--eafit-yellow-text);
+  font-size: 1.1em;
+}
+
+[data-theme="dark"] .feature-list li::before {
+  color: var(--eafit-yellow);
+}
+
+.feature-list.check li::before {
+  content: "✓";
+  color: var(--accent-emerald);
+  font-weight: 800;
+}
+
+.feature-list.arrow li::before {
+  content: "→";
+  color: var(--eafit-blue);
+  font-weight: 800;
+}
+
+[data-theme="dark"] .feature-list.arrow li::before {
+  color: var(--accent-cyan);
+}
+
+/* ==========================================================================
+   9. CAJAS DE ALERTA (CALLOUTS)
+   ========================================================================== */
+.callout,
+.reveal .callout {
+  border-radius: 14px;
+  padding: 20px 28px;
+  margin: 18px 0;
+  font-size: 0.96em !important;     /* ~36.5px */
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  border-left: 6px solid;
+  box-sizing: border-box;
+}
+
+.callout-icon {
+  font-size: 1.4em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.callout-content {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.callout-title {
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+/* Callout Themes - Light & Dark */
+.callout-tip {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: #059669;
+  color: #064e3b;
+}
+.callout-tip .callout-title { color: #059669; }
+
+[data-theme="dark"] .callout-tip {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: var(--accent-emerald);
+  color: #d1fae5;
+}
+[data-theme="dark"] .callout-tip .callout-title { color: var(--accent-emerald); }
+
+.callout-info {
+  background: rgba(0, 75, 133, 0.08);
+  border-color: var(--eafit-blue);
+  color: #0c4a6e;
+}
+.callout-info .callout-title { color: var(--eafit-blue); }
+
+[data-theme="dark"] .callout-info {
+  background: rgba(56, 189, 248, 0.14);
+  border-color: var(--accent-cyan);
+  color: #e0f2fe;
+}
+[data-theme="dark"] .callout-info .callout-title { color: var(--accent-cyan); }
+
+.callout-warning {
+  background: rgba(255, 185, 3, 0.16);
+  border-color: #d97706;
+  color: #78350f;
+}
+.callout-warning .callout-title { color: #b45309; }
+
+[data-theme="dark"] .callout-warning {
+  background: rgba(255, 185, 3, 0.16);
+  border-color: var(--eafit-yellow);
+  color: #fef3c7;
+}
+[data-theme="dark"] .callout-warning .callout-title { color: var(--eafit-yellow); }
+
+.callout-danger {
+  background: rgba(244, 63, 94, 0.09);
+  border-color: #e11d48;
+  color: #881337;
+}
+.callout-danger .callout-title { color: #e11d48; }
+
+[data-theme="dark"] .callout-danger {
+  background: rgba(244, 63, 94, 0.16);
+  border-color: var(--accent-rose);
+  color: #ffe4e6;
+}
+[data-theme="dark"] .callout-danger .callout-title { color: var(--accent-rose); }
+
+/* ==========================================================================
+   10. CONTENEDORES DE FÓRMULAS (FORMULA BOXES)
+   ========================================================================== */
+.formula-box,
+.reveal .formula-box {
+  background: var(--formula-bg);
+  border: 1px solid var(--formula-border);
+  border-radius: 14px;
+  padding: 22px 32px;
+  margin: 18px 0;
+  text-align: center;
+  color: var(--formula-text);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.formula-title {
+  font-size: 0.85em;
+  color: var(--eafit-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+[data-theme="dark"] .formula-title {
+  color: var(--accent-cyan);
+}
+
+.formula-desc {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   11. TARJETAS DE FIGURAS E ILUSTRACIONES (FIGURE CARDS)
+   ========================================================================== */
+.figure-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--card-shadow);
+  height: 100%;
+}
+
+.figure-img-wrap {
+  width: 100%;
+  flex: 1;
+  min-height: 380px;
+  max-height: 580px;
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .figure-img-wrap {
+  background: #020617;
+}
+
+.figure-img {
+  width: 100%;
+  height: 100%;
+  max-height: 550px;
+  object-fit: contain;
+  display: block;
+}
+
+.figure-caption,
+.reveal .figure-caption {
+  font-size: 0.86em !important;     /* ~32.6px */
+  color: var(--text-muted);
+  padding: 14px 22px;
+  background: var(--bg-card-hover);
+  border-top: 1px solid var(--border-subtle);
+  line-height: 1.5;
+}
+
+.figure-caption strong {
+  color: var(--eafit-blue);
+  font-weight: 800;
+}
+
+[data-theme="dark"] .figure-caption strong {
+  color: var(--accent-cyan);
+}
+
+/* ==========================================================================
+   12. TABLAS DE DATOS (DATA TABLES)
+   ========================================================================== */
+.reveal table.data-table {
+  width: 100%;
+  font-size: 0.94em !important;     /* ~35.7px */
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 18px 0;
+  background: var(--table-bg);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--card-shadow);
+}
+
+.reveal table.data-table th {
+  background: var(--table-header-bg);
+  color: var(--table-header-text);
+  padding: 14px 20px;
+  font-weight: 800;
+  text-align: left;
+  border-bottom: 4px solid var(--eafit-yellow);
+}
+
+.reveal table.data-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--table-border);
+  color: var(--text-body);
+  line-height: 1.45;
+}
+
+.reveal table.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal table.data-table tr:hover td {
+  background: var(--table-row-hover);
+}
+
+/* ==========================================================================
+   13. CAJAS DE ESTADÍSTICAS (STAT BOXES)
+   ========================================================================== */
+.stat-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 24px 28px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stat-number {
+  font-size: 2.2em;                 /* ~83px */
+  font-weight: 800;
+  color: var(--eafit-blue);
+  font-family: var(--font-sans);
+  line-height: 1.1;
+}
+
+[data-theme="dark"] .stat-number {
+  color: var(--eafit-yellow);
+}
+
+.stat-label {
+  font-size: 0.84em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   14. INSIGNIAS (BADGES)
+   ========================================================================== */
+.badge,
+.reveal .badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.8em !important;      /* ~30.4px */
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+.badge-blue { 
+  background: rgba(0, 75, 133, 0.12); 
+  color: #004B85; 
+  border: 1px solid rgba(0, 75, 133, 0.35); 
+}
+[data-theme="dark"] .badge-blue { 
+  background: rgba(0, 75, 133, 0.4); 
+  color: #60a5fa; 
+  border-color: #2563eb; 
+}
+
+.badge-yellow { 
+  background: rgba(255, 185, 3, 0.18); 
+  color: #b45309; 
+  border: 1px solid rgba(217, 119, 6, 0.45); 
+}
+[data-theme="dark"] .badge-yellow { 
+  background: rgba(255, 185, 3, 0.2); 
+  color: #fbbf24; 
+  border-color: #d97706; 
+}
+
+.badge-green { 
+  background: rgba(16, 185, 129, 0.14); 
+  color: #065f46; 
+  border: 1px solid rgba(5, 150, 105, 0.35); 
+}
+[data-theme="dark"] .badge-green { 
+  background: rgba(16, 185, 129, 0.2); 
+  color: #34d399; 
+  border-color: #059669; 
+}
+
+.badge-red { 
+  background: rgba(244, 63, 94, 0.12); 
+  color: #9f1239; 
+  border: 1px solid rgba(225, 29, 72, 0.35); 
+}
+[data-theme="dark"] .badge-red { 
+  background: rgba(244, 63, 94, 0.2); 
+  color: #f87171; 
+  border-color: #e11d48; 
+}
+
+/* ==========================================================================
+   15. PORTADA (SLIDE-COVER)
+   ========================================================================== */
+.cover-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--eafit-blue);
+  border: 2px solid var(--eafit-yellow);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.78em;
+  padding: 8px 24px;
+  border-radius: 9999px;
+  margin-bottom: 26px;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  box-shadow: 0 4px 14px rgba(0, 75, 133, 0.2);
+}
+
+[data-theme="dark"] .cover-badge {
+  background: rgba(0, 75, 133, 0.4);
+  border-color: var(--eafit-yellow);
+  color: var(--eafit-yellow);
+  box-shadow: none;
+}
+
+.cover-meta {
+  display: flex;
+  gap: 44px;
+  margin-top: 52px;
+  padding-top: 32px;
+  border-top: 2px solid var(--border-subtle);
+}
+
+.cover-meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cover-meta-label {
+  font-size: 0.68em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.cover-meta-value {
+  font-size: 0.85em;
+  color: var(--text-main);
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   16. CONTENEDORES DE VIDEO
+   ========================================================================== */
+.video-card {
+  background: #000000;
+  border: 1px solid var(--border-card);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.video-card video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.video-info {
+  background: var(--bg-card-hover);
+  padding: 12px 18px;
+  font-size: 0.75em;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ==========================================================================
+   17. CONTROLES DE REVEAL.JS
+   ========================================================================== */
+.reveal .progress {
+  height: 6px;
+  background: rgba(0, 75, 133, 0.15);
+}
+
+.reveal .progress span {
+  background: linear-gradient(90deg, var(--eafit-blue), var(--eafit-yellow));
+}
+
+.reveal .controls button {
+  color: var(--eafit-blue);
+}
+
+[data-theme="dark"] .reveal .controls button {
+  color: var(--eafit-yellow);
+}
+
+.reveal .slide-number {
+  background: var(--bar-bg);
+  color: var(--eafit-blue);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid var(--bar-border);
+  padding: 5px 12px;
+  bottom: 50px;
+  right: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .reveal .slide-number {
+  color: var(--eafit-yellow);
+}
+
+/* Overrides de Impresión */
+@media print {
+  .presentation-header,
+  .presentation-footer {
+    display: none !important;
+  }
+}

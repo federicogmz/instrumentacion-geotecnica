@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>00. Presentación del Curso, Metodología y Evaluación | Instrumentación Geotécnica - EAFIT</title>
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  
+  <!-- Tema Institucional EAFIT -->
+  <link rel="stylesheet" href="css/presentation-theme.css">
+</head>
+<body>
+
+  <!-- Barra Superior Institucional -->
+  <header class="presentation-header">
+    <div class="header-brand">
+      <img src="img/brand/eafit_logo.png" alt="EAFIT" class="header-logo" onerror="this.style.display='none'">
+      <span class="header-title">Instrumentación Geotécnica</span>
+      <span class="header-badge">00 &bull; Presentación del Curso</span>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
+      <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
+      <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
+      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+    </div>
+  </header>
+
+  <!-- Contenedor Reveal.js -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section class="slide-cover">
+        <div class="cover-badge">Universidad EAFIT &bull; Departamento de Ingeniería Civil</div>
+        <h1>Instrumentación Geotécnica</h1>
+        <h3 style="color: var(--eafit-yellow-text); margin-top: 15px">Presentación del Curso</h3>
+        
+        <div class="cover-meta" style="margin-top: 40px">
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Profesores</span>
+            <span class="cover-meta-value">Federico Gómez, MSc. &bull; Juliana Álvarez, MSc.</span>
+          </div>
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Modalidad</span>
+            <span class="cover-meta-value">Presencial &bull; Teórico - Práctico</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: DOCENTES -->
+      <section>
+        <h2>Docentes</h2>
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card card-highlight">
+            <div class="card-title">
+              <span class="card-icon">👩‍🏫</span>
+              <span>Juliana Álvarez</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px">
+              <li><strong>Ingeniera Civil</strong></li>
+              <li><strong>MSc. Ingeniería</strong></li>
+              <li>Líder de observatorio de amenazas y riesgos proyecto SIATA</li>
+              <li>Profesora de cátedra</li>
+            </ul>
+            <div class="callout callout-info" style="margin-top: 20px; padding: 10px 14px;">
+              <span class="callout-icon">✉️</span>
+              <div class="callout-content">
+                <a href="mailto:jalvarezz@eafit.edu.co">jalvarezz@eafit.edu.co</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title">
+              <span class="card-icon">👨‍🏫</span>
+              <span>Federico Gómez</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px">
+              <li><strong>Ingeniero Geólogo</strong></li>
+              <li><strong>MSc. Ingeniería</strong></li>
+              <li>Líder de Teledetección proyecto SIATA</li>
+              <li>Profesor de cátedra</li>
+            </ul>
+            <div class="callout callout-info" style="margin-top: 20px; padding: 10px 14px;">
+              <span class="callout-icon">✉️</span>
+              <div class="callout-content">
+                <a href="mailto:fjgomezc@eafit.edu.co">fjgomezc@eafit.edu.co</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 3: CONTENIDO -->
+      <section>
+        <h2>Contenido</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: stretch;">
+          
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">📚</span>
+                <span>Teórico:</span>
+              </div>
+              <ul class="bullet-list" style="margin-top: 10px">
+                <li>Conceptos básicos de la instrumentación geotécnica</li>
+                <li>Variables hidrometeorológicas</li>
+                <li>El agua en el suelo</li>
+                <li>Medición de deformaciones</li>
+                <li>Interpretación y análisis de datos</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="color: var(--accent-emerald);">
+                <span class="card-icon">💻</span>
+                <span>Práctico:</span>
+              </div>
+              <ul class="bullet-list" style="margin-top: 10px">
+                <li>Introducción a Python</li>
+                <li>Visualización de datos</li>
+                <li>Análisis y manejo de datos temporales</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <img src="img/p00/image3.png" alt="Python Logo" style="max-height: 280px; width: auto; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 4: METODOLOGÍA -->
+      <section>
+        <h2>Metodología</h2>
+        <div class="grid-3" style="margin-top: 25px;">
+          <div class="card">
+            <div class="card-title">
+              <span class="card-icon">📖</span>
+              <span>Clase magistral</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 1.1em; margin-top: 10px;">(Clase teórica)</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span class="card-icon">🔬</span>
+              <span>Clase de análisis</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 1.1em; margin-top: 10px;">(Clase práctica)</p>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span class="card-icon">📝</span>
+              <span>Desarrollo individual</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 1.1em; margin-top: 10px;">Tema fuera de clase<br>(Proyecto individual)</p>
+          </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 30px;">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-content">
+            <strong>Importante:</strong> El curso tiene <strong>3 Umes</strong> &bull; <strong>144 h</strong>: 48 h Clase + 96 h trabajo individual.<br>
+            <span style="color: var(--accent-rose); font-weight: 700; margin-top: 5px; display: inline-block;">El curso se dará por perdido con ausencia de 4 clases.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: METODOLOGÍA - PRESENCIALIDAD -->
+      <section>
+        <h2>Metodología</h2>
+        <div style="max-width: 800px; margin: 40px auto 0 auto;">
+          
+          <div class="card card-highlight" style="text-align: center; padding: 40px;">
+            <span style="font-size: 3.5em; display: block; margin-bottom: 15px;">🏫</span>
+            <h3 style="font-size: 1.6em; color: var(--eafit-blue);">La especialización y, por tanto, el curso es PRESENCIAL.</h3>
+            <p style="font-size: 1.4em; color: var(--accent-rose); font-weight: 800; margin-top: 20px; text-transform: uppercase;">
+              ¡No se permite asistencia remota!
+            </p>
+          </div>
+
+          <div class="callout callout-danger" style="margin-top: 25px; text-align: center; justify-content: center;">
+            <span class="callout-icon">🚫</span>
+            <div class="callout-content" style="font-size: 1.15em; font-weight: 700;">
+              El curso se dará por perdido con ausencia de 4 clases.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 6: HERRAMIENTAS -->
+      <section>
+        <h2>Herramientas</h2>
+        <p style="font-size: 1.2em; margin-top: 15px;">
+          Documentación y repositorio oficial del curso en GitHub:
+        </p>
+        
+        <div class="card card-highlight" style="margin-top: 20px; padding: 15px 25px;">
+          <a href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" style="font-family: var(--font-mono); font-size: 1.15em; color: var(--eafit-blue); word-break: break-all;">
+            🔗 https://github.com/federicogmz/instrumentacion-geotecnica
+          </a>
+        </div>
+
+        <p style="font-size: 1.2em; font-weight: 600; margin-top: 25px; color: var(--text-main);">
+          Análisis de datos geotécnicos
+        </p>
+
+        <div style="display: flex; gap: 30px; justify-content: center; align-items: center; margin-top: 25px; flex-wrap: wrap;">
+          <img src="img/p00/image3.png" alt="Python" style="height: 90px; width: auto; object-fit: contain;">
+          <img src="img/p00/image4.png" alt="Herramientas" style="height: 90px; width: auto; object-fit: contain;">
+          <img src="img/p00/image5.png" alt="GitHub" style="height: 90px; width: auto; object-fit: contain;">
+        </div>
+      </section>
+
+      <!-- SLIDE 7: HERRAMIENTAS - APOYO TECNOLÓGICO -->
+      <section>
+        <h2>Herramientas</h2>
+        <div class="card card-highlight" style="max-width: 850px; margin: 20px auto 0 auto; text-align: center; padding: 30px;">
+          <h3 style="color: var(--eafit-yellow-text); font-size: 1.8em; margin-bottom: 15px;">¡Apoyo tecnológico!</h3>
+          <p style="font-size: 1.3em; line-height: 1.6; color: var(--text-body); font-weight: 500;">
+            En la era AI no debe haber trabajos mal escritos, gráficas deficientes, errores de ortografía y gramática, etc.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 35px; justify-content: center; align-items: center; margin-top: 35px; flex-wrap: wrap;">
+          <img src="img/p00/image6.png" alt="AI Tool 1" style="height: 75px; width: auto; object-fit: contain;">
+          <img src="img/p00/image7.png" alt="AI Tool 2" style="height: 75px; width: auto; object-fit: contain;">
+          <img src="img/p00/image8.png" alt="AI Tool 3" style="height: 75px; width: auto; object-fit: contain;">
+          <img src="img/p00/image9.png" alt="AI Tool 4" style="height: 75px; width: auto; object-fit: contain;">
+        </div>
+      </section>
+
+      <!-- SLIDE 8: ESPACIOS DIGITALES -->
+      <section>
+        <h2>Espacios digitales</h2>
+        <div class="split-2" style="margin-top: 35px; gap: 30px;">
+          
+          <div class="card card-highlight" style="text-align: center; padding: 30px;">
+            <img src="img/p00/image10.png" alt="Microsoft Teams" style="height: 90px; width: auto; object-fit: contain; margin-bottom: 20px;">
+            <h3 style="font-size: 1.3em; color: var(--text-main);">Microsoft Teams</h3>
+            <p style="margin-top: 12px; font-size: 1.15em; color: var(--text-muted);">
+              Toda la comunicación oficial será a través de <strong>Microsoft Teams</strong>.
+            </p>
+          </div>
+
+          <div class="card card-highlight" style="text-align: center; padding: 30px;">
+            <img src="img/p00/image11.png" alt="EAFIT Interactiva" style="height: 90px; width: auto; object-fit: contain; margin-bottom: 20px;">
+            <h3 style="font-size: 1.3em; color: var(--text-main);">EAFIT Interactiva</h3>
+            <p style="margin-top: 12px; font-size: 1.15em; color: var(--text-muted);">
+              Todas las notas oficiales se registrarán en <strong>EAFIT Interactiva</strong>.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 9: EVALUACIÓN -->
+      <section>
+        <h2>Evaluación</h2>
+        <p style="font-size: 1.15em; margin-top: 10px;">
+          <strong>Caso de estudio:</strong> propuesta de proyecto integrado para la definición y análisis de instrumentación geotécnica.
+        </p>
+
+        <div class="grid-3" style="margin-top: 25px;">
+          <div class="card card-highlight" style="text-align: center; border-top: 4px solid var(--eafit-blue);">
+            <div class="stat-number" style="font-size: 2.6em; color: var(--eafit-blue); font-weight: 800;">40%</div>
+            <div class="card-title" style="justify-content: center; margin-top: 10px;">Documento tipo reporte</div>
+            <p style="color: var(--text-muted); margin-top: 8px;">Porcentaje propuesto</p>
+          </div>
+
+          <div class="card card-highlight" style="text-align: center; border-top: 4px solid var(--accent-emerald);">
+            <div class="stat-number" style="font-size: 2.6em; color: var(--accent-emerald); font-weight: 800;">25%</div>
+            <div class="card-title" style="justify-content: center; margin-top: 10px;">Entregas parciales</div>
+            <p style="color: var(--text-muted); margin-top: 8px;">Porcentaje propuesto</p>
+          </div>
+
+          <div class="card card-highlight" style="text-align: center; border-top: 4px solid var(--eafit-yellow-text);">
+            <div class="stat-number" style="font-size: 2.6em; color: var(--eafit-yellow-text); font-weight: 800;">35%</div>
+            <div class="card-title" style="justify-content: center; margin-top: 10px;">Sustentación</div>
+            <p style="color: var(--text-muted); margin-top: 8px;">Porcentaje propuesto</p>
+          </div>
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 25px;">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-content" style="font-size: 0.95em;">
+            <strong>Importante:</strong> El curso está programado hasta el <strong>31 de octubre</strong>. Si requiere un reporte de calificaciones antes de esa fecha, por favor infórmelo <strong>a más tardar la próxima semana</strong> para realizar los ajustes necesarios en la programación; de lo contrario, se deberá ajustar a la programación inicial.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: EVALUACIÓN - INDICACIONES DEL REPORTE -->
+      <section>
+        <h2>Evaluación</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.3em; margin-top: 10px;">
+          Indicaciones generales para el reporte o documento escrito:
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px;">
+          <div class="card">
+            <div class="card-title">
+              <span class="card-icon">📌</span>
+              <span>Condiciones de Entrega</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px">
+              <li>La información del caso de estudio será asignada por el docente.</li>
+              <li>El trabajo se desarrollará de <strong>manera individual</strong>.</li>
+              <li><strong>Formato de entrega:</strong> PDF.</li>
+              <li><strong>Extensión máxima:</strong> 12 páginas (sin incluir portada ni referencias).</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title">
+              <span class="card-icon">✍️</span>
+              <span>Criterio Editorial Clave</span>
+            </div>
+            <p style="font-size: 1.15em; line-height: 1.6; margin-top: 15px;">
+              Redacción clara y técnica, <strong>evitando geopoesía</strong>.
+            </p>
+            <div class="callout callout-danger" style="margin-top: 20px;">
+              <span class="callout-icon">🚫</span>
+              <div class="callout-content">
+                <strong>Los reportes que no se ajusten a las indicaciones no serán revisados.</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: ESTRUCTURA DEL REPORTE TÉCNICO (PARTE 1) -->
+      <section>
+        <h2>Evaluación: Estructura del reporte técnico</h2>
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">1️⃣</span>
+              <span>Introducción</span>
+            </div>
+            <p style="margin-top: 12px; font-size: 1em; line-height: 1.55; color: var(--text-body);">
+              El reporte inicia contextualizando el área de estudio, describiendo los antecedentes y la problemática geotécnica detectada. Se justifica la necesidad del monitoreo, enfatizando los riesgos asociados y la importancia de anticipar eventos críticos mediante herramientas de observación. Se integra información obtenida en visitas a terreno e inspecciones preliminares.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">2️⃣</span>
+              <span>Esquema de monitoreo</span>
+            </div>
+            <p style="margin-top: 12px; font-size: 1em; line-height: 1.55; color: var(--text-body);">
+              Se detalla el sistema de monitoreo implementado, especificando los sensores utilizados (extensómetros, acelerómetros, sensores de humedad, pluviómetros), las variables medidas, su ubicación y la frecuencia de registro. Se recomienda el uso de esquemas, mapas o croquis para facilitar la comprensión espacial del sistema.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 12: ESTRUCTURA DEL REPORTE TÉCNICO (PARTE 2) -->
+      <section>
+        <h2>Evaluación: Análisis de los Resultados</h2>
+        <div class="card card-highlight" style="margin-top: 25px; padding: 25px;">
+          <p style="font-size: 1.1em; line-height: 1.6; color: var(--text-body);">
+            Esta sección presenta un <strong>análisis técnico de las series temporales y espaciales</strong> obtenidas. Se identifican patrones, tendencias y relaciones entre variables (por ejemplo, lluvia y deformación). Se destacan eventos relevantes (lluvias intensas, desplazamientos, intervenciones antrópicas) y se analizan desviaciones respecto al comportamiento esperado.
+          </p>
+          
+          <div class="callout callout-info" style="margin-top: 20px;">
+            <span class="callout-icon">🛰️</span>
+            <div class="callout-content" style="font-size: 1.05em;">
+              <strong>Análisis espacial integrado:</strong> Incluye análisis espacial mediante <strong>modelos digitales de superficie (DSM)</strong> y el <strong>índice NDVI</strong> para detectar cambios morfológicos y en la cobertura vegetal, integrando estos resultados con los datos temporales para una interpretación robusta del sistema.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: ESTRUCTURA DEL REPORTE TÉCNICO (PARTE 3) -->
+      <section>
+        <h2>Evaluación: Umbrales y Cierre</h2>
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">🚨</span>
+              <span>Umbrales y Sistema de Alerta</span>
+            </div>
+            <p style="margin-top: 12px; font-size: 0.95em; line-height: 1.55;">
+              Se propone un sistema de umbrales y criterios de alerta temprana, definiendo valores críticos para variables clave, basados en el análisis de datos. Se presenta un esquema o tabla con los niveles de alerta (<strong>normal, atención, alerta, alarma</strong>), condiciones de activación y acciones recomendadas para cada nivel.
+            </p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-yellow-text);">
+                <span class="card-icon">💡</span>
+                <span>Conclusiones (Highlights)</span>
+              </div>
+              <ul class="bullet-list" style="margin-top: 10px;">
+                <li>Principales hallazgos del análisis de datos.</li>
+                <li>Identificación de eventos críticos y zonas inestables.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                <span class="card-icon">📚</span>
+                <span>Referencias</span>
+              </div>
+              <p style="margin-top: 5px; color: var(--text-muted); font-size: 0.95em;">
+                Normativas, publicaciones y fuentes bibliográficas de soporte técnico.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 14: ELEMENTOS IMPORTANTES DE LA PRESENTACIÓN -->
+      <section>
+        <h2>Evaluación: Presentación Oral</h2>
+        <div class="card card-highlight" style="margin-top: 20px; padding: 25px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px; margin-bottom: 15px;">
+            <h3 style="color: var(--eafit-blue); margin: 0;">Elementos importantes de la presentación</h3>
+            <span class="header-badge" style="font-size: 0.9em; background: rgba(0,75,133,0.1); color: var(--eafit-blue);">⏱️ Duración máxima: 20 min</span>
+          </div>
+
+          <p style="font-size: 1.05em; line-height: 1.6; color: var(--text-body);">
+            Enfócate en presentar de forma sintética y clara el contexto, el sistema de monitoreo, los hallazgos principales y la propuesta de alerta, demostrando comprensión técnica y capacidad crítica. Es fundamental integrar todos los análisis realizados, mostrando cómo se complementan entre sí y justificando las interpretaciones y umbrales propuestos.
+          </p>
+
+          <p style="font-size: 1.05em; line-height: 1.6; color: var(--text-body); margin-top: 15px;">
+            Utiliza buenas y claras herramientas visuales para apoyar tu exposición y asegúrate de mantener fluidez y coherencia en el discurso. <strong>No repitas textualmente el reporte; en cambio, explica, interpreta y defiende tus conclusiones</strong>, mostrando criterio técnico y capacidad para responder preguntas técnicas sobre tus decisiones y metodología.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 15: FECHAS DE ENTREGA -->
+      <section>
+        <h2>Evaluación: Fechas de Entrega</h2>
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📅</span>
+              <span>Entregas Oficiales</span>
+            </div>
+            
+            <div style="margin-top: 18px;">
+              <span style="font-size: 0.9em; color: var(--text-muted); text-transform: uppercase;">Entrega de reporte técnico (fecha tentativa):</span>
+              <div style="font-size: 1.35em; font-weight: 700; color: var(--text-main); margin-top: 4px;">
+                26 de octubre – 11:59 pm
+              </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <span style="font-size: 0.9em; color: var(--text-muted); text-transform: uppercase;">Sustentaciones:</span>
+              <div style="font-size: 1.35em; font-weight: 700; color: var(--eafit-yellow-text); margin-top: 4px;">
+                31 de octubre durante la clase
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">🥾</span>
+              <span>¡Salida de Campo!</span>
+            </div>
+            <p style="font-size: 1.3em; font-weight: 700; color: var(--text-main); margin-top: 15px;">
+              Próxima semana
+            </p>
+            <div class="callout callout-warning" style="margin-top: 20px;">
+              <span class="callout-icon">📋</span>
+              <div class="callout-content">
+                <strong>Requisito indispensable:</strong> Diligenciar el siguiente formato:<br>
+                <span style="font-weight: 700; color: var(--text-main); font-size: 1.1em;">Consentimiento informado</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 16: HORARIOS DE ATENCIÓN Y ASESORÍA -->
+      <section>
+        <h2>Horarios de atención y asesoría</h2>
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card">
+            <div class="card-title">
+              <span class="card-icon">👩‍🏫</span>
+              <span>Juliana Álvarez</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px">
+              <li><strong>Canal de Teams:</strong> Consultas cortas</li>
+              <li><strong>Correo:</strong> <a href="mailto:jalvarezz@eafit.edu.co">jalvarezz@eafit.edu.co</a> (Consultas cortas)</li>
+              <li><strong>Horario:</strong> <span style="color: var(--eafit-blue); font-weight: 700;">Lunes 2pm – 4pm</span> (Programar espacio)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span class="card-icon">👨‍🏫</span>
+              <span>Federico Gómez</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px">
+              <li><strong>Canal de Teams:</strong> Consultas cortas</li>
+              <li><strong>Correo:</strong> <a href="mailto:fjgomezc@eafit.edu.co">fjgomezc@eafit.edu.co</a> (Consultas cortas)</li>
+              <li><strong>Horario:</strong> <span style="color: var(--eafit-blue); font-weight: 700;">Lunes 10am – 12m</span> (Programar espacio)</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 17: EMPECEMOS -->
+      <section class="slide-cover">
+        <div class="cover-badge">Universidad EAFIT &bull; Instrumentación Geotécnica</div>
+        <h1 style="font-size: 3.5em; margin-top: 20px;">¡Empecemos!</h1>
+        <p style="font-size: 1.3em; color: var(--text-muted); margin-top: 20px;">
+          Iniciamos con los Conceptos Básicos de la Instrumentación Geotécnica
+        </p>
+        <div style="margin-top: 40px;">
+          <a href="01_conceptos_basicos.html" class="header-btn" style="display: inline-flex; font-size: 1.1em; padding: 12px 24px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
+            <span>🚀</span> Ir al Módulo 1 &bull; Conceptos Básicos
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Barra Inferior de Información y Atajos -->
+  <footer class="presentation-footer">
+    <div class="footer-credits">
+      <strong>EAFIT</strong> &bull; Instrumentación Geotécnica &bull; Docentes: Federico Gómez, MSc. & Juliana Álvarez, MSc.
+    </div>
+    <div class="footer-shortcuts">
+      <span>Espacio</span> Avanzar &bull; <span>←</span> Retroceder &bull; <span>F</span> Pantalla Completa &bull; <span>T</span> Modo Claro/Oscuro &bull; <span>Esc</span> Cuadrícula
+    </div>
+  </footer>
+
+  <!-- Scripts Reveal.js y Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.min.js"></script>
+  <script src="js/presentation-core.js"></script>
+
+</body>
+</html>

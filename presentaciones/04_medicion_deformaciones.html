@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04. Medición de Deformaciones | Instrumentación Geotécnica - EAFIT</title>
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  
+  <!-- Tema Institucional EAFIT -->
+  <link rel="stylesheet" href="css/presentation-theme.css">
+</head>
+<body>
+
+  <!-- Barra Superior Institucional -->
+  <header class="presentation-header">
+    <div class="header-brand">
+      <img src="img/brand/eafit_logo.png" alt="EAFIT" class="header-logo" onerror="this.style.display='none'">
+      <span class="header-title">Instrumentación Geotécnica</span>
+      <span class="header-badge">04 &bull; Medición de Deformaciones</span>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
+      <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
+      <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
+      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+    </div>
+  </header>
+
+  <!-- Contenedor Reveal.js -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section class="slide-cover">
+        <div class="cover-badge">Universidad EAFIT &bull; Departamento de Ingeniería Civil</div>
+        <h1>Medición de deformaciones</h1>
+        <h3 style="color: var(--eafit-yellow-text); margin-top: 15px">Curso de Instrumentación Geotécnica</h3>
+        
+        <div class="cover-meta" style="margin-top: 40px">
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Profesores</span>
+            <span class="cover-meta-value">Federico Gómez, MSc. &bull; Juliana Álvarez, MSc.</span>
+          </div>
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Módulo</span>
+            <span class="cover-meta-value">04 &bull; Sensores Cinemáticos y Remotos</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: DEFORMACIONES EN SUELOS Y ESTRUCTURAS -->
+      <section>
+        <h2>Deformaciones en suelos y estructuras</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 1.05em; line-height: 1.6;">
+              <li>Las deformaciones pueden ser <strong>visibles (macroscópicas)</strong> o <strong>imperceptibles a simple vista (microscópicas)</strong>.</li>
+              <li>Pueden ocurrir en todas las direcciones del espacio.</li>
+              <li>La <strong>magnitud y la velocidad</strong> de la deformación son clave para evaluar la estabilidad de taludes y obras.</li>
+            </ul>
+            <div class="callout callout-info" style="margin-top: 15px;">
+              <span class="callout-icon">📍</span>
+              <div class="callout-content" style="font-size: 0.95em;">
+                Ejemplo: Deformaciones en el barrio Ancón Norte, Copacabana.
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image2.jpeg" alt="Deformaciones Ancón Norte, Copacabana" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 3: IMPORTANCIA DE MEDIR DEFORMACIONES -->
+      <section>
+        <h2>Importancia de medir y monitorear deformaciones</h2>
+        <div class="grid-3" style="margin-top: 25px; gap: 20px;">
+          
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">🛡️</span>
+              <span>Seguridad</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.9em;">
+              <li>Permite detectar movimientos que podrían indicar inestabilidad o falla inminente.</li>
+              <li>Ayuda a prevenir catástrofes en estructuras críticas como presas, túneles, o edificios altos.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-blue);">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🏗️</span>
+              <span>Rendimiento estructural</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.9em;">
+              <li>Verifica si las estructuras se comportan según lo diseñado.</li>
+              <li>Identifica la necesidad de mantenimiento o refuerzo.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">⚖️</span>
+              <span>Aspectos legales y económicos</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.9em;">
+              <li>Proporciona evidencia en casos de disputas sobre daños estructurales.</li>
+              <li>Puede ayudar a optimizar diseños futuros, potencialmente reduciendo costos.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 4: CAUSAS: FACTORES INTRÍNSECOS -->
+      <section>
+        <h2>¿Qué causa las deformaciones?</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Factores intrínsecos del suelo
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 1em; line-height: 1.6;">
+              <li>
+                <strong>Composición y estructura del suelo:</strong>
+                <ul style="margin-top: 5px; font-size: 0.9em;">
+                  <li>Tipo de suelo (arcilla, limo, arena, grava).</li>
+                </ul>
+              </li>
+              <li style="margin-top: 10px;">
+                <strong>Propiedades mecánicas:</strong>
+                <ul style="margin-top: 5px; font-size: 0.9em;">
+                  <li>Resistencia al corte.</li>
+                  <li>Compresibilidad (índice de compresión, índice de recompresión).</li>
+                </ul>
+              </li>
+              <li style="margin-top: 10px;">
+                <strong>Ley de Terzaghi</strong> (Esfuerzo efectivo $\sigma' = \sigma - u$).
+              </li>
+            </ul>
+          </div>
+
+          <div style="display: flex; gap: 15px; justify-content: center;">
+            <img src="img/p04/image3.jpeg" alt="Estructura de Suelo" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 8px;">
+            <img src="img/p04/image4.png" alt="Compresión de Granos" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 8px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 5: CAUSAS: FACTORES EXTERNOS Y TIPOS -->
+      <section>
+        <h2>¿Qué causa las deformaciones?</h2>
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚡</span>
+              <span>Factores externos</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li>
+                <strong>Cargas aplicadas:</strong>
+                <ul style="margin-top: 4px;">
+                  <li>Dinámicas (tráfico, sismos).</li>
+                  <li>Estáticas (peso propio, cimentaciones).</li>
+                </ul>
+              </li>
+              <li>Cambios en el contenido de agua.</li>
+              <li>Variaciones de temperatura.</li>
+              <li>Gravedad.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📐</span>
+              <span>¿Cómo son las deformaciones en los suelos?</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 12px; font-size: 1.05em;">
+              <li>
+                <strong>Deformación volumétrica:</strong> cambio en el volumen de poros por compresión o consolidación.
+              </li>
+              <li style="margin-top: 10px;">
+                <strong>Deformación de corte:</strong> distorsión angular y cizallamiento a lo largo de planos de falla.
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 6: RELACIÓN ESFUERZO - DEFORMACIÓN -->
+      <section>
+        <h2>Relación entre esfuerzos y deformaciones</h2>
+        <div class="card card-highlight" style="margin-top: 20px; padding: 25px;">
+          <p style="font-size: 1.05em; line-height: 1.6;">
+            La relación entre los esfuerzos aplicados y las deformaciones resultantes en suelos es <strong>compleja debido a la naturaleza inelástica y heterogénea del material</strong>. A diferencia de los materiales rígidos (como los metales), los suelos no tienen una relación lineal constante entre esfuerzo y deformación (ley de Hooke).
+          </p>
+
+          <div class="split-2" style="margin-top: 20px; gap: 20px;">
+            <div class="card" style="border-left: 4px solid var(--eafit-blue);">
+              <strong>Tipo de suelo:</strong>
+              <ul class="bullet-list" style="margin-top: 6px; font-size: 0.9em;">
+                <li>Elasticidad.</li>
+                <li>Plasticidad.</li>
+              </ul>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--accent-emerald);">
+              <strong>Contenido de agua e Historial de carga:</strong>
+              <ul class="bullet-list" style="margin-top: 6px; font-size: 0.9em;">
+                <li>Consolidación (Deformación volumétrica).</li>
+                <li>Cohesión y fricción interna (Deformación de corte).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: COMPORTAMIENTO ELÁSTICO (HOOKE) -->
+      <section>
+        <h2>Relación entre Esfuerzos y Deformaciones</h2>
+        <h3 style="color: var(--eafit-blue); font-size: 1.25em; margin-top: 8px;">
+          Comportamiento elástico
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1.05em; line-height: 1.6;">
+                La <strong>Ley de Hooke</strong> establece que, dentro del rango elástico, el esfuerzo es directamente proporcional a la deformación.
+              </p>
+              <div style="text-align: center; font-size: 1.5em; padding: 12px; margin: 15px 0; background: rgba(0,75,133,0.08); border-radius: 8px; font-family: var(--font-mono);">
+                98963\sigma = E \cdot arepsilon98963
+              </div>
+              <p style="font-size: 0.92em; color: var(--text-muted); line-height: 1.5;">
+                Es válida para pequeñas deformaciones en la mayoría de los materiales, incluyendo suelos densos y rocas a bajos niveles de esfuerzo, pero <em>no describe adecuadamente el comportamiento de suelos blandos o materiales con comportamiento no lineal</em>.
+              </p>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image6.png" alt="Curva Esfuerzo Deformación - Rango Elástico" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 8: COMPORTAMIENTO PLÁSTICO -->
+      <section>
+        <h2>Relación entre esfuerzos y deformaciones</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Comportamiento plástico y fluencia
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              El <strong>punto de fluencia</strong> es el nivel de esfuerzo en el que un material comienza a deformarse de forma permanente.
+            </p>
+            <p style="font-size: 1.05em; line-height: 1.6; margin-top: 12px;">
+              En los suelos, es común el <strong>comportamiento elasto-plástico</strong>, lo que significa que pueden deformarse de manera reversible (elástica) y también irreversible (plástica).
+            </p>
+            <div class="callout callout-info" style="margin-top: 15px;">
+              <span class="callout-icon">📈</span>
+              <div class="callout-content" style="font-size: 0.95em;">
+                <strong>Endurecimiento por deformación:</strong> Algunos suelos presentan endurecimiento por deformación, aumentando su resistencia a medida que se deforman plásticamente.
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image6.png" alt="Curva Esfuerzo Deformación - Fluencia" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 9: RESISTENCIA PICO Y ESTRICCIÓN -->
+      <section>
+        <h2>Relación entre esfuerzos y deformaciones</h2>
+        <h3 style="color: var(--accent-rose); font-size: 1.25em; margin-top: 8px;">
+          Resistencia máxima (pico) y etapa de estricción
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div style="display: flex; flex-direction: column; gap: 15px;">
+            <div class="card">
+              <div class="card-title" style="color: var(--accent-rose);">
+                <span class="card-icon">⛰️</span>
+                <span>Resistencia máxima o pico</span>
+              </div>
+              <p style="font-size: 0.92em; line-height: 1.5; margin-top: 6px;">
+                Después del endurecimiento, se alcanza un pico en la curva que representa el <strong>máximo esfuerzo que el suelo puede soportar antes de comenzar a fallar</strong>. Las partículas han alcanzado su límite de reorganización y cualquier esfuerzo adicional causará una falla localizada.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-yellow-text);">
+                <span class="card-icon">📉</span>
+                <span>Etapa de estricción / reblandecimiento</span>
+              </div>
+              <p style="font-size: 0.92em; line-height: 1.5; margin-top: 6px;">
+                Indica que el suelo está perdiendo capacidad de resistencia a medida que se concentra la deformación en zonas específicas, lo que corresponde a <strong>fisuración interna o formación de planos de deslizamiento</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image6.png" alt="Curva Esfuerzo Deformación - Pico y Reblandecimiento" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 10: INSTRUMENTOS: CLASIFICACIÓN Y ESCALAS -->
+      <section>
+        <h2>Instrumentos para medir deformaciones</h2>
+        <p style="font-size: 1.1em; margin-top: 10px;">
+          La deformación en el terreno y las consecuencias asociadas se pueden monitorear a diferentes escalas temporales y espaciales.
+        </p>
+
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--eafit-blue);">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📍</span>
+              <span>Sensores en sitio:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li><strong>Extensómetros</strong></li>
+              <li><strong>Acelerómetros</strong></li>
+              <li><strong>GPS - GNSS</strong></li>
+              <li><strong>Inclinómetros</strong></li>
+              <li><strong>TDR</strong> - Fibra óptica para medición distribuida</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-cyan);">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">🛰️</span>
+              <span>Sensores remotos:</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li><strong>Drones (UAV)</strong></li>
+              <li><strong>Satélites (Óptico & SAR)</strong></li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 11: EXTENSÓMETROS: PRINCIPIO Y APLICACIONES -->
+      <section>
+        <h2>Extensómetros</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo de las deformaciones superficiales
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1.05em; line-height: 1.6;">
+                Miden el <strong>cambio de distancia entre dos puntos</strong> mediante la variación de posición entre sus extremos.
+              </p>
+
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--eafit-blue);">Aplicaciones:</strong>
+                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.55;">
+                  Detectan alargamiento o contracción debido a fuerzas externas. Son muy útiles en el monitoreo de <strong>grietas en edificios o en el suelo, la convergencia en túneles, y el control de deformaciones en presas y taludes</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <img src="img/p04/image7.jpeg" alt="Extensómetro 1" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 6px;">
+            <img src="img/p04/image8.jpeg" alt="Extensómetro 2" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 6px;">
+            <img src="img/p04/image9.jpeg" alt="Extensómetro 3" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 6px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 12: EXTENSÓMETROS: VENTAJAS Y LIMITACIONES -->
+      <section>
+        <h2>Extensómetros</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo de las deformaciones superficiales
+        </h3>
+
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">✅</span>
+              <span>Ventajas</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
+              <li><strong>Medición directa</strong> de deformaciones.</li>
+              <li>Alta precisión en la medición milimétrica.</li>
+              <li>Aplicable en diversas estructuras: presas, túneles, edificios y taludes.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚠️</span>
+              <span>Limitaciones</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
+              <li><strong>Resolución espacial limitada:</strong> solo mide una grieta en un punto específico.</li>
+              <li>Pueden estar expuestos a daños físicos en condiciones adversas (movimientos bruscos o intemperie).</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 13: EXTENSÓMETROS EN CAMPO -->
+      <section>
+        <h2>Extensómetros: Registro en campo</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p04/image10.png" alt="Registro de Extensómetro en Grieta" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 14: ACELERÓMETROS: PRINCIPIO Y APLICACIONES -->
+      <section>
+        <h2>Acelerómetros</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo de las deformaciones superficiales y dinámicas
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1.05em; line-height: 1.6;">
+                Miden la <strong>aceleración de un objeto o estructura en uno o varios ejes</strong>, detectando cambios en su movimiento.
+              </p>
+
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--eafit-blue);">Aplicaciones:</strong>
+                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.55;">
+                  Combinados con giroscopios, miden tanto la aceleración como la orientación y movimiento angular en el espacio. Responden a las fuerzas de inercia provocadas por movimientos, convirtiéndolas en <strong>señales eléctricas proporcionales a la aceleración</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 15px; justify-content: center;">
+            <img src="img/p04/image11.png" alt="Sensor Acelerómetro Triaxial" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 8px;">
+            <img src="img/p04/image12.jpeg" alt="Acelerómetro en Campo" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 8px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 15: ACELERÓMETROS: VENTAJAS Y LIMITACIONES -->
+      <section>
+        <h2>Acelerómetros</h2>
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">✅</span>
+              <span>Ventajas</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
+              <li>Alta sensibilidad para detectar <strong>movimientos mínimos</strong>.</li>
+              <li>Bajo costo y dimensiones compactas.</li>
+              <li>Fáciles de integrar en sistemas de monitoreo continuo.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚠️</span>
+              <span>Limitaciones</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
+              <li>Resolución espacial: solo mide la placa o nodo en el que se encuentra.</li>
+              <li>Afectados por <strong>ruido e interferencias ambientales</strong> (requiere filtrado).</li>
+              <li>El análisis de los datos puede ser complejo.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 16: ACELERÓMETROS EN CAMPO -->
+      <section>
+        <h2>Acelerómetros: Series de tiempo</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p04/image13.png" alt="Registro de Acelerómetro y Análisis Espectral" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 17: INCLINÓMETROS: PRINCIPIO -->
+      <section>
+        <h2>Inclinómetros</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo de las deformaciones profundas
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <p style="font-size: 1.1em; line-height: 1.6;">
+              Los inclinómetros miden la <strong>deformación a través de una sonda que mide las variaciones de inclinación a lo largo de la profundidad</strong> dentro de una tubería ranurada instalada en una perforación.
+            </p>
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 15px;">
+              Componentes y esquema de la inclinometría convencional. Figuras adaptadas de Machan & Bennett (2008).
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image14.png" alt="Componentes Inclinómetro Machan Bennett" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 18: INCLINÓMETROS: VENTAJAS Y LIMITACIONES -->
+      <section>
+        <h2>Inclinómetros</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo de las deformaciones profundas
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">✅</span>
+              <span>Ventajas</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 12px; font-size: 1em;">
+              <li>Permiten <strong>mediciones precisas a lo largo de toda la perforación</strong>.</li>
+              <li>Permiten determinar la <strong>profundidad de las superficies de falla</strong> y la magnitud de la deformación.</li>
+              <li>Alta precisión en deformaciones horizontales acumuladas.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚠️</span>
+              <span>Limitaciones</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 12px; font-size: 0.92em;">
+              <li><strong>Alto costo</strong>, especialmente por las perforaciones profundas.</li>
+              <li>Mantenimiento de tubería: puede obstruirse o cizallarse.</li>
+              <li>La <strong>rotura total de la tubería imposibilita lecturas futuras</strong>.</li>
+              <li>Requiere personal especializado y logística periódica de lectura manual.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 19: INCLINÓMETROS: RESULTANTE BRISAS DEL JARDÍN -->
+      <section>
+        <h2>Inclinómetros: Desplazamiento Resultante</h2>
+        <h3 style="color: var(--eafit-blue); font-size: 1.2em; margin-top: 6px;">
+          Desplazamiento resultante inclinómetro Brisas del Jardín
+        </h3>
+
+        <div style="display: flex; gap: 15px; justify-content: center; align-items: center; margin-top: 20px;">
+          <img src="img/p04/image15.png" alt="Inclinómetro Brisas del Jardín 1" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p04/image16.jpeg" alt="Inclinómetro Foto Campo" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p04/image17.png" alt="Perfil Desplazamiento" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 20: INCLINÓMETROS: SEÑALES DESEADAS -->
+      <section>
+        <h2>Inclinómetros: Monitoreo profundo</h2>
+        <h3 style="color: var(--accent-emerald); font-size: 1.3em; margin-top: 8px;">
+          ¡Señales deseadas!
+        </h3>
+
+        <div style="text-align: center; margin-top: 20px;">
+          <img src="img/p04/image18.png" alt="Perfiles Inclinométricos con Falla Definida" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 21: TDR: PRINCIPIO Y APLICACIONES -->
+      <section>
+        <h2>TDR (Time Domain Reflectometry)</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo de las deformaciones profundas
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1.05em; line-height: 1.6;">
+                Los sensores TDR (<strong>Reflectometría en el Dominio del Tiempo</strong>) miden la deformación a través del análisis del <strong>tiempo de retorno de un pulso electromagnético</strong> enviado a lo largo de una sonda o cable coaxial.
+              </p>
+
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--eafit-blue);">Aplicaciones:</strong>
+                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.55;">
+                  Al registrar variaciones en la velocidad y forma del pulso debido a deformación mecánica del cable, mide desplazamientos internos. Utilizado para <strong>monitorear deslizamientos profundos, taludes y deformaciones en infraestructuras enterradas</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image19.png" alt="Principio de Sensor TDR Coaxial" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 22: TDR: VENTAJAS Y LIMITACIONES -->
+      <section>
+        <h2>TDR (Time Domain Reflectometry)</h2>
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">✅</span>
+              <span>Ventajas</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1em;">
+              <li>Mediciones <strong>continuas a lo largo de toda la longitud</strong> de la sonda.</li>
+              <li>Permiten determinar superficies de falla y magnitud de deformación.</li>
+              <li>Monitoreo automatizable en tiempo real.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚠️</span>
+              <span>Limitaciones</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 0.95em;">
+              <li>Alto costo de perforaciones e instrumentación.</li>
+              <li>Los datos requieren un <strong>análisis técnico detallado</strong>; la interpretación puede ser compleja.</li>
+              <li>Factores como corrosión del cable pueden afectar la señal.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 23: TDR EN CAMPO -->
+      <section>
+        <h2>TDR: Registro en campo</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p04/image20.png" alt="Reflectograma TDR y Registro de Falla" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 24: CELDAS DE DEFORMACIÓN VS CARGA -->
+      <section>
+        <h2>Celdas: Deformación vs. Carga</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo de las deformaciones superficiales y esfuerzos
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📏</span>
+              <span>Celda de deformación</span>
+            </div>
+            <p style="font-size: 1em; margin-top: 10px;">
+              Sensor que mide cambios muy pequeños en la deformación de un material mediante la <strong>variación de su resistencia eléctrica</strong> (mide qué tanto se estira o comprime un elemento).
+            </p>
+            <div class="callout callout-info" style="margin-top: 15px;">
+              <strong>Celda de deformación &rarr; Mide el EFECTO</strong>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚖️</span>
+              <span>Celda de carga</span>
+            </div>
+            <p style="font-size: 1em; margin-top: 10px;">
+              <strong>Mide fuerza directamente</strong> (anclajes, pilotes, cimentaciones).
+            </p>
+            <div class="callout callout-warning" style="margin-top: 15px;">
+              <strong>⚠️ Una celda de carga mide fuerza porque internamente mide deformación &rarr; Mide la CAUSA</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="callout callout-success" style="margin-top: 20px; text-align: center; justify-content: center;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-content" style="font-size: 1.05em; font-weight: 600;">
+            Entonces… ¿son diferentes? Sí… pero usan el <strong>MISMO principio interno</strong>.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 25: GALGAS EXTENSOMÉTRICAS -->
+      <section>
+        <h2>Celdas: Galga Extensométrica</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <p style="font-size: 1.05em; line-height: 1.65;">
+              El principio se basa en el uso de una <strong>galga extensométrica (strain gauge)</strong>.
+            </p>
+            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
+              Las galgas son un <strong>hilo metálico muy delgado pegado a una pieza metálica</strong>. Tienen un diseño simple pero efectivo basado en la transferencia entre una fuerza aplicada, la deformación del material y el flujo de electricidad.
+            </p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+            <img src="img/p04/image21.png" alt="Galga Extensométrica Hilo Metálico" style="max-height: 160px; width: auto;">
+            <img src="img/p04/image22.png" alt="Célula de Presión Galga" style="max-height: 160px; width: auto;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 26: LEY DE HOOKE Y CELDAS -->
+      <section>
+        <h2>Celdas: De deformación a fuerza</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div class="card card-highlight">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              Los cambios en la resistencia eléctrica son muy pequeños, pero los equipos electrónicos pueden detectarlos con extrema sensibilidad.
+            </p>
+            
+            <div style="text-align: center; font-size: 1.6em; padding: 15px; margin: 18px 0; background: rgba(0,75,133,0.08); border-radius: 8px; font-family: var(--font-mono);">
+              98963\sigma = E \cdot arepsilon98963
+            </div>
+
+            <ul class="bullet-list" style="font-size: 1.1em;">
+              <li>La <strong>galga mide deformación</strong> ($arepsilon$).</li>
+              <li>La <strong>celda de carga convierte esa deformación en fuerza / esfuerzo</strong> ($\sigma$).</li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image24.png" alt="Celda de Carga en Anclaje" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 27: DRONES PARA DEFORMACIONES -->
+      <section>
+        <h2>Drones para la detección de deformaciones</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 6px;">
+          Monitoreo con sensores remotos
+        </h3>
+
+        <div class="split-2" style="margin-top: 15px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 0.95em; line-height: 1.55;">
+                Permite analizar cambios en el terreno utilizando tanto imágenes ópticas como <strong>modelos digitales de elevación (DEM)</strong>. Los drones equipados con cámaras de alta resolución y sensores láser permiten realizar inspecciones detalladas a nivel local con alta precisión.
+              </p>
+              <p style="font-size: 0.92em; line-height: 1.5; margin-top: 8px; color: var(--text-muted);">
+                Al comparar vuelos multitemporales, es posible detectar hundimientos, agrietamientos y frentes de avance en taludes inaccesibles.
+              </p>
+            </div>
+
+            <div class="callout callout-info" style="margin-top: 12px;">
+              <span class="callout-icon">🗺️</span>
+              <div class="callout-content" style="font-size: 0.88em;">
+                <strong>Análisis entre 14 y 25 de julio de 2023:</strong> Zonas rojas indican desplazamientos negativos (hundimientos); zonas azules indican desplazamientos positivos (depositación).
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <img src="img/p04/image25.png" alt="DEM Diferencial Dron" style="max-height: 330px; width: auto; border-radius: 6px;">
+            <img src="img/p04/image26.png" alt="Ortofoto y Deformación Dron" style="max-height: 330px; width: auto; border-radius: 6px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 28: MONITOREO SATELITAL -->
+      <section>
+        <h2>Satélites y Misiones para Deformaciones</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo de deformaciones con sensores remotos
+        </h3>
+
+        <div class="card card-highlight" style="margin-top: 25px; padding: 25px;">
+          <p style="font-size: 1.1em; line-height: 1.65;">
+            El <strong>monitoreo satelital de deformaciones</strong> se ha convertido en una herramienta clave en la geotecnia para el control de movimientos del terreno y estructuras a gran escala.
+          </p>
+          <p style="font-size: 1.05em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
+            Este tipo de monitoreo utiliza dos tecnologías principales: <strong>imágenes ópticas</strong> y <strong>radar de apertura sintética (SAR)</strong>. Ambas permiten medir desplazamientos y deformaciones del terreno de forma remota, sin necesidad de instalar sensores físicos en el sitio.
+          </p>
+        </div>
+      </section>
+
+      <!-- SLIDE 29: SATÉLITES: IMÁGENES ÓPTICAS -->
+      <section>
+        <h2>Monitoreo con Imágenes Ópticas</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              Las imágenes ópticas satelitales proporcionan una vista detallada de la superficie terrestre y permiten <strong>detectar deformaciones mediante el análisis de diferencias entre imágenes tomadas en diferentes momentos</strong>.
+            </p>
+            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
+              Comparando las posiciones de puntos específicos en imágenes capturadas en fechas distintas, se pueden identificar desplazamientos horizontales y deformaciones superficiales. También permiten realizar <strong>análisis de cambios de coberturas</strong>.
+            </p>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image27.png" alt="Comparación Óptica Satelital" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 30: SATÉLITES: INTERFEROMETRÍA DE RADAR (InSAR) -->
+      <section class="slide-cover">
+        <div class="cover-badge">Módulo 04 &bull; Teledetección Avanzada</div>
+        <h2 style="font-size: 2em; margin-top: 15px;">
+          Monitoreo con Interferometría de Radar (InSAR)
+        </h2>
+
+        <div class="split-2" style="margin-top: 25px; align-items: center; text-align: left;">
+          
+          <div class="card card-highlight">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              El <strong>SAR (Synthetic Aperture Radar)</strong> es una tecnología avanzada que mide deformaciones de la superficie terrestre con <strong>precisión milimétrica</strong>.
+            </p>
+            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px;">
+              El método más común, conocido como <strong>Interferometría SAR (InSAR)</strong>, compara fases de señales de radar capturadas en diferentes momentos para identificar movimientos verticales y en la línea de vista (LOS) del satélite.
+            </p>
+            <div style="margin-top: 20px;">
+              <a href="05_analisis_datos_umbrales.html" class="header-btn" style="display: inline-flex; font-size: 1em; padding: 10px 20px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
+                <span>📊</span> Ir al Módulo 5 &bull; Análisis de Datos
+              </a>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image28.png" alt="Interferograma InSAR Desplazamientos Milimétricos" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Barra Inferior de Información y Atajos -->
+  <footer class="presentation-footer">
+    <div class="footer-credits">
+      <strong>EAFIT</strong> &bull; Instrumentación Geotécnica &bull; Docentes: Federico Gómez, MSc. & Juliana Álvarez, MSc.
+    </div>
+    <div class="footer-shortcuts">
+      <span>Espacio</span> Avanzar &bull; <span>←</span> Retroceder &bull; <span>F</span> Pantalla Completa &bull; <span>T</span> Modo Claro/Oscuro &bull; <span>Esc</span> Cuadrícula
+    </div>
+  </footer>
+
+  <!-- Scripts Reveal.js y Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.min.js"></script>
+  <script src="js/presentation-core.js"></script>
+
+</body>
+</html>

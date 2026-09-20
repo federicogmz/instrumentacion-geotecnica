@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03. El Agua en el Suelo | Instrumentación Geotécnica - EAFIT</title>
+
+  <!-- Reveal.js & KaTeX Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  
+  <!-- Tema Institucional EAFIT -->
+  <link rel="stylesheet" href="css/presentation-theme.css">
+</head>
+<body>
+
+  <!-- Barra Superior Institucional -->
+  <header class="presentation-header">
+    <div class="header-brand">
+      <img src="img/brand/eafit_logo.png" alt="EAFIT" class="header-logo" onerror="this.style.display='none'">
+      <span class="header-title">Instrumentación Geotécnica</span>
+      <span class="header-badge">03 &bull; El Agua en el Suelo</span>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
+      <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
+      <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
+      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+    </div>
+  </header>
+
+  <!-- Contenedor Reveal.js -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: PORTADA -->
+      <section class="slide-cover">
+        <div class="cover-badge">Universidad EAFIT &bull; Departamento de Ingeniería Civil</div>
+        <h1>El agua en el suelo</h1>
+        <h3 style="color: var(--eafit-yellow-text); margin-top: 15px">Curso de Instrumentación Geotécnica</h3>
+        
+        <div class="cover-meta" style="margin-top: 40px">
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Profesores</span>
+            <span class="cover-meta-value">Federico Gómez, MSc. &bull; Juliana Álvarez, MSc.</span>
+          </div>
+          <div class="cover-meta-item">
+            <span class="cover-meta-label">Módulo</span>
+            <span class="cover-meta-value">03 &bull; Hidráulica de Suelos y Sensores</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: POR QUÉ SE PRODUCEN LAS FALLAS -->
+      <section>
+        <h2>¿Por qué se producen las fallas en estructuras, en el suelo o en las rocas?</h2>
+        <div class="grid-3" style="margin-top: 20px; gap: 15px;">
+          
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-blue);">
+            <div class="card-title" style="color: var(--eafit-blue); font-size: 1.05em;">
+              <span>⛰️ Estáticos (Condicionantes)</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.88em; margin-top: 8px;">
+              <li>Pendiente del terreno.</li>
+              <li>Geología y tipo de suelo.</li>
+              <li>Uso del suelo.</li>
+              <li>Geomorfología.</li>
+              <li>Hidrogeología.</li>
+              <li>Tipo de materiales de construcción.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-yellow-text);">
+            <div class="card-title" style="color: var(--eafit-yellow-text); font-size: 1.05em;">
+              <span>⏳ Pre-detonantes</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.88em; margin-top: 8px;">
+              <li><strong>Humedad del suelo.</strong></li>
+              <li><strong>Lluvia antecedente o humedad del suelo.</strong></li>
+              <li>Cambio de coberturas.</li>
+              <li>Deformaciones pequeñas en estructuras.</li>
+              <li>Drenajes deficientes.</li>
+              <li>Sobre carga en estructuras.</li>
+              <li>Componente antrópico.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose); font-size: 1.05em;">
+              <span>⚡ Dinámicos (Detonantes)</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.88em; margin-top: 8px;">
+              <li><strong>Lluvia</strong></li>
+              <li>Sismos.</li>
+              <li>Sobre carga en estructura o en el terreno.</li>
+              <li>Componente antrópico.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 3: LLUVIA Y HUMEDAD: TERZAGHI -->
+      <section>
+        <h2>La lluvia y la humedad como factores</h2>
+        <h3 style="color: var(--accent-rose); font-size: 1.25em; margin-top: 8px;">
+          Pre-detonantes y detonantes
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div>
+            <div class="card card-highlight">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">📐</span>
+                <span>Ley de Terzaghi</span>
+              </div>
+              <p style="margin-top: 10px; font-size: 1.05em;">
+                La resistencia al corte de un suelo viene dada por:
+              </p>
+              <div style="text-align: center; font-size: 1.4em; padding: 15px; margin: 12px 0; background: rgba(0,75,133,0.06); border-radius: 8px; font-family: var(--font-mono);">
+                98916	au = c' + (\sigma - u) 	an\phi'98916
+              </div>
+              <p style="font-size: 0.95em; color: var(--text-muted);">
+                Donde '$ y $\phi'$ son parámetros intrínsecos del suelo, mientras que $\sigma' = \sigma - u$ dependerá de las variaciones de los esfuerzos totales debidos al efecto de la presión de poros ($).
+              </p>
+            </div>
+
+            <div class="callout callout-info" style="margin-top: 15px;">
+              <span class="callout-icon">💧</span>
+              <div class="callout-content" style="font-size: 1.05em; font-weight: 600;">
+                Existe entonces una relación directa entre la lluvia y el aumento de agua en el suelo.
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p03/image2.jpeg" alt="Esfuerzos y Presión de Poros" style="max-height: 350px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 4: INFILTRACIÓN -->
+      <section>
+        <h2>Impacto del agua en los suelos</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Infiltración desde una perspectiva geotécnica
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1em; line-height: 1.6;">
+                La <strong>infiltración</strong> es el proceso mediante el cual el agua de la superficie del terreno, como la proveniente de la lluvia o el riego, se introduce y se mueve hacia el interior del suelo a través de sus poros.
+              </p>
+              <p style="font-size: 0.95em; line-height: 1.5; margin-top: 10px; color: var(--text-muted);">
+                Este proceso es fundamental para el ciclo hidrológico y tiene una influencia directa sobre la cantidad de agua disponible en el subsuelo, afectando tanto la agricultura como la estabilidad geotécnica de los terrenos.
+              </p>
+            </div>
+
+            <div class="card card-highlight" style="margin-top: 15px; border-left: 4px solid var(--accent-cyan);">
+              <strong style="color: var(--accent-cyan);">Factores claves:</strong>
+              <ul class="bullet-list" style="margin-top: 8px; font-size: 0.95em;">
+                <li>Propiedades del suelo.</li>
+                <li>Humedad inicial del suelo.</li>
+                <li>Condiciones superficiales.</li>
+                <li>Intensidad de la lluvia.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p03/image7.png" alt="Proceso de Infiltración en el Suelo" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 5: CAPILARIDAD Y SUCCIÓN MATRICIAL -->
+      <section>
+        <h2>Impacto del agua en los suelos</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 6px;">
+          Infiltración: ¿Cómo afecta la estabilidad interna del suelo?
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; gap: 20px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🔬</span>
+              <span>Capilaridad (+)</span>
+            </div>
+            <p style="font-size: 0.92em; line-height: 1.55; margin-top: 10px;">
+              Fenómeno por el cual un líquido, como el agua, asciende o desciende dentro de los poros de un material debido a la atracción entre las moléculas del líquido y las paredes sólidas del material, superando en algunos casos la fuerza de la gravedad.
+            </p>
+            <div style="text-align: center; margin-top: 10px;">
+              <img src="img/p03/image8.png" alt="Capilaridad" style="max-height: 140px; width: auto;">
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">🧲</span>
+              <span>Succión matricial (+)</span>
+            </div>
+            <p style="font-size: 0.92em; line-height: 1.55; margin-top: 10px;">
+              Se refiere a la <strong>presión negativa</strong> que el agua experimenta en los poros del suelo cuando el contenido de agua es bajo. Ocurre debido a las fuerzas de atracción entre el agua y las partículas de suelo (tensión superficial).
+            </p>
+            <div style="text-align: center; margin-top: 10px;">
+              <img src="img/p03/image9.png" alt="Succión Matricial Meniscos" style="max-height: 140px; width: auto;">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 18px; text-align: center; justify-content: center;">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-content" style="font-size: 1.1em; font-weight: 700;">
+            ¡La Resistencia al corte decrece en suelos completamente saturados!
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: MONITOREO DEL AGUA EN EL SUELO - ESCALAS -->
+      <section>
+        <h2>Monitoreo del agua en el suelo</h2>
+        <p style="font-size: 1.15em; margin-top: 10px;">
+          El agua en el suelo y los fenómenos asociados a esto se pueden monitorear a diferentes escalas temporales y espaciales.
+        </p>
+
+        <div class="split-2" style="margin-top: 35px; gap: 30px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--eafit-blue); padding: 30px;">
+            <div class="card-title" style="color: var(--eafit-blue); font-size: 1.25em;">
+              <span class="card-icon">📍</span>
+              <span>Sensores en sitio:</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 1.15em; margin-top: 20px;">
+              <li><strong>Sensores de humedad</strong></li>
+              <li><strong>Tensiómetros</strong></li>
+              <li><strong>Piezómetros</strong></li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-cyan); padding: 30px;">
+            <div class="card-title" style="color: var(--accent-cyan); font-size: 1.25em;">
+              <span class="card-icon">🛰️</span>
+              <span>Sensores remotos:</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 1.15em; margin-top: 20px;">
+              <li><strong>Satélites</strong></li>
+            </ul>
+            <p style="font-size: 1em; color: var(--text-muted); margin-top: 20px;">
+              Monitoreo regional de humedad superficial a gran escala.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 7: SENSORES DE HUMEDAD: ¿QUÉ MIDEN? -->
+      <section>
+        <h2>Sensores de humedad</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo del agua en el suelo
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1.05em; line-height: 1.6;">
+                Miden el <strong>contenido volumétrico de agua en el suelo</strong> mediante la variación de la frecuencia de una <strong>onda electromagnética</strong> que se transmite por el suelo.
+              </p>
+
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--eafit-blue);">¿Qué mide?</strong>
+                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.55;">
+                  El sensor emite ondas electromagnéticas de una determinada frecuencia en el suelo. A medida que estas ondas se transmiten a través del suelo, la presencia de agua afecta su velocidad. El sensor mide el tiempo que tarda la onda en viajar, y esto se relaciona con la cantidad de agua presente.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+            <img src="img/p03/image10.png" alt="Sensor de Humedad 1" style="max-height: 120px; width: auto;">
+            <img src="img/p03/image11.png" alt="Sensor de Humedad 2" style="max-height: 120px; width: auto;">
+            <img src="img/p03/image12.png" alt="Sensor de Humedad 3" style="max-height: 120px; width: auto;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 8: SENSORES DE HUMEDAD: VENTAJAS Y LIMITACIONES -->
+      <section>
+        <h2>Sensores de humedad</h2>
+        <div class="split-2" style="margin-top: 30px; gap: 30px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">✅</span>
+              <span>Ventajas</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.1em;">
+              <li>Permite lecturas <strong>rápidas y continuas</strong>.</li>
+              <li>Buena precisión en diferentes tipos de suelo.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚠️</span>
+              <span>Limitaciones</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.1em;">
+              <li>Puede ser afectado por la conductividad eléctrica del suelo.</li>
+              <li><strong>Necesita calibración específica</strong> para cada tipo de suelo.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 35px; text-align: center; justify-content: center;">
+          <span class="callout-icon">🎯</span>
+          <div class="callout-content" style="font-size: 1.15em; font-weight: 700;">
+            ¡Es fundamental el análisis de los datos para cada punto específico!
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: SENSORES DE HUMEDAD EN CAMPO 1 -->
+      <section>
+        <h2>Sensores de humedad: Monitoreo en campo</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p03/image13.jpeg" alt="Instalación de Sensor de Humedad en Talud" style="max-height: 440px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 10: SENSORES DE HUMEDAD EN CAMPO 2 -->
+      <section>
+        <h2>Sensores de humedad: Monitoreo en campo</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p03/image13.jpeg" alt="Detalle Instalación Sensor Humedad" style="max-height: 440px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <p style="font-size: 0.9em; color: var(--text-muted); margin-top: 10px;">Perfil de instalación del sensor a diferentes profundidades en el talud</p>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: SENSORES DE HUMEDAD: CALIBRACIÓN Y CURVAS -->
+      <section>
+        <h2>Sensores de humedad: Calibración y Curvas</h2>
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          <div style="text-align: center;">
+            <img src="img/p03/image14.png" alt="Curva de Calibración de Sensor" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 6px;">Curva de calibración sensor vs. contenido volumétrico</p>
+          </div>
+          <div style="text-align: center;">
+            <img src="img/p03/image15.png" alt="Registro Temporal de Humedad" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 6px;">Serie temporal de respuesta ante eventos de lluvia</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: TENSIÓMETROS: ¿QUÉ MIDEN? -->
+      <section>
+        <h2>Tensiómetros</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo del agua en el suelo
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div>
+            <div class="card">
+              <p style="font-size: 1.05em; line-height: 1.6;">
+                Son instrumentos avanzados para medir la <strong>succión o potencial matricial</strong> del agua en el suelo. Utilizan una <strong>cápsula de cerámica o piedra porosa</strong> para medir la tensión con alta precisión.
+              </p>
+
+              <div style="margin-top: 15px;">
+                <strong style="color: var(--eafit-blue);">¿Qué mide?</strong>
+                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.55;">
+                  La succión ejercida por el suelo sobre el agua dentro de la piedra porosa es medida por un sensor de presión dentro del dispositivo. El sensor digital convierte esa información en datos sobre el potencial matricial del suelo. Los datos se registran y pueden ser transmitidos de manera remota o leídos en el sitio.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 15px; justify-content: center;">
+            <img src="img/p03/image16.png" alt="Tensiómetro Sensor" style="max-height: 350px; width: auto; object-fit: contain;">
+            <img src="img/p03/image17.png" alt="Tensiómetro Esquema" style="max-height: 350px; width: auto; object-fit: contain;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 13: TENSIÓMETROS: VENTAJAS Y LIMITACIONES -->
+      <section>
+        <h2>Tensiómetros</h2>
+        <div class="split-2" style="margin-top: 25px; gap: 25px;">
+          
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">✅</span>
+              <span>Ventajas</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 12px; font-size: 1em;">
+              <li>Permite lecturas <strong>rápidas y continuas</strong>.</li>
+              <li>Buena precisión en diferentes tipos de suelo.</li>
+              <li>Se pueden correlacionar con <strong>contenidos de humedad del suelo</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose);">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">⚠️</span>
+              <span>Limitaciones</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 12px; font-size: 0.92em;">
+              <li>Puede requerir calibración regular, especialmente si se usa en diferentes tipos de suelo.</li>
+              <li>La piedra porosa puede obstruirse.</li>
+              <li><strong>No es ideal para suelos extremadamente secos o saturados</strong>, donde los valores de succión pueden exceder el rango medible (cavitación).</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 25px; text-align: center; justify-content: center;">
+          <span class="callout-icon">🎯</span>
+          <div class="callout-content" style="font-size: 1.1em; font-weight: 700;">
+            ¡Es fundamental el análisis de los datos para cada punto específico!
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: TENSIÓMETROS EN CAMPO -->
+      <section>
+        <h2>Tensiómetros: Monitoreo en campo</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p03/image18.png" alt="Tensiómetros Instalados en Campo" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 15: MONITOREO DEL AGUA EN EL SUELO: REGISTROS -->
+      <section>
+        <h2>Monitoreo del agua en el suelo</h2>
+        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 30px;">
+          <img src="img/p03/image19.png" alt="Curva de Succión vs Humedad" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p03/image20.png" alt="Respuesta de Succión ante Lluvia" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <img src="img/p03/image21.png" alt="Esquema de Instalación" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 16: PIEZÓMETROS: DEFINICIÓN Y PRINCIPIO -->
+      <section>
+        <h2>Piezómetros</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Monitoreo del agua en el suelo
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; gap: 25px;">
+          
+          <div class="card">
+            <p style="font-size: 1.05em; line-height: 1.6;">
+              Son instrumentos utilizados para medir la <strong>presión del agua en el subsuelo</strong>, particularmente el nivel de agua o presión en acuíferos y el nivel freático.
+            </p>
+            <p style="font-size: 0.95em; line-height: 1.55; margin-top: 10px; color: var(--text-muted);">
+              Son esenciales en proyectos de geotecnia, construcción y manejo de recursos hídricos para evaluar la <strong>estabilidad de suelos y estructuras bajo condiciones de carga de agua</strong>.
+            </p>
+          </div>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">⚙️</span>
+              <span>¿Qué mide? – Principio básico</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li>El agua subterránea se encuentra entre las partículas de suelo.</li>
+              <li>La cantidad de agua en los poros ejerce una presión sobre las partículas, conocida como <strong>presión de poros</strong>.</li>
+              <li>El piezómetro mide esta presión, relacionada con el <strong>nivel freático</strong>.</li>
+              <li><em>Dependiendo del sensor mide la altura a la que el agua se queda quieta o la presión que ejerce sobre un transductor.</em></li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 17: PIEZÓMETROS: INSTALACIÓN -->
+      <section>
+        <h2>Piezómetros: Instalación en sondeos</h2>
+        <div style="text-align: center; margin-top: 25px;">
+          <img src="img/p03/image22.png" alt="Esquema de Instalación Piezométrica" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 18: PIEZÓMETROS: INTERPRETACIÓN Y TIPOS -->
+      <section>
+        <h2>Piezómetros: Interpretación y tipos de sensores</h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="card">
+              <div class="card-title" style="color: var(--eafit-blue);">
+                <span class="card-icon">📏</span>
+                <span>Piezómetros de tubo abierto (Casagrande)</span>
+              </div>
+              <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5;">
+                El nivel de agua dentro del tubo se mide con una cinta métrica o electrónicamente. Este nivel indica dónde está el <strong>nivel freático</strong> (la superficie donde el suelo cambia de parcialmente saturado a saturado).
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="color: var(--accent-cyan);">
+                <span class="card-icon">⚡</span>
+                <span>Piezómetros con sensores eléctricos / cuerda vibrante</span>
+              </div>
+              <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5;">
+                La presión medida se puede convertir en datos continuos de nivel de agua o presión de poros, que se interpreta para entender las condiciones del suelo ante eventos dinámicos.
+              </p>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p03/image23.png" alt="Piezómetro Eléctrico y Célula" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 19: SERIES PIEZOMÉTRICAS Y PERCENTILES -->
+      <section>
+        <h2>Piezómetros: Monitoreo de series de tiempo</h2>
+        <p style="font-size: 1.1em; margin-top: 8px; font-weight: 600;">
+          Las bandas de colores corresponden a percentiles asociados al nivel piezométrico.
+        </p>
+
+        <div style="text-align: center; margin-top: 20px;">
+          <img src="img/p03/image24.png" alt="Serie Piezométrica con Bandas de Percentiles" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>
+
+      <!-- SLIDE 20: SATÉLITES PARA HUMEDAD DEL SUELO -->
+      <section>
+        <h2>Monitoreo del agua en el suelo: Satélites</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Satélites y Misiones Notables para el Monitoreo de Humedad del Suelo
+        </h3>
+
+        <div class="card card-highlight" style="margin-top: 25px; padding: 25px;">
+          <p style="font-size: 1.1em; line-height: 1.6;">
+            Los satélites miden la humedad del suelo principalmente a través de <strong>técnicas de teledetección</strong> que utilizan diferentes tipos de sensores para captar señales desde el espacio.
+          </p>
+          <p style="font-size: 1.05em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
+            Estas técnicas permiten obtener información sobre el <strong>contenido de agua en las capas superficiales del suelo</strong>, normalmente hasta unos pocos centímetros de profundidad.
+          </p>
+          <div class="callout callout-info" style="margin-top: 20px;">
+            <span class="callout-icon">📡</span>
+            <div class="callout-content" style="font-size: 1em;">
+              La cantidad de agua en el suelo influye en el tipo y la <strong>intensidad de la señal reflejada</strong>, lo que permite estimar el contenido de humedad en diferentes sensores y mediante diferentes técnicas.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 21: MISIÓN SMAP -->
+      <section>
+        <h2>Satélites: Misión SMAP (NASA)</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 6px;">
+          Soil Moisture Active Passive
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <div class="card">
+            <ul class="bullet-list" style="font-size: 1.05em; line-height: 1.65;">
+              <li><strong>Agencia:</strong> NASA.</li>
+              <li><strong>Lanzamiento:</strong> 2015.</li>
+              <li><strong>Función:</strong> Mide la humedad del suelo en la capa superficial y la congelación/descongelación del suelo.</li>
+              <li><strong>Tecnología:</strong> Combina un radar activo (que operó inicialmente) y un radiómetro de microondas pasivo.</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; gap: 15px; justify-content: center;">
+            <img src="img/p03/image25.png" alt="Satélite SMAP" style="max-height: 280px; width: auto; object-fit: contain; border-radius: 8px;">
+            <img src="img/p03/image26.jpeg" alt="Mapa Global SMAP" style="max-height: 280px; width: auto; object-fit: contain; border-radius: 8px;">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 22: MISIÓN SMOS -->
+      <section>
+        <h2>Satélites: Misión SMOS (ESA)</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 6px;">
+          Soil Moisture and Ocean Salinity
+        </h3>
+
+        <div class="split-2" style="margin-top: 25px; align-items: center;">
+          
+          <div class="card card-highlight">
+            <ul class="bullet-list" style="font-size: 1.1em; line-height: 1.7;">
+              <li><strong>Agencia:</strong> Agencia Espacial Europea (ESA).</li>
+              <li><strong>Lanzamiento:</strong> 2009.</li>
+              <li><strong>Función:</strong> Mide la humedad del suelo y la salinidad de los océanos.</li>
+              <li><strong>Tecnología:</strong> Radiómetro pasivo de microondas interferométrico (MIRAS).</li>
+            </ul>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p03/image27.gif" alt="Satélite SMOS Animación" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 23: SENTINEL-1 Y LANDSAT -->
+      <section class="slide-cover">
+        <div class="cover-badge">Módulo 03 &bull; Sensores Remotos y Síntesis</div>
+        <h2 style="font-size: 2em; margin-top: 15px;">
+          Satélites: Misiones Complementarias
+        </h2>
+
+        <div class="split-2" style="margin-top: 25px; text-align: left; gap: 25px;">
+          
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🛰️</span>
+              <span>Sentinel-1 (ESA - 2014)</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li>Monitoreo de la superficie terrestre con SAR.</li>
+              <li>Mide deformaciones y humedad del suelo.</li>
+              <li><strong>Tecnología:</strong> Radar de apertura sintética (SAR en banda C).</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">🌍</span>
+              <span>Landsat (NASA / USGS)</span>
+            </div>
+            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
+              <li>Monitoreo óptico y térmico de la Tierra.</li>
+              <li>Detección de cambios en la vegetación y humedad superficial.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 35px;">
+          <a href="04_medicion_deformaciones.html" class="header-btn" style="display: inline-flex; font-size: 1.05em; padding: 10px 22px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
+            <span>📐</span> Ir al Módulo 4 &bull; Medición de Deformaciones
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Barra Inferior de Información y Atajos -->
+  <footer class="presentation-footer">
+    <div class="footer-credits">
+      <strong>EAFIT</strong> &bull; Instrumentación Geotécnica &bull; Docentes: Federico Gómez, MSc. & Juliana Álvarez, MSc.
+    </div>
+    <div class="footer-shortcuts">
+      <span>Espacio</span> Avanzar &bull; <span>←</span> Retroceder &bull; <span>F</span> Pantalla Completa &bull; <span>T</span> Modo Claro/Oscuro &bull; <span>Esc</span> Cuadrícula
+    </div>
+  </footer>
+
+  <!-- Scripts Reveal.js y Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/math/math.min.js"></script>
+  <script src="js/presentation-core.js"></script>
+
+</body>
+</html>

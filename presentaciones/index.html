@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentaciones Teóricas | Instrumentación Geotécnica - Universidad EAFIT</title>
+  
+  <meta name="description" content="Portal oficial de presentaciones teóricas interactivas en HTML para el curso de Instrumentación Geotécnica de la Universidad EAFIT.">
+  <meta name="author" content="M.Eng. Federico Gómez, M.Eng. Juliana Álvarez - Universidad EAFIT">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       Universidad EAFIT - Portal de Presentaciones
+       Modo Claro (Default Institucional EAFIT) y Soporte de Modo Oscuro
+       ========================================================================== */
+    :root {
+      --eafit-blue: #004B85;          /* Pantone 294C */
+      --eafit-blue-dark: #002855;
+      --eafit-blue-deep: #001A49;
+      --eafit-yellow: #FFB903;        /* Pantone 123C */
+      --eafit-yellow-dark: #B45309;   /* Ámbar institucional de alto contraste */
+      
+      /* Superficies Modo Claro */
+      --bg-page: #F8FAFC;
+      --bg-gradient: 
+        radial-gradient(circle at 12% 15%, rgba(0, 75, 133, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 88% 85%, rgba(255, 185, 3, 0.1) 0%, transparent 50%),
+        #F8FAFC;
+      --bg-header: rgba(255, 255, 255, 0.95);
+      --bg-card: #FFFFFF;
+      --bg-card-hover: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --border-subtle: rgba(0, 75, 133, 0.12);
+      --border-card: rgba(0, 75, 133, 0.15);
+      --border-card-hover: var(--eafit-blue);
+      --card-shadow: 0 8px 24px -4px rgba(0, 75, 133, 0.08), 0 3px 8px -2px rgba(0, 0, 0, 0.04);
+      --card-shadow-hover: 0 16px 36px -6px rgba(0, 75, 133, 0.18), 0 6px 16px -2px rgba(0, 0, 0, 0.06);
+      
+      /* Tipografía Modo Claro */
+      --text-main: #0B192C;          /* Contraste AAA */
+      --text-body: #1E293B;
+      --text-muted: #475569;
+      --text-dim: #64748B;
+      
+      /* Acentos */
+      --accent-cyan: #0284c7;
+      --accent-emerald: #059669;
+      --accent-rose: #e11d48;
+      --logo-filter: none;
+      
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #060D1F;
+      --bg-gradient: 
+        radial-gradient(circle at 15% 15%, rgba(0, 75, 133, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(0, 26, 73, 0.55) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 185, 3, 0.04) 0%, transparent 60%),
+        #060D1F;
+      --bg-header: rgba(6, 13, 31, 0.95);
+      --bg-card: rgba(15, 29, 58, 0.88);
+      --bg-card-hover: rgba(23, 41, 80, 0.96);
+      --bg-surface: #0A142C;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-card: rgba(56, 189, 248, 0.22);
+      --border-card-hover: var(--eafit-yellow);
+      --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+      --card-shadow-hover: 0 18px 40px -5px rgba(0, 75, 133, 0.45);
+      
+      --text-main: #FFFFFF;
+      --text-body: #E2E8F0;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --accent-cyan: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-rose: #f43f5e;
+      --logo-filter: brightness(0) invert(1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      background-image: var(--bg-gradient);
+      color: var(--text-body);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Encabezado */
+    .header {
+      background: var(--bg-header);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0, 75, 133, 0.05);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand-logo {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      filter: var(--logo-filter);
+      transition: filter 0.3s ease;
+    }
+
+    .brand-info h1 {
+      font-size: 1.3rem;
+      color: var(--eafit-blue);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    [data-theme="dark"] .brand-info h1 {
+      color: #FFFFFF;
+    }
+
+    .brand-info p {
+      font-size: 0.92rem;
+      color: var(--eafit-yellow-dark);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .brand-info p {
+      color: var(--eafit-yellow);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-nav {
+      background: rgba(0, 75, 133, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 9px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    [data-theme="dark"] .btn-nav {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+    }
+
+    .btn-nav:hover {
+      background: var(--eafit-blue);
+      border-color: var(--eafit-yellow);
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    .btn-nav-primary {
+      background: var(--eafit-blue);
+      border-color: var(--eafit-blue);
+      color: #FFFFFF;
+    }
+
+    .btn-nav-primary:hover {
+      background: #003666;
+      border-color: var(--eafit-yellow);
+      box-shadow: 0 4px 16px rgba(0, 75, 133, 0.3);
+    }
+
+    .btn-theme-toggle {
+      background: rgba(255, 185, 3, 0.18);
+      border: 1px solid rgba(217, 119, 6, 0.4);
+      color: var(--eafit-yellow-dark);
+    }
+
+    [data-theme="dark"] .btn-theme-toggle {
+      background: rgba(255, 185, 3, 0.15);
+      border-color: var(--eafit-yellow);
+      color: var(--eafit-yellow);
+    }
+
+    /* Contenedor Principal */
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 48px 28px 72px;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 56px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 75, 133, 0.08);
+      border: 1.5px solid var(--eafit-blue);
+      color: var(--eafit-blue);
+      font-size: 0.95rem;
+      font-weight: 800;
+      padding: 8px 22px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 22px;
+    }
+
+    [data-theme="dark"] .hero-badge {
+      background: rgba(0, 75, 133, 0.4);
+      border-color: var(--eafit-yellow);
+      color: var(--eafit-yellow);
+    }
+
+    .hero h2 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--eafit-blue);
+      line-height: 1.18;
+      margin-bottom: 20px;
+      letter-spacing: -0.025em;
+    }
+
+    [data-theme="dark"] .hero h2 {
+      color: #FFFFFF;
+    }
+
+    .hero h2 span {
+      background: linear-gradient(135deg, var(--eafit-blue) 30%, var(--eafit-yellow-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    [data-theme="dark"] .hero h2 span {
+      background: linear-gradient(135deg, #FFFFFF 40%, var(--eafit-yellow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-body);
+      max-width: 900px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    .hero-meta strong {
+      color: var(--text-main);
+    }
+
+    /* Barra de Estadísticas Rápidas */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+
+    .stat-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.2s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-val {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--eafit-blue);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    [data-theme="dark"] .stat-val {
+      color: var(--eafit-yellow);
+    }
+
+    .stat-lbl {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    /* Encabezado de Sección */
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--border-subtle);
+    }
+
+    .section-head h3 {
+      font-size: 1.75rem;
+      color: var(--eafit-blue);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    [data-theme="dark"] .section-head h3 {
+      color: #FFFFFF;
+    }
+
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-top: 4px;
+    }
+
+    /* Rejilla de Presentaciones */
+    .presentations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+
+    .pres-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--card-shadow);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .pres-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-card-hover);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .pres-banner {
+      height: 130px;
+      background: linear-gradient(135deg, var(--eafit-blue-dark), var(--eafit-blue));
+      padding: 20px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pres-banner::after {
+      content: "";
+      position: absolute;
+      right: -25px;
+      bottom: -35px;
+      width: 130px;
+      height: 130px;
+      background: radial-gradient(circle, rgba(255, 185, 3, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .pres-number {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      padding: 6px 12px;
+      border-radius: 7px;
+      letter-spacing: 0.06em;
+    }
+
+    .pres-icon {
+      font-size: 2.6rem;
+      line-height: 1;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+    }
+
+    .pres-body {
+      padding: 28px 26px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pres-title {
+      font-size: 1.45rem;
+      color: var(--eafit-blue);
+      font-weight: 800;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    [data-theme="dark"] .pres-title {
+      color: #FFFFFF;
+    }
+
+    .pres-desc {
+      font-size: 1.05rem;
+      color: var(--text-body);
+      margin-bottom: 22px;
+      flex: 1;
+      line-height: 1.6;
+    }
+
+    .pres-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      background: rgba(0, 75, 133, 0.08);
+      border: 1px solid rgba(0, 75, 133, 0.18);
+      color: var(--eafit-blue);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 6px;
+    }
+
+    [data-theme="dark"] .tag {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.25);
+      color: var(--accent-cyan);
+    }
+
+    .pres-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .pres-meta {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 14px;
+      font-weight: 600;
+    }
+
+    .pres-btn {
+      background: var(--eafit-blue);
+      color: #FFFFFF;
+      border: 1px solid var(--eafit-yellow);
+      padding: 10px 20px;
+      border-radius: 9px;
+      font-size: 0.98rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .pres-btn:hover {
+      background: #003666;
+      box-shadow: 0 4px 18px rgba(0, 75, 133, 0.35);
+      transform: translateX(4px);
+    }
+
+    /* Tarjeta de Atajos */
+    .shortcuts-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 18px;
+      padding: 32px 36px;
+      margin-bottom: 48px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .shortcuts-card h4 {
+      font-size: 1.35rem;
+      color: var(--eafit-blue);
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    [data-theme="dark"] .shortcuts-card h4 {
+      color: #FFFFFF;
+    }
+
+    .keys-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .key-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 1.02rem;
+      color: var(--text-body);
+    }
+
+    .key-badge {
+      background: rgba(0, 75, 133, 0.08);
+      border: 1px solid rgba(0, 75, 133, 0.2);
+      color: var(--eafit-blue);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 7px;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="dark"] .key-badge {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--eafit-yellow);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    /* Pie de Página */
+    .footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-subtle);
+      padding: 30px 36px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      box-shadow: 0 -2px 10px rgba(0, 75, 133, 0.04);
+    }
+
+    .footer a {
+      color: var(--eafit-blue);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .footer a {
+      color: var(--accent-cyan);
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado Principal -->
+  <header class="header">
+    <div class="brand-wrap">
+      <img src="img/brand/eafit_logo.png" alt="Universidad EAFIT" class="brand-logo" onerror="this.style.display='none'">
+      <div class="brand-info">
+        <h1>Instrumentación Geotécnica</h1>
+        <p>Universidad EAFIT | Componente Teórico Oficial</p>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-nav btn-theme-toggle" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)">
+        <span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span>
+      </button>
+      <a href="../index.html" class="btn-nav btn-nav-primary">
+        <span>🧪</span> Ir al Laboratorio Práctico de Python
+      </a>
+      <a href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" rel="noopener noreferrer" class="btn-nav">
+        <span>💻</span> GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="container">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span>🏛️</span> Ciclo de Conferencias Teóricas & Fundamentos Geomecánicos
+      </div>
+      <h2>Presentaciones Interactivas en <span>HTML5</span></h2>
+      <p>
+        Suite completa de diapositivas oficiales bajo el Manual de Identidad Visual de la Universidad EAFIT. Diseñadas para docencia presencial, proyección Full HD (16:9), renderizado de ecuaciones matemáticas con KaTeX y análisis de casos reales.
+      </p>
+      <div class="hero-meta">
+        <div>👨‍🏫 <strong>Federico Gómez, MSc.</strong> (fjgomezc@eafit.edu.co &bull; Ing. Geólogo, Líder Teledetección SIATA)</div>
+        <div>👩‍🏫 <strong>Juliana Álvarez, MSc.</strong> (jalvarezz@eafit.edu.co &bull; Ing. Civil, Líder Amenazas SIATA)</div>
+        <div>📍 <strong>Modalidad:</strong> Presencial Teórico-Práctica &bull; EAFIT</div>
+      </div>
+    </section>
+
+    <!-- Barra de Estadísticas Rápidas -->
+    <section class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-val">7</div>
+        <div class="stat-lbl">Módulos Teóricos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">154</div>
+        <div class="stat-lbl">Ilustraciones & Esquemas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">16:9</div>
+        <div class="stat-lbl">Widescreen Reveal.js</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">100%</div>
+        <div class="stat-lbl">Interactivo con KaTeX</div>
+      </div>
+    </section>
+
+    <!-- Encabezado de Sección -->
+    <div class="section-head">
+      <div>
+        <h3>Catálogo de Diapositivas por Módulo</h3>
+        <p>Selecciona una clase para proyectar la presentación interactiva en pantalla completa.</p>
+      </div>
+    </div>
+
+    <!-- Rejilla de Presentaciones -->
+    <div class="presentations-grid">
+
+      <!-- Presentación 00 -->
+      <article class="pres-card">
+        <div class="pres-banner">
+          <span class="pres-number">CLASE 00</span>
+          <span class="pres-icon">📋</span>
+        </div>
+        <div class="pres-body">
+          <h4 class="pres-title">Presentación del Curso, Metodología y Evaluación</h4>
+          <p class="pres-desc">
+            Metodología del curso (144 h / 3 Umes), presencialidad estricta (pérdida con 4 faltas), esquema evaluativo oficial (Reporte 40%, Entregas parciales 25%, Sustentación 35%), estructura del reporte técnico (máx. 12 págs, evitando geopoesía), plataformas digitales y horarios de asesoría.
+          </p>
+          <div class="pres-tags">
+            <span class="tag">Metodología</span>
+            <span class="tag">Evaluación Oficial</span>
+            <span class="tag">Reporte Técnico</span>
+            <span class="tag">Asesorías</span>
+          </div>
+          <div class="pres-footer">
+            <div class="pres-meta">
+              <span>📄 17 diapositivas</span>
+              <span>⏱️ 1 hora</span>
+            </div>
+            <a href="00_presentacion_curso.html" class="pres-btn">Ver Diapositivas →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Presentación 01 -->
+      <article class="pres-card">
+        <div class="pres-banner">
+          <span class="pres-number">MÓDULO 01</span>
+          <span class="pres-icon">🌐</span>
+        </div>
+        <div class="pres-body">
+          <h4 class="pres-title">Conceptos Básicos de la Instrumentación Geotécnica</h4>
+          <p class="pres-desc">
+            Preguntas fundamentales del curso, análisis de casos históricos (Rotura de la Presa de Malpasset 1959, Túnel de la Línea, deslizamiento Las Playas en San Antonio de Prado 2022), variables críticas a monitorear, escalas de observación (Lloret, UPC) y concepto de riesgo.
+          </p>
+          <div class="pres-tags">
+            <span class="tag">Preguntas Clave</span>
+            <span class="tag">Malpasset</span>
+            <span class="tag">Túnel de la Línea</span>
+            <span class="tag">Escalas de Observación</span>
+            <span class="tag">Riesgo</span>
+          </div>
+          <div class="pres-footer">
+            <div class="pres-meta">
+              <span>📄 16 diapositivas</span>
+              <span>⏱️ 2 horas</span>
+            </div>
+            <a href="01_conceptos_basicos.html" class="pres-btn">Ver Diapositivas →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Presentación 02 -->
+      <article class="pres-card">
+        <div class="pres-banner">
+          <span class="pres-number">MÓDULO 02</span>
+          <span class="pres-icon">🌧️</span>
+        </div>
+        <div class="pres-body">
+          <h4 class="pres-title">Variables Hidrometeorológicas</h4>
+          <p class="pres-desc">
+            Factores condicionantes, pre-detonantes y detonantes, ley de Terzaghi y reducción de resistencia al corte por agua, umbrales de lluvia SIATA, pluviómetros de balancín, radar meteorológico Doppler (reflectividad en dBZ, estratiforme vs convectiva) y satélites de precipitación (GOES, GPM, TRMM).
+          </p>
+          <div class="pres-tags">
+            <span class="tag">Terzaghi</span>
+            <span class="tag">Pluviómetros</span>
+            <span class="tag">Radar Doppler</span>
+            <span class="tag">Satélites GOES</span>
+            <span class="tag">Integración</span>
+          </div>
+          <div class="pres-footer">
+            <div class="pres-meta">
+              <span>📄 26 diapositivas</span>
+              <span>⏱️ 3 horas</span>
+            </div>
+            <a href="02_variables_hidrometeorologicas.html" class="pres-btn">Ver Diapositivas →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Presentación 03 -->
+      <article class="pres-card">
+        <div class="pres-banner">
+          <span class="pres-number">MÓDULO 03</span>
+          <span class="pres-icon">💧</span>
+        </div>
+        <div class="pres-body">
+          <h4 class="pres-title">El Agua en el Suelo</h4>
+          <p class="pres-desc">
+            Infiltración y estabilidad interna del terreno, capilaridad y succión matricial en suelos no saturados, sensores de humedad volumétrica (ondas electromagnéticas y curvas de calibración), tensiómetros de cápsula porosa, piezómetros (tubo abierto y eléctricos) y teledetección de humedad (SMAP, SMOS, Sentinel-1).
+          </p>
+          <div class="pres-tags">
+            <span class="tag">Infiltración</span>
+            <span class="tag">Succión Matricial</span>
+            <span class="tag">Sensores de Humedad</span>
+            <span class="tag">Tensiómetros</span>
+            <span class="tag">Piezómetros</span>
+          </div>
+          <div class="pres-footer">
+            <div class="pres-meta">
+              <span>📄 23 diapositivas</span>
+              <span>⏱️ 3 horas</span>
+            </div>
+            <a href="03_agua_en_el_suelo.html" class="pres-btn">Ver Diapositivas →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Presentación 04 -->
+      <article class="pres-card">
+        <div class="pres-banner">
+          <span class="pres-number">MÓDULO 04</span>
+          <span class="pres-icon">📏</span>
+        </div>
+        <div class="pres-body">
+          <h4 class="pres-title">Medición de Deformaciones</h4>
+          <p class="pres-desc">
+            Deformaciones macroscópicas y microscópicas, factores intrínsecos y externos, relación esfuerzo-deformación (Hooke, fluencia, pico y estricción), extensómetros, acelerómetros, inclinómetros (Machan & Bennett), reflectometría TDR, celdas de deformación vs carga (galgas), drones fotogramétricos DEM e interferometría radar satelital (InSAR).
+          </p>
+          <div class="pres-tags">
+            <span class="tag">Extensómetros</span>
+            <span class="tag">Acelerómetros</span>
+            <span class="tag">Inclinómetros</span>
+            <span class="tag">TDR</span>
+            <span class="tag">Drones DEM</span>
+            <span class="tag">InSAR</span>
+          </div>
+          <div class="pres-footer">
+            <div class="pres-meta">
+              <span>📄 30 diapositivas</span>
+              <span>⏱️ 3 horas</span>
+            </div>
+            <a href="04_medicion_deformaciones.html" class="pres-btn">Ver Diapositivas →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Presentación 05 -->
+      <article class="pres-card">
+        <div class="pres-banner">
+          <span class="pres-number">MÓDULO 05</span>
+          <span class="pres-icon">📈</span>
+        </div>
+        <div class="pres-body">
+          <h4 class="pres-title">Interpretación y Análisis de Datos en Instrumentación Geotécnica</h4>
+          <p class="pres-desc">
+            Objetivos del análisis, componentes de series temporales (tendencia, estacionalidad, eventos, ruido), pre-procesamiento (validación, interpolación, filtrado, correcciones térmicas), análisis estadístico y desviaciones, análisis espacial (DSM y NDVI), comparación con modelos de diseño, criterios de alarma, metodologías de umbrales (empíricos, modelados, NSR-10) y rangos admisibles.
+          </p>
+          <div class="pres-tags">
+            <span class="tag">Series Temporales</span>
+            <span class="tag">Pre-procesamiento</span>
+            <span class="tag">Análisis Espacial</span>
+            <span class="tag">Modelos Teóricos</span>
+            <span class="tag">Umbrales Críticos</span>
+            <span class="tag">NSR-10</span>
+          </div>
+          <div class="pres-footer">
+            <div class="pres-meta">
+              <span>📄 24 diapositivas</span>
+              <span>⏱️ 3 horas</span>
+            </div>
+            <a href="05_analisis_datos_umbrales.html" class="pres-btn">Ver Diapositivas →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Presentación Especial: ET -->
+      <article class="pres-card">
+        <div class="pres-banner">
+          <span class="pres-number">TEMA ESPECIAL</span>
+          <span class="pres-icon">🌊</span>
+        </div>
+        <div class="pres-body">
+          <h4 class="pres-title">Caracterización y Propagación de Avenidas Torrenciales</h4>
+          <p class="pres-desc">
+            Definición y física de flujos torrenciales, factores detonantes, susceptibilidad a partir de morfometría de cuencas (metodologías de Arango et al. 2020 e Ilinca 2021), modelos lluvia-escorrentía, zonas de impacto y metodologías de tránsito comparadas: empírico (Flow-R), hidráulico 2D (Iber) y transporte de masa bifásica (r.avaflow).
+          </p>
+          <div class="pres-tags">
+            <span class="tag">Avenidas Torrenciales</span>
+            <span class="tag">Morfometría de Cuencas</span>
+            <span class="tag">Flow-R</span>
+            <span class="tag">Iber 2D</span>
+            <span class="tag">r.avaflow</span>
+          </div>
+          <div class="pres-footer">
+            <div class="pres-meta">
+              <span>📄 24 diapositivas</span>
+              <span>⏱️ 2.5 horas</span>
+            </div>
+            <a href="et_avenidas_torrenciales.html" class="pres-btn">Ver Diapositivas →</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Guía de Atajos de Teclado -->
+    <section class="shortcuts-card">
+      <h4><span>⌨️</span> Atajos de Teclado para Docencia y Proyección</h4>
+      <div class="keys-grid">
+        <div class="key-item">
+          <span class="key-badge">Espacio / →</span>
+          <span>Avanzar diapositiva</span>
+        </div>
+        <div class="key-item">
+          <span class="key-badge">←</span>
+          <span>Retroceder diapositiva</span>
+        </div>
+        <div class="key-item">
+          <span class="key-badge">F</span>
+          <span>Alternar Pantalla Completa</span>
+        </div>
+        <div class="key-item">
+          <span class="key-badge">T</span>
+          <span>Alternar Modo Claro / Oscuro</span>
+        </div>
+        <div class="key-item">
+          <span class="key-badge">O / Esc</span>
+          <span>Vista general en cuadrícula</span>
+        </div>
+        <div class="key-item">
+          <span class="key-badge">S</span>
+          <span>Modo orador con notas y reloj</span>
+        </div>
+        <div class="key-item">
+          <span class="key-badge">B / .</span>
+          <span>Pausa (pantalla en negro)</span>
+        </div>
+        <div class="key-item">
+          <span class="key-badge">Alt + Clic</span>
+          <span>Zoom a gráficos y fórmulas</span>
+        </div>
+        <div class="key-item">
+          <span class="key-badge">?print-pdf</span>
+          <span>Exportar a PDF para imprimir</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pie de Página -->
+  <footer class="footer">
+    <p>
+      Universidad EAFIT | Departamento de Ingeniería Civil | Curso de Instrumentación Geotécnica<br>
+      Docentes: M.Eng. Federico Gómez & M.Eng. Juliana Álvarez &bull; <a href="../index.html">Plataforma Web Interactiva</a> &bull; <a href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" rel="noopener noreferrer">Repositorio GitHub</a>
+    </p>
+  </footer>
+
+  <!-- Script de Sincronización de Tema EAFIT -->
+  <script>
+    (function initTheme() {
+      const savedTheme = localStorage.getItem('eafit-theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeBtn = document.getElementById('btn-theme-toggle');
+      const themeText = document.getElementById('theme-text');
+      const themeIcon = document.getElementById('theme-icon');
+
+      function updateUI() {
+        const theme = document.documentElement.getAttribute('data-theme') || 'light';
+        if (themeText) themeText.textContent = theme === 'light' ? 'Modo Oscuro' : 'Modo Claro';
+        if (themeIcon) themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+      }
+
+      function toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('eafit-theme', next);
+        updateUI();
+      }
+
+      if (themeBtn) {
+        updateUI();
+        themeBtn.addEventListener('click', toggleTheme);
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 't' || e.key === 'T') {
+          if (!['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+            toggleTheme();
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
