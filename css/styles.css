@@ -3004,3 +3004,721 @@ body {
 [data-theme="light"] .filter-code-footer {
   background: #1e293b;
 }
+
+
+/* ==========================================================================
+   COMPONENTES VISUALES INTERACTIVOS (MÓDULOS 1.6 & 2.2, 2.3, 2.4)
+   ========================================================================== */
+
+/* -------------------------------------------------------------
+   WIDGET 1.6: ANATOMÍA DE DATAFRAME (PANDAS)
+   ------------------------------------------------------------- */
+.wb-df-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.df-columns-header {
+  background: rgba(56, 189, 248, 0.08);
+  border: 1.5px dashed var(--accent-blue);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.df-axis-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--accent-blue);
+  white-space: nowrap;
+}
+
+.df-col-badges {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.df-col-badge {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+}
+
+.df-col-badge.hl-col {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+.df-body-layout {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.df-index-col {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1.5px dashed var(--accent-amber);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 140px;
+  flex-shrink: 0;
+}
+
+.df-axis-tag-vert {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--accent-amber);
+  line-height: 1.2;
+}
+
+.df-index-cells {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.df-idx-cell {
+  font-family: monospace;
+  font-size: 0.7rem;
+  color: var(--text-main);
+  background: var(--bg-surface);
+  padding: 2px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.df-values-matrix {
+  flex: 1;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+[data-theme="light"] .df-values-matrix {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.df-matrix-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--text-dim);
+}
+
+.df-matrix-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.df-row-cells {
+  display: flex;
+  justify-content: space-around;
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.df-row-cells .hl-cell {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.df-series-extract {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.extract-arrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-emerald);
+}
+
+.series-card-preview {
+  width: 100%;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1.5px solid var(--accent-emerald);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.series-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--accent-emerald);
+}
+
+.series-items {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--text-main);
+  overflow-x: auto;
+}
+
+/* Simulador DataFrame */
+.df-sim-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.df-channel-selector, .df-methods-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.channel-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.df-chan-btn, .df-meth-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.df-chan-btn:hover, .df-meth-btn:hover {
+  color: var(--text-main);
+  border-color: var(--accent-blue);
+}
+
+.df-chan-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+.df-meth-btn.active {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
+}
+
+.df-interactive-table-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+[data-theme="light"] .df-interactive-table-wrapper {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.df-sensor-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.df-sensor-table th, .df-sensor-table td {
+  padding: 6px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.idx-th, .idx-td {
+  background: rgba(245, 158, 11, 0.05);
+  font-weight: 700;
+  color: var(--accent-amber);
+}
+
+.th-active-col, .td-active-col {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  font-weight: 800;
+}
+
+.df-output-panel {
+  background: #090d16;
+  border: 1px solid #1e293b;
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+}
+
+[data-theme="light"] .df-output-panel {
+  background: #1e293b;
+}
+
+.df-snippet-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.df-snippet-code code {
+  font-family: monospace;
+  font-size: 0.82rem;
+  color: #38bdf8;
+}
+
+.df-snippet-res {
+  border-top: 1px dashed rgba(255,255,255,0.15);
+  padding-top: 0.5rem;
+  font-family: monospace;
+  font-size: 0.82rem;
+  color: #f8fafc;
+  line-height: 1.45;
+}
+
+/* -------------------------------------------------------------
+   WIDGET 2.2: BOXPLOT ANATOMY & OUTLIERS
+   ------------------------------------------------------------- */
+.wb-boxplot-schematic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bp-part {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.bp-outlier-zone {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1.5px dashed #ef4444;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+}
+
+.bp-badge-outlier {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ef4444;
+}
+
+.bp-formula {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.whisker-line {
+  width: 20px;
+  height: 2px;
+  background: var(--accent-blue);
+}
+
+.bp-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.bp-box-body {
+  width: 100%;
+  background: rgba(56, 189, 248, 0.08);
+  border: 2px solid var(--accent-blue);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bp-q3-line, .bp-q1-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.bp-median-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 6px;
+  background: rgba(245, 158, 11, 0.15);
+  border-left: 3px solid #f59e0b;
+  border-radius: 3px;
+}
+
+.q-label-med { font-weight: 800; color: #f59e0b; font-size: 0.75rem; }
+.q-desc-med { font-size: 0.7rem; color: var(--text-main); }
+
+.bp-iqr-bracket {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  text-align: center;
+  border-top: 1px dashed var(--border-subtle);
+  padding-top: 4px;
+}
+
+/* Simulador Boxplot */
+.bp-sim-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.bp-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bp-toggle-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-dim);
+}
+
+.bp-state-btn {
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.bp-state-btn.active-noise {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+}
+
+.bp-state-btn.active-clean {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
+}
+
+.bp-status-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.pill-alert { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444; }
+.pill-ok { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; }
+
+.bp-sim-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .bp-sim-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bp-graphic-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="light"] .bp-graphic-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.bp-svg-container {
+  width: 100%;
+  max-width: 320px;
+}
+
+.svg-axis-txt { font-size: 10px; fill: var(--text-dim); }
+.svg-bp-txt { font-size: 9px; fill: var(--text-muted); }
+.svg-bp-txt-med { font-size: 10px; font-weight: 800; fill: #f59e0b; }
+.svg-outlier-txt { font-size: 10px; font-weight: 800; fill: #ef4444; }
+
+.bp-metrics-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.metric-comparison-card {
+  background: rgba(15, 23, 42, 0.35);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem;
+}
+
+[data-theme="light"] .metric-comparison-card {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.metric-comparison-card.distorted {
+  border-left: 3px solid #ef4444;
+}
+
+.metric-comparison-card.robust {
+  border-left: 3px solid #10b981;
+}
+
+.mc-title { font-size: 0.72rem; font-weight: 700; color: var(--text-dim); }
+.mc-val { font-size: 1.35rem; font-weight: 800; margin: 2px 0; }
+.mc-desc { font-size: 0.72rem; color: var(--text-muted); line-height: 1.35; }
+
+.bp-summary-box {
+  background: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  font-size: 0.72rem;
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* -------------------------------------------------------------
+   WIDGET 2.3: SEMÁFORO DE UMBRALES (axhspan)
+   ------------------------------------------------------------- */
+.wb-bands-schematic {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.schematic-band {
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.band-red { background: rgba(239, 68, 68, 0.15); border-left: 4px solid #ef4444; }
+.band-orange { background: rgba(249, 115, 22, 0.15); border-left: 4px solid #f97316; }
+.band-yellow { background: rgba(234, 179, 8, 0.15); border-left: 4px solid #eab308; }
+.band-green { background: rgba(16, 185, 129, 0.15); border-left: 4px solid #10b981; }
+
+.band-tag { font-size: 0.75rem; font-weight: 800; }
+.band-action { font-size: 0.72rem; color: var(--text-dim); }
+.band-code { font-family: monospace; font-size: 0.7rem; color: var(--text-muted); }
+
+/* Simulador Bandas */
+.tb-controls-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.85rem;
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.tb-graph-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+[data-theme="light"] .tb-graph-wrapper {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.tb-svg {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+}
+
+.tb-summary-cards {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.tb-stat-pill {
+  flex: 1;
+  min-width: 110px;
+  padding: 0.4rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.pill-green { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; }
+.pill-yellow { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid #eab308; }
+.pill-orange { background: rgba(249, 115, 22, 0.15); color: #f97316; border: 1px solid #f97316; }
+.pill-red { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444; }
+
+.tb-code-footer {
+  background: #090d16;
+  border: 1px solid #1e293b;
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+}
+
+[data-theme="light"] .tb-code-footer {
+  background: #1e293b;
+}
+
+/* -------------------------------------------------------------
+   WIDGET 2.4: DOBLE EJE CON LLUVIA INVERTIDA (twinx)
+   ------------------------------------------------------------- */
+.wb-dual-axis-schematic {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.da-zone {
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.zone-atmosphere {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1.5px dashed var(--accent-blue);
+}
+
+.zone-subsoil {
+  background: rgba(244, 63, 94, 0.12);
+  border: 1.5px solid #f43f5e;
+}
+
+.da-zone-divider {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-emerald);
+}
+
+/* Simulador Doble Eje */
+.da-sim-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: rgba(15, 23, 42, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.da-toggle-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.da-label { font-size: 0.75rem; font-weight: 700; color: var(--text-dim); }
+
+.da-btn {
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.da-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+.da-badge-state {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.badge-ok { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; }
+.badge-warn { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444; }
+
+.da-graph-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+[data-theme="light"] .da-graph-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.da-svg {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+}
+
+.da-code-footer {
+  background: #090d16;
+  border: 1px solid #1e293b;
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+}
+
+[data-theme="light"] .da-code-footer {
+  background: #1e293b;
+}

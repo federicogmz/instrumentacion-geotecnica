@@ -343,6 +343,9 @@ for fs in factores_seguridad:
         title: "1.6 Primeros Pasos con Pandas: DataFrames e Índices",
         concept: `
           <p><strong>Pandas</strong> es la librería por excelencia para el manejo de series temporales. Organiza la información en una tabla bidimensional llamada <strong>DataFrame</strong>.</p>
+          
+          <!-- Contenedor Interactivo de Anatomía de DataFrame -->
+          <div id="dataframe-anatomy-container"></div>
           <div class="code-example-block">
 import pandas as pd
 
@@ -514,6 +517,9 @@ plt.show()`,
         title: "2.2 Boxplot del Extensómetro y Umbrales de Outliers",
         concept: `
           <p>Un <strong>boxplot (diagrama de caja)</strong> resume la distribución estadística:</p>
+          
+          <!-- Contenedor Interactivo de Anatomía del Boxplot -->
+          <div id="boxplot-anatomy-container"></div>
           <ul>
             <li><strong>Caja:</strong> Rango intercuartílico (IQR = Q3 - Q1), donde está el 50% central de los días.</li>
             <li><strong>Límite superior:</strong> <code>Q3 + 1.5 * IQR</code>. Todo punto por encima es un <strong>outlier</strong> (aceleración inusual de la grieta).</li>
@@ -577,6 +583,9 @@ plt.show()`,
         title: "2.3 Semáforo de Alerta con Zonas Coloreadas",
         concept: `
           <p>Podemos colorear el fondo de una serie de tiempo con <code>plt.axhspan(y_min, y_max, color=..., alpha=...)</code> para crear un semáforo visual de alerta geotécnica:</p>
+          
+          <!-- Contenedor Interactivo de Semáforo de Umbrales -->
+          <div id="threshold-bands-container"></div>
           <ul>
             <li>🟢 Verde (Normal): Entre Q1 y Q3.</li>
             <li>🟠 Naranja (Precaución): Entre cuartiles y bigotes.</li>
@@ -646,6 +655,9 @@ plt.show()`,
             La lluvia se <strong>suma ('sum')</strong> porque es acumulativa, mientras que la humedad se <strong>promedia ('mean')</strong> porque representa un estado instantáneo.
           </div>
           <p>En ingeniería geológica, graficamos la lluvia en el eje superior derecho invertido (<code>ax2.invert_yaxis()</code>) para observar cómo cada aguacero impacta la humedad del terreno en el eje primario.</p>
+          
+          <!-- Contenedor Interactivo de Doble Eje con Lluvia Invertida -->
+          <div id="dual-axis-rain-container"></div>
         `,
         instruction: "Completa el remuestreo semanal de lluvia y humedad, y activa la inversión del eje Y con <code>ax2.invert_yaxis()</code>.",
         initialCode: `# -------------------------------------------------------------

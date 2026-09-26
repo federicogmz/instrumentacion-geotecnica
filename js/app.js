@@ -307,8 +307,20 @@ class CourseApp {
     if (lesson.id === "m1_l5" && window.initForLoopWidget) {
       window.initForLoopWidget();
     }
+    if (lesson.id === "m1_l6" && window.initDataFrameAnatomyWidget) {
+      window.initDataFrameAnatomyWidget();
+    }
     if (lesson.id === "m1_l7" && window.initBooleanFilterWidget) {
       window.initBooleanFilterWidget();
+    }
+    if (lesson.id === "m2_l2" && window.initBoxplotWidget) {
+      window.initBoxplotWidget();
+    }
+    if (lesson.id === "m2_l3" && window.initThresholdBandsWidget) {
+      window.initThresholdBandsWidget();
+    }
+    if (lesson.id === "m2_l4" && window.initDualAxisRainWidget) {
+      window.initDualAxisRainWidget();
     }
   }
 
