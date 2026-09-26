@@ -729,6 +729,9 @@ plt.show()`,
           <p>Los sensores sufren caídas de telemetría o baterías agotadas. 
           Nunca debemos borrar los registros con <code>dropna()</code> porque perderíamos semanas completas de monitoreo.</p>
           <p>Para rellenar huecos puntuales de pocos días en la sonda de humedad, aplicamos <strong>interpolación lineal</strong>:</p>
+          
+          <!-- Contenedor Interactivo de Datos Faltantes -->
+          <div id="missing-data-container"></div>
           <div class="code-example-block">
 df['sh1'] = df['sh1'].interpolate(method='linear')
           </div>
@@ -772,6 +775,9 @@ print("Valores nulos después de interpolar:", df_activo['sh1'].isnull().sum())`
         concept: `
           <p>Los movimientos en masa en zonas de ladera responden a la <strong>lluvia antecedente</strong> (agua acumulada en las semanas previas que satura el suelo y eleva la presión de poros).</p>
           <p>Usamos <code>df['p'].rolling(window=30).sum()</code> para calcular el acumulado móvil en ventana de 30 días.</p>
+          
+          <!-- Contenedor Interactivo de Ventana Móvil -->
+          <div id="rolling-window-container"></div>
         `,
         instruction: "Calcula la lluvia antecedente móvil a 30 días en la columna <code>df_activo['lluvia_30d']</code> y grafica su evolución.",
         initialCode: `# -------------------------------------------------------------
@@ -822,6 +828,9 @@ plt.show()`,
         title: "3.3 Velocidad de Deformación con .diff()",
         concept: `
           <p>La <strong>velocidad de apertura de grietas</strong> ($\Delta DE1 / \Delta t$) indica la aceleración del talud. En Pandas se calcula con la primera diferencia discreta: <code>.diff()</code>.</p>
+          
+          <!-- Contenedor Interactivo de Velocidad y Aceleración -->
+          <div id="velocity-acceleration-container"></div>
           <div class="code-example-block">
 df['velocidad'] = df['DE1'].diff()  # mm/día
           </div>
@@ -862,6 +871,9 @@ print(f"Velocidad máxima de apertura registrada: {tasa_deformacion.max():.3f} m
           <p>¿Cuántos días tarda el agua de lluvia en infiltrarse y humedecer el perfil del suelo?
           Para averiguarlo, calculamos la correlación de Pearson desplazando temporalmente la lluvia con <code>df['p'].shift(lag)</code> para diferentes días de retardo (*lags*).</p>
           <p>El día que alcanza el <strong>pico de máxima correlación positiva</strong> corresponde al <strong>tiempo de percolación / infiltración</strong> del frente húmedo.</p>
+          
+          <!-- Contenedor Interactivo de Correlación Rezagada -->
+          <div id="lag-correlation-container"></div>
         `,
         instruction: "Calcula la correlación entre humedad y lluvia para lags de -10 a +10 días y encuentra el retardo óptimo.",
         initialCode: `# -------------------------------------------------------------

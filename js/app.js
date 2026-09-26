@@ -322,6 +322,18 @@ class CourseApp {
     if (lesson.id === "m2_l4" && window.initDualAxisRainWidget) {
       window.initDualAxisRainWidget();
     }
+    if (lesson.id === "m3_l1" && window.initMissingDataWidget) {
+      window.initMissingDataWidget();
+    }
+    if (lesson.id === "m3_l2" && window.initRollingWindowWidget) {
+      window.initRollingWindowWidget();
+    }
+    if (lesson.id === "m3_l3" && window.initVelocityAccelerationWidget) {
+      window.initVelocityAccelerationWidget();
+    }
+    if (lesson.id === "m3_l4" && window.initLagCorrelationWidget) {
+      window.initLagCorrelationWidget();
+    }
   }
 
   renderSandboxSection() {
