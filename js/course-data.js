@@ -116,6 +116,9 @@ print(f"Esfuerzo vertical total: {esfuerzo_total} kPa")`,
         title: "1.2 Listas, Indexación y Cálculo de Promedios",
         concept: `
           <p>Una <strong>lista</strong> guarda una secuencia ordenada de valores entre corchetes <code>[...]</code>, como una columna de lecturas en tu libreta de campo.</p>
+          
+          <!-- Contenedor Interactivo de Indexación y Slicing (Esquema de Pizarra) -->
+          <div id="list-indexing-container"></div>
           <p><strong>Reglas clave de indexación:</strong></p>
           <ul>
             <li>En Python el primer elemento es <code>lista[0]</code>.</li>
@@ -229,6 +232,9 @@ else:
         title: "1.4 Funciones en Python (def): Reutilización de Cálculos",
         concept: `
           <p>Una <strong>función</strong> es un bloque de código que empaqueta una fórmula para reutilizarla con cualquier sensor sin repetir líneas:</p>
+          
+          <!-- Contenedor Interactivo de Anatomía de Funciones (Esquema de Pizarra) -->
+          <div id="function-anatomy-container"></div>
           <div class="code-example-block">
 def esfuerzo_efectivo(sigma_total, presion_poros):
     """Calcula el esfuerzo efectivo de Terzaghi: σ' = σ - u"""
@@ -269,6 +275,9 @@ print(f"Esfuerzo vertical efectivo: {sigma_prima} kPa")`,
         title: "1.5 Bucles con for: Iteración y Aplicación de Funciones",
         concept: `
           <p>En el monitoreo geotécnico, los instrumentos generan <strong>series temporales y colecciones de datos</strong> (ej. deformaciones a lo largo del tiempo o factores de seguridad en distintas secciones de un talud).</p>
+          
+          <!-- Contenedor Interactivo de Bucles for (Esquema de Pizarra y Cinta) -->
+          <div id="for-loop-container"></div>
           <p>Un <strong>bucle <code>for</code></strong> es la estructura de control que permite recorrer una lista elemento por elemento y <strong>aplicar una función automáticamente a cada dato</strong> sin repetir código a mano:</p>
           <div class="code-example-block">
 # Sintaxis fundamental del bucle for:
@@ -383,6 +392,9 @@ print(df.head(3))`,
         title: "1.7 Filtrado Booleano y Consolidación de Canales",
         concept: `
           <p>Podemos aplicar la lógica condicional que aprendimos en 1.3 para filtrar filas de una tabla: <code>df[df['p'] > umbral]</code>.</p>
+          
+          <!-- Contenedor Interactivo de Filtrado Booleano (Esquema de Pizarra y Tamiz) -->
+          <div id="boolean-filter-container"></div>
           <div class="code-example-block">
 # Filtrar días con lluvia registrada
 dias_con_lluvia = df[df['p'] > 0]

@@ -294,9 +294,21 @@ class CourseApp {
       this.dom.validationBanner.innerHTML = "✅ ¡Ya has completado este ejercicio previamente!";
     }
 
-    // Inicializar widget interactivo de flujo condicional (esquema de pizarra)
+    // Inicialización de widgets visuales pedagógicos (esquemas de pizarra y simuladores)
+    if (lesson.id === "m1_l2" && window.initListIndexingWidget) {
+      window.initListIndexingWidget();
+    }
     if (lesson.id === "m1_l3" && window.initConditionalFlowWidget) {
       window.initConditionalFlowWidget();
+    }
+    if (lesson.id === "m1_l4" && window.initFunctionAnatomyWidget) {
+      window.initFunctionAnatomyWidget();
+    }
+    if (lesson.id === "m1_l5" && window.initForLoopWidget) {
+      window.initForLoopWidget();
+    }
+    if (lesson.id === "m1_l7" && window.initBooleanFilterWidget) {
+      window.initBooleanFilterWidget();
     }
   }
 
