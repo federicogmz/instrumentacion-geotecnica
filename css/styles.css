@@ -331,19 +331,16 @@ body {
 }
 
 /* ==========================================================================
-   Interactive Split Workspace
+   ESPACIO DE TRABAJO (WORKSPACE) FLEXIBLE & REDIMENSIONABLE
    ========================================================================== */
 .workspace-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
   min-height: 720px;
-}
-
-@media (max-width: 1024px) {
-  .workspace-grid {
-    grid-template-columns: 1fr;
-  }
+  position: relative;
+  width: 100%;
 }
 
 /* Left Pane: Theory & Pedagogy */
@@ -356,8 +353,311 @@ body {
   flex-direction: column;
   gap: 1.25rem;
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: calc(100vh - 180px);
   box-shadow: var(--shadow-card);
+  min-width: 0; /* IMPRESCINDIBLE: Permite que el flex-item se comprima sin desbordar */
+  box-sizing: border-box;
+  flex: 0 0 calc(55% - 7px);
+  transition: flex 0.08s ease-out;
+}
+
+[data-theme="light"] .theory-pane {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+/* Evitar desbordamiento en el panel de teoría */
+.theory-pane * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.theory-pane pre, 
+.theory-pane .code-example-block, 
+.theory-pane .trace-pre,
+.theory-pane .wb-code-block {
+  overflow-x: auto;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.theory-pane table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+.theory-pane .interactive-flow-card {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Right Pane: Editor & Console */
+.editor-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0; /* IMPRESCINDIBLE: Evita desbordamiento en horizontal */
+  box-sizing: border-box;
+  flex: 0 0 calc(45% - 7px);
+  transition: flex 0.08s ease-out;
+}
+
+/* Barra Divisoria Deslizable (Splitter) */
+.workspace-resizer {
+  flex: 0 0 14px;
+  cursor: col-resize;
+  position: relative;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  background: transparent;
+  transition: background 0.2s ease;
+  margin: 0 4px;
+}
+
+.workspace-resizer:hover, 
+body.is-resizing-workspace .workspace-resizer {
+  background: rgba(56, 189, 248, 0.15);
+  border-radius: 6px;
+}
+
+.resizer-handle {
+  width: 14px;
+  height: 120px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  transition: all 0.2s ease;
+}
+
+[data-theme="light"] .resizer-handle {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.workspace-resizer:hover .resizer-handle {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  height: 135px;
+}
+
+.resizer-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.resizer-btn:hover {
+  background: var(--bg-card);
+  color: var(--accent-blue);
+}
+
+.resizer-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resizer-dots span {
+  display: block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.workspace-resizer:hover .resizer-dots span {
+  background: var(--accent-blue);
+}
+
+/* Cursor global durante el arrastre */
+body.is-resizing-workspace,
+body.is-resizing-workspace * {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+/* Barra Superior de Control de Ancho (Layout Bar) */
+.workspace-layout-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 0.55rem 1rem;
+  margin-bottom: 0.85rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .workspace-layout-bar {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.layout-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+  min-width: 300px;
+}
+
+.layout-label-text {
+  font-size: 0.8rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.layout-slider-track-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 300px;
+}
+
+.workspace-split-slider {
+  width: 100%;
+  accent-color: var(--accent-blue);
+  cursor: ew-resize;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-card);
+}
+
+.layout-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+.layout-badge {
+  font-family: monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--accent-blue);
+  white-space: nowrap;
+}
+
+.layout-presets-group {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.layout-preset-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.32rem 0.65rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.layout-preset-btn:hover {
+  color: var(--text-main);
+  border-color: var(--accent-blue);
+}
+
+.layout-preset-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+/* Botones Flotantes de Restauración Rápida */
+.floating-restore-pill {
+  position: fixed;
+  bottom: 2rem;
+  z-index: 999;
+  background: #0284c7;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.5);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-restore-pill.visible {
+  display: flex;
+  animation: bounceIn 0.3s ease-out;
+}
+
+.floating-restore-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.7);
+}
+
+.floating-restore-pill.restore-theory {
+  left: 2rem;
+}
+
+.floating-restore-pill.restore-editor {
+  right: 2rem;
+}
+
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 900px) {
+  .workspace-grid {
+    flex-direction: column !important;
+  }
+  .workspace-resizer {
+    display: none !important;
+  }
+  .theory-pane, .editor-pane {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    max-height: none !important;
+  }
+  .workspace-layout-bar {
+    display: none !important;
+  }
 }
 
 .lesson-header {

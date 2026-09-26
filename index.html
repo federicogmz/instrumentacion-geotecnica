@@ -106,13 +106,63 @@
       </div>
     </section>
 
+    <!-- Barra de Control de Disposición y Slider de Ancho -->
+    <div class="workspace-layout-bar" id="workspace-layout-bar">
+      <div class="layout-slider-group">
+        <span class="layout-label-text">
+          <span>📖</span> <strong>Teoría</strong>
+        </span>
+        <div class="layout-slider-track-wrap">
+          <input type="range" min="0" max="100" value="55" step="1" id="workspace-layout-slider" class="workspace-split-slider" title="Arrastra para cambiar el ancho de los paneles">
+          <div class="layout-slider-ticks">
+            <span class="tick-label">0%</span>
+            <span class="tick-label">25%</span>
+            <span class="tick-label">50%</span>
+            <span class="tick-label">75%</span>
+            <span class="tick-label">100%</span>
+          </div>
+        </div>
+        <span class="layout-label-text">
+          <strong>Editor</strong> <span>💻</span>
+        </span>
+        <span class="layout-badge" id="layout-pct-badge">55% Teoría / 45% Editor</span>
+      </div>
+
+      <div class="layout-presets-group">
+        <button class="layout-preset-btn" data-pct="100" title="Ocultar Editor y expandir Teoría al 100%">
+          📖 100% Teoría
+        </button>
+        <button class="layout-preset-btn" data-pct="65" title="Modo Lectura Cómoda (65% Teoría / 35% Editor)">
+          📑 65 / 35
+        </button>
+        <button class="layout-preset-btn active" data-pct="50" title="Modo Equilibrado (50% / 50%)">
+          ⚖️ 50 / 50
+        </button>
+        <button class="layout-preset-btn" data-pct="35" title="Modo Código Amplio (35% Teoría / 65% Editor)">
+          💻 35 / 65
+        </button>
+        <button class="layout-preset-btn" data-pct="0" title="Ocultar Teoría y expandir Editor al 100%">
+          ⚡ 100% Editor
+        </button>
+      </div>
+    </div>
+
     <!-- Espacio de Trabajo Dividido (Teoría a la izquierda, Editor a la derecha) -->
-    <div class="workspace-grid">
+    <div class="workspace-grid" id="workspace-grid">
       
       <!-- Panel Izquierdo: Conceptos, Teoría y Ejercicios -->
       <section class="theory-pane" id="theory-pane" aria-label="Contenido pedagógico y enunciados">
         <!-- Rellenado dinámicamente por app.js -->
       </section>
+
+      <!-- Divisor Deslizable Interactivo (Resizer Bar) -->
+      <div class="workspace-resizer" id="workspace-resizer" title="Arrastra para redimensionar o haz doble clic para equilibrar 50/50">
+        <div class="resizer-handle">
+          <button class="resizer-btn btn-collapse-left" id="btn-collapse-theory" title="Ocultar Teoría">◀</button>
+          <div class="resizer-dots"><span></span><span></span><span></span></div>
+          <button class="resizer-btn btn-collapse-right" id="btn-collapse-editor" title="Ocultar Editor">▶</button>
+        </div>
+      </div>
 
       <!-- Panel Derecho: Editor Interactivo de Python y Consola -->
       <section class="editor-pane" id="editor-pane" aria-label="Editor de código y consola interactiva">
@@ -201,6 +251,14 @@
 
     </div>
 
+    <!-- Botones Flotantes de Restauración Rápida -->
+    <button class="floating-restore-pill restore-theory" id="btn-restore-theory" title="Restaurar panel de teoría">
+      📖 Mostrar Teoría
+    </button>
+    <button class="floating-restore-pill restore-editor" id="btn-restore-editor" title="Restaurar panel de editor">
+      💻 Mostrar Editor
+    </button>
+
   </main>
 
   <!-- =======================================================================
@@ -237,6 +295,7 @@
   <script src="js/rolling-window.js?v=2"></script>
   <script src="js/velocity-acceleration.js?v=2"></script>
   <script src="js/lag-correlation.js?v=2"></script>
+  <script src="js/layout-resizer.js?v=2"></script>
   <script src="js/app.js?v=2"></script>
 
 </body>
