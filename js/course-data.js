@@ -164,21 +164,27 @@ print(f"Promedio de deformación: {promedio:.2f} mm")`,
         id: "m1_l3",
         title: "1.3 Estructuras de Control: Condicionales (if, elif, else)",
         concept: `
-          <p>Ahora que dominamos variables y números, podemos <strong>tomar decisiones automáticas</strong> con condicionales.</p>
+          <p>Ahora que dominamos variables y números, podemos <strong>tomar decisiones automáticas</strong> en Python a partir de umbrales físicos medidos por sensores geotécnicos.</p>
+          
+          <!-- Contenedor del Simulador y Diagrama de Flujo (Esquema de Pizarra) -->
+          <div id="conditional-flow-container"></div>
+
+          <p><strong>Estructura General de Sintaxis en Python:</strong></p>
           <div class="code-example-block">
 if condicion:
-    # Se ejecuta si es verdadero
+    # Se ejecuta si la condicion es True y sale del bloque (cortocircuito)
 elif otra_condicion:
-    # Se ejecuta si la primera fue falsa y esta es verdadera
+    # Se evalúa únicamente si la condición anterior resultó False
 else:
-    # Se ejecuta si ninguna se cumplió
+    # Se ejecuta por descarte si ninguna condición previa fue True
           </div>
+
           <p><strong>Criterio Geotécnico: Factor de Seguridad (FS)</strong></p>
           <p><center><code>FS = Fuerzas Resistentes / Fuerzas Actuantes</code></center></p>
           <ul>
-            <li>Si <code>FS < 1.0</code>: 🚨 Falla inminente / Inestable.</li>
-            <li>Si <code>FS < 1.3</code>: ⚠️ Alerta / Precaución.</li>
-            <li>Si <code>FS >= 1.3</code>: ✅ Condición Estable.</li>
+            <li>Si <code>FS &lt; 1.0</code>: 🚨 <strong>Falla Inminente / Inestable</strong> (fuerzas actuantes superan la resistencia cortante).</li>
+            <li>Si <code>FS &lt; 1.3</code>: ⚠️ <strong>Alerta / Precaución</strong> (margen de estabilidad crítico ante saturación de agua).</li>
+            <li>Si <code>FS &gt;= 1.3</code>: ✅ <strong>Condición Estable</strong> (margen seguro según norma NSR-10).</li>
           </ul>
         `,
         instruction: "Calcula el Factor de Seguridad dividiendo <code>fuerzas_resistentes / fuerzas_actuantes</code> y completa la estructura <code>if / elif / else</code> para clasificar el talud.",
@@ -260,7 +266,72 @@ print(f"Esfuerzo vertical efectivo: {sigma_prima} kPa")`,
       },
       {
         id: "m1_l5",
-        title: "1.5 Primeros Pasos con Pandas: DataFrames e Índices",
+        title: "1.5 Bucles con for: Iteración y Aplicación de Funciones",
+        concept: `
+          <p>En el monitoreo geotécnico, los instrumentos generan <strong>series temporales y colecciones de datos</strong> (ej. deformaciones a lo largo del tiempo o factores de seguridad en distintas secciones de un talud).</p>
+          <p>Un <strong>bucle <code>for</code></strong> es la estructura de control que permite recorrer una lista elemento por elemento y <strong>aplicar una función automáticamente a cada dato</strong> sin repetir código a mano:</p>
+          <div class="code-example-block">
+# Sintaxis fundamental del bucle for:
+for elemento in coleccion:
+    # Acción que se ejecuta para cada elemento
+
+# Ejemplo: iterar sobre una lista aplicando una función personalizada
+for fs in lista_fs:
+    estado = clasificar_talud(fs)
+    print(f"FS: {fs:.2f} ➔ {estado}")
+          </div>
+          <p><strong>Tres Técnicas Clave de Iteración:</strong></p>
+          <ul>
+            <li><strong>Iteración directa:</strong> <code>for valor in lista:</code> recorre los valores secuencialmente.</li>
+            <li><strong>Con índice (<code>enumerate</code>):</strong> <code>for i, valor in enumerate(lista, start=1):</code> entrega tanto la posición (sensor o día) como el valor medido.</li>
+            <li><strong>Acumulación de resultados:</strong> Usar <code>.append()</code> dentro del bucle para guardar los resultados calculados en una lista nueva.</li>
+          </ul>
+          <div class="theory-callout" style="margin-top:1rem;">
+            🌉 <strong>La Antesala a Pandas (¿Por qué esto nos lleva a la Lección 1.6?):</strong><br>
+            Un bucle <code>for</code> es indispensable para entender la lógica de iteración. Sin embargo, cuando un sensor SIATA registra <strong>100.000 lecturas</strong> en una campaña de instrumentación, recorrer fila por fila con un <code>for</code> en Python puro se vuelve lento.<br>
+            En la siguiente lección conoceremos <strong>Pandas</strong>, la librería que <em>vectoriza</em> estas operaciones para ejecutarlas sobre series masivas en milisegundos sin necesidad de escribir bucles manuales.
+          </div>
+        `,
+        instruction: "Tienes una serie con 5 factores de seguridad (<code>factores_seguridad</code>) evaluados en distintos sectores del talud. Completa el bucle <code>for</code> para iterar sobre la lista, aplicar la función <code>clasificar_talud(fs)</code> a cada medición e imprimir su resultado.",
+        initialCode: `# -------------------------------------------------------------
+# EJERCICIO 1.5: Bucles for y Aplicación de Funciones
+# -------------------------------------------------------------
+# Serie de factores de seguridad calculados en 5 perfiles del talud:
+factores_seguridad = [1.45, 1.22, 0.88, 1.05, 1.35]
+
+# 1. Función que clasifica cada lectura (reutilizando condicionales):
+def clasificar_talud(fs):
+    if fs < 1.0:
+        return "🚨 INESTABLE"
+    elif fs < 1.3:
+        return "⚠️ ALERTA"
+    else:
+        return "✅ ESTABLE"
+
+# 2. Completa el bucle for para iterar aplicando la función:
+# for fs in factores_seguridad:
+#     estado = clasificar_talud(fs)
+#     print(f"FS = {fs:.2f} -> {estado}")
+`,
+        hint: "Descomenta las tres últimas líneas del bucle 'for fs in factores_seguridad:' asegurando la indentación de 4 espacios. Cada iteración evaluará un factor de seguridad diferente llamando a clasificar_talud(fs).",
+        solution: `factores_seguridad = [1.45, 1.22, 0.88, 1.05, 1.35]
+
+def clasificar_talud(fs):
+    if fs < 1.0:
+        return "🚨 INESTABLE"
+    elif fs < 1.3:
+        return "⚠️ ALERTA"
+    else:
+        return "✅ ESTABLE"
+
+for fs in factores_seguridad:
+    estado = clasificar_talud(fs)
+    print(f"FS = {fs:.2f} -> {estado}")`,
+        validator: (output) => output.includes("INESTABLE") && output.includes("ALERTA") && output.includes("ESTABLE") && (output.includes("0.88") || output.includes("1.45"))
+      },
+      {
+        id: "m1_l6",
+        title: "1.6 Primeros Pasos con Pandas: DataFrames e Índices",
         concept: `
           <p><strong>Pandas</strong> es la librería por excelencia para el manejo de series temporales. Organiza la información en una tabla bidimensional llamada <strong>DataFrame</strong>.</p>
           <div class="code-example-block">
@@ -276,7 +347,7 @@ print(df.shape)     # Muestra (filas, columnas)
         `,
         instruction: "Carga el archivo <code>'df_ancon.csv'</code>, convierte su índice a formato fecha con <code>pd.to_datetime</code> e imprime sus dimensiones con <code>df.shape</code>.",
         initialCode: `# -------------------------------------------------------------
-# EJERCICIO 1.5: Carga de Series Temporales con Pandas
+# EJERCICIO 1.6: Carga de Series Temporales con Pandas
 # -------------------------------------------------------------
 import pandas as pd
 
@@ -308,8 +379,8 @@ print(df.head(3))`,
         validator: (output) => output.includes("798") && output.includes("sh1")
       },
       {
-        id: "m1_l6",
-        title: "1.6 Filtrado Booleano y Consolidación de Canales",
+        id: "m1_l7",
+        title: "1.7 Filtrado Booleano y Consolidación de Canales",
         concept: `
           <p>Podemos aplicar la lógica condicional que aprendimos en 1.3 para filtrar filas de una tabla: <code>df[df['p'] > umbral]</code>.</p>
           <div class="code-example-block">
@@ -324,7 +395,7 @@ print(f"Días con lluvia: {len(dias_con_lluvia)}")
         `,
         instruction: "Carga el dataset y filtra los días con <strong>precipitación intensa mayor a 15.0 mm/día</strong>. Cuenta cuántos días superaron este umbral usando <code>len()</code>.",
         initialCode: `# -------------------------------------------------------------
-# EJERCICIO 1.6: Filtrado de Lluvia Detonante
+# EJERCICIO 1.7: Filtrado de Lluvia Detonante
 # -------------------------------------------------------------
 import pandas as pd
 

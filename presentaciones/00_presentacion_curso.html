@@ -124,15 +124,81 @@
                 <span>Práctico:</span>
               </div>
               <ul class="bullet-list" style="margin-top: 10px">
-                <li>Introducción a Python</li>
-                <li>Visualización de datos</li>
-                <li>Análisis y manejo de datos temporales</li>
+                <li>Fundamentos de Python (variables, listas, condicionales, funciones y bucles for)</li>
+                <li>Procesamiento de series temporales con Pandas</li>
+                <li>Visualización de datos con Matplotlib</li>
+                <li>Análisis y manejo de series temporales de sensores</li>
               </ul>
             </div>
           </div>
 
           <div style="display: flex; align-items: center; justify-content: center;">
             <img src="img/p00/image3.png" alt="Python Logo" style="max-height: 280px; width: auto; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SLIDE 3B: ESTRUCTURAS CONDICIONALES EN PYTHON -->
+      <section>
+        <h2>Lógica Condicional e Iteración en Python: <code>if / elif / else</code> y <code>for</code></h2>
+        <div class="split-2" style="margin-top: 20px; align-items: center;">
+          
+          <!-- Diagrama Visual tipo Pizarra -->
+          <div class="card" style="padding: 24px 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+              <div style="width: 44px; height: 44px; border: 2.5px solid #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #10b981; font-family: monospace; font-size: 1.1em; font-weight: 800; background: rgba(16,185,129,0.12);">var</div>
+              <span style="color: #ef4444; font-family: monospace; font-weight: 700; font-size: 1.1em;">Var 1</span>
+            </div>
+            <div style="color: #10b981; font-size: 0.8em; margin: -2px 0 4px;">▼</div>
+            
+            <div style="border: 2px dashed #10b981; border-radius: 12px; padding: 14px 12px; width: 100%; max-width: 380px; background: rgba(16,185,129,0.03);">
+              <!-- IF -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="border: 2px solid #ef4444; border-radius: 6px; padding: 6px 12px; background: rgba(239,68,68,0.1); color: #ef4444; font-family: monospace; font-weight: 800; min-width: 80px; text-align: center;">IF</div>
+                <div style="color: #10b981; font-weight: 700; font-size: 0.9em;">➔ True <span style="font-size:0.8em; color:var(--text-muted);">(Sale)</span></div>
+              </div>
+              <div style="color: #ef4444; font-size: 0.75em; font-weight: 700; margin: 3px 0 3px 26px;">▼ False</div>
+              
+              <!-- elif -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="border: 2px solid #ef4444; border-radius: 6px; padding: 6px 12px; background: rgba(239,68,68,0.1); color: #ef4444; font-family: monospace; font-weight: 800; min-width: 80px; text-align: center;">elif</div>
+                <div style="color: #10b981; font-weight: 700; font-size: 0.9em;">➔ True <span style="font-size:0.8em; color:var(--text-muted);">(Sale)</span></div>
+              </div>
+              <div style="color: #ef4444; font-size: 0.75em; font-weight: 700; margin: 3px 0 3px 26px;">▼ False</div>
+              
+              <!-- else -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="border: 2px solid #ef4444; border-radius: 6px; padding: 6px 12px; background: rgba(239,68,68,0.1); color: #ef4444; font-family: monospace; font-weight: 800; min-width: 80px; text-align: center;">else</div>
+                <div style="color: #10b981; font-weight: 700; font-size: 0.9em;">➔ True <span style="font-size:0.8em; color:var(--text-muted);">(Por descarte)</span></div>
+              </div>
+              <div style="color: #ef4444; font-size: 0.75em; font-weight: 700; margin: 3px 0 0 26px;">▼ False</div>
+            </div>
+          </div>
+
+          <!-- Explicación Pedagógica -->
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div class="card">
+              <div class="card-title" style="color: var(--accent-emerald);">
+                <span class="card-icon">⚡</span>
+                <span>Evaluación de Cortocircuito</span>
+              </div>
+              <ul class="bullet-list" style="margin-top: 8px; font-size: 0.9em;">
+                <li><strong>Secuencial:</strong> Se evalúa de arriba hacia abajo (<code>if</code> ➔ <code>elif</code> ➔ <code>else</code>).</li>
+                <li><strong>Exclusión mutua:</strong> Tan pronto una condición da <code>True</code>, ejecuta su bloque y <strong>sale inmediatamente</strong> sin evaluar las demás.</li>
+                <li><strong>else sin condición:</strong> Es la red de seguridad si ninguna de las ramas previas se cumplió.</li>
+              </ul>
+            </div>
+
+            <div class="callout callout-info" style="padding: 10px 14px;">
+              <span class="callout-icon">🧪</span>
+              <div class="callout-content">
+                <span>Disponible con <strong>simulador interactivo en tiempo real</strong> en el Laboratorio Práctico:</span><br>
+                <a href="../index.html" class="header-btn" style="margin-top: 10px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; padding: 8px 18px; border-radius: 8px; background: #0284c7; color: #ffffff; font-weight: 700; font-size: 0.9em; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);">
+                  <span>🐍</span> Probar en Laboratorio Interactivo &bull; Lecciones 1.3 a 1.5 ➔
+                </a>
+              </div>
+            </div>
           </div>
 
         </div>

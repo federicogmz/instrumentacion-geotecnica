@@ -1169,3 +1169,582 @@ body {
   color: var(--accent-cyan);
   text-decoration: none;
 }
+
+/* ==========================================================================
+   Componente Visual: Flujo Condicional Interactivo (Esquema de Pizarra)
+   ========================================================================== */
+
+.cf-widget-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin: 1.25rem 0;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+[data-theme="light"] .cf-widget-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Toolbar & Tabs */
+.cf-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cf-mode-toggle {
+  display: flex;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  gap: 4px;
+}
+
+[data-theme="light"] .cf-mode-toggle {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.cf-btn-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cf-btn-tab.active {
+  background: var(--accent-blue);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+
+.cf-presets {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cf-presets-label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.cf-pill-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-body);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cf-pill-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: translateY(-1px);
+}
+
+.cf-pill-btn.active-pill {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+/* Slider Bar */
+.cf-slider-bar {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+[data-theme="light"] .cf-slider-bar {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.cf-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--text-body);
+}
+
+.cf-val-badge {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  font-family: var(--font-mono);
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.cf-range-slider {
+  width: 100%;
+  accent-color: var(--accent-cyan);
+  cursor: pointer;
+}
+
+.cf-slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+/* Canvas del Diagrama */
+.cf-canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.04) 0%, transparent 75%);
+  border-radius: var(--radius-md);
+}
+
+/* Nodo Superior var */
+.cf-top-var-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 4px;
+}
+
+.cf-var-circle {
+  width: 52px;
+  height: 52px;
+  border: 2.5px solid #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16, 185, 129, 0.12);
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
+  transition: all 0.3s ease;
+}
+
+.cf-var-label {
+  color: #10b981;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.cf-var-caption {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent-emerald);
+  font-weight: 600;
+}
+
+.cf-var-badge-wb {
+  color: #ef4444;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Flecha Verde hacia abajo */
+.cf-arrow-down-green {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2px 0 6px;
+}
+
+.cf-stem-green {
+  width: 2.5px;
+  height: 18px;
+  background: #10b981;
+}
+
+.cf-head-green {
+  color: #10b981;
+  font-size: 0.75rem;
+  line-height: 0.6;
+  margin-top: -1px;
+}
+
+/* Contenedor Punteado (Pizarra) */
+.cf-dashed-container {
+  border: 2px dashed #10b981;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1rem 0.85rem;
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: rgba(16, 185, 129, 0.025);
+  box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.03);
+}
+
+[data-theme="light"] .cf-dashed-container {
+  border-color: #059669;
+  background: rgba(5, 150, 105, 0.02);
+}
+
+.cf-container-tag {
+  position: absolute;
+  top: -11px;
+  left: 18px;
+  background: var(--bg-card);
+  padding: 0 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #10b981;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="light"] .cf-container-tag {
+  background: #ffffff;
+  color: #059669;
+}
+
+/* Fila de Nodo Condicional */
+.cf-row-node {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* Caja de Decisión Roja (IF, elif, else) */
+.cf-box-cond {
+  border: 2px solid #ef4444;
+  border-radius: var(--radius-sm);
+  background: rgba(239, 68, 68, 0.08);
+  padding: 0.6rem 0.75rem;
+  min-width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
+}
+
+.cf-keyword {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ef4444;
+  line-height: 1;
+}
+
+.cf-cond-expr {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Estados de Activación de la Caja */
+.box-active-true {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.16) !important;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.45) !important;
+  transform: scale(1.03);
+}
+
+.box-active-true .cf-keyword {
+  color: #10b981 !important;
+}
+
+.box-passed {
+  border-color: rgba(239, 68, 68, 0.4);
+  opacity: 0.7;
+}
+
+.box-skipped {
+  opacity: 0.35;
+  filter: grayscale(0.5);
+  border-style: dotted;
+}
+
+/* Rama Derecha (Salida True) */
+.cf-branch-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  transition: all 0.3s ease;
+  opacity: 0.4;
+}
+
+.branch-active-true {
+  opacity: 1 !important;
+}
+
+.cf-h-arrow-green {
+  display: flex;
+  align-items: center;
+  color: #10b981;
+}
+
+.cf-h-line-green {
+  width: 18px;
+  height: 2.5px;
+  background: #10b981;
+}
+
+.cf-h-head-green {
+  font-size: 1.1rem;
+  line-height: 1;
+  margin-left: -2px;
+}
+
+.cf-action-bubble {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.45rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .cf-action-bubble {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.action-active {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3) !important;
+}
+
+.cf-badge-bool {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+.true-badge {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.false-badge {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.cf-action-text {
+  font-size: 0.75rem;
+  color: var(--text-body);
+  font-weight: 500;
+}
+
+.cf-action-text code {
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+}
+
+/* Flecha Vertical Roja: False */
+.cf-v-arrow-red {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px; /* Alineado con la caja condicional */
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+.cf-v-stem-red {
+  width: 2px;
+  height: 22px;
+  background: #ef4444;
+  margin-top: 2px;
+}
+
+.cf-v-head-red {
+  color: #ef4444;
+  font-size: 0.75rem;
+  line-height: 0.6;
+  margin-top: -1px;
+}
+
+.v-active-false {
+  opacity: 1;
+}
+
+.v-active-false .cf-v-stem-red {
+  background: #f87171;
+  box-shadow: 0 0 8px rgba(248, 113, 113, 0.6);
+  width: 2.5px;
+}
+
+.v-dimmed {
+  opacity: 0.25;
+}
+
+/* Panel Explicativo y Diagnóstico */
+.cf-explanation-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+[data-theme="light"] .cf-explanation-card {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+
+.cf-narrative-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cf-tag-result {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.status-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.status-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.status-safe {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+/* Pasos Narrativos */
+.cf-steps-narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.flow-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-body);
+}
+
+.step-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Takeaways Mnemotécnicos */
+.cf-takeaways-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.65rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.cf-takeaway-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.cf-takeaway-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: -1px;
+}
+
+.cf-takeaway-item strong {
+  display: block;
+  font-size: 0.73rem;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.cf-takeaway-item p {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.box-whiteboard {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.25) !important;
+  opacity: 1 !important;
+}
+
+.box-whiteboard .cf-keyword {
+  color: #ef4444 !important;
+}

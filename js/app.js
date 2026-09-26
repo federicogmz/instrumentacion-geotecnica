@@ -293,6 +293,11 @@ class CourseApp {
       this.dom.validationBanner.className = "validation-banner success";
       this.dom.validationBanner.innerHTML = "✅ ¡Ya has completado este ejercicio previamente!";
     }
+
+    // Inicializar widget interactivo de flujo condicional (esquema de pizarra)
+    if (lesson.id === "m1_l3" && window.initConditionalFlowWidget) {
+      window.initConditionalFlowWidget();
+    }
   }
 
   renderSandboxSection() {
