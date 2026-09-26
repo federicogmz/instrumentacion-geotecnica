@@ -64,48 +64,126 @@ class PyodideRunner {
   }
 
   async mountDataFiles() {
-    try {
-      // Intentar cargar data/df_ancon.csv desde el servidor web
-      const response = await fetch("./data/df_ancon.csv");
-      if (response.ok) {
-        const csvText = await response.text();
-        // Escribir en el filesystem virtual de Pyodide
-        this.pyodide.FS.writeFile("/df_ancon.csv", csvText);
-        this.pyodide.FS.writeFile("df_ancon.csv", csvText);
+    const files = [
+      { name: "df_ancon.csv", path: "./data/df_ancon.csv" },
+      { name: "pluviometro.csv", path: "./data/pluviometro.csv" },
+      { name: "humedad.csv", path: "./data/humedad.csv" },
+      { name: "extensometro.csv", path: "./data/extensometro.csv" }
+    ];
 
-        // Crear carpeta data si se requiere
+    try {
+      this.pyodide.FS.mkdir("/data");
+    } catch (e) {}
+
+    await Promise.all(
+      files.map(async (file) => {
         try {
-          this.pyodide.FS.mkdir("/data");
-        } catch (e) {}
-        try {
-          this.pyodide.FS.writeFile("/data/df_ancon.csv", csvText);
-        } catch (e) {}
-      }
-    } catch (e) {
-      console.warn("No se pudo cargar el archivo CSV externo, cargando respaldo embebido...", e);
-      // Respaldo de emergencia sintético con fechas reales
-      this.writeFallbackData();
-    }
+          const response = await fetch(file.path);
+          if (response.ok) {
+            const csvText = await response.text();
+            this.pyodide.FS.writeFile("/" + file.name, csvText);
+            this.pyodide.FS.writeFile(file.name, csvText);
+            try {
+              this.pyodide.FS.writeFile("/data/" + file.name, csvText);
+            } catch (err) {}
+          }
+        } catch (e) {
+          console.warn(`No se pudo cargar ${file.name} desde el servidor:`, e);
+        }
+      })
+    );
+
+    // Respaldo de emergencia sintético para garantizar disponibilidad offline o errores de fetch
+    this.writeFallbackData();
   }
 
   writeFallbackData() {
-    // Generar un fragmento representativo si no hay conectividad a ./data/df_ancon.csv
-    let sampleCSV = "Unnamed: 0,sh1,p,C1,B1,Tem_1,DE1\n";
-    const startDate = new Date("2020-03-24");
-    for (let i = 0; i < 100; i++) {
-      const cur = new Date(startDate);
-      cur.setDate(startDate.getDate() + i);
-      const dStr = cur.toISOString().split("T")[0];
-      const sh1 = (55 + Math.sin(i / 5) * 15 + Math.random() * 2).toFixed(2);
-      const p = Math.random() > 0.7 ? (Math.random() * 35).toFixed(1) : "0.0";
-      const c1 = (1.75 + i * 0.008 + (Math.random() - 0.5) * 0.02).toFixed(3);
-      const b1 = (-0.6 + i * 0.004 + (Math.random() - 0.5) * 0.01).toFixed(3);
-      const tem = (26 + Math.sin(i / 3) * 3).toFixed(1);
-      const de1 = (Math.random() > 0.8 ? (Math.random() * 1.5).toFixed(2) : "0.0");
-      sampleCSV += `${dStr},${sh1},${p},${c1},${b1},${tem},${de1}\n`;
+    // 1. Verificar y respaldar df_ancon.csv
+    let existsAncon = false;
+    try {
+      const stat = this.pyodide.FS.stat("/df_ancon.csv");
+      if (stat && stat.size > 100) existsAncon = true;
+    } catch (e) {}
+
+    if (!existsAncon) {
+      let sampleCSV = "Unnamed: 0,sh1,p,C1,B1,Tem_1,DE1\n";
+      const startDate = new Date("2020-03-24");
+      for (let i = 0; i < 100; i++) {
+        const cur = new Date(startDate);
+        cur.setDate(startDate.getDate() + i);
+        const dStr = cur.toISOString().split("T")[0];
+        const sh1 = (55 + Math.sin(i / 5) * 15 + Math.random() * 2).toFixed(2);
+        const p = Math.random() > 0.7 ? (Math.random() * 35).toFixed(1) : "0.0";
+        const c1 = (1.75 + i * 0.008 + (Math.random() - 0.5) * 0.02).toFixed(3);
+        const b1 = (-0.6 + i * 0.004 + (Math.random() - 0.5) * 0.01).toFixed(3);
+        const tem = (26 + Math.sin(i / 3) * 3).toFixed(1);
+        const de1 = (Math.random() > 0.8 ? (Math.random() * 1.5).toFixed(2) : "0.0");
+        sampleCSV += `${dStr},${sh1},${p},${c1},${b1},${tem},${de1}\n`;
+      }
+      this.pyodide.FS.writeFile("/df_ancon.csv", sampleCSV);
+      this.pyodide.FS.writeFile("df_ancon.csv", sampleCSV);
     }
-    this.pyodide.FS.writeFile("/df_ancon.csv", sampleCSV);
-    this.pyodide.FS.writeFile("df_ancon.csv", sampleCSV);
+
+    // 2. Verificar y respaldar pluviometro.csv
+    let existsPluv = false;
+    try {
+      const stat = this.pyodide.FS.stat("/pluviometro.csv");
+      if (stat && stat.size > 100) existsPluv = true;
+    } catch (e) {}
+
+    if (!existsPluv) {
+      let pluvCSV = ",p1,p2\n";
+      const startDate = new Date("2019-05-03T16:00:00");
+      for (let i = 0; i < 300; i++) {
+        const cur = new Date(startDate.getTime() + i * 5 * 60000);
+        const dStr = cur.toISOString().replace("T", " ").substring(0, 19);
+        const p1 = Math.random() > 0.85 ? (Math.random() * 4.0).toFixed(1) : "0.0";
+        const p2 = p1;
+        pluvCSV += `${dStr},${p1},${p2}\n`;
+      }
+      this.pyodide.FS.writeFile("/pluviometro.csv", pluvCSV);
+      this.pyodide.FS.writeFile("pluviometro.csv", pluvCSV);
+    }
+
+    // 3. Verificar y respaldar humedad.csv
+    let existsHum = false;
+    try {
+      const stat = this.pyodide.FS.stat("/humedad.csv");
+      if (stat && stat.size > 100) existsHum = true;
+    } catch (e) {}
+
+    if (!existsHum) {
+      let humCSV = "TIMESTAMP,sh1\n";
+      const startDate = new Date("2020-03-11T17:00:00");
+      for (let i = 0; i < 300; i++) {
+        const cur = new Date(startDate.getTime() + i * 5 * 60000);
+        const dStr = cur.toISOString().replace("T", " ").substring(0, 19);
+        const sh1 = (55 + Math.sin(i / 20) * 5 + Math.random() * 0.5).toFixed(2);
+        humCSV += `${dStr},${sh1}\n`;
+      }
+      this.pyodide.FS.writeFile("/humedad.csv", humCSV);
+      this.pyodide.FS.writeFile("humedad.csv", humCSV);
+    }
+
+    // 4. Verificar y respaldar extensometro.csv
+    let existsExt = false;
+    try {
+      const stat = this.pyodide.FS.stat("/extensometro.csv");
+      if (stat && stat.size > 100) existsExt = true;
+    } catch (e) {}
+
+    if (!existsExt) {
+      let extCSV = ",DE1\n";
+      const startDate = new Date("2019-07-11T13:50:00");
+      for (let i = 0; i < 300; i++) {
+        const cur = new Date(startDate.getTime() + i * 60000);
+        const dStr = cur.toISOString().replace("T", " ").substring(0, 19);
+        const de1 = (i * 0.005 + (Math.random() - 0.5) * 0.01).toFixed(4);
+        extCSV += `${dStr},${de1}\n`;
+      }
+      this.pyodide.FS.writeFile("/extensometro.csv", extCSV);
+      this.pyodide.FS.writeFile("extensometro.csv", extCSV);
+    }
   }
 
   async runCode(code) {

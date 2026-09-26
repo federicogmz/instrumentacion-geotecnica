@@ -1,20 +1,20 @@
 /**
  * dataframe-anatomy.js
  * Componente visual interactivo para la enseñanza de la Anatomía de DataFrames en Pandas.
- * Contexto Geotécnico: Matriz de canales del Datalogger Ancón Norte (piezómetros, extensómetros, inclinómetros).
+ * Contexto Geotécnico: Estación Pluviométrica SIATA Ancón Norte (canales gemelos de balancín p1 y p2).
  */
 
 (function () {
   let state = {
     mode: "simulator", // 'simulator' o 'whiteboard'
-    selectedChannel: "piezometro_kpa",
+    selectedChannel: "p1",
     selectedMethod: "head", // 'head', 'shape', 'columns', 'describe'
     data: [
-      { date: "2024-05-01 00:00", piezometro_kpa: 18.5, extensometro_mm: 4.2, inclinometro_mm: 1.1, lluvia_mm: 0.0 },
-      { date: "2024-05-01 06:00", piezometro_kpa: 22.1, extensometro_mm: 5.8, inclinometro_mm: 1.3, lluvia_mm: 14.5 },
-      { date: "2024-05-01 12:00", piezometro_kpa: 31.4, extensometro_mm: 9.4, inclinometro_mm: 2.5, lluvia_mm: 32.0 },
-      { date: "2024-05-01 18:00", piezometro_kpa: 28.0, extensometro_mm: 11.2, inclinometro_mm: 3.1, lluvia_mm: 8.0 },
-      { date: "2024-05-02 00:00", piezometro_kpa: 24.3, extensometro_mm: 12.0, inclinometro_mm: 3.4, lluvia_mm: 2.0 },
+      { date: "2019-05-03 16:00", p1: 0.0, p2: 0.0, p: 0.0, event: "Seco" },
+      { date: "2019-05-03 16:05", p1: 0.2, p2: 0.2, p: 0.2, event: "Llovizna leve" },
+      { date: "2019-05-03 16:10", p1: 1.4, p2: 1.4, p: 1.4, event: "Lluvia moderada" },
+      { date: "2019-05-03 16:15", p1: 3.6, p2: 3.8, p: 3.8, event: "Aguacero fuerte" },
+      { date: "2019-05-03 16:20", p1: 0.8, p2: 0.8, p: 0.8, event: "Remanente" },
     ]
   };
 
@@ -34,7 +34,7 @@
         <div class="flow-header">
           <div class="flow-title-group">
             <span class="flow-badge">Módulo 1 &bull; Lección 1.6</span>
-            <h4 class="flow-title">Anatomía de un DataFrame en Pandas: Estructura 2D vs 1D</h4>
+            <h4 class="flow-title">Anatomía de un DataFrame: Registro del Pluviómetro SIATA</h4>
           </div>
           <div class="flow-mode-toggle">
             <button class="flow-mode-btn ${state.mode === 'simulator' ? 'active' : ''}" id="df-mode-sim">
@@ -57,17 +57,16 @@
     return `
       <div class="whiteboard-view animate-fade-in">
         <div class="wb-diagram-col">
-          <div class="wb-title-badge">ARQUITECTURA DE DATOS: <code>pandas.DataFrame</code></div>
+          <div class="wb-title-badge">ARQUITECTURA DE DATOS: <code>pandas.DataFrame</code> (Pluviómetro)</div>
 
           <div class="wb-df-diagram">
             <!-- Header Columnas -->
             <div class="df-columns-header">
               <span class="df-axis-tag">EJE 1: COLUMNAS (<code>df.columns</code>) ➔</span>
               <div class="df-col-badges">
-                <span class="df-col-badge hl-col">piezometro_kpa</span>
-                <span class="df-col-badge">extensometro_mm</span>
-                <span class="df-col-badge">inclinometro_mm</span>
-                <span class="df-col-badge">lluvia_mm</span>
+                <span class="df-col-badge ${state.selectedChannel === 'p1' ? 'hl-col' : ''}">p1 (Balancín 1)</span>
+                <span class="df-col-badge ${state.selectedChannel === 'p2' ? 'hl-col' : ''}">p2 (Balancín 2)</span>
+                <span class="df-col-badge">p = max(p1, p2)</span>
               </div>
             </div>
 
@@ -77,57 +76,65 @@
               <div class="df-index-col">
                 <span class="df-axis-tag-vert">EJE 0: ÍNDICE TEMPORAL (<code>df.index</code>)</span>
                 <div class="df-index-cells">
-                  <span class="df-idx-cell">2024-05-01 00:00</span>
-                  <span class="df-idx-cell">2024-05-01 06:00</span>
-                  <span class="df-idx-cell">2024-05-01 12:00</span>
-                  <span class="df-idx-cell">2024-05-01 18:00</span>
-                  <span class="df-idx-cell">2024-05-02 00:00</span>
+                  <span class="df-idx-cell">2019-05-03 16:00</span>
+                  <span class="df-idx-cell">2019-05-03 16:05</span>
+                  <span class="df-idx-cell">2019-05-03 16:10</span>
+                  <span class="df-idx-cell">2019-05-03 16:15</span>
+                  <span class="df-idx-cell">2019-05-03 16:20</span>
                 </div>
               </div>
 
               <!-- Matriz de Valores -->
               <div class="df-values-matrix">
-                <div class="df-matrix-tag">MATRIZ 2D DE VALORES (<code>df.values</code>, NumPy float64)</div>
+                <div class="df-matrix-tag">MATRIZ 2D DE VALORES (<code>df.values</code>, NumPy float64 en mm)</div>
                 <div class="df-matrix-rows">
-                  <div class="df-row-cells"><span class="hl-cell">18.5</span><span>4.2</span><span>1.1</span><span>0.0</span></div>
-                  <div class="df-row-cells"><span class="hl-cell">22.1</span><span>5.8</span><span>1.3</span><span>14.5</span></div>
-                  <div class="df-row-cells"><span class="hl-cell">31.4</span><span>9.4</span><span>2.5</span><span>32.0</span></div>
-                  <div class="df-row-cells"><span class="hl-cell">28.0</span><span>11.2</span><span>3.1</span><span>8.0</span></div>
-                  <div class="df-row-cells"><span class="hl-cell">24.3</span><span>12.0</span><span>3.4</span><span>2.0</span></div>
+                  <div class="df-row-cells"><span class="hl-cell">0.0</span><span>0.0</span><span>0.0</span></div>
+                  <div class="df-row-cells"><span class="hl-cell">0.2</span><span>0.2</span><span>0.2</span></div>
+                  <div class="df-row-cells"><span class="hl-cell">1.4</span><span>1.4</span><span>1.4</span></div>
+                  <div class="df-row-cells"><span class="hl-cell">3.6</span><span>3.8</span><span>3.8</span></div>
+                  <div class="df-row-cells"><span class="hl-cell">0.8</span><span>0.8</span><span>0.8</span></div>
                 </div>
               </div>
             </div>
 
             <!-- Desglose a Series 1D -->
             <div class="df-series-extract">
-              <span class="extract-arrow">▼ Al extraer una sola columna: <code>serie = df['piezometro_kpa']</code> ▼</span>
+              <span class="extract-arrow">▼ Al extraer un solo balancín: <code>serie = df['p1']</code> ▼</span>
               <div class="series-card-preview">
-                <span class="series-tag">PANDAS SERIES (1D: Índice + Vector de Valores)</span>
+                <span class="series-tag">PANDAS SERIES (1D: Índice Temporal + Vector Numérico de Lluvia)</span>
                 <div class="series-items">
-                  <code>2024-05-01 00:00 ➔ 18.5</code> | 
-                  <code>2024-05-01 06:00 ➔ 22.1</code> | 
-                  <code>2024-05-01 12:00 ➔ 31.4 ...</code>
+                  <code>2019-05-03 16:00 ➔ 0.0 mm</code> | 
+                  <code>2019-05-03 16:05 ➔ 0.2 mm</code> | 
+                  <code>2019-05-03 16:15 ➔ 3.6 mm ...</code>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="wb-rules-col">
+        <div class="wb-explanation-col">
           <div class="wb-card-glass">
-            <h5 style="color:var(--accent-emerald); margin-top:0;">📚 Las 3 Reglas de Oro de Pandas</h5>
-            <ul class="bullet-list" style="margin-top:10px; font-size:0.88em; gap:10px;">
-              <li><strong>DataFrame (2D):</strong> Es una tabla rectangular completa con múltiples canales de sensores, filas temporales y columnas rotuladas.</li>
-              <li><strong>Series (1D):</strong> Es una sola columna aislada. Tiene un único tipo de dato (<code>dtype</code>) y conserva intacto el índice temporal.</li>
-              <li><strong>Índice Temporal (<code>DatetimeIndex</code>):</strong> En instrumentación, el índice no son números 0, 1, 2, sino estampas de tiempo reales. Esto permite resamplear días, horas o semanas con <code>.resample()</code>.</li>
-            </ul>
+            <h5 style="color:var(--accent-teal); margin-top:0;">🌧️ ¿Por qué Pandas con el Pluviómetro?</h5>
+            <p style="font-size:0.88em; color:var(--text-muted); line-height:1.5;">
+              La estación SIATA de Ancón Norte registra precipitaciones cada <strong>5 minutos</strong> durante más de 2 años (más de <strong>229.000 filas</strong>).
+            </p>
+            <p style="font-size:0.88em; color:var(--text-muted); line-height:1.5;">
+              Procesar esta serie con listas y bucles <code>for</code> manuales sería lento y susceptible a errores. <strong>Pandas</strong> optimiza estas operaciones vectorizadas en memoria con NumPy.
+            </p>
+          </div>
+
+          <div class="wb-card-glass" style="margin-top:14px; border-left:3px solid var(--accent-orange);">
+            <h5 style="color:var(--accent-orange); margin-top:0;">⚖️ Balancines Gemelos (p1 y p2)</h5>
+            <p style="font-size:0.85em; color:var(--text-muted); margin:0;">
+              Los pluviómetros profesionales cuentan con dos cubetas gemelas para <strong>redundancia física</strong>. Si hojas o ramas atascan una cubeta (ej. 3.6 vs 3.8 mm a las 16:15), el segundo canal garantiza la captura del evento. Se consolida con <code>max(p1, p2)</code>.
+            </p>
           </div>
 
           <div class="wb-card-glass" style="margin-top:14px; border-left:3px solid var(--accent-blue);">
-            <h5 style="color:var(--accent-blue); margin-top:0;">⚡ Atributos vs Métodos</h5>
+            <h5 style="color:var(--accent-blue); margin-top:0;">⚡ Atributos vs Métodos en Pandas</h5>
             <p style="font-size:0.85em; color:var(--text-muted); margin:0;">
-              • <strong>Atributos (sin paréntesis):</strong> Propiedades fijas en memoria: <code>df.shape</code>, <code>df.columns</code>, <code>df.dtypes</code>.<br>
-              • <strong>Métodos (con paréntesis):</strong> Acciones de cálculo: <code>df.head()</code>, <code>df.describe()</code>, <code>df.mean()</code>.
+              • <strong>Atributos (sin paréntesis):</strong> Propiedades estructurales: <code>df.shape</code>, <code>df.columns</code>, <code>df.index</code>.<br>
+              • <strong>Métodos (con paréntesis):</strong> Cálculos o acciones: <code>df.head(3)</code>, <code>df.describe()</code>, <code>df.mean()</code>.
             </p>
           </div>
         </div>
@@ -147,25 +154,22 @@
         <!-- Barra de Exploración de Canales y Atributos -->
         <div class="df-sim-toolbar">
           <div class="df-channel-selector">
-            <span class="selector-label">Canal Activo (Series):</span>
+            <span class="selector-label">Canal del Pluviómetro:</span>
             <div class="channel-pills">
-              <button class="df-chan-btn ${col === 'piezometro_kpa' ? 'active' : ''}" data-chan="piezometro_kpa">
-                💧 Piezómetro (kPa)
+              <button class="df-chan-btn ${col === 'p1' ? 'active' : ''}" data-chan="p1">
+                🌧️ Balancín 1 (p1)
               </button>
-              <button class="df-chan-btn ${col === 'extensometro_mm' ? 'active' : ''}" data-chan="extensometro_mm">
-                📏 Extensómetro (mm)
+              <button class="df-chan-btn ${col === 'p2' ? 'active' : ''}" data-chan="p2">
+                🌧️ Balancín 2 (p2)
               </button>
-              <button class="df-chan-btn ${col === 'inclinometro_mm' ? 'active' : ''}" data-chan="inclinometro_mm">
-                📐 Inclinómetro (mm)
-              </button>
-              <button class="df-chan-btn ${col === 'lluvia_mm' ? 'active' : ''}" data-chan="lluvia_mm">
-                🌧️ Pluviómetro (mm)
+              <button class="df-chan-btn ${col === 'p' ? 'active' : ''}" data-chan="p">
+                ⚖️ Consolidado (p)
               </button>
             </div>
           </div>
 
           <div class="df-methods-selector">
-            <span class="selector-label">Inspección de Atributo:</span>
+            <span class="selector-label">Inspección de Atributo/Método:</span>
             <div class="channel-pills">
               <button class="df-meth-btn ${state.selectedMethod === 'head' ? 'active' : ''}" data-meth="head">
                 .head(3)
@@ -189,21 +193,21 @@
             <table class="df-sensor-table">
               <thead>
                 <tr>
-                  <th class="idx-th">Fecha / Hora (Index)</th>
-                  <th class="${col === 'piezometro_kpa' ? 'th-active-col' : ''}">piezometro_kpa</th>
-                  <th class="${col === 'extensometro_mm' ? 'th-active-col' : ''}">extensometro_mm</th>
-                  <th class="${col === 'inclinometro_mm' ? 'th-active-col' : ''}">inclinometro_mm</th>
-                  <th class="${col === 'lluvia_mm' ? 'th-active-col' : ''}">lluvia_mm</th>
+                  <th class="idx-th">Fecha y Hora (DatetimeIndex)</th>
+                  <th class="${col === 'p1' ? 'th-active-col' : ''}">p1 (mm)</th>
+                  <th class="${col === 'p2' ? 'th-active-col' : ''}">p2 (mm)</th>
+                  <th class="${col === 'p' ? 'th-active-col' : ''}">p = max(p1, p2)</th>
+                  <th>Evento Observado</th>
                 </tr>
               </thead>
               <tbody>
                 ${state.data.map(d => `
                   <tr>
                     <td class="idx-td"><code>${d.date}</code></td>
-                    <td class="${col === 'piezometro_kpa' ? 'td-active-col' : ''}">${d.piezometro_kpa}</td>
-                    <td class="${col === 'extensometro_mm' ? 'td-active-col' : ''}">${d.extensometro_mm}</td>
-                    <td class="${col === 'inclinometro_mm' ? 'td-active-col' : ''}">${d.inclinometro_mm}</td>
-                    <td class="${col === 'lluvia_mm' ? 'td-active-col' : ''}">${d.lluvia_mm}</td>
+                    <td class="${col === 'p1' ? 'td-active-col' : ''}">${d.p1.toFixed(1)}</td>
+                    <td class="${col === 'p2' ? 'td-active-col' : ''}">${d.p2.toFixed(1)}</td>
+                    <td class="${col === 'p' ? 'td-active-col' : ''}"><strong>${d.p.toFixed(1)}</strong></td>
+                    <td style="color:var(--text-muted); font-size:0.85rem;">${d.event}</td>
                   </tr>
                 `).join('')}
               </tbody>
@@ -224,13 +228,13 @@
       return `
         <div class="df-snippet-box">
           <div class="df-snippet-code">
-            <code># Seleccionar canal como Serie 1D y ver primeros registros:<br>serie = df['${col}']<br>print(serie.head(3))</code>
+            <code># Seleccionar canal y visualizar las primeras 3 lecturas:<br>serie = df['${col}']<br>print(serie.head(3))</code>
           </div>
           <div class="df-snippet-res">
-            ➔ <strong>Serie Unidimensional extraída:</strong><br>
-            2024-05-01 00:00 &nbsp; ${state.data[0][col]}<br>
-            2024-05-01 06:00 &nbsp; ${state.data[1][col]}<br>
-            2024-05-01 12:00 &nbsp; ${state.data[2][col]}<br>
+            ➔ <strong>Serie de precipitación extraída (mm / 5 min):</strong><br>
+            2019-05-03 16:00:00 &nbsp; ${state.data[0][col].toFixed(1)}<br>
+            2019-05-03 16:05:00 &nbsp; ${state.data[1][col].toFixed(1)}<br>
+            2019-05-03 16:10:00 &nbsp; ${state.data[2][col].toFixed(1)}<br>
             <span style="color:var(--text-muted); font-size:0.75rem;">Name: ${col}, dtype: float64</span>
           </div>
         </div>
@@ -241,10 +245,10 @@
       return `
         <div class="df-snippet-box">
           <div class="df-snippet-code">
-            <code># Dimensión de la matriz (Filas, Columnas):<br>print(df.shape)</code>
+            <code># Dimensiones del DataFrame del pluviómetro:<br>print(df.shape)</code>
           </div>
           <div class="df-snippet-res">
-            ➔ <strong>(5, 4)</strong>: 5 estampas temporales (filas) y 4 canales de instrumentación (columnas).
+            ➔ <strong>(229345, 2)</strong> en el archivo completo (229.345 estampas de tiempo cada 5 min y 2 canales balancín: <code>p1</code>, <code>p2</code>).
           </div>
         </div>
       `;
@@ -254,10 +258,10 @@
       return `
         <div class="df-snippet-box">
           <div class="df-snippet-code">
-            <code># Lista de nombres de canales de sensores:<br>print(list(df.columns))</code>
+            <code># Lista de canales de instrumentación:<br>print(list(df.columns))</code>
           </div>
           <div class="df-snippet-res">
-            ➔ <strong>['piezometro_kpa', 'extensometro_mm', 'inclinometro_mm', 'lluvia_mm']</strong>
+            ➔ <strong>['p1', 'p2']</strong> (Canales gemelos de balancín en la estación SIATA)
           </div>
         </div>
       `;
@@ -267,10 +271,10 @@
       return `
         <div class="df-snippet-box">
           <div class="df-snippet-code">
-            <code># Estadísticas descriptivas del canal activo:<br>print(df['${col}'].describe())</code>
+            <code># Estadísticas de precipitación del canal activo:<br>print(df['${col}'].describe())</code>
           </div>
           <div class="df-snippet-res">
-            Promedio: <strong>${avg}</strong> | Mínimo: <strong>${minVal}</strong> | Máximo: <strong>${maxVal}</strong> | Total lecturas: <strong>5</strong>
+            Media: <strong>${avg} mm/5min</strong> | Mín: <strong>${minVal} mm</strong> | Máx: <strong>${maxVal} mm</strong> (Aguacero pico).
           </div>
         </div>
       `;

@@ -340,105 +340,188 @@ for fs in factores_seguridad:
       },
       {
         id: "m1_l6",
-        title: "1.6 Primeros Pasos con Pandas: DataFrames e Índices",
+        title: "1.6 Primeros Pasos con Pandas: DataFrames e Índices Pluviométricos",
         concept: `
-          <p><strong>Pandas</strong> es la librería por excelencia para el manejo de series temporales. Organiza la información en una tabla bidimensional llamada <strong>DataFrame</strong>.</p>
+          <p>Habiendo completado la Clase 1 de <strong>Lluvia y Monitoreo Hidrometeorológico</strong>, abordamos el procesamiento computacional de las estaciones pluviométricas. Una estación de balancines tipo SIATA genera cientos de miles de registros continuos (cada 5 minutos). Con bucles <code>for</code> manuales el análisis sería lento e ineficiente. Aquí entra <strong>Pandas</strong>, la librería estándar en geotecnia para organizar series temporales en tablas bidimensionales llamadas <strong>DataFrames</strong> indexadas en el tiempo (<code>DatetimeIndex</code>).</p>
           
-          <!-- Contenedor Interactivo de Anatomía de DataFrame -->
+          <!-- Contenedor Interactivo de Anatomía de DataFrame (Pluviómetros) -->
           <div id="dataframe-anatomy-container"></div>
           <div class="code-example-block">
 import pandas as pd
 
-# Cargar CSV asignando la primera columna (fecha) como índice
-df = pd.read_csv('df_ancon.csv', index_col=0)
-df.index = pd.to_datetime(df.index)
+# Cargar serie de tiempo del pluviómetro (fecha como índice)
+df_lluvia = pd.read_csv('pluviometro.csv', index_col=0)
+df_lluvia.index = pd.to_datetime(df_lluvia.index)
 
-print(df.head(3))   # Muestra las 3 primeras filas
-print(df.shape)     # Muestra (filas, columnas)
+print(df_lluvia.head(3))   # Muestra las 3 primeras lecturas (canales p1 y p2)
+print(df_lluvia.shape)     # (229345, 2) -> (filas temporales, canales de balancín)
+          </div>
+          <div class="theory-callout">
+            💡 <strong>Conexión con Clase 1 (Lluvia):</strong><br>
+            A este nivel no utilizamos aún <code>df_ancon.csv</code> porque esa tabla integrada se construye a partir de los sensores individuales. Comenzamos directamente con <code>pluviometro.csv</code> para analizar las lecturas crudas de precipitación.
           </div>
         `,
-        instruction: "Carga el archivo <code>'df_ancon.csv'</code>, convierte su índice a formato fecha con <code>pd.to_datetime</code> e imprime sus dimensiones con <code>df.shape</code>.",
+        instruction: "Carga la serie del pluviómetro <code>'pluviometro.csv'</code> asignando la fecha como índice (<code>index_col=0</code>), convierte el índice a fechas con <code>pd.to_datetime</code> e imprime sus dimensiones con <code>df_lluvia.shape</code> y sus 3 primeras filas con <code>df_lluvia.head(3)</code>.",
         initialCode: `# -------------------------------------------------------------
-# EJERCICIO 1.6: Carga de Series Temporales con Pandas
+# EJERCICIO 1.6: Carga de Series Temporales con Pandas (Pluviómetro)
 # -------------------------------------------------------------
 import pandas as pd
 
-# 1. Lee el archivo 'df_ancon.csv' con index_col=0:
-df = None
+# 1. Lee el archivo 'pluviometro.csv' con index_col=0:
+df_lluvia = None
 
 # 2. Convierte el índice a formato de fecha:
-# df.index = pd.to_datetime(df.index)
+# df_lluvia.index = pd.to_datetime(df_lluvia.index)
 
 # 3. Imprime las dimensiones y las primeras filas:
-if df is not None:
-    print(f"Dimensiones del DataFrame: {df.shape}")
-    print("
-Primeras filas del registro de Ancón Norte:")
-    print(df.head(3))
+if df_lluvia is not None:
+    print(f"Dimensiones del registro de lluvia: {df_lluvia.shape}")
+    print("\nPrimeras lecturas del pluviómetro (canales p1 y p2):")
+    print(df_lluvia.head(3))
 else:
-    print("Completa: df = pd.read_csv('df_ancon.csv', index_col=0)")
+    print("Completa: df_lluvia = pd.read_csv('pluviometro.csv', index_col=0)")
 `,
-        hint: "Escribe: `df = pd.read_csv('df_ancon.csv', index_col=0)` y luego descomenta la línea de `pd.to_datetime`.",
+        hint: "Escribe: `df_lluvia = pd.read_csv('pluviometro.csv', index_col=0)` y luego descomenta `df_lluvia.index = pd.to_datetime(df_lluvia.index)`.",
         solution: `import pandas as pd
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-df.index = pd.to_datetime(df.index)
+df_lluvia = pd.read_csv('pluviometro.csv', index_col=0)
+df_lluvia.index = pd.to_datetime(df_lluvia.index)
 
-print(f"Dimensiones del DataFrame: {df.shape}")
-print("
-Primeras filas del registro de Ancón Norte:")
-print(df.head(3))`,
-        validator: (output) => output.includes("798") && output.includes("sh1")
+print(f"Dimensiones del registro de lluvia: {df_lluvia.shape}")
+print("\nPrimeras lecturas del pluviómetro (canales p1 y p2):")
+print(df_lluvia.head(3))`,
+        validator: (output) => output.includes("p1") && output.includes("p2") && (output.includes("229345") || output.includes("Dimensiones del registro de lluvia:"))
       },
       {
         id: "m1_l7",
-        title: "1.7 Filtrado Booleano y Consolidación de Canales",
+        title: "1.7 Filtrado Booleano y Consolidación de Canales de Lluvia",
         concept: `
-          <p>Podemos aplicar la lógica condicional que aprendimos en 1.3 para filtrar filas de una tabla: <code>df[df['p'] > umbral]</code>.</p>
+          <p>En instrumentación geotécnica, la estación pluviométrica SIATA dispone de balancines gemelos (<code>p1</code> y <code>p2</code>) para redundancia física: si un embudo se obstruye con hojas o sedimentos, el balancín hermano continúa midiendo. Consolidamos la lluvia representativa tomando el máximo: <code>df['p'] = df[['p1', 'p2']].max(axis=1)</code>.</p>
           
-          <!-- Contenedor Interactivo de Filtrado Booleano (Esquema de Pizarra y Tamiz) -->
+          <p>Dado que la mayor parte del tiempo no llueve, aplicamos la lógica condicional aprendida en 1.3 mediante <strong>filtrado booleano</strong> vectorizado: <code>df[df['p'] > 0]</code>.</p>
+          
+          <!-- Contenedor Interactivo de Filtrado Booleano (Tamiz Pluviométrico) -->
           <div id="boolean-filter-container"></div>
           <div class="code-example-block">
-# Filtrar días con lluvia registrada
-dias_con_lluvia = df[df['p'] > 0]
-print(f"Días con lluvia: {len(dias_con_lluvia)}")
-          </div>
-          <div class="theory-callout">
-            💡 <strong>Pregunta Instrumental Geotécnica:</strong><br>
-            ¿Por qué el pluviómetro SIATA registra dos canales (<code>p1</code> y <code>p2</code>)? Son dos balancines gemelos en la misma estación para redundancia. Si hojas o sedimentos atascan uno, el otro sigue midiendo. Se toma <code>max(p1, p2)</code> para consolidar la lluvia.
+# 1. Consolidar canal representativo de balancines gemelos
+df['p'] = df[['p1', 'p2']].max(axis=1)
+
+# 2. Filtrar intervalos donde hubo lluvia activa (descartar ceros)
+lluvia_activa = df[df['p'] > 0]
+print(f"Registros con lluvia: {len(lluvia_activa)}")
           </div>
         `,
-        instruction: "Carga el dataset y filtra los días con <strong>precipitación intensa mayor a 15.0 mm/día</strong>. Cuenta cuántos días superaron este umbral usando <code>len()</code>.",
+        instruction: "Carga <code>'pluviometro.csv'</code>, consolida el canal representativo como <code>df['p'] = df[['p1', 'p2']].max(axis=1)</code>, filtra los intervalos con precipitación activa (<code>df['p'] > 0</code>) y cuenta cuántos registros registraron lluvia con <code>len()</code>.",
         initialCode: `# -------------------------------------------------------------
-# EJERCICIO 1.7: Filtrado de Lluvia Detonante
+# EJERCICIO 1.7: Consolidación y Filtrado de Lluvia Activa
 # -------------------------------------------------------------
 import pandas as pd
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
+df = pd.read_csv('pluviometro.csv', index_col=0)
+df.index = pd.to_datetime(df.index)
 
-# 1. Filtra los días donde la columna 'p' sea mayor a 15.0:
-lluvia_intensa = None
+# 1. Consolida la columna representativa 'p' con el máximo de p1 y p2:
+df['p'] = None
 
-# 2. Imprime la cantidad de días encontrados:
-if lluvia_intensa is not None:
-    print(f"Días con lluvia > 15 mm/día: {len(lluvia_intensa)}")
-    print("
-Ejemplo de eventos intensos:")
-    print(lluvia_intensa[['p', 'DE1']].head(4))
+# 2. Filtra los intervalos donde la lluvia 'p' sea mayor a 0:
+lluvia_activa = None
+
+# 3. Imprime la cantidad de registros encontrados y un vistazo:
+if lluvia_activa is not None and df['p'] is not None:
+    print(f"Registros con lluvia activa: {len(lluvia_activa)}")
+    print("\nPrimeros eventos registrados:")
+    print(lluvia_activa[['p1', 'p2', 'p']].head(4))
 else:
-    print("Aplica el filtro: lluvia_intensa = df[df['p'] > 15.0]")
+    print("Define: df['p'] = df[['p1', 'p2']].max(axis=1) y lluvia_activa = df[df['p'] > 0]")
 `,
-        hint: "Asigna: `lluvia_intensa = df[df['p'] > 15.0]`.",
+        hint: "Asigna: `df['p'] = df[['p1', 'p2']].max(axis=1)` y luego `lluvia_activa = df[df['p'] > 0]`.",
         solution: `import pandas as pd
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-lluvia_intensa = df[df['p'] > 15.0]
+df = pd.read_csv('pluviometro.csv', index_col=0)
+df.index = pd.to_datetime(df.index)
 
-print(f"Días con lluvia > 15 mm/día: {len(lluvia_intensa)}")
-print("
-Ejemplo de eventos intensos:")
-print(lluvia_intensa[['p', 'DE1']].head(4))`,
-        validator: (output) => output.includes("Días con lluvia > 15 mm/día:") && !output.includes("None")
+df['p'] = df[['p1', 'p2']].max(axis=1)
+lluvia_activa = df[df['p'] > 0]
+
+print(f"Registros con lluvia activa: {len(lluvia_activa)}")
+print("\nPrimeros eventos registrados:")
+print(lluvia_activa[['p1', 'p2', 'p']].head(4))`,
+        validator: (output) => output.includes("Registros con lluvia activa:") && !output.includes("None") && output.includes("p")
+      },
+      {
+        id: "m1_l8",
+        title: "1.8 🏆 Reto Integrador: Concatenación y Exploración Multisensores",
+        concept: `
+          <p>Para cerrar el <strong>Módulo 1</strong>, integramos las series temporales de los sensores geotécnicos e hidrometeorológicos instalados en Ancón Norte estudiados hasta el momento:</p>
+          <ul>
+            <li>🌧️ <strong>Pluviómetro</strong> (<code>pluviometro.csv</code>): precipitación superficial detonante (<code>p1, p2</code>).</li>
+            <li>💧 <strong>Sonda de Humedad</strong> (<code>humedad.csv</code>): contenido volumétrico de agua en suelo (<code>sh1</code>), registrando el avance del frente de infiltración.</li>
+            <li>📏 <strong>Extensómetro</strong> (<code>extensometro.csv</code>): apertura milimétrica de grieta de tracción en corona (<code>DE1</code>).</li>
+          </ul>
+          
+          <div class="theory-callout">
+            ⚠️ <strong>Decisión Metodológica:</strong><br>
+            En esta fase inicial nos enfocamos exclusivamente en los sensores hidro-mecánicos primarios (lluvia, humedad e inicio de deformación superficial). Por esta razón, <strong>no evaluaremos el acelerómetro/inclinómetro</strong> en este módulo (sus ángulos de cabeceo y balanceo se abordarán más adelante al estudiar deformaciones profundas).
+          </div>
+          
+          <!-- Contenedor Interactivo de Fusión y Concatenación Multisensores -->
+          <div id="sensor-concat-container"></div>
+          
+          <div class="code-example-block">
+# Concatenación multivariada alineando automáticamente por DatetimeIndex:
+df_ladera = pd.concat([df_pluv, df_hum, df_ext], axis=1)
+
+print(df_ladera.shape)      # (filas totales x canales combinados)
+print(df_ladera.describe()) # Estadísticas descriptivas de todos los sensores
+          </div>
+        `,
+        instruction: "Carga las series de <code>'pluviometro.csv'</code>, <code>'humedad.csv'</code> y <code>'extensometro.csv'</code> definiendo su primera columna como índice y convirtiéndola a fechas con <code>pd.to_datetime</code>. Concatena los DataFrames con <code>pd.concat([df_pluv, df_hum, df_ext], axis=1)</code> e imprime las dimensiones totales con <code>df_ladera.shape</code> y el resumen estadístico con <code>df_ladera.describe()</code>.",
+        initialCode: `# -------------------------------------------------------------
+# RETO INTEGRADOR MÓDULO 1: Concatenación y Exploración de Sensores
+# -------------------------------------------------------------
+import pandas as pd
+
+# 1. Cargar las 3 series de tiempo hidro-mecánicas (sin evaluar acelerómetro):
+df_pluv = pd.read_csv('pluviometro.csv', index_col=0)
+df_pluv.index = pd.to_datetime(df_pluv.index)
+
+df_hum = pd.read_csv('humedad.csv', index_col=0)
+df_hum.index = pd.to_datetime(df_hum.index)
+
+df_ext = pd.read_csv('extensometro.csv', index_col=0)
+df_ext.index = pd.to_datetime(df_ext.index)
+
+# 2. Concatena los DataFrames por columnas (axis=1):
+df_ladera = None
+
+# 3. Explora el DataFrame integrado de monitoreo:
+if df_ladera is not None:
+    print(f"Dimensiones del monitoreo integrado: {df_ladera.shape}")
+    print("\nColumnas integradas:", list(df_ladera.columns))
+    print("\nResumen estadístico de los sensores de ladera:")
+    print(df_ladera.describe().round(2))
+else:
+    print("Completa: df_ladera = pd.concat([df_pluv, df_hum, df_ext], axis=1)")
+`,
+        hint: "Escribe: `df_ladera = pd.concat([df_pluv, df_hum, df_ext], axis=1)`.",
+        solution: `import pandas as pd
+
+df_pluv = pd.read_csv('pluviometro.csv', index_col=0)
+df_pluv.index = pd.to_datetime(df_pluv.index)
+
+df_hum = pd.read_csv('humedad.csv', index_col=0)
+df_hum.index = pd.to_datetime(df_hum.index)
+
+df_ext = pd.read_csv('extensometro.csv', index_col=0)
+df_ext.index = pd.to_datetime(df_ext.index)
+
+df_ladera = pd.concat([df_pluv, df_hum, df_ext], axis=1)
+
+print(f"Dimensiones del monitoreo integrado: {df_ladera.shape}")
+print("\nColumnas integradas:", list(df_ladera.columns))
+print("\nResumen estadístico de los sensores de ladera:")
+print(df_ladera.describe().round(2))`,
+        validator: (output) => output.includes("Dimensiones del monitoreo integrado:") && output.includes("sh1") && output.includes("DE1") && (output.includes("p1") || output.includes("p2"))
       }
     ]
   },

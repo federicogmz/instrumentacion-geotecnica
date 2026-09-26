@@ -313,6 +313,9 @@ class CourseApp {
     if (lesson.id === "m1_l7" && window.initBooleanFilterWidget) {
       window.initBooleanFilterWidget();
     }
+    if (lesson.id === "m1_l8" && window.initSensorConcatWidget) {
+      window.initSensorConcatWidget();
+    }
     if (lesson.id === "m2_l2" && window.initBoxplotWidget) {
       window.initBoxplotWidget();
     }
