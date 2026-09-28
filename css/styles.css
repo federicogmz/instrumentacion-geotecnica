@@ -4440,3 +4440,632 @@ body.is-resizing-workspace * {
 }
 
 [data-theme="light"] .lc-footer-status { background: #1e293b; }
+
+/* ==========================================================================
+   GAMIFICATION v3.0 — Nuevos estilos para sidebar, badges, confeti,
+   modal de módulo completo, barra segmentada, nav badges, roadmap,
+   pasos de lección, botones de navegación entre módulos.
+   ========================================================================== */
+
+/* ── Sidebar — Mapa de Curso ─────────────────────────────────────────────── */
+:root {
+  --sidebar-w: 230px;
+  --sidebar-transition: 0.28s ease;
+}
+
+.course-sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  max-width: var(--sidebar-w);
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-subtle);
+  overflow: hidden;
+  transition: width var(--sidebar-transition), min-width var(--sidebar-transition), opacity var(--sidebar-transition);
+  position: relative;
+  z-index: 10;
+}
+
+.course-sidebar.collapsed {
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.btn-sidebar-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--bg-card);
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--accent-cyan);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 0.02em;
+  transition: background 0.2s;
+  width: 100%;
+  white-space: nowrap;
+}
+.btn-sidebar-toggle:hover { background: var(--bg-card-hover); }
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+.sidebar-inner { display: flex; flex-direction: column; }
+
+.sidebar-title {
+  padding: 0.6rem 0.9rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.sidebar-module {
+  margin-bottom: 0.1rem;
+}
+
+.sidebar-module-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: background 0.18s;
+  user-select: none;
+}
+.sidebar-module-header:hover { background: rgba(255,255,255,0.05); }
+
+.sidebar-module.active > .sidebar-module-header {
+  background: rgba(56, 189, 248, 0.1);
+  border-left: 3px solid var(--accent-cyan);
+  padding-left: calc(0.9rem - 3px);
+}
+
+.sidebar-module-emoji { font-size: 1rem; }
+
+.sidebar-module-label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.sidebar-module-label strong {
+  font-size: 0.8rem;
+  color: var(--text-main);
+}
+.sidebar-mod-progress {
+  font-size: 0.67rem;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+.sidebar-done-badge { font-size: 0.85rem; }
+
+/* Lista de lecciones dentro del módulo activo */
+.sidebar-lessons {
+  padding: 0.1rem 0 0.3rem 1.2rem;
+  border-left: 2px solid var(--border-subtle);
+  margin: 0 0.9rem 0 1.45rem;
+}
+
+.sidebar-lesson {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-bottom: 0.05rem;
+}
+.sidebar-lesson:hover { background: rgba(255,255,255,0.07); }
+
+.sidebar-lesson.current {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent-cyan);
+}
+.sidebar-lesson.completed { opacity: 0.7; }
+.sidebar-lesson.completed .sidebar-lesson-text { color: var(--text-muted); }
+
+.sidebar-lesson-icon {
+  font-size: 0.7rem;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+  width: 14px;
+  text-align: center;
+}
+.sidebar-lesson-text {
+  font-size: 0.72rem;
+  color: var(--text-body);
+  line-height: 1.35;
+}
+
+/* Dark sidebar scrollbar */
+.sidebar-content::-webkit-scrollbar { width: 4px; }
+.sidebar-content::-webkit-scrollbar-track { background: transparent; }
+.sidebar-content::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 4px; }
+
+/* ── Nav progress badges ─────────────────────────────────────────────────── */
+.nav-progress-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-full);
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: rgba(255,255,255,0.1);
+  color: var(--text-dim);
+  margin-left: 0.3rem;
+  vertical-align: middle;
+  transition: background 0.3s, color 0.3s;
+}
+.nav-progress-badge.complete {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--accent-emerald);
+}
+
+/* Pestañas de Presentaciones — estilo unificado con el resto del nav */
+.nav-tab-presentations {
+  text-decoration: none !important;
+  color: var(--accent-amber) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+.nav-tab-presentations:hover {
+  background: rgba(245, 158, 11, 0.08) !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+/* ── Barra de progreso segmentada ────────────────────────────────────────── */
+.progress-segments {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.seg-module {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  cursor: default;
+}
+
+.seg-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-dim);
+  font-size: 0.68rem;
+  width: 20px;
+}
+
+.seg-track {
+  width: 60px;
+  height: 6px;
+  background: rgba(255,255,255,0.07);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.seg-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+}
+.seg-fill.complete {
+  background: linear-gradient(90deg, var(--accent-emerald), #059669);
+}
+
+.seg-count {
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  color: var(--text-dim);
+}
+
+/* ── Badges container ────────────────────────────────────────────────────── */
+.badges-container {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: default;
+  transition: all 0.25s ease;
+  min-width: 44px;
+}
+
+.badge-item.earned {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.25);
+}
+.badge-item.locked {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+.badge-item.earned:hover {
+  background: rgba(56, 189, 248, 0.15);
+  transform: translateY(-2px);
+}
+
+.badge-emoji { font-size: 1.1rem; line-height: 1; }
+.badge-name  {
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 56px;
+}
+.badge-item.earned .badge-name { color: var(--accent-cyan); }
+
+/* ── Toast de badge desbloqueado ─────────────────────────────────────────── */
+.badge-toast {
+  position: fixed;
+  top: 80px;
+  right: -340px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-card);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.4rem;
+  box-shadow: 0 12px 40px -8px rgba(0,0,0,0.6), 0 0 20px -5px var(--accent-cyan-glow);
+  transition: right 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 320px;
+}
+.badge-toast.show { right: 20px; }
+
+.badge-toast-emoji { font-size: 2.2rem; }
+.badge-toast-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-amber);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.badge-toast-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.15rem;
+}
+.badge-toast-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── Confetti Canvas ─────────────────────────────────────────────────────── */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8888;
+  display: none;
+}
+
+/* ── Modal Módulo Completo ───────────────────────────────────────────────── */
+.module-complete-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mcm-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.mcm-card {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-card);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 20px 60px -15px rgba(0,0,0,0.8), 0 0 40px -10px var(--accent-cyan-glow);
+  animation: mcm-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes mcm-pop {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.mcm-emoji span { font-size: 3.5rem; }
+.mcm-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0.75rem 0 0.4rem;
+}
+.mcm-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+.mcm-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+.mcm-stat { display: flex; flex-direction: column; align-items: center; }
+.mcm-stat-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  font-family: var(--font-mono);
+}
+.mcm-stat-label { font-size: 0.78rem; color: var(--text-dim); }
+.mcm-actions { display: flex; flex-direction: column; gap: 0.65rem; align-items: center; }
+.mcm-btn-next {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  width: 100%;
+}
+.mcm-btn-close {
+  font-size: 0.85rem;
+  padding: 0.4rem 1rem;
+}
+
+/* ── Indicador de pasos mini en la lección ───────────────────────────────── */
+.lesson-steps {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lesson-step {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lesson-step:hover {
+  background: rgba(56, 189, 248, 0.5);
+  transform: scale(1.3);
+}
+.lesson-step.done {
+  background: var(--accent-emerald);
+  border-color: var(--accent-emerald);
+}
+.lesson-step.current {
+  background: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  transform: scale(1.2);
+  box-shadow: 0 0 6px 1px var(--accent-cyan-glow);
+}
+
+/* ── Barra de navegación inferior de lecciones ───────────────────────────── */
+.lesson-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.btn-next-module {
+  padding: 0.55rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* ── Roadmap en la sección Teoría ────────────────────────────────────────── */
+.course-roadmap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.roadmap-module {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  transition: border-color 0.25s, background 0.25s;
+}
+.roadmap-module.in-progress {
+  border-color: rgba(56, 189, 248, 0.3);
+  background: rgba(56, 189, 248, 0.04);
+}
+.roadmap-module.done {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.roadmap-module-icon { font-size: 1.6rem; flex-shrink: 0; }
+
+.roadmap-module-body { flex: 1; }
+.roadmap-module-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  margin-bottom: 0.1rem;
+}
+.roadmap-module-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.roadmap-progress-mini {
+  height: 5px;
+  background: rgba(255,255,255,0.07);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 0.3rem;
+}
+.roadmap-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease;
+}
+.roadmap-module.done .roadmap-bar {
+  background: linear-gradient(90deg, var(--accent-emerald), #059669);
+}
+
+.roadmap-mod-count {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+}
+
+.roadmap-btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+/* ── Banner de "continuar donde lo dejé" en Teoría ───────────────────────── */
+.teoria-resume-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  color: var(--text-body);
+}
+
+/* ── Workspace grid actualizado para incluir sidebar ─────────────────────── */
+.workspace-grid {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  min-height: 720px;
+  position: relative;
+  width: 100%;
+}
+
+/* ── Mejoras progress-ribbon para alojar badges y segmentos ──────────────── */
+.progress-ribbon {
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* ── Light theme overrides para nuevos elementos ─────────────────────────── */
+[data-theme="light"] .course-sidebar {
+  background: #ffffff;
+  border-right-color: rgba(0,0,0,0.08);
+}
+[data-theme="light"] .sidebar-module-header:hover { background: rgba(0,0,0,0.04); }
+[data-theme="light"] .sidebar-module.active > .sidebar-module-header { background: rgba(2,132,199,0.08); }
+[data-theme="light"] .sidebar-lesson:hover { background: rgba(0,0,0,0.05); }
+[data-theme="light"] .sidebar-lesson.current { background: rgba(2,132,199,0.1); }
+[data-theme="light"] .badge-toast {
+  background: #ffffff;
+  border-color: rgba(2,132,199,0.3);
+  box-shadow: 0 12px 40px -8px rgba(0,0,0,0.2);
+}
+[data-theme="light"] .mcm-card {
+  background: #ffffff;
+  border-color: rgba(2,132,199,0.3);
+}
+[data-theme="light"] .roadmap-module { background: #f8fafc; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .roadmap-module.in-progress { background: rgba(2,132,199,0.04); }
+[data-theme="light"] .roadmap-module.done { background: rgba(5,150,105,0.05); }
+[data-theme="light"] .seg-track { background: rgba(0,0,0,0.07); }
+[data-theme="light"] .lesson-step { background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.15); }
+[data-theme="light"] .teoria-resume-banner { background: rgba(2,132,199,0.05); border-color: rgba(2,132,199,0.2); }
+
+/* ── Responsividad mejorada (breakpoints 768px y 480px) ──────────────────── */
+@media (max-width: 900px) {
+  .course-sidebar { display: none !important; }
+  .progress-segments { display: none; }
+  .badges-container { display: none; }
+}
+
+@media (max-width: 768px) {
+  .nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    justify-content: flex-start;
+  }
+  .nav-tab-btn {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.65rem;
+  }
+  .brand-text h1 { font-size: 1rem; }
+  .brand-text p  { display: none; }
+  .progress-ribbon {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .progress-bar-track { max-width: 100%; }
+  .workspace-layout-bar { flex-direction: column; gap: 0.5rem; }
+  .roadmap-module { flex-wrap: wrap; }
+  .roadmap-btn { width: 100%; text-align: center; }
+  .lesson-nav-bar { flex-wrap: wrap; gap: 0.5rem; }
+  .lesson-nav-bar button { flex: 1; min-width: 120px; }
+}
+
+@media (max-width: 480px) {
+  .nav-tabs { gap: 0.2rem; }
+  .nav-tab-btn { padding: 0.3rem 0.45rem; font-size: 0.68rem; }
+  .nav-progress-badge { display: none; }
+  .header-actions .github-link { display: none; }
+  .brand-icon { font-size: 1.5rem; }
+  .lesson-steps { gap: 3px; }
+  .lesson-step { width: 7px; height: 7px; }
+  .mcm-card { padding: 1.5rem; }
+  .mcm-title { font-size: 1.3rem; }
+}

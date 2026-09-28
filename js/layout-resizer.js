@@ -153,7 +153,7 @@
       btnColTheory.addEventListener("click", (e) => {
         e.stopPropagation();
         if (state.theoryPct <= 10) {
-          applyLayout(50); // Restaurar a equilibrado
+          applyLayout(55); // Restaurar a equilibrado
         } else {
           applyLayout(0); // Ocultar teoría
         }
@@ -164,7 +164,7 @@
       btnColEditor.addEventListener("click", (e) => {
         e.stopPropagation();
         if (state.theoryPct >= 90) {
-          applyLayout(50); // Restaurar a equilibrado
+          applyLayout(55); // Restaurar a equilibrado
         } else {
           applyLayout(100); // Ocultar editor
         }
@@ -176,10 +176,10 @@
     const btnResEditor = document.getElementById("btn-restore-editor");
 
     if (btnResTheory) {
-      btnResTheory.addEventListener("click", () => applyLayout(50));
+      btnResTheory.addEventListener("click", () => applyLayout(55));
     }
     if (btnResEditor) {
-      btnResEditor.addEventListener("click", () => applyLayout(50));
+      btnResEditor.addEventListener("click", () => applyLayout(55));
     }
 
     // 5. Drag & Drop de la barra divisoria (Splitter)
@@ -189,7 +189,7 @@
     if (resizer && grid) {
       // Doble clic para resetear a 50/50
       resizer.addEventListener("dblclick", () => {
-        applyLayout(50);
+        applyLayout(55);
       });
 
       // Mouse drag
