@@ -12,6 +12,7 @@
   
   <!-- Tema Institucional EAFIT -->
   <link rel="stylesheet" href="css/presentation-theme.css">
+  <link rel="stylesheet" href="css/diagrams.css">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
       <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
       <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
       <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
-      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+      <a href="../index.html#ruta" class="header-btn"><span>🏠</span> Salir al índice</a>
     </div>
   </header>
 
@@ -115,11 +116,11 @@
               <p style="margin-top: 10px; font-size: 1.05em;">
                 La resistencia al corte de un suelo viene dada por:
               </p>
-              <div style="text-align: center; font-size: 1.4em; padding: 15px; margin: 12px 0; background: rgba(0,75,133,0.06); border-radius: 8px; font-family: var(--font-mono);">
-                98849	au = c' + (\sigma - u) 	an\phi'98849
+              <div style="text-align: center; font-size: 1.1em; padding: 4px 15px; margin: 10px 0; background: rgba(0,75,133,0.06); border-radius: 8px;">
+                $$\tau = c' + (\sigma - u)\tan\phi'$$
               </div>
               <p style="font-size: 0.95em; color: var(--text-muted);">
-                Donde '$ y $\phi'$ son parámetros intrínsecos del suelo, mientras que $\sigma' = \sigma - u$ dependerá de las variaciones de los esfuerzos totales debidos al efecto de la presión de poros ($).
+                Donde $c'$ y $\phi'$ son parámetros intrínsecos del suelo, mientras que $\sigma' = \sigma - u$ dependerá de las variaciones de los esfuerzos totales debidos al efecto de la presión de poros ($u$).
               </p>
             </div>
 
@@ -221,6 +222,183 @@
 
         </div>
       </section>
+
+      <!-- NEW:02-id -->
+      <section>
+        <h2>Umbrales de lluvia: intensidad y duración <span class="key-badge">★ Diapositiva clave</span></h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Cuánta lluvia, en cuánto tiempo, detona un deslizamiento?
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" style="max-height: 640px" viewBox="0 0 760 510" role="img" aria-label="Umbral de intensidad y duración de lluvia para deslizamientos">
+<line class="grid" x1="178.2" y1="50" x2="178.2" y2="440"/><text class="s" x="178.2" y="464" text-anchor="middle">1</text>
+<line class="grid" x1="371.5" y1="50" x2="371.5" y2="440"/><text class="s" x="371.5" y="464" text-anchor="middle">10</text>
+<line class="grid" x1="564.9" y1="50" x2="564.9" y2="440"/><text class="s" x="564.9" y="464" text-anchor="middle">100</text>
+<line class="grid" x1="120" y1="404.4" x2="700" y2="404.4"/><text class="s" x="110" y="410.4" text-anchor="end">0.1</text>
+<line class="grid" x1="120" y1="286.3" x2="700" y2="286.3"/><text class="s" x="110" y="292.3" text-anchor="end">1</text>
+<line class="grid" x1="120" y1="168.1" x2="700" y2="168.1"/><text class="s" x="110" y="174.1" text-anchor="end">10</text>
+<line class="ax" x1="120" y1="440" x2="700" y2="440"/><line class="ax" x1="120" y1="440" x2="120" y2="50"/>
+<path d="M120.0,134.1 L129.7,136.4 L139.3,138.7 L149.0,141.0 L158.7,143.3 L168.3,145.6 L178.0,147.9 L187.7,150.2 L197.3,152.5 L207.0,154.8 L216.7,157.1 L226.3,159.4 L236.0,161.7 L245.7,164.0 L255.3,166.3 L265.0,168.6 L274.7,171.0 L284.3,173.3 L294.0,175.6 L303.7,177.9 L313.3,180.2 L323.0,182.5 L332.7,184.8 L342.3,187.1 L352.0,189.4 L361.7,191.7 L371.3,194.0 L381.0,196.3 L390.7,198.6 L400.3,200.9 L410.0,203.2 L419.7,205.5 L429.3,207.8 L439.0,210.1 L448.7,212.4 L458.3,214.7 L468.0,217.0 L477.7,219.3 L487.3,221.6 L497.0,223.9 L506.7,226.2 L516.3,228.5 L526.0,230.9 L535.7,233.2 L545.3,235.5 L555.0,237.8 L564.7,240.1 L574.3,242.4 L584.0,244.7 L593.7,247.0 L603.3,249.3 L613.0,251.6 L622.7,253.9 L632.3,256.2 L642.0,258.5 L651.7,260.8 L661.3,263.1 L671.0,265.4 L680.7,267.7 L690.3,270.0 L700.0,272.3 L700,50 L120,50 Z" style="fill: var(--al-r); fill-opacity: 0.10"/>
+<path class="curve s-rose" style="stroke-width: 5" d="M120.0,134.1 L129.7,136.4 L139.3,138.7 L149.0,141.0 L158.7,143.3 L168.3,145.6 L178.0,147.9 L187.7,150.2 L197.3,152.5 L207.0,154.8 L216.7,157.1 L226.3,159.4 L236.0,161.7 L245.7,164.0 L255.3,166.3 L265.0,168.6 L274.7,171.0 L284.3,173.3 L294.0,175.6 L303.7,177.9 L313.3,180.2 L323.0,182.5 L332.7,184.8 L342.3,187.1 L352.0,189.4 L361.7,191.7 L371.3,194.0 L381.0,196.3 L390.7,198.6 L400.3,200.9 L410.0,203.2 L419.7,205.5 L429.3,207.8 L439.0,210.1 L448.7,212.4 L458.3,214.7 L468.0,217.0 L477.7,219.3 L487.3,221.6 L497.0,223.9 L506.7,226.2 L516.3,228.5 L526.0,230.9 L535.7,233.2 L545.3,235.5 L555.0,237.8 L564.7,240.1 L574.3,242.4 L584.0,244.7 L593.7,247.0 L603.3,249.3 L613.0,251.6 L622.7,253.9 L632.3,256.2 L642.0,258.5 L651.7,260.8 L661.3,263.1 L671.0,265.4 L680.7,267.7 L690.3,270.0 L700.0,272.3"/>
+<circle cx="291.2" cy="313.3" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="367.9" cy="323.9" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="210.1" cy="249.8" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="617.8" cy="288.1" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="544.6" cy="356.1" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="435.2" cy="321.9" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="260.9" cy="305.6" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="280.9" cy="189.0" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="575.2" cy="277.0" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="561.5" cy="364.3" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="326.6" cy="244.3" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="528.7" cy="258.9" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="599.7" cy="389.2" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="468.3" cy="271.5" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="420.5" cy="333.0" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="405.0" cy="342.4" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="625.8" cy="280.4" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="440.5" cy="319.7" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="613.5" cy="320.8" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="600.7" cy="277.0" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="421.7" cy="298.4" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="465.0" cy="306.2" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="255.5" cy="274.9" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="567.4" cy="387.9" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="200.4" cy="214.3" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="312.5" cy="254.6" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="403.9" cy="304.7" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="655.8" cy="386.5" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="375.9" cy="318.7" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="481.2" cy="333.0" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="348.6" cy="231.9" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="331.8" cy="255.7" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="611.3" cy="389.9" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="207.7" cy="274.8" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="544.6" cy="298.0" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="291.9" cy="279.8" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="263.2" cy="254.0" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="198.7" cy="203.5" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="607.3" cy="262.8" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="530.1" cy="243.7" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="186.9" cy="260.9" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="640.8" cy="297.3" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="374.8" cy="209.1" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="475.4" cy="251.6" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="318.7" cy="306.8" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="390.9" cy="332.1" r="6" class="f-gray" style="fill-opacity: 0.55"/>
+<circle cx="369.0" cy="130.8" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="348.4" cy="184.4" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="230.6" cy="146.5" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="534.2" cy="207.0" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="331.5" cy="175.0" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="615.6" cy="222.6" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="297.7" cy="169.2" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="234.9" cy="147.6" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="490.3" cy="209.6" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="229.0" cy="126.4" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="314.6" cy="115.6" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="262.5" cy="132.0" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="530.1" cy="203.1" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="618.0" cy="219.9" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="311.6" cy="151.0" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="227.4" cy="130.3" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="314.4" cy="122.2" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<circle cx="553.7" cy="203.3" r="8" class="f-rose" style="fill-opacity: 0.9"/>
+<text class="b m" x="410" y="496" text-anchor="middle">Duración de la lluvia, D (horas)</text>
+<text class="b m" transform="translate(36,250) rotate(-90)" text-anchor="middle">Intensidad media, I (mm/h)</text>
+<circle cx="560" cy="80" r="8" class="f-rose"/><text class="s" x="576" y="86">con deslizamientos</text>
+<circle cx="560" cy="108" r="6" class="f-gray" style="fill-opacity: 0.6"/><text class="s" x="576" y="114">sin deslizamientos</text>
+<text class="rose-txt s" x="463.8" y="200.0" text-anchor="middle">umbral I–D</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">📈</span><span>Cómo leer el umbral I–D</span></div>
+            <ul class="bullet-list" style="font-size: 0.72em;">
+              <li>Cada punto es un <strong>evento de lluvia</strong>: su duración y su intensidad media.</li>
+              <li>Los eventos <strong>sobre la línea</strong> son los que suelen detonar deslizamientos.</li>
+              <li>Lluvias cortas necesitan mucha intensidad; las largas, menos.</li>
+              <li>Ejemplo: $I = 14{,}82\,D^{-0{,}39}$, umbral global de Caine (1980). Cada región calibra el suyo.</li>
+            </ul>
+          </div>
+          </div>
+
+        </div>
+        <div class="callout callout-info" style="margin-top: 12px;">
+          <span class="callout-icon">📡</span>
+          <div class="callout-content" style="font-weight: 600;">Con la lluvia en tiempo real (pluviómetros y radar) se compara cada evento con el umbral: <strong>es la base de muchos sistemas de alerta por lluvia</strong>.</div>
+        </div>
+      </section>
+      <!-- NEW:02-antecedent -->
+      <section>
+        <h2>Lluvia antecedente: el suelo tiene memoria</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Los días previos deciden qué hace la tormenta
+        </h3>
+
+        <div style="margin-top: 8px;">
+          <svg class="dg" style="max-height: 600px" viewBox="0 0 1040 440" role="img" aria-label="Misma lluvia de 60 milímetros con suelo seco y con suelo húmedo">
+<rect class="panel" x="0" y="20" width="500" height="330" rx="12" style="fill-opacity: 0.45"/>
+<line class="ax" x1="20" y1="250" x2="480" y2="250"/>
+<rect class="f-hum" x="24.2" y="246.3" width="19.7" height="3.7" style="opacity: 0.9"/>
+<rect class="f-hum" x="52.3" y="244.9" width="19.7" height="5.1" style="opacity: 0.9"/>
+<rect class="f-hum" x="80.5" y="244.9" width="19.7" height="5.1" style="opacity: 0.9"/>
+<rect class="f-hum" x="108.6" y="248.9" width="19.7" height="1.1" style="opacity: 0.9"/>
+<rect class="f-hum" x="136.7" y="249.9" width="19.7" height="0.1" style="opacity: 0.9"/>
+<rect class="f-hum" x="164.8" y="247.1" width="19.7" height="2.9" style="opacity: 0.9"/>
+<rect class="f-hum" x="193.0" y="247.9" width="19.7" height="2.1" style="opacity: 0.9"/>
+<rect class="f-hum" x="221.1" y="243.7" width="19.7" height="6.3" style="opacity: 0.9"/>
+<rect class="f-hum" x="249.2" y="244.7" width="19.7" height="5.3" style="opacity: 0.9"/>
+<rect class="f-hum" x="277.3" y="245.4" width="19.7" height="4.6" style="opacity: 0.9"/>
+<rect class="f-hum" x="305.5" y="245.7" width="19.7" height="4.3" style="opacity: 0.9"/>
+<rect class="f-hum" x="333.6" y="244.9" width="19.7" height="5.1" style="opacity: 0.9"/>
+<rect class="f-hum" x="361.7" y="248.9" width="19.7" height="1.1" style="opacity: 0.9"/>
+<rect class="f-hum" x="389.8" y="246.6" width="19.7" height="3.4" style="opacity: 0.9"/>
+<rect class="f-hum" x="418.0" y="248.7" width="19.7" height="1.3" style="opacity: 0.9"/>
+<rect class="f-rain" x="444.7" y="95.7" width="21.1" height="154.3"/>
+<text class="rain-txt s" x="454.5" y="87.7" text-anchor="middle">60 mm</text>
+<path d="M22.8,262 L22.8,270 L441.9,270 L441.9,262" style="fill: none; stroke: var(--text-muted); stroke-width: 2.5"/>
+<text class="b s" x="230.9" y="292" text-anchor="middle">15 días previos: 20 mm</text>
+<text class="s" x="273.1" y="320" text-anchor="middle">Tiempo →</text>
+<rect class="panel" x="540" y="20" width="500" height="330" rx="12" style="fill-opacity: 0.45"/>
+<line class="ax" x1="560" y1="250" x2="1020" y2="250"/>
+<rect class="f-pie" x="564.2" y="211.3" width="19.7" height="38.7" style="opacity: 0.9"/>
+<rect class="f-pie" x="592.3" y="233.1" width="19.7" height="16.9" style="opacity: 0.9"/>
+<rect class="f-pie" x="620.5" y="213.5" width="19.7" height="36.5" style="opacity: 0.9"/>
+<rect class="f-pie" x="648.6" y="232.7" width="19.7" height="17.3" style="opacity: 0.9"/>
+<rect class="f-pie" x="676.7" y="216.9" width="19.7" height="33.1" style="opacity: 0.9"/>
+<rect class="f-pie" x="704.8" y="225.9" width="19.7" height="24.1" style="opacity: 0.9"/>
+<rect class="f-pie" x="733.0" y="224.2" width="19.7" height="25.8" style="opacity: 0.9"/>
+<rect class="f-pie" x="761.1" y="212.9" width="19.7" height="37.1" style="opacity: 0.9"/>
+<rect class="f-pie" x="789.2" y="234.1" width="19.7" height="15.9" style="opacity: 0.9"/>
+<rect class="f-pie" x="817.3" y="233.0" width="19.7" height="17.0" style="opacity: 0.9"/>
+<rect class="f-pie" x="845.5" y="211.0" width="19.7" height="39.0" style="opacity: 0.9"/>
+<rect class="f-pie" x="873.6" y="221.5" width="19.7" height="28.5" style="opacity: 0.9"/>
+<rect class="f-pie" x="901.7" y="232.2" width="19.7" height="17.8" style="opacity: 0.9"/>
+<rect class="f-pie" x="929.8" y="209.2" width="19.7" height="40.8" style="opacity: 0.9"/>
+<rect class="f-pie" x="958.0" y="210.2" width="19.7" height="39.8" style="opacity: 0.9"/>
+<rect class="f-rain" x="984.7" y="95.7" width="21.1" height="154.3"/>
+<text class="rain-txt s" x="994.5" y="87.7" text-anchor="middle">60 mm</text>
+<path d="M562.8,262 L562.8,270 L981.9,270 L981.9,262" style="fill: none; stroke: var(--text-muted); stroke-width: 2.5"/>
+<text class="b s" x="770.9" y="292" text-anchor="middle">15 días previos: 167 mm</text>
+<text class="s" x="813.1" y="320" text-anchor="middle">Tiempo →</text>
+<text class="hum-txt l" x="250" y="60" text-anchor="middle" style="font-size: 25px">Suelo seco</text>
+<text class="pie-txt l" x="790" y="60" text-anchor="middle" style="font-size: 25px">Suelo húmedo</text>
+<rect x="60" y="360" width="440" height="66" rx="12" class="f-ag" style="fill-opacity: 0.85"/><text class="dk" x="280" y="402" text-anchor="middle" style="font-size: 23px">El suelo absorbe: sin falla</text>
+<rect x="600" y="360" width="440" height="66" rx="12" class="f-ar" style="fill-opacity: 0.9"/><text class="w" x="820" y="402" text-anchor="middle" style="font-size: 23px">Saturado: se activa el deslizamiento</text>
+<text class="b l" x="520" y="205" text-anchor="middle" style="font-size: 30px">vs.</text>
+</svg>
+        </div>
+        <div class="callout callout-warning" style="margin-top: 12px;">
+          <span class="callout-icon">☔</span>
+          <div class="callout-content" style="font-weight: 600;"><strong>La misma tormenta puede ser inofensiva o mortal</strong>. Por eso los sistemas de alerta miran la lluvia del evento <em>y</em> la lluvia acumulada de los días previos.</div>
+        </div>
+      </section>
+
+
+
 
       <!-- SLIDE 8: ESCALAS DE MONITOREO DE LLUVIA -->
       <section>
@@ -460,6 +638,56 @@
 
         </div>
       </section>
+
+      <!-- NEW:02-radar -->
+      <section>
+        <h2>Radar meteorológico: cómo «ve» la lluvia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Distancia por el tiempo del eco; intensidad por su fuerza
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" style="max-height: 600px" viewBox="0 0 760 500" role="img" aria-label="Principio de funcionamiento del radar meteorológico"><defs><marker id="rd-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-main)"/></marker><marker id="rd-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-cyan)"/></marker><marker id="rd-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-muted)"/></marker></defs>
+<rect class="f-gray" x="30" y="300" width="60" height="70" rx="6"/><circle cx="60" cy="290" r="26" class="f-blue"/>
+<text class="b m" x="60" y="400" text-anchor="middle">Radar</text>
+<path d="M120.6,205.4 A90,90 0 0 1 120.6,374.6" style="fill: none; stroke: var(--sensor-rain); stroke-width: 4; opacity: 0.95"/>
+<path d="M134.2,167.8 A130,130 0 0 1 134.2,412.2" style="fill: none; stroke: var(--sensor-rain); stroke-width: 4; opacity: 0.7"/>
+<path d="M147.8,130.20000000000002 A170,170 0 0 1 147.8,449.79999999999995" style="fill: none; stroke: var(--sensor-rain); stroke-width: 4; opacity: 0.44999999999999996"/>
+<g class="f-gray" style="fill-opacity: 0.55"><ellipse cx="560" cy="150" rx="90" ry="44"/><ellipse cx="640" cy="130" rx="76" ry="48"/><ellipse cx="500" cy="164" rx="60" ry="34"/></g>
+<g class="s-rain" style="stroke-width: 4; stroke-linecap: round"><line x1="500" y1="205" x2="491" y2="233"/><line x1="540" y1="205" x2="531" y2="233"/><line x1="580" y1="205" x2="571" y2="233"/><line x1="620" y1="205" x2="611" y2="233"/><line x1="660" y1="205" x2="651" y2="233"/><line x1="520" y1="245" x2="511" y2="273"/><line x1="560" y1="245" x2="551" y2="273"/><line x1="600" y1="245" x2="591" y2="273"/><line x1="640" y1="245" x2="631" y2="273"/></g>
+<line x1="110" y1="290" x2="470" y2="200" style="stroke: var(--text-main); stroke-width: 3.5; stroke-dasharray: 10 6" marker-end="url(#rd-a)"/>
+<line x1="470" y1="222" x2="112" y2="312" style="stroke: var(--accent-cyan); stroke-width: 3.5; stroke-dasharray: 10 6" marker-end="url(#rd-b)"/>
+<text class="b s" x="250" y="222" text-anchor="middle" transform="rotate(-14 250 222)">pulso emitido</text>
+<text class="pie-txt s" x="300" y="292" text-anchor="middle" transform="rotate(-14 300 292)">eco de la lluvia</text>
+<line x1="110" y1="440" x2="470" y2="440" style="stroke: var(--text-muted); stroke-width: 3" marker-end="url(#rd-c)" marker-start="url(#rd-c)"/>
+<text class="b m" x="290" y="474" text-anchor="middle">distancia d</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">📡</span><span>Dos preguntas, dos respuestas</span></div>
+            <ul class="bullet-list" style="font-size: 0.74em;">
+              <li><strong>¿A qué distancia?</strong> $d = \dfrac{c \cdot t}{2}$, con $t$ el tiempo de ida y vuelta.</li>
+              <li><strong>¿Cuánta lluvia?</strong> Mientras más energía vuelve (dBZ), más intensa.</li>
+            </ul>
+          </div>
+          <table class="data-table" style="font-size: 0.66em !important; margin: 10px 0 0;">
+            <thead><tr><th>Reflectividad</th><th>Lluvia (aprox.)</th></tr></thead>
+            <tbody>
+              <tr><td>20 dBZ</td><td>llovizna, &lt; 1 mm/h</td></tr>
+              <tr><td>30 dBZ</td><td>ligera, ~3 mm/h</td></tr>
+              <tr><td>40 dBZ</td><td>fuerte, ~12 mm/h</td></tr>
+              <tr><td>50 dBZ</td><td>muy fuerte, ~50 mm/h</td></tr>
+            </tbody>
+          </table>
+            <p style="font-size: 0.6em !important; color: var(--text-muted); margin: 6px 0 0;">Con la relación de Marshall–Palmer, $Z = 200R^{1{,}6}$. Valores orientativos.</p>
+          </div>
+
+        </div>
+      </section>
+
+
 
       <!-- SLIDE 15: RADAR: VENTAJAS Y LIMITACIONES -->
       <section>
@@ -775,6 +1003,88 @@
           <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 8px;">Satélite GOES</p>
         </div>
       </section>
+
+      <!-- NEW:02-scales -->
+      <section>
+        <h2>Tres formas de medir la lluvia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Del punto a la región: qué aporta cada sensor
+        </h3>
+
+        <div style="margin-top: 8px;">
+          <svg class="dg" style="max-height: 560px" viewBox="0 0 1160 420" role="img" aria-label="Comparación de la escala de observación de la lluvia: pluviómetro, radar y satélite">
+<rect class="panel" x="0" y="10" width="360" height="400" rx="14"/>
+<path d="M70,60 L140,30 L230,50 L270,110 L250,190 L180,240 L100,220 L50,150 Z" transform="translate(30,40)" style="fill: var(--soil-dry); stroke: var(--text-muted); stroke-width: 2.5"/>
+<text class="b l" x="180" y="330" text-anchor="middle" style="font-size: 25px">Pluviómetro</text>
+<text class="s" x="180" y="356" text-anchor="middle">Puntual</text>
+<circle cx="150" cy="150" r="11" class="f-hum"/>
+<circle cx="220" cy="200" r="11" class="f-hum"/>
+<circle cx="270" cy="130" r="11" class="f-hum"/>
+<text class="s" x="180" y="386" text-anchor="middle">mide con exactitud, solo ahí</text>
+<rect class="panel" x="400" y="10" width="360" height="400" rx="14"/>
+<path d="M70,60 L140,30 L230,50 L270,110 L250,190 L180,240 L100,220 L50,150 Z" transform="translate(430,40)" style="fill: var(--soil-dry); stroke: var(--text-muted); stroke-width: 2.5"/>
+<text class="b l" x="580" y="330" text-anchor="middle" style="font-size: 25px">Radar</text>
+<text class="s" x="580" y="356" text-anchor="middle">Área (~1 km)</text>
+<rect x="460" y="60" width="40" height="32" class="f-pie" style="fill-opacity: 0.21"/>
+<rect x="460" y="94" width="40" height="32" class="f-pie" style="fill-opacity: 0.26"/>
+<rect x="460" y="128" width="40" height="32" class="f-pie" style="fill-opacity: 0.28"/>
+<rect x="460" y="162" width="40" height="32" class="f-pie" style="fill-opacity: 0.26"/>
+<rect x="460" y="196" width="40" height="32" class="f-pie" style="fill-opacity: 0.21"/>
+<rect x="460" y="230" width="40" height="32" class="f-pie" style="fill-opacity: 0.17"/>
+<rect x="502" y="60" width="40" height="32" class="f-pie" style="fill-opacity: 0.31"/>
+<rect x="502" y="94" width="40" height="32" class="f-pie" style="fill-opacity: 0.44"/>
+<rect x="502" y="128" width="40" height="32" class="f-pie" style="fill-opacity: 0.51"/>
+<rect x="502" y="162" width="40" height="32" class="f-pie" style="fill-opacity: 0.44"/>
+<rect x="502" y="196" width="40" height="32" class="f-pie" style="fill-opacity: 0.31"/>
+<rect x="502" y="230" width="40" height="32" class="f-pie" style="fill-opacity: 0.21"/>
+<rect x="544" y="60" width="40" height="32" class="f-pie" style="fill-opacity: 0.44"/>
+<rect x="544" y="94" width="40" height="32" class="f-pie" style="fill-opacity: 0.69"/>
+<rect x="544" y="128" width="40" height="32" class="f-pie" style="fill-opacity: 0.80"/>
+<rect x="544" y="162" width="40" height="32" class="f-pie" style="fill-opacity: 0.69"/>
+<rect x="544" y="196" width="40" height="32" class="f-pie" style="fill-opacity: 0.44"/>
+<rect x="544" y="230" width="40" height="32" class="f-pie" style="fill-opacity: 0.26"/>
+<rect x="586" y="60" width="40" height="32" class="f-pie" style="fill-opacity: 0.51"/>
+<rect x="586" y="94" width="40" height="32" class="f-pie" style="fill-opacity: 0.80"/>
+<rect x="586" y="128" width="40" height="32" class="f-pie" style="fill-opacity: 0.95"/>
+<rect x="586" y="162" width="40" height="32" class="f-pie" style="fill-opacity: 0.80"/>
+<rect x="586" y="196" width="40" height="32" class="f-pie" style="fill-opacity: 0.51"/>
+<rect x="586" y="230" width="40" height="32" class="f-pie" style="fill-opacity: 0.28"/>
+<rect x="628" y="60" width="40" height="32" class="f-pie" style="fill-opacity: 0.44"/>
+<rect x="628" y="94" width="40" height="32" class="f-pie" style="fill-opacity: 0.69"/>
+<rect x="628" y="128" width="40" height="32" class="f-pie" style="fill-opacity: 0.80"/>
+<rect x="628" y="162" width="40" height="32" class="f-pie" style="fill-opacity: 0.69"/>
+<rect x="628" y="196" width="40" height="32" class="f-pie" style="fill-opacity: 0.44"/>
+<rect x="628" y="230" width="40" height="32" class="f-pie" style="fill-opacity: 0.26"/>
+<rect x="670" y="60" width="40" height="32" class="f-pie" style="fill-opacity: 0.31"/>
+<rect x="670" y="94" width="40" height="32" class="f-pie" style="fill-opacity: 0.44"/>
+<rect x="670" y="128" width="40" height="32" class="f-pie" style="fill-opacity: 0.51"/>
+<rect x="670" y="162" width="40" height="32" class="f-pie" style="fill-opacity: 0.44"/>
+<rect x="670" y="196" width="40" height="32" class="f-pie" style="fill-opacity: 0.31"/>
+<rect x="670" y="230" width="40" height="32" class="f-pie" style="fill-opacity: 0.21"/>
+<text class="s" x="580" y="386" text-anchor="middle">estima toda la cuenca</text>
+<rect class="panel" x="800" y="10" width="360" height="400" rx="14"/>
+<path d="M70,60 L140,30 L230,50 L270,110 L250,190 L180,240 L100,220 L50,150 Z" transform="translate(830,40)" style="fill: var(--soil-dry); stroke: var(--text-muted); stroke-width: 2.5"/>
+<text class="b l" x="980" y="330" text-anchor="middle" style="font-size: 25px">Satélite</text>
+<text class="s" x="980" y="356" text-anchor="middle">Regional (~10 km)</text>
+<rect x="850" y="50" width="88" height="80" class="f-rain" style="fill-opacity: 0.29"/>
+<rect x="850" y="132" width="88" height="80" class="f-rain" style="fill-opacity: 0.39"/>
+<rect x="850" y="214" width="88" height="80" class="f-rain" style="fill-opacity: 0.29"/>
+<rect x="940" y="50" width="88" height="80" class="f-rain" style="fill-opacity: 0.50"/>
+<rect x="940" y="132" width="88" height="80" class="f-rain" style="fill-opacity: 0.85"/>
+<rect x="940" y="214" width="88" height="80" class="f-rain" style="fill-opacity: 0.50"/>
+<rect x="1030" y="50" width="88" height="80" class="f-rain" style="fill-opacity: 0.42"/>
+<rect x="1030" y="132" width="88" height="80" class="f-rain" style="fill-opacity: 0.68"/>
+<rect x="1030" y="214" width="88" height="80" class="f-rain" style="fill-opacity: 0.42"/>
+<text class="s" x="980" y="386" text-anchor="middle">tendencia, incluso sin red local</text>
+</svg>
+        </div>
+        <div class="callout callout-info" style="margin-top: 12px;">
+          <span class="callout-icon">🤝</span>
+          <div class="callout-content" style="font-weight: 600;">Se complementan: el <strong>pluviómetro</strong> calibra, el <strong>radar</strong> muestra dónde llueve ahora y el <strong>satélite</strong> cubre donde no hay nada más.</div>
+        </div>
+      </section>
+
+
 
       <!-- SLIDE 26: INTEGRACIÓN DE SENSORES -->
       <section class="slide-cover">

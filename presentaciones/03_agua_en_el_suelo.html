@@ -12,6 +12,7 @@
   
   <!-- Tema Institucional EAFIT -->
   <link rel="stylesheet" href="css/presentation-theme.css">
+  <link rel="stylesheet" href="css/diagrams.css">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
       <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
       <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
       <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
-      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+      <a href="../index.html#ruta" class="header-btn"><span>🏠</span> Salir al índice</a>
     </div>
   </header>
 
@@ -48,6 +49,133 @@
           <div class="cover-meta-item">
             <span class="cover-meta-label">Módulo</span>
             <span class="cover-meta-value">03 &bull; Hidráulica de Suelos y Sensores</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- NUEVA: POR QUÉ MONITOREAR EL AGUA EN EL SUELO -->
+      <section>
+        <h2>¿Por qué monitorear el agua en el suelo?</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          El agua es el factor que más se repite en las fallas geotécnicas
+        </h3>
+
+        <div class="split-2" style="margin-top: 22px; align-items: center; gap: 50px;">
+
+          <div class="card card-highlight">
+            <ul class="bullet-list" style="font-size: 1.02em;">
+              <li><strong>Deslizamientos</strong> detonados por lluvia.</li>
+              <li><strong>Falla de presas</strong> por filtración y erosión interna.</li>
+              <li><strong>Inestabilidad de excavaciones</strong> y taludes de corte.</li>
+              <li><strong>Asentamientos por consolidación</strong> al disiparse la presión de poros.</li>
+              <li><strong>Suelos expansivos y colapsables</strong> que cambian de volumen al mojarse.</li>
+            </ul>
+          </div>
+
+          <div class="chain">
+            <div class="chain-box chain-cause">
+              <span class="chain-tag">Causa · no se ve</span>
+              <strong>💧 El agua en el suelo</strong>
+              <span class="sub">Contenido de agua, succión, presión de poros</span>
+            </div>
+            <div class="chain-arrow">▼</div>
+            <div class="chain-box chain-mid">
+              <span class="chain-tag">Efecto</span>
+              <strong>⚖️ Cambia la resistencia y la rigidez del suelo</strong>
+              <span class="sub">σ′ = σ − u: al subir u, baja el esfuerzo efectivo</span>
+            </div>
+            <div class="chain-arrow">▼</div>
+            <div class="chain-box chain-effect">
+              <span class="chain-tag">Consecuencia · sí se ve</span>
+              <strong>📏 Deformación y movimiento</strong>
+              <span class="sub">Lo que mide el Módulo 4 (extensómetros, inclinómetros…)</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 22px;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-content" style="font-weight: 600;">
+            El agua no se ve, pero cambia la resistencia y la rigidez del suelo. <strong>Monitorearla es medir la causa y no solo la consecuencia.</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- NUEVA: CASOS HISTÓRICOS -->
+      <section>
+        <h2>Casos históricos: cuando el agua gana</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Dos fallas que cambiaron la ingeniería geotécnica
+        </h3>
+
+        <div class="split-2" style="margin-top: 18px; gap: 26px;">
+
+          <div class="card card-highlight" style="border-left-color: var(--accent-rose) !important;">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">🌊</span>
+              <span>Vajont, Italia · 1963</span>
+            </div>
+            <svg class="dg" viewBox="0 0 520 300" role="img" aria-label="Esquema del deslizamiento de Vajont hacia el embalse">
+              <defs>
+                <marker id="vj-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-rose)"/></marker>
+                <marker id="vj-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-cyan)"/></marker>
+              </defs>
+              <polygon class="f-soil-dry" points="68,300 68,270 150,270 230,190 330,110 430,62 520,52 520,300"/>
+              <polygon class="f-water" points="68,105 338,105 330,110 230,190 150,270 68,270"/>
+              <polygon class="f-rose" fill-opacity="0.35" points="230,190 330,110 430,62 520,52 520,150 430,192 330,232"/>
+              <path class="thin dash s-rose" style="stroke-width: 3.5" d="M230,190 Q330,250 430,192 T520,150"/>
+              <rect class="f-gray" x="40" y="88" width="28" height="212" rx="3"/>
+              <path class="thin s-rose" style="stroke-width: 4" marker-end="url(#vj-a)" d="M452,118 L372,168"/>
+              <path class="thin s-blue" style="stroke-width: 4" marker-end="url(#vj-b)" d="M175,98 Q130,32 62,58"/>
+              <text class="b m" x="54" y="80" text-anchor="middle">Presa</text>
+              <text class="s" x="82" y="28">Ola que sobrepasa la presa</text>
+              <text class="b m" x="82" y="205" style="fill: var(--text-main)">Embalse</text>
+              <text class="rose-txt m" x="232" y="84">Masa deslizada</text>
+              <text class="s" x="300" y="268">Superficie de falla</text>
+              <text class="s" x="505" y="292" text-anchor="end">Lluvia + cambios del embalse → u ↑</text>
+            </svg>
+            <ul class="bullet-list" style="font-size: 0.78em; margin-top: 6px;">
+              <li>Una ladera de ~270 millones de m³ deslizó hacia el embalse.</li>
+              <li>La ola pasó sobre la presa, que resistió, y arrasó el valle: ~2.000 víctimas.</li>
+              <li><strong>Lección:</strong> la presión de poros y el nivel del embalse controlaban la ladera.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left-color: var(--accent-cyan) !important;">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">🏞️</span>
+              <span>Teton Dam, EE. UU. · 1976</span>
+            </div>
+            <svg class="dg" viewBox="0 0 520 300" role="img" aria-label="Esquema de la erosión interna en la presa Teton">
+              <defs>
+                <marker id="tt-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-rose)"/></marker>
+              </defs>
+              <rect class="f-solid" x="0" y="250" width="520" height="50"/>
+              <polygon class="f-soil-dry" points="120,120 400,120 480,250 40,250"/>
+              <polygon class="f-water" points="0,140 108,140 40,250 0,250"/>
+              <path class="thin dash s-blue" style="stroke-width: 3.5" d="M108,140 C200,170 330,205 448,238"/>
+              <path class="s-rose" style="stroke-width: 20; opacity: 0.22; fill: none; stroke-linecap: round" d="M56,234 C170,238 300,240 458,246"/>
+              <path class="s-rose" style="stroke-width: 6; fill: none; stroke-linecap: round" marker-end="url(#tt-a)" d="M56,234 C170,238 300,240 452,246"/>
+              <circle class="f-blue" cx="478" cy="262" r="6"/><circle class="f-blue" cx="496" cy="276" r="5"/><circle class="f-blue" cx="494" cy="252" r="5"/>
+              <text class="b m" x="12" y="126">Embalse</text>
+              <text class="b m" x="262" y="160" text-anchor="middle">Presa de tierra</text>
+              <text class="pie-txt s" x="250" y="205" text-anchor="middle" transform="rotate(10 250 205)">Línea de filtración</text>
+              <text class="rose-txt m" x="210" y="282">Tubificación: erosión interna</text>
+            </svg>
+            <ul class="bullet-list" style="font-size: 0.78em; margin-top: 6px;">
+              <li>Presa de tierra que colapsó durante su primer llenado.</li>
+              <li>El agua abrió un conducto por dentro (erosión interna) y creció hasta el colapso.</li>
+              <li><strong>Lección:</strong> las filtraciones fueron visibles horas antes; vigilar el agua permite avisar.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 16px;">
+          <span class="callout-icon">⛰️</span>
+          <div class="callout-content" style="font-weight: 600;">
+            Más cerca de casa: <strong>deslizamientos detonados por lluvia en la región andina</strong>. El mecanismo es el mismo, solo que a otra escala.
           </div>
         </div>
       </section>
@@ -101,6 +229,77 @@
         </div>
       </section>
 
+      <!-- NUEVA: MECANISMOS - ZONAS DEL PERFIL Y PRESIÓN DE PORPS -->
+      <section>
+        <h2>Mecanismos: el agua en el perfil del suelo</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Zonas del perfil y presión de poros positiva y negativa
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 14px; align-items: center; gap: 30px;">
+
+          <svg class="dg" viewBox="0 0 1000 520" role="img" aria-label="Zonas del perfil del suelo y perfil de presión de poros">
+            <defs>
+              <pattern id="grn" width="26" height="26" patternUnits="userSpaceOnUse">
+                <circle cx="6" cy="7" r="2.6" class="grains"/><circle cx="19" cy="17" r="3.2" class="grains"/><circle cx="8" cy="21" r="1.8" class="grains"/>
+              </pattern>
+            </defs>
+            <!-- Columna de suelo -->
+            <rect class="f-soil-dry" x="30" y="50" width="300" height="180"/>
+            <rect class="f-soil-cap" x="30" y="230" width="300" height="70"/>
+            <rect class="f-soil-sat" x="30" y="300" width="300" height="190"/>
+            <rect x="30" y="50" width="300" height="440" fill="url(#grn)"/>
+            <line class="ax" x1="10" y1="50" x2="330" y2="50"/>
+            <text class="s" x="10" y="40">Superficie</text>
+            <text class="b l" x="45" y="108" style="font-size: 22px">Zona no saturada</text>
+            <text class="s" x="45" y="134">(vadosa): aire y agua</text>
+            <text class="b l" x="45" y="258" style="font-size: 22px">Franja capilar</text>
+            <text class="s" x="45" y="282">el agua asciende</text>
+            <text class="b l" x="45" y="372" style="font-size: 22px">Zona saturada</text>
+            <text class="s" x="45" y="398">poros llenos de agua</text>
+            <!-- Nivel freático -->
+            <line class="thin dash s-blue" style="stroke-width: 3.5" x1="30" y1="300" x2="940" y2="300"/>
+            <polygon class="f-blue" points="352,300 374,287 374,313"/>
+            <text class="pie-txt m" x="382" y="334">Nivel freático (u = 0)</text>
+            <!-- Perfil de presión -->
+            <text class="b m" x="640" y="30" text-anchor="middle">Presión del agua en los poros, u</text>
+            <polygon class="f-rose" fill-opacity="0.2" points="640,50 460,50 640,300"/>
+            <polygon class="f-blue" fill-opacity="0.28" points="640,300 640,490 777,490"/>
+            <line class="ax" x1="640" y1="50" x2="640" y2="490"/>
+            <path class="curve s-rose" d="M460,50 L640,300"/>
+            <path class="curve s-blue" d="M640,300 L777,490"/>
+            <text class="rose-txt l" x="450" y="82" text-anchor="end">u &lt; 0</text>
+            <text class="s" x="450" y="108" text-anchor="end">succión</text>
+            <text class="s" x="450" y="130" text-anchor="end">matricial</text>
+            <text class="pie-txt l" x="772" y="402">u &gt; 0</text>
+            <text class="s" x="772" y="426">presión de poros</text>
+            <text class="s" x="772" y="448">positiva</text>
+            <text class="s" x="650" y="290">u = 0</text>
+          </svg>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🔍</span>
+              <span>Qué hay que ver</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.82em;">
+              <li><strong>Zona no saturada:</strong> poros con aire y agua; u&nbsp;&lt;&nbsp;0.</li>
+              <li><strong>Franja capilar:</strong> casi saturada, pero todavía con succión.</li>
+              <li><strong>Zona saturada:</strong> bajo el nivel freático; u&nbsp;&gt;&nbsp;0.</li>
+              <li>El <strong>nivel freático</strong> es donde u = 0.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 12px;">
+          <span class="callout-icon">🧭</span>
+          <div class="callout-content" style="font-weight: 600;">
+            Sobre el nivel freático el agua está en <strong>succión</strong> (el suelo «se agarra» más); bajo el nivel freático la <strong>presión positiva</strong> empuja las partículas y reduce el esfuerzo efectivo.
+          </div>
+        </div>
+      </section>
+
       <!-- SLIDE 3: LLUVIA Y HUMEDAD: TERZAGHI -->
       <section>
         <h2>La lluvia y la humedad como factores</h2>
@@ -119,11 +318,11 @@
               <p style="margin-top: 10px; font-size: 1.05em;">
                 La resistencia al corte de un suelo viene dada por:
               </p>
-              <div style="text-align: center; font-size: 1.4em; padding: 15px; margin: 12px 0; background: rgba(0,75,133,0.06); border-radius: 8px; font-family: var(--font-mono);">
-                98916	au = c' + (\sigma - u) 	an\phi'98916
+              <div style="text-align: center; font-size: 1.1em; padding: 4px 15px; margin: 10px 0; background: rgba(0,75,133,0.06); border-radius: 8px;">
+                $$\tau = c' + (\sigma - u)\tan\phi'$$
               </div>
               <p style="font-size: 0.95em; color: var(--text-muted);">
-                Donde '$ y $\phi'$ son parámetros intrínsecos del suelo, mientras que $\sigma' = \sigma - u$ dependerá de las variaciones de los esfuerzos totales debidos al efecto de la presión de poros ($).
+                Donde $c'$ y $\phi'$ son parámetros intrínsecos del suelo, mientras que $\sigma' = \sigma - u$ dependerá de las variaciones de los esfuerzos totales debidos al efecto de la presión de poros ($u$).
               </p>
             </div>
 
@@ -137,6 +336,115 @@
 
           <div style="text-align: center;">
             <img src="img/p03/image2.jpeg" alt="Esfuerzos y Presión de Poros" style="max-height: 350px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+
+        </div>
+      </section>
+
+      <!-- NUEVA: EXTENSIÓN AL SUELO NO SATURADO -->
+      <section>
+        <h2>Esfuerzos efectivos en suelos no saturados</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Extendiendo el principio de Terzaghi por encima del nivel freático
+        </h3>
+
+        <div class="split-2" style="margin-top: 20px; gap: 30px;">
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🧮</span>
+              <span>Esfuerzo efectivo de Bishop (1959)</span>
+            </div>
+            <div class="formula-inline">
+              $$\sigma' = (\sigma - u_a) + \chi\,(u_a - u_w)$$
+            </div>
+            <ul class="bullet-list" style="font-size: 0.85em;">
+              <li>$u_a$: presión del aire; $u_w$: presión del agua.</li>
+              <li>$(u_a - u_w)$ es la <strong>succión matricial</strong>.</li>
+              <li>$\chi$ va de 0 (suelo seco) a 1 (saturado).</li>
+              <li>Si $\chi = 1$ y $u_a = 0$ se recupera <strong>Terzaghi</strong>: $\sigma' = \sigma - u$.</li>
+            </ul>
+          </div>
+
+          <div class="card card-highlight" style="border-left-color: var(--accent-cyan) !important;">
+            <div class="card-title" style="color: var(--accent-cyan);">
+              <span class="card-icon">🧩</span>
+              <span>Variables de esfuerzo independientes</span>
+            </div>
+            <div class="formula-inline">
+              $$\tau = c' + (\sigma - u_a)\tan\phi' + (u_a - u_w)\tan\phi^{b}$$
+            </div>
+            <ul class="bullet-list" style="font-size: 0.85em;">
+              <li>$(\sigma - u_a)$: esfuerzo normal neto.</li>
+              <li>$(u_a - u_w)$: succión matricial, $\psi$.</li>
+              <li>$\phi^{b}$: cuánto aumenta la resistencia por cada unidad de succión.</li>
+              <li>Fredlund y Morgenstern (1977).</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 20px;">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-content" style="font-weight: 600;">
+            Más succión = más resistencia aparente. Al llover, <strong>$\psi \to 0$ y esa resistencia se pierde</strong>: por eso hay que medir la succión, no solo la humedad.
+          </div>
+        </div>
+      </section>
+
+      <!-- NUEVA: CURVA DE RETENCIÓN (SWCC) -->
+      <section>
+        <h2>Curva de retención de agua (SWCC)</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          El puente entre humedad, succión y presión de poros
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 16px; align-items: center; gap: 30px;">
+
+          <svg class="dg" viewBox="0 0 1000 540" role="img" aria-label="Curva de retención de agua del suelo: contenido de agua contra succión">
+            <rect x="110" y="60" width="140" height="400" style="fill: var(--accent-cyan); fill-opacity: 0.12"/>
+            <rect x="250" y="60" width="350" height="400" style="fill: var(--accent-amber); fill-opacity: 0.12"/>
+            <rect x="600" y="60" width="330" height="400" style="fill: var(--accent-rose); fill-opacity: 0.09"/>
+            <text class="b m" x="180" y="84" text-anchor="middle">Saturado</text>
+            <text class="b m" x="425" y="84" text-anchor="middle">Desaturación</text>
+            <text class="b m" x="765" y="84" text-anchor="middle">Residual</text>
+            <line class="ax" x1="110" y1="460" x2="940" y2="460"/>
+            <line class="ax" x1="110" y1="460" x2="110" y2="56"/>
+            <polygon class="f-gray" points="950,460 932,452 932,468"/>
+            <polygon class="f-gray" points="110,48 102,66 118,66"/>
+            <line class="thin dash" x1="110" y1="110" x2="930" y2="110"/>
+            <line class="thin dash" x1="110" y1="410" x2="930" y2="410"/>
+            <text class="b m" x="98" y="116" text-anchor="end">θs</text>
+            <text class="b m" x="98" y="416" text-anchor="end">θr</text>
+            <path class="curve s-blue" d="M110,110 L250,112 C340,118 400,190 460,270 C520,350 580,400 700,408 L930,412"/>
+            <circle cx="250" cy="112" r="8" class="f-gray"/>
+            <text class="b m" x="245" y="152" text-anchor="end">AEV</text>
+            <text class="s" x="245" y="172" text-anchor="end">entrada de aire</text>
+            <!-- Un punto de la curva -->
+            <line class="thin dash s-hum" style="stroke-width: 3" x1="110" y1="270" x2="460" y2="270"/>
+            <line class="thin dash s-ten" style="stroke-width: 3" x1="460" y1="270" x2="460" y2="460"/>
+            <circle cx="460" cy="270" r="10" style="fill: var(--eafit-yellow); stroke: var(--text-main); stroke-width: 2.5"/>
+            <text class="b m" x="98" y="276" text-anchor="end">θ₁</text>
+            <text class="b m" x="460" y="486" text-anchor="middle">ψ₁</text>
+            <text class="hum-txt m" x="125" y="256">Sensor de humedad → θ</text>
+            <text class="ten-txt m" x="448" y="352" text-anchor="end">Tensiómetro → ψ</text>
+            <text class="pie-txt m" x="122" y="206">Piezómetro</text>
+            <text class="s" x="122" y="228">u &gt; 0 (ψ = 0)</text>
+            <text class="l" transform="translate(44,262) rotate(-90)" text-anchor="middle" style="font-size: 21px">Contenido volumétrico de agua, θ</text>
+            <text class="l" x="525" y="524" text-anchor="middle" style="font-size: 21px">Succión matricial, ψ (escala logarítmica) →</text>
+          </svg>
+
+          <div class="card">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🌉</span>
+              <span>¿Por qué es el «puente»?</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.82em;">
+              <li>Cada suelo tiene <strong>su</strong> curva que relaciona θ con ψ.</li>
+              <li>Con humedad <em>y</em> succión medidas juntas, se puede <strong>calibrar y validar</strong> la curva en campo.</li>
+              <li>El piezómetro cubre el extremo saturado, donde ψ = 0 y u &gt; 0.</li>
+              <li><strong>Histéresis:</strong> humedecer y secar no siguen el mismo camino.</li>
+            </ul>
           </div>
 
         </div>
@@ -176,6 +484,73 @@
             <img src="img/p03/image7.png" alt="Proceso de Infiltración en el Suelo" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
           </div>
 
+        </div>
+      </section>
+
+      <!-- NUEVA: PROCESO - INFILTRACIÓN POR LLUVIA COMO SECUENCIA -->
+      <section>
+        <h2>Proceso: infiltración por lluvia</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Una secuencia de eventos, y cada uno lo ve un sensor distinto
+        </h3>
+
+        <div class="step-flow">
+
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-icon">🌧️</div>
+            <div class="step-title">Llueve</div>
+            <p>El agua llega a la superficie y comienza a infiltrarse.</p>
+            <span class="sensor-chip chip-rain">Pluviómetro</span>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-icon">⬇️</div>
+            <div class="step-title">Avanza el frente húmedo</div>
+            <p>El suelo se humedece de arriba hacia abajo.</p>
+            <span class="sensor-chip chip-hum">Sensor de humedad</span>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-icon">🧲</div>
+            <div class="step-title">Cae la succión</div>
+            <p>Al humedecerse, la succión matricial tiende a cero.</p>
+            <span class="sensor-chip chip-ten">Tensiómetro</span>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-icon">📉</div>
+            <div class="step-title">Baja la resistencia aparente</div>
+            <p>Se pierde la resistencia que aportaba la succión.</p>
+            <span class="sensor-chip chip-calc">σ′ calculado</span>
+          </div>
+
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-icon">⬆️</div>
+            <div class="step-title">Sube el nivel freático</div>
+            <p>Se generan presiones de poros positivas.</p>
+            <span class="sensor-chip chip-pie">Piezómetro</span>
+          </div>
+
+          <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-icon">⚠️</div>
+            <div class="step-title">Puede llegar la falla</div>
+            <p>Cuando la resistencia cae por debajo del esfuerzo actuante.</p>
+            <span class="sensor-chip chip-def">Deformación (Mód. 4)</span>
+          </div>
+
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 34px;">
+          <span class="callout-icon">🔎</span>
+          <div class="callout-content" style="font-weight: 600;">
+            Cada etapa deja una huella distinta. <strong>Por eso se combinan sensores:</strong> ninguno cuenta la historia completa.
+          </div>
         </div>
       </section>
 
@@ -224,6 +599,83 @@
         </div>
       </section>
 
+      <!-- NUEVA: PROCESO - CICLOS DE HUMEDECIMIENTO Y SECADO -->
+      <section>
+        <h2>Proceso: ciclos de humedecimiento y secado</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Suelos expansivos, grietas y cambios estacionales
+        </h3>
+
+        <div style="margin-top: 14px;">
+          <svg class="dg" viewBox="0 0 1000 290" role="img" aria-label="Ciclo de humedecimiento, secado y nueva lluvia en un suelo expansivo">
+            <defs>
+              <pattern id="grn2" width="26" height="26" patternUnits="userSpaceOnUse">
+                <circle cx="6" cy="7" r="2.6" class="grains"/><circle cx="19" cy="17" r="3.2" class="grains"/><circle cx="8" cy="21" r="1.8" class="grains"/>
+              </pattern>
+              <marker id="cy-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-cyan)"/></marker>
+            </defs>
+
+            <!-- Panel 1: humedecimiento -->
+            <rect class="panel" x="10" y="10" width="300" height="210" rx="14"/>
+            <text class="b m" x="160" y="40" text-anchor="middle">1 · Humedecimiento</text>
+            <path class="f-blue" d="M90,60 q-9,15 0,22 q9,-7 0,-22z"/>
+            <path class="f-blue" d="M160,54 q-9,15 0,22 q9,-7 0,-22z"/>
+            <path class="f-blue" d="M230,60 q-9,15 0,22 q9,-7 0,-22z"/>
+            <rect class="f-soil-sat" x="40" y="112" width="240" height="90" rx="4"/>
+            <rect x="40" y="112" width="240" height="90" rx="4" fill="url(#grn2)"/>
+            <polygon class="f-gray" points="14,157 32,147 32,167"/>
+            <polygon class="f-gray" points="306,157 288,147 288,167"/>
+            <text class="b m" x="160" y="163" text-anchor="middle">Se expande</text>
+
+            <polygon class="f-gray" points="322,108 346,120 322,132"/>
+
+            <!-- Panel 2: secado -->
+            <rect class="panel" x="350" y="10" width="300" height="210" rx="14"/>
+            <text class="b m" x="500" y="40" text-anchor="middle">2 · Secado</text>
+            <circle class="f-ten" cx="600" cy="62" r="17"/>
+            <g class="s-ten" style="stroke-width: 4; stroke-linecap: round"><line x1="600" y1="34" x2="600" y2="26"/><line x1="628" y1="62" x2="636" y2="62"/><line x1="580" y1="42" x2="574" y2="36"/><line x1="620" y1="42" x2="626" y2="36"/></g>
+            <rect class="f-soil-dry" x="400" y="112" width="200" height="90" rx="4"/>
+            <rect x="400" y="112" width="200" height="90" rx="4" fill="url(#grn2)"/>
+            <g style="stroke: var(--text-main); stroke-width: 3.5; fill: none; stroke-linecap: round; stroke-linejoin: round">
+              <path d="M455,112 l7,22 l-9,18 l8,24"/><path d="M510,112 l-6,24 l9,16 l-6,24"/><path d="M565,112 l6,18 l-7,16 l6,24"/>
+            </g>
+            <polygon class="f-gray" points="362,147 380,157 362,167"/>
+            <polygon class="f-gray" points="638,147 620,157 638,167"/>
+
+            <polygon class="f-gray" points="662,108 686,120 662,132"/>
+
+            <!-- Panel 3: nueva lluvia -->
+            <rect class="panel" x="690" y="10" width="300" height="210" rx="14"/>
+            <text class="b m" x="840" y="40" text-anchor="middle">3 · Nueva lluvia</text>
+            <path class="f-blue" d="M775,52 q-9,15 0,22 q9,-7 0,-22z"/>
+            <path class="f-blue" d="M840,48 q-9,15 0,22 q9,-7 0,-22z"/>
+            <path class="f-blue" d="M905,52 q-9,15 0,22 q9,-7 0,-22z"/>
+            <rect class="f-soil-dry" x="740" y="112" width="200" height="90" rx="4"/>
+            <rect x="740" y="112" width="200" height="90" rx="4" fill="url(#grn2)"/>
+            <g style="stroke: var(--accent-cyan); stroke-width: 6; fill: none; stroke-linecap: round; stroke-linejoin: round">
+              <path d="M795,112 l7,22 l-9,18 l8,24"/><path d="M850,112 l-6,24 l9,16 l-6,24"/><path d="M905,112 l6,18 l-7,16 l6,24"/>
+            </g>
+            <g class="s-blue" style="stroke-width: 4; fill: none" marker-end="url(#cy-a)">
+              <path d="M795,80 L795,104" marker-end="url(#cy-a)"/><path d="M850,84 L850,104" marker-end="url(#cy-a)"/><path d="M905,80 L905,104" marker-end="url(#cy-a)"/>
+            </g>
+
+            <text class="s" x="160" y="246" text-anchor="middle">El suelo expansivo se hincha</text>
+            <text class="s" x="160" y="268" text-anchor="middle">y la succión disminuye</text>
+            <text class="s" x="500" y="246" text-anchor="middle">Se contrae y se agrieta</text>
+            <text class="s" x="500" y="268" text-anchor="middle">y la succión aumenta</text>
+            <text class="s" x="840" y="246" text-anchor="middle">El agua entra por las grietas</text>
+            <text class="s" x="840" y="268" text-anchor="middle">y llega más profundo</text>
+          </svg>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 14px;">
+          <span class="callout-icon">🔁</span>
+          <div class="callout-content" style="font-weight: 600;">
+            Con cada ciclo estacional cambian la succión y la resistencia aparente. <strong>Las grietas son vías de infiltración preferencial</strong> y aceleran la respuesta a la siguiente lluvia.
+          </div>
+        </div>
+      </section>
+
       <!-- SLIDE 6: MONITOREO DEL AGUA EN EL SUELO - ESCALAS -->
       <section>
         <h2>Monitoreo del agua en el suelo</h2>
@@ -256,6 +708,221 @@
             <p style="font-size: 1em; color: var(--text-muted); margin-top: 20px;">
               Monitoreo regional de humedad superficial a gran escala.
             </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- NUEVA (CLAVE): MAPA VARIABLE → SENSOR: PERFIL VERTICAL -->
+      <section>
+        <h2>Mapa variable → sensor <span class="key-badge">★ Diapositiva clave</span></h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Cada sensor va donde su variable importa
+        </h3>
+
+        <div style="margin-top: 10px;">
+          <svg class="dg" style="max-height: 760px" viewBox="0 0 1400 620" role="img" aria-label="Perfil vertical del suelo con la ubicación de cada sensor por zona">
+            <defs>
+              <pattern id="grn3" width="26" height="26" patternUnits="userSpaceOnUse">
+                <circle cx="6" cy="7" r="2.6" class="grains"/><circle cx="19" cy="17" r="3.2" class="grains"/><circle cx="8" cy="21" r="1.8" class="grains"/>
+              </pattern>
+            </defs>
+
+            <!-- Atmósfera: lluvia y satélite -->
+            <g class="f-gray" style="fill-opacity: 0.5"><ellipse cx="150" cy="50" rx="48" ry="24"/><ellipse cx="192" cy="40" rx="40" ry="26"/><ellipse cx="112" cy="56" rx="34" ry="18"/></g>
+            <g class="s-rain" style="stroke-width: 3.5; stroke-linecap: round">
+              <line x1="112" y1="84" x2="104" y2="104"/><line x1="142" y1="84" x2="134" y2="104"/><line x1="172" y1="84" x2="164" y2="104"/><line x1="202" y1="84" x2="194" y2="104"/>
+              <line x1="127" y1="108" x2="119" y2="128"/><line x1="157" y1="108" x2="149" y2="128"/><line x1="187" y1="108" x2="179" y2="128"/>
+            </g>
+            <text class="rain-txt l" x="252" y="56">Lluvia</text>
+            <text class="m" x="252" y="82">pluviómetro · radar</text>
+            <polygon class="f-rain" points="500,150 526,150 520,132 506,132"/>
+            <rect class="f-rain" x="506" y="126" width="14" height="6"/>
+            <rect class="f-rain" x="664" y="34" width="32" height="26" rx="4"/>
+            <rect class="f-blue" x="626" y="40" width="32" height="14"/><rect class="f-blue" x="702" y="40" width="32" height="14"/>
+            <line class="thin dash s-rain" style="stroke-width: 3" x1="680" y1="64" x2="680" y2="148"/>
+            <text class="rain-txt l" x="704" y="96">Satélite</text>
+            <text class="m" x="704" y="122">humedad superficial</text>
+
+            <!-- Perfil del suelo -->
+            <rect class="f-soil-dry" x="20" y="150" width="780" height="190"/>
+            <rect class="f-soil-cap" x="20" y="340" width="780" height="70"/>
+            <rect class="f-soil-sat" x="20" y="410" width="780" height="180"/>
+            <rect x="20" y="150" width="780" height="440" fill="url(#grn3)"/>
+            <line class="ax" x1="10" y1="150" x2="810" y2="150"/>
+            <line class="thin dash s-blue" style="stroke-width: 3.5" x1="20" y1="410" x2="800" y2="410"/>
+            <text class="pie-txt s" x="672" y="440">nivel freático</text>
+            <text class="b l" x="36" y="184">Zona no saturada</text>
+            <text class="m" x="36" y="210">θ variable · u &lt; 0</text>
+            <text class="b l" x="36" y="372">Franja capilar</text>
+            <text class="m" x="36" y="398">el agua asciende</text>
+            <text class="b l" x="36" y="456">Zona saturada</text>
+            <text class="m" x="36" y="482">θ = θs · u &gt; 0</text>
+
+            <!-- ① Sensores de humedad -->
+            <g class="s-hum" style="stroke-width: 3"><line x1="290" y1="150" x2="290" y2="230"/><line x1="380" y1="150" x2="380" y2="292"/></g>
+            <rect class="f-hum" x="278" y="230" width="24" height="38" rx="6"/>
+            <rect class="f-hum" x="368" y="292" width="24" height="38" rx="6"/>
+            <circle class="f-hum" cx="290" cy="130" r="17"/><text class="w" x="290" y="138" text-anchor="middle">1</text>
+            <circle class="f-hum" cx="380" cy="130" r="17"/><text class="w" x="380" y="138" text-anchor="middle">1</text>
+
+            <!-- ② Tensiómetro -->
+            <rect class="f-gray" style="fill-opacity: 0.85" x="484" y="150" width="12" height="176"/>
+            <ellipse class="f-ten" cx="490" cy="338" rx="13" ry="18"/>
+            <circle class="f-ten" cx="490" cy="130" r="17"/><text class="w" x="490" y="138" text-anchor="middle">2</text>
+
+            <!-- ③ Piezómetro -->
+            <rect class="f-gray" style="fill-opacity: 0.55" x="641" y="150" width="18" height="352"/>
+            <rect class="f-blue" x="644" y="410" width="12" height="92"/>
+            <rect class="f-pie" x="637" y="498" width="26" height="30" rx="4"/>
+            <circle class="f-pie" cx="650" cy="130" r="17"/><text class="w" x="650" y="138" text-anchor="middle">3</text>
+
+            <!-- Fichas de la derecha -->
+            <rect class="panel" x="830" y="140" width="560" height="150" rx="12"/>
+            <rect class="f-hum" x="830" y="140" width="9" height="150" rx="4"/>
+            <circle class="f-hum" cx="872" cy="176" r="17"/><text class="w" x="872" y="184" text-anchor="middle">1</text>
+            <text class="hum-txt l" x="900" y="185">Sensores de humedad</text>
+            <text class="m" x="858" y="226" style="font-size: 23px"><tspan class="b">Zona:</tspan> no saturada, somera</text>
+            <text class="m" x="858" y="254" style="font-size: 23px"><tspan class="b">Mide:</tspan> θ, contenido volumétrico de agua</text>
+            <text class="m" x="858" y="282" style="font-size: 23px"><tspan class="b">Dice:</tspan> hasta dónde llegó el frente húmedo</text>
+
+            <rect class="panel" x="830" y="302" width="560" height="150" rx="12"/>
+            <rect class="f-ten" x="830" y="302" width="9" height="150" rx="4"/>
+            <circle class="f-ten" cx="872" cy="338" r="17"/><text class="w" x="872" y="346" text-anchor="middle">2</text>
+            <text class="ten-txt l" x="900" y="347">Tensiómetros</text>
+            <text class="m" x="858" y="388" style="font-size: 23px"><tspan class="b">Zona:</tspan> no saturada y franja capilar</text>
+            <text class="m" x="858" y="416" style="font-size: 23px"><tspan class="b">Mide:</tspan> succión matricial ψ</text>
+            <text class="m" x="858" y="444" style="font-size: 23px"><tspan class="b">Dice:</tspan> cuánta resistencia aparente queda</text>
+
+            <rect class="panel" x="830" y="464" width="560" height="146" rx="12"/>
+            <rect class="f-pie" x="830" y="464" width="9" height="146" rx="4"/>
+            <circle class="f-pie" cx="872" cy="500" r="17"/><text class="w" x="872" y="508" text-anchor="middle">3</text>
+            <text class="pie-txt l" x="900" y="509">Piezómetros</text>
+            <text class="m" x="858" y="550" style="font-size: 23px"><tspan class="b">Zona:</tspan> saturada</text>
+            <text class="m" x="858" y="578" style="font-size: 23px"><tspan class="b">Mide:</tspan> presión de poros u y nivel freático</text>
+            <text class="m" x="858" y="606" style="font-size: 23px"><tspan class="b">Dice:</tspan> esfuerzo efectivo y estabilidad</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- NUEVA (CLAVE): TABLA VARIABLE → ZONA → SENSOR → QUÉ TE DICE -->
+      <section>
+        <h2>Mapa variable → sensor <span class="key-badge">★ Diapositiva clave</span></h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Variable, zona donde importa, sensor y qué te dice
+        </h3>
+
+        <table class="data-table" style="margin-top: 18px;">
+          <thead>
+            <tr>
+              <th>Variable</th>
+              <th>Zona donde importa</th>
+              <th>Sensor</th>
+              <th>Qué te dice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Presión de poros positiva, nivel freático</strong></td>
+              <td>Saturada</td>
+              <td><span class="dot" style="background: var(--sensor-pie)"></span>Piezómetros</td>
+              <td>Esfuerzo efectivo, estabilidad, consolidación</td>
+            </tr>
+            <tr>
+              <td><strong>Succión matricial</strong> (presión negativa)</td>
+              <td>No saturada y franja capilar</td>
+              <td><span class="dot" style="background: var(--sensor-ten)"></span>Tensiómetros</td>
+              <td>Resistencia aparente y cuánto falta para saturarse</td>
+            </tr>
+            <tr>
+              <td><strong>Contenido volumétrico de agua</strong></td>
+              <td>No saturada, somera</td>
+              <td><span class="dot" style="background: var(--sensor-hum)"></span>Sensores de humedad (TDR / FDR)</td>
+              <td>Avance del frente húmedo y grado de saturación</td>
+            </tr>
+            <tr>
+              <td><strong>Lluvia</strong> (entrada de agua)</td>
+              <td>Superficie</td>
+              <td><span class="dot" style="background: var(--sensor-rain)"></span>Pluviómetros y radar</td>
+              <td>Cuánta agua llega y si se superan los umbrales</td>
+            </tr>
+            <tr>
+              <td><strong>Humedad superficial regional</strong></td>
+              <td>Primeros centímetros, escala regional</td>
+              <td><span class="dot" style="background: var(--sensor-rain)"></span>Satélites (SMAP, SMOS)</td>
+              <td>Tendencias espaciales y humedad antecedente</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout callout-warning" style="margin-top: 18px;">
+          <span class="callout-icon">🎯</span>
+          <div class="callout-content" style="font-weight: 600;">
+            Regla práctica: <strong>una variable, una zona, un sensor</strong>. Sin saber en qué zona está el sensor, el dato no se puede interpretar.
+          </div>
+        </div>
+      </section>
+
+      <!-- NUEVA: RESPUESTA TEMPORAL COMBINADA DE LOS SENSORES -->
+      <section>
+        <h2>Leer los sensores en conjunto</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Respuesta típica de cada sensor ante un evento de lluvia (esquema)
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" viewBox="0 0 1000 620" role="img" aria-label="Respuesta temporal esquemática de lluvia, humedad, succión y presión de poros">
+            <!-- Bandas -->
+            <rect x="300" y="30" width="80" height="540" style="fill: var(--sensor-rain); fill-opacity: 0.1"/>
+            <rect x="480" y="30" width="110" height="540" style="fill: var(--accent-rose); fill-opacity: 0.13"/>
+            <text class="rain-txt s" x="340" y="22" text-anchor="middle">Lluvia</text>
+            <text class="rose-txt s" x="535" y="22" text-anchor="middle">Ventana crítica</text>
+
+            <!-- Paneles -->
+            <rect class="panel" x="210" y="30" width="770" height="120" rx="10" style="fill-opacity: 0.35"/>
+            <rect class="panel" x="210" y="170" width="770" height="120" rx="10" style="fill-opacity: 0.35"/>
+            <rect class="panel" x="210" y="310" width="770" height="120" rx="10" style="fill-opacity: 0.35"/>
+            <rect class="panel" x="210" y="450" width="770" height="120" rx="10" style="fill-opacity: 0.35"/>
+
+            <!-- Etiquetas -->
+            <text class="rain-txt m" x="14" y="76">Pluviómetro</text><text class="s" x="14" y="98">lluvia (mm/h)</text>
+            <text class="hum-txt m" x="14" y="216">Sensor de humedad</text><text class="s" x="14" y="238">θ: respuesta rápida</text>
+            <text class="ten-txt m" x="14" y="356">Tensiómetro</text><text class="s" x="14" y="378">ψ cae al humedecerse</text>
+            <text class="pie-txt m" x="14" y="496">Piezómetro</text><text class="s" x="14" y="518">u sube con retardo</text>
+
+            <!-- Lluvia -->
+            <g class="f-rain">
+              <rect x="300" y="117" width="8" height="18"/><rect x="310" y="93" width="8" height="42"/><rect x="320" y="67" width="8" height="68"/><rect x="330" y="83" width="8" height="52"/>
+              <rect x="340" y="55" width="8" height="80"/><rect x="350" y="87" width="8" height="48"/><rect x="360" y="107" width="8" height="28"/><rect x="370" y="121" width="8" height="14"/>
+            </g>
+            <!-- Humedad -->
+            <path class="curve s-hum" d="M210,265 L305,265 C330,265 340,206 400,205 L560,206 C700,210 800,245 975,255"/>
+            <!-- Succión -->
+            <path class="curve s-ten" d="M210,340 L340,340 C380,340 400,408 470,410 L610,410 C700,408 800,360 975,345"/>
+            <text class="s" x="535" y="398" text-anchor="middle">ψ ≈ 0</text>
+            <!-- Presión de poros -->
+            <path class="curve s-pie" d="M210,550 L430,550 C480,550 500,478 545,475 C600,472 700,530 975,548"/>
+            <line class="s-gray" style="stroke-width: 2.5" x1="300" y1="462" x2="540" y2="462"/>
+            <polygon class="f-gray" points="546,462 534,455 534,469"/>
+            <text class="s" x="420" y="456" text-anchor="middle">retardo</text>
+
+            <!-- Eje de tiempo -->
+            <line class="ax" x1="210" y1="592" x2="965" y2="592"/>
+            <polygon class="f-gray" points="978,592 962,584 962,600"/>
+            <text class="b m" x="595" y="616" text-anchor="middle">Tiempo</text>
+          </svg>
+
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">🧩</span>
+              <span>Cómo leerlos juntos</span>
+            </div>
+            <ul class="bullet-list" style="font-size: 0.8em;">
+              <li><strong style="color: var(--sensor-hum)">La humedad avisa primero:</strong> el frente húmedo llega y θ sube.</li>
+              <li><strong style="color: var(--sensor-ten)">La succión confirma:</strong> cae hacia cero y se pierde resistencia aparente.</li>
+              <li><strong style="color: var(--sensor-pie)">La presión de poros marca el momento crítico:</strong> sube con retardo y se sostiene.</li>
+            </ul>
           </div>
 
         </div>

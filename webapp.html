@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laboratorio Interactivo de Instrumentación Geotécnica | Universidad EAFIT</title>
+
+  <!-- Metadatos SEO -->
+  <meta name="description" content="Plataforma web interactiva para el análisis computacional de sensores geotécnicos con Python y Pandas. Caso de estudio real de Ancón Norte (Copacabana - SIATA).">
+  <meta name="author" content="M.Eng. Federico Gómez, M.Eng. Juliana Álvarez - Universidad EAFIT">
+  <meta name="keywords" content="Instrumentación Geotécnica, Python, Pandas, Matplotlib, Geotecnia, Sensores, Ancón Norte, SIATA, Deslizamientos, EAFIT">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Laboratorio Interactivo de Instrumentación Geotécnica">
+  <meta property="og:description" content="Aprende análisis de sensores geotécnicos con Python interactivo directamente en el navegador.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CodeMirror CSS & Themes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/styles.css?v=4">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
+</head>
+<body>
+
+  <!-- CONFETTI CANVAS (overlay, hidden by default) -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- BADGE TOAST (injected by JS) -->
+
+  <!-- MODAL: Módulo Completo -->
+  <div class="module-complete-modal" id="module-complete-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="mcm-title">
+    <div class="mcm-backdrop" id="module-complete-close"></div>
+    <div class="mcm-card">
+      <div class="mcm-emoji" id="mcm-emoji"><span class="mcm-module-emoji"></span></div>
+      <h2 class="mcm-title" id="mcm-title">¡<span class="mcm-module-name"></span> Completado! 🎉</h2>
+      <p class="mcm-subtitle">Has terminado todos los ejercicios de este módulo.</p>
+      <div class="mcm-stats">
+        <div class="mcm-stat">
+          <span class="mcm-stat-val mcm-lessons-done"></span>
+          <span class="mcm-stat-label">completados</span>
+        </div>
+      </div>
+      <div class="mcm-actions">
+        <button class="btn-run mcm-btn-next" id="module-complete-next">Siguiente módulo →</button>
+        <button class="btn-tool mcm-btn-close" onclick="document.getElementById('module-complete-modal').style.display='none'">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       ENCABEZADO PRINCIPAL (HEADER)
+       =================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+
+      <!-- Marca / Logo -->
+      <div class="brand-wrapper" onclick="window.location.href='index.html'" style="cursor: pointer" title="Volver al índice del curso">
+        <div class="brand-icon">🏔️</div>
+        <div class="brand-text">
+          <h1>Instrumentación Geotécnica</h1>
+          <p>Universidad EAFIT | Laboratorio Computacional</p>
+        </div>
+      </div>
+
+      <!-- Pestañas de Navegación con indicadores de progreso -->
+      <nav class="nav-tabs" aria-label="Navegación del Curso">
+        <a href="index.html" class="nav-tab-btn" id="nav-btn-inicio" title="Índice del curso">
+          <span>🏠</span> Inicio
+        </a>
+        <button class="nav-tab-btn active" data-target="teoria" id="nav-btn-teoria">
+          <span>📖</span> Caso Ancón
+        </button>
+        <button class="nav-tab-btn" data-target="modulo1" id="nav-btn-m1">
+          <span>🐍</span> M1: Python
+          <span class="nav-progress-badge" id="nav-badge-modulo1">0/8</span>
+        </button>
+        <button class="nav-tab-btn" data-target="modulo2" id="nav-btn-m2">
+          <span>📊</span> M2: Gráficos
+          <span class="nav-progress-badge" id="nav-badge-modulo2">0/4</span>
+        </button>
+        <button class="nav-tab-btn" data-target="modulo3" id="nav-btn-m3">
+          <span>🔬</span> M3: Análisis
+          <span class="nav-progress-badge" id="nav-badge-modulo3">0/4</span>
+        </button>
+        <button class="nav-tab-btn" data-target="sandbox" id="nav-btn-sandbox">
+          <span>🧪</span> Sandbox
+        </button>
+        <a href="index.html#ruta" class="nav-tab-btn nav-tab-presentations" id="nav-btn-presentaciones"
+           title="Ver las presentaciones teóricas oficiales en Reveal.js">
+          <span>🏛️</span> Presentaciones
+        </a>
+      </nav>
+
+      <!-- Estado de Pyodide, Tema, GitHub -->
+      <div class="header-actions">
+        <button class="btn-theme" id="btn-theme-toggle" title="Cambiar a Modo Claro / Oscuro" aria-label="Alternar modo claro u oscuro">
+          🌓
+        </button>
+        <div class="pyodide-status-badge loading" id="pyodide-status" title="Estado del motor de Python WebAssembly">
+          <span class="status-dot"></span>
+          <span id="pyodide-status-text">Iniciando Python...</span>
+        </div>
+        <a href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" rel="noopener noreferrer" class="github-link" title="Ver repositorio en GitHub">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       CONTENEDOR PRINCIPAL
+       =================================================================== -->
+  <main class="main-container">
+
+    <!-- BARRA DE PROGRESO GAMIFICADA -->
+    <section class="progress-ribbon" aria-label="Progreso del estudiante">
+      <div class="progress-info">
+        <span>🚀 Progreso:</span>
+        <strong id="progress-count">0 / 0 ejercicios (0%)</strong>
+      </div>
+      <!-- Barra global -->
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <!-- Barras segmentadas por módulo -->
+      <div class="progress-segments" id="progress-segments"></div>
+      <!-- Badges -->
+      <div class="badges-container" id="badges-container"></div>
+    </section>
+
+    <!-- BARRA CONTROL DE DISPOSICIÓN -->
+    <div class="workspace-layout-bar" id="workspace-layout-bar">
+      <div class="layout-slider-group">
+        <span class="layout-label-text"><span>📖</span> <strong>Teoría</strong></span>
+        <div class="layout-slider-track-wrap">
+          <input type="range" min="0" max="100" value="55" step="1"
+                 id="workspace-layout-slider" class="workspace-split-slider"
+                 title="Arrastra para cambiar el ancho de los paneles">
+          <div class="layout-slider-ticks">
+            <span class="tick-label">0%</span>
+            <span class="tick-label">25%</span>
+            <span class="tick-label">50%</span>
+            <span class="tick-label">75%</span>
+            <span class="tick-label">100%</span>
+          </div>
+        </div>
+        <span class="layout-label-text"><strong>Editor</strong> <span>💻</span></span>
+        <span class="layout-badge" id="layout-pct-badge">55% Teoría / 45% Editor</span>
+      </div>
+
+      <div class="layout-presets-group">
+        <button class="layout-preset-btn" data-pct="100" title="Teoría al 100%">📖 100%</button>
+        <button class="layout-preset-btn" data-pct="65" title="65% Teoría / 35% Editor">📑 65/35</button>
+        <button class="layout-preset-btn" data-pct="55" title="Modo Equilibrado">⚖️ 55/45</button>
+        <button class="layout-preset-btn" data-pct="35" title="Código Amplio">💻 35/65</button>
+        <button class="layout-preset-btn" data-pct="0" title="Editor al 100%">⚡ 100% Ed.</button>
+      </div>
+    </div>
+
+    <!-- WORKSPACE GRID -->
+    <div class="workspace-grid" id="workspace-grid">
+
+      <!-- SIDEBAR: Mapa de Curso -->
+      <aside class="course-sidebar" id="course-sidebar" style="display:none;" aria-label="Mapa de lecciones">
+        <button class="btn-sidebar-toggle" id="btn-sidebar-toggle" title="Ocultar panel lateral">
+          <span>◀</span> Lecciones
+        </button>
+        <div class="sidebar-content" id="sidebar-content"></div>
+      </aside>
+
+      <!-- PANEL IZQUIERDO: Teoría -->
+      <section class="theory-pane" id="theory-pane" aria-label="Contenido pedagógico y enunciados">
+        <!-- Rellenado dinámicamente por app.js -->
+      </section>
+
+      <!-- DIVISOR DESLIZABLE -->
+      <div class="workspace-resizer" id="workspace-resizer" title="Arrastra para redimensionar o doble clic para 50/50">
+        <div class="resizer-handle">
+          <button class="resizer-btn btn-collapse-left"  id="btn-collapse-theory" title="Ocultar Teoría">◀</button>
+          <div class="resizer-dots"><span></span><span></span><span></span></div>
+          <button class="resizer-btn btn-collapse-right" id="btn-collapse-editor" title="Ocultar Editor">▶</button>
+        </div>
+      </div>
+
+      <!-- PANEL DERECHO: Editor -->
+      <section class="editor-pane" id="editor-pane" aria-label="Editor de código y consola interactiva">
+
+        <!-- Tarjeta del Editor -->
+        <div class="editor-card">
+          <div class="editor-toolbar">
+            <div class="editor-title">
+              <span>🐍</span> editor.py &bull; <small style="color:var(--text-dim)">Python 3 WebAssembly</small>
+            </div>
+            <div class="editor-actions">
+              <button class="btn-tool" id="btn-reset" title="Reiniciar código inicial"><span>🔄</span> Reiniciar</button>
+              <button class="btn-tool" id="btn-hint"  title="Ver pista"><span>💡</span> Pista</button>
+              <button class="btn-tool" id="btn-solution" title="Mostrar solución"><span>👁️</span> Solución</button>
+              <button class="btn-run" id="btn-run" disabled title="Ejecutar código (Ctrl+Enter)">
+                <span>▶</span> Ejecutar Código
+              </button>
+            </div>
+          </div>
+
+          <!-- Pistas -->
+          <div class="accordion-box hint-accordion" id="hint-box" style="display:none; margin:0.5rem 1rem 0;">
+            <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
+              <span class="accordion-title">💡 Pista de Ayuda</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-body open" id="hint-content"></div>
+          </div>
+
+          <!-- Solución -->
+          <div class="accordion-box solution-accordion" id="solution-box" style="display:none; margin:0.5rem 1rem 0;">
+            <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
+              <span class="accordion-title">👁️ Solución Sugerida</span>
+              <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-body open">
+              <pre id="solution-content" class="solution-code"></pre>
+            </div>
+          </div>
+
+          <!-- Editor de código -->
+          <div class="code-area-wrapper">
+            <div class="line-numbers" id="line-numbers" aria-hidden="true"></div>
+            <textarea class="code-textarea" id="code-input" spellcheck="false"
+                      aria-label="Editor de código Python"
+                      placeholder="Escribe tu código Python aquí..."></textarea>
+          </div>
+        </div>
+
+        <!-- Banner de Validación -->
+        <div class="validation-banner" id="validation-banner">
+          🎉 ¡Excelente trabajo! Ejercicio completado con éxito.
+        </div>
+
+        <!-- Consola -->
+        <div class="console-card">
+          <div class="console-header">
+            <div class="console-tabs">
+              <button class="console-tab-btn active" id="tab-console">Terminal (Texto)</button>
+              <button class="console-tab-btn" id="tab-plot">Gráfico Matplotlib 📊</button>
+            </div>
+            <button class="clear-btn" id="btn-clear-console" title="Limpiar consola">Limpiar</button>
+          </div>
+          <div class="console-output-area" id="console-output" aria-live="polite">
+            Esperando ejecución de código... Haz clic en "Ejecutar Código" o presiona Ctrl + Enter.
+          </div>
+          <div class="plot-display-area" id="plot-display" aria-label="Visualización de gráficos">
+            <p style="color:var(--text-dim); font-size:0.85rem;">No hay gráficos generados aún. Llama a <code>plt.show()</code> en tu código.</p>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- Botones Flotantes de Restauración -->
+    <button class="floating-restore-pill restore-theory" id="btn-restore-theory" title="Restaurar panel de teoría">📖 Mostrar Teoría</button>
+    <button class="floating-restore-pill restore-editor" id="btn-restore-editor" title="Restaurar panel de editor">💻 Mostrar Editor</button>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>Curso de <strong>Instrumentación Geotécnica</strong> &bull; Departamento de Ingeniería Civil &bull; <strong>Universidad EAFIT</strong></p>
+    <p style="margin-top:0.35rem; font-size:0.78rem;">
+      Docentes: M.Eng. Federico Gómez (<a href="mailto:fjgomezc@eafit.edu.co">fjgomezc@eafit.edu.co</a>) &amp; M.Eng. Juliana Álvarez (<a href="mailto:jalvarezz@eafit.edu.co">jalvarezz@eafit.edu.co</a>)
+    </p>
+  </footer>
+
+  <!-- CodeMirror JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/course-data.js?v=4"></script>
+  <script src="js/pyodide-runner.js?v=4"></script>
+  <script src="js/list-indexing.js?v=4"></script>
+  <script src="js/conditional-flow.js?v=4"></script>
+  <script src="js/function-anatomy.js?v=4"></script>
+  <script src="js/for-loop-flow.js?v=4"></script>
+  <script src="js/boolean-filter.js?v=4"></script>
+  <script src="js/dataframe-anatomy.js?v=4"></script>
+  <script src="js/sensor-concat.js?v=4"></script>
+  <script src="js/boxplot-anatomy.js?v=4"></script>
+  <script src="js/threshold-bands.js?v=4"></script>
+  <script src="js/dual-axis-rain.js?v=4"></script>
+  <script src="js/missing-data.js?v=4"></script>
+  <script src="js/rolling-window.js?v=4"></script>
+  <script src="js/velocity-acceleration.js?v=4"></script>
+  <script src="js/lag-correlation.js?v=4"></script>
+  <script src="js/layout-resizer.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
+
+</body>
+</html>

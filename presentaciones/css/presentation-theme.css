@@ -134,7 +134,7 @@
    ========================================================================== */
 .reveal {
   font-family: var(--font-sans);
-  font-size: 38px;                  /* CALIBRADO: Letra visible y cómoda desde cualquier distancia */
+  font-size: 34px;                  /* Base legible; el ajuste automático (presentation-core.js) reduce/amplía el cuerpo de cada lámina */
   font-weight: 400;
   color: var(--text-body);
   background-color: var(--bg-presentation);
@@ -150,7 +150,8 @@
 .reveal .slides > section {
   height: 100%;
   box-sizing: border-box;
-  padding: 38px 60px !important;
+  /* Reserva de espacio: header fijo (56px) arriba y footer fijo (40px) abajo */
+  padding: 80px 60px 60px !important;
   display: flex !important;
   flex-direction: column;
   justify-content: flex-start;
@@ -159,7 +160,57 @@
 .reveal .slides > section.slide-cover {
   justify-content: center;
   text-align: left;
-  padding: 50px 80px !important;
+  padding: 80px 80px 60px !important;
+}
+
+/* Cuerpo de cada lámina (todo lo que sigue a los títulos): lo escala presentation-core.js
+   para que nunca desborde ni deje grandes espacios vacíos */
+.reveal .slides > section > .fit-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  transform-origin: top left;
+  flex: none;
+}
+
+.reveal .slides > section h2 {
+  margin-bottom: 0.3em;
+  align-self: flex-start;
+}
+
+/* Filas flex/grid inline (galerías de imágenes): permitir que los hijos se encojan */
+.reveal .slides section [style*="display: flex"] > *,
+.reveal .slides section [style*="display:flex"] > *,
+.reveal .slides section [style*="display: grid"] > *,
+.reveal .slides section [style*="display:grid"] > * {
+  min-width: 0;
+}
+
+.reveal .slides section [style*="display: flex"] > img,
+.reveal .slides section [style*="display:flex"] > img {
+  flex: 0 1 auto;
+}
+
+/* Columna de medios (última columna de un split): imágenes más grandes para no dejar vacíos */
+.reveal .slides section :is(.split-2, .split-2-1, .split-1-2) > div:last-child:not([style*="column"]) > img {
+  max-height: 560px !important;
+}
+
+.reveal .slides section :is(.split-2, .split-2-1, .split-1-2) > div:last-child[style*="column"] > img {
+  max-height: 210px !important;
+}
+
+/* Tarjetas únicas con ancho fijo en línea (850px): usar todo el ancho del lienzo */
+.reveal .slides > section > .fit-wrap > .card[style*="max-width"] {
+  max-width: 1500px !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Imágenes: nunca más anchas que su contenedor */
+.reveal .slides section img {
+  max-width: 100%;
+  object-fit: contain;
 }
 
 /* ==========================================================================
@@ -414,47 +465,47 @@
 
 .split-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 40px;
   align-items: stretch;
-  flex: 1;
+  flex: none;
   margin-top: 18px;
 }
 
 .split-2-1 {
   display: grid;
-  grid-template-columns: 1.8fr 1.2fr;
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.2fr);
   gap: 40px;
   align-items: stretch;
-  flex: 1;
+  flex: none;
   margin-top: 18px;
 }
 
 .split-1-2 {
   display: grid;
-  grid-template-columns: 1.2fr 1.8fr;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr);
   gap: 40px;
   align-items: stretch;
-  flex: 1;
+  flex: none;
   margin-top: 18px;
 }
 
 .split-3,
 .grid-3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
   align-items: stretch;
-  flex: 1;
+  flex: none;
   margin-top: 18px;
 }
 
 .grid-4 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 22px;
   align-items: stretch;
-  flex: 1;
+  flex: none;
   margin-top: 18px;
 }
 
@@ -470,10 +521,10 @@
   backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   box-sizing: border-box;
-  height: 100%;
+  min-width: 0;
 }
 
 .card:hover {
@@ -508,6 +559,43 @@
 
 .card-icon {
   font-size: 1.2em;
+}
+
+/* Listas con viñeta (usadas en todas las láminas) */
+.reveal .bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.4em 0 0;
+  display: block;
+}
+
+.reveal .bullet-list li {
+  position: relative;
+  padding-left: 1.3em;
+  margin-bottom: 0.5em;
+  line-height: 1.45;
+  color: var(--text-body);
+}
+
+.reveal .bullet-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.15em;
+  top: 0.55em;
+  width: 0.42em;
+  height: 0.42em;
+  border-radius: 50%;
+  background: var(--eafit-yellow-text);
+}
+
+.reveal .bullet-list li > ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.3em;
+}
+
+[data-theme="dark"] .reveal .bullet-list li::before {
+  background: var(--eafit-yellow);
 }
 
 .card p,
@@ -707,8 +795,8 @@
 .figure-img-wrap {
   width: 100%;
   flex: 1;
-  min-height: 380px;
-  max-height: 580px;
+  min-height: 0;
+  max-height: 560px;
   background: #F8FAFC;
   display: flex;
   align-items: center;

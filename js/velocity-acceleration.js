@@ -66,19 +66,19 @@
             <!-- Fase 1 -->
             <div class="va-phase-card border-normal">
               <span class="va-phase-num">Fase 1: Deformación Primaria (Transitoria)</span>
-              <p>Tras una lluvia o excavación, la velocidad decrece con el tiempo ($\Delta v / \Delta t &lt; 0$). El suelo se acomoda hacia el equilibrio.</p>
+              <p>Tras una lluvia o excavación, la velocidad decrece con el tiempo ($\\Delta v / \\Delta t &lt; 0$). El suelo se acomoda hacia el equilibrio.</p>
             </div>
 
             <!-- Fase 2 -->
             <div class="va-phase-card border-warning">
               <span class="va-phase-num">Fase 2: Deformación Secundaria (Creep Estable)</span>
-              <p>Velocidad constante ($\Delta d / \Delta t \approx \text{constante}$). El talud se deforma lentamente a ritmo uniforme (ej. 0.5 mm/día).</p>
+              <p>Velocidad constante ($\\Delta d / \\Delta t \\approx \\text{constante}$). El talud se deforma lentamente a ritmo uniforme (ej. 0.5 mm/día).</p>
             </div>
 
             <!-- Fase 3 -->
             <div class="va-phase-card border-danger">
               <span class="va-phase-num">Fase 3: Deformación Terciaria (Aceleración Crítica)</span>
-              <p>La velocidad se dispara exponencialmente ($\Delta v / \Delta t &gt; 0$). La falla y colapso de la masa de tierra son inminentes.</p>
+              <p>La velocidad se dispara exponencialmente ($\\Delta v / \\Delta t &gt; 0$). La falla y colapso de la masa de tierra son inminentes.</p>
             </div>
           </div>
         </div>

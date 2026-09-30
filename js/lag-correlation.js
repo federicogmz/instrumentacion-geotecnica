@@ -108,7 +108,7 @@
 
             <div class="lc-stage stage-math">
               <span class="lc-stage-tag">3. LA TRAMPA DEL REZAGO CERO: <code>df.corr()</code></span>
-              <p>Sin desfasar (lag = 0), la correlación parece nula ($r \approx 0.12$). Al aplicar <code>df['lluvia'].shift(4)</code>, los picos se acoplan y $r \rightarrow 0.95$.</p>
+              <p>Sin desfasar (lag = 0), la correlación parece nula ($r \\approx 0.12$). Al aplicar <code>df['lluvia'].shift(4)</code>, los picos se acoplan y $r \\rightarrow 0.95$.</p>
             </div>
           </div>
         </div>

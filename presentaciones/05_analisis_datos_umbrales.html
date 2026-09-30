@@ -12,6 +12,7 @@
   
   <!-- Tema Institucional EAFIT -->
   <link rel="stylesheet" href="css/presentation-theme.css">
+  <link rel="stylesheet" href="css/diagrams.css">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
       <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
       <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
       <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
-      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+      <a href="../index.html#ruta" class="header-btn"><span>🏠</span> Salir al índice</a>
     </div>
   </header>
 
@@ -69,6 +70,73 @@
           </ul>
         </div>
       </section>
+
+      <!-- NEW:05-chain -->
+      <section>
+        <h2>Del dato a la decisión</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          La cadena completa del monitoreo geotécnico
+        </h3>
+
+        <div style="margin-top: 14px;">
+          <svg class="dg" style="max-height: 560px" viewBox="0 0 1200 400" role="img" aria-label="Cadena del monitoreo: del sensor a la decisión"><defs><marker id="ch-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-dim)"/></marker></defs>
+<rect x="392" y="52" width="620" height="240" rx="18" style="fill: var(--eafit-yellow); fill-opacity: 0.12; stroke: var(--eafit-yellow-text); stroke-width: 3; stroke-dasharray: 10 7"/>
+<text class="b m" x="702" y="40" text-anchor="middle" style="fill: var(--eafit-yellow-text)">★ Este módulo: de los datos a la alerta</text>
+<text class="s" x="190" y="40" text-anchor="middle">Módulos 1 a 4: medir</text>
+<rect class="panel" x="0" y="70" width="170" height="200" rx="14"/>
+<path class="f-blue" d="M0,110 L0,84 Q0,70 14,70 L156,70 Q170,70 170,84 L170,110 Z"/>
+<text class="w" x="85" y="102" text-anchor="middle" style="font-size: 21px">1 · Sensor</text>
+<text x="85" y="180" text-anchor="middle" style="font-size: 54px">📡</text>
+<text class="s" x="85" y="218" text-anchor="middle">Mide la variable</text>
+<text class="s" x="85" y="240" text-anchor="middle">en campo</text>
+<polygon class="f-gray" points="176,158 200,170 176,182"/>
+<rect class="panel" x="206" y="70" width="170" height="200" rx="14"/>
+<path class="f-rain" d="M206,110 L206,84 Q206,70 220,70 L362,70 Q376,70 376,84 L376,110 Z"/>
+<text class="w" x="291" y="102" text-anchor="middle" style="font-size: 21px">2 · Adquisición</text>
+<text x="291" y="180" text-anchor="middle" style="font-size: 54px">📶</text>
+<text class="s" x="291" y="218" text-anchor="middle">Registro y</text>
+<text class="s" x="291" y="240" text-anchor="middle">telemetría</text>
+<polygon class="f-gray" points="382,158 406,170 382,182"/>
+<rect class="panel" x="412" y="70" width="170" height="200" rx="14"/>
+<path class="f-hum" d="M412,110 L412,84 Q412,70 426,70 L568,70 Q582,70 582,84 L582,110 Z"/>
+<text class="w" x="497" y="102" text-anchor="middle" style="font-size: 21px">3 · Validación</text>
+<text x="497" y="180" text-anchor="middle" style="font-size: 54px">✅</text>
+<text class="s" x="497" y="218" text-anchor="middle">Detecta errores y</text>
+<text class="s" x="497" y="240" text-anchor="middle">huecos en los datos</text>
+<polygon class="f-gray" points="588,158 612,170 588,182"/>
+<rect class="panel" x="618" y="70" width="170" height="200" rx="14"/>
+<path class="f-ten" d="M618,110 L618,84 Q618,70 632,70 L774,70 Q788,70 788,84 L788,110 Z"/>
+<text class="w" x="703" y="102" text-anchor="middle" style="font-size: 21px">4 · Análisis</text>
+<text x="703" y="180" text-anchor="middle" style="font-size: 54px">📈</text>
+<text class="s" x="703" y="218" text-anchor="middle">Tendencias, velocidad</text>
+<text class="s" x="703" y="240" text-anchor="middle">y correlaciones</text>
+<polygon class="f-gray" points="794,158 818,170 794,182"/>
+<rect class="panel" x="824" y="70" width="170" height="200" rx="14"/>
+<path class="f-ao" d="M824,110 L824,84 Q824,70 838,70 L980,70 Q994,70 994,84 L994,110 Z"/>
+<text class="w" x="909" y="102" text-anchor="middle" style="font-size: 21px">5 · Umbrales</text>
+<text x="909" y="180" text-anchor="middle" style="font-size: 54px">🚨</text>
+<text class="s" x="909" y="218" text-anchor="middle">Compara con los</text>
+<text class="s" x="909" y="240" text-anchor="middle">niveles de alerta</text>
+<polygon class="f-gray" points="1000,158 1024,170 1000,182"/>
+<rect class="panel" x="1030" y="70" width="170" height="200" rx="14"/>
+<path class="f-ar" d="M1030,110 L1030,84 Q1030,70 1044,70 L1186,70 Q1200,70 1200,84 L1200,110 Z"/>
+<text class="w" x="1115" y="102" text-anchor="middle" style="font-size: 21px">6 · Decisión</text>
+<text x="1115" y="180" text-anchor="middle" style="font-size: 54px">🧭</text>
+<text class="s" x="1115" y="218" text-anchor="middle">Acciones y</text>
+<text class="s" x="1115" y="240" text-anchor="middle">comunicación</text>
+<path d="M1115,274 L1115,340 L85,340 L85,278" style="fill: none; stroke: var(--text-dim); stroke-width: 3.5; stroke-dasharray: 10 7" marker-end="url(#ch-a)"/>
+<text class="b m" x="600" y="376" text-anchor="middle">Retroalimentación: cada evento ajusta los umbrales, los sensores y los protocolos</text>
+</svg>
+        </div>
+        <div class="callout callout-info" style="margin-top: 16px;">
+          <span class="callout-icon">🔗</span>
+          <div class="callout-content" style="font-weight: 600;">Un dato solo vale si recorre toda la cadena: <strong>medirlo bien, validarlo, interpretarlo y convertirlo en una decisión a tiempo</strong>.</div>
+        </div>
+      </section>
+
+
+
+
 
       <!-- SLIDE 3: ETAPAS DE LA INTERPRETACIÓN -->
       <section>
@@ -206,6 +274,81 @@
         </div>
       </section>
 
+      <!-- NEW:05-quality -->
+      <section>
+        <h2>Calidad de datos: seis anomalías típicas</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Antes de analizar, hay que validar
+        </h3>
+
+        <div style="margin-top: 10px;">
+          <svg class="dg" style="max-height: 700px" viewBox="0 0 1200 580" role="img" aria-label="Seis anomalías típicas en series de sensores geotécnicos">
+<rect class="panel" x="0" y="0" width="380" height="280" rx="12"/>
+<text class="b m" x="16" y="30">1. Dato fuera de rango</text>
+<line class="grid" x1="22" y1="106.4" x2="358" y2="106.4"/>
+<path class="series s-pie" d="M22.0,106.8 L27.7,105.1 L33.4,105.3 L39.1,104.7 L44.8,104.9 L50.5,103.3 L56.2,101.0 L61.9,101.3 L67.6,100.0 L73.3,100.6 L78.9,100.1 L84.6,100.1 L90.3,102.3 L96.0,98.8 L101.7,99.3 L107.4,99.3 L113.1,102.3 L118.8,102.5 L124.5,101.7 L130.2,101.5 L135.9,100.8 L141.6,101.8 L147.3,101.6 L153.0,103.7 L158.7,103.1 L164.4,103.6 L170.1,105.7 L175.8,103.3 L181.5,105.5 L187.2,105.4 L192.8,108.5 L198.5,109.4 L204.2,109.5 L209.9,109.9 L215.6,56.4 L221.3,110.6 L227.0,112.0 L232.7,113.1 L238.4,112.9 L244.1,110.9 L249.8,113.8 L255.5,112.6 L261.2,112.4 L266.9,114.9 L272.6,112.8 L278.3,111.0 L284.0,115.1 L289.7,112.6 L295.4,111.9 L301.1,112.4 L306.7,110.1 L312.4,110.3 L318.1,111.5 L323.8,107.9 L329.5,107.4 L335.2,106.3 L340.9,105.0 L346.6,105.6 L352.3,105.2 L358.0,106.4"/>
+<line class="thin dash s-rose" x1="22" y1="79.2" x2="358" y2="79.2"/>
+<circle cx="215.6" cy="56.4" r="7" class="f-rose"/>
+<text class="rose-txt s" x="358" y="73.2" text-anchor="end">límite físico</text>
+<text class="s" x="16" y="186"><tspan class="b">Señal:</tspan> Valor imposible físicamente</text>
+<text class="s" x="16" y="214"><tspan class="b">Revisar:</tspan> Compara con los límites del sensor</text>
+<text class="s" x="16" y="242"><tspan class="b">Acción:</tspan> Marcarlo y excluirlo; no borrar</text>
+<rect class="panel" x="410" y="0" width="380" height="280" rx="12"/>
+<text class="b m" x="426" y="30">2. Datos faltantes</text>
+<line class="grid" x1="432" y1="106.4" x2="768" y2="106.4"/>
+<rect x="568.7" y="52" width="79.7" height="98" style="fill: var(--accent-rose); fill-opacity: 0.14"/>
+<path class="series s-pie" d="M432.0,105.6 L437.7,106.5 L443.4,105.6 L449.1,106.0 L454.8,104.9 L460.5,103.7 L466.2,100.7 L471.9,104.5 L477.6,103.3 L483.3,100.6 L488.9,98.7 L494.6,99.5 L500.3,102.6 L506.0,103.3 L511.7,99.4 L517.4,100.9 L523.1,101.5 L528.8,99.0 L534.5,99.1 L540.2,100.6 L545.9,100.9 L551.6,101.2 L557.3,100.2 L563.0,102.0"/>
+<path class="series s-pie" d="M654.1,112.7 L659.8,112.3 L665.5,112.0 L671.2,112.8 L676.9,111.5 L682.6,113.7 L688.3,113.3 L694.0,111.1 L699.7,112.1 L705.4,112.9 L711.1,110.1 L716.7,108.9 L722.4,110.8 L728.1,111.4 L733.8,109.1 L739.5,108.5 L745.2,108.0 L750.9,105.0 L756.6,107.5 L762.3,103.7 L768.0,106.3"/>
+<text class="rose-txt s" x="608.5" y="100" text-anchor="middle">sin datos</text>
+<text class="s" x="426" y="186"><tspan class="b">Señal:</tspan> Tiempos sin registro (NaN)</text>
+<text class="s" x="426" y="214"><tspan class="b">Revisar:</tspan> Revisa la comunicación</text>
+<text class="s" x="426" y="242"><tspan class="b">Acción:</tspan> Interpolar solo huecos cortos</text>
+<rect class="panel" x="820" y="0" width="380" height="280" rx="12"/>
+<text class="b m" x="836" y="30">3. Sensor «congelado»</text>
+<line class="grid" x1="842" y1="106.4" x2="1178" y2="106.4"/>
+<path class="series s-pie" d="M842.0,107.5 L847.7,104.9 L853.4,103.5 L859.1,103.2 L864.8,103.2 L870.5,102.8 L876.2,102.2 L881.9,101.1 L887.6,101.6 L893.3,100.6 L898.9,99.8 L904.6,100.3 L910.3,99.1 L916.0,99.2 L921.7,97.3 L927.4,99.5 L933.1,100.6 L938.8,100.7 L944.5,100.5 L950.2,99.6 L955.9,101.7 L961.6,101.2 L967.3,99.8 L973.0,106.2 L978.7,104.9 L984.4,103.8 L990.1,104.3 L995.8,105.2 L1001.5,106.8 L1007.2,106.1 L1012.8,106.1 L1018.5,106.1 L1024.2,106.1 L1029.9,106.1 L1035.6,106.1 L1041.3,106.1 L1047.0,106.1 L1052.7,106.1 L1058.4,106.1 L1064.1,106.1 L1069.8,106.1 L1075.5,106.1 L1081.2,106.1 L1086.9,106.1 L1092.6,106.1 L1098.3,106.1 L1104.0,106.1 L1109.7,106.1 L1115.4,106.1 L1121.1,106.1 L1126.7,106.1 L1132.4,106.1 L1138.1,106.1 L1143.8,106.1 L1149.5,106.1 L1155.2,106.1 L1160.9,106.1 L1166.6,106.1 L1172.3,106.1 L1178.0,106.1"/>
+<rect x="1012.8" y="52" width="165.2" height="98" style="fill: var(--accent-amber); fill-opacity: 0.14"/>
+<text class="ten-txt s" x="1098.3" y="70" text-anchor="middle">valor constante</text>
+<text class="s" x="836" y="186"><tspan class="b">Señal:</tspan> Varianza cero por muchas lecturas</text>
+<text class="s" x="836" y="214"><tspan class="b">Revisar:</tspan> Inspeccionar el equipo</text>
+<text class="s" x="836" y="242"><tspan class="b">Acción:</tspan> Descartar el tramo afectado</text>
+<rect class="panel" x="0" y="300" width="380" height="280" rx="12"/>
+<text class="b m" x="16" y="330">4. Deriva (drift)</text>
+<line class="grid" x1="22" y1="406.4" x2="358" y2="406.4"/>
+<path class="series s-gray" style="stroke-dasharray: 8 6" d="M22.0,405.6 L27.7,405.6 L33.4,405.1 L39.1,402.6 L44.8,402.5 L50.5,403.3 L56.2,399.4 L61.9,403.1 L67.6,400.4 L73.3,401.2 L78.9,400.4 L84.6,399.5 L90.3,399.9 L96.0,399.3 L101.7,401.6 L107.4,401.6 L113.1,399.4 L118.8,401.3 L124.5,401.6 L130.2,402.4 L135.9,399.9 L141.6,400.9 L147.3,400.6 L153.0,403.9 L158.7,403.5 L164.4,405.4 L170.1,404.0 L175.8,403.8 L181.5,407.2 L187.2,405.3 L192.8,406.6 L198.5,408.6 L204.2,411.2 L209.9,408.2 L215.6,410.4 L221.3,411.5 L227.0,411.0 L232.7,411.4 L238.4,410.6 L244.1,413.6 L249.8,411.5 L255.5,411.3 L261.2,411.4 L266.9,413.2 L272.6,413.7 L278.3,411.6 L284.0,412.3 L289.7,412.0 L295.4,410.2 L301.1,411.6 L306.7,413.3 L312.4,410.6 L318.1,411.6 L323.8,408.1 L329.5,407.9 L335.2,408.2 L340.9,406.9 L346.6,405.2 L352.3,405.3 L358.0,403.2"/>
+<path class="series s-rose" d="M22.0,405.6 L27.7,404.5 L33.4,403.4 L39.1,400.5 L44.8,401.5 L50.5,401.0 L56.2,398.6 L61.9,401.4 L67.6,398.9 L73.3,397.4 L78.9,397.8 L84.6,395.7 L90.3,395.8 L96.0,394.8 L101.7,397.1 L107.4,396.2 L113.1,392.6 L118.8,395.3 L124.5,395.0 L130.2,395.2 L135.9,393.0 L141.6,394.4 L147.3,393.3 L153.0,395.1 L158.7,396.2 L164.4,397.0 L170.1,394.3 L175.8,393.9 L181.5,397.5 L187.2,394.6 L192.8,396.1 L198.5,398.6 L204.2,401.1 L209.9,397.1 L215.6,398.0 L221.3,399.7 L227.0,399.0 L232.7,399.0 L238.4,398.3 L244.1,400.1 L249.8,398.3 L255.5,396.8 L261.2,398.3 L266.9,398.0 L272.6,398.8 L278.3,397.2 L284.0,395.8 L289.7,395.8 L295.4,394.9 L301.1,395.1 L306.7,395.7 L312.4,393.2 L318.1,393.0 L323.8,389.1 L329.5,388.7 L335.2,388.9 L340.9,386.5 L346.6,384.9 L352.3,384.8 L358.0,384.0"/>
+<text class="s" x="22" y="368">— sensor</text><text class="s" x="110" y="368" style="fill: var(--text-dim)">-- referencia</text>
+<text class="s" x="16" y="486"><tspan class="b">Señal:</tspan> Se aleja de un sensor de referencia</text>
+<text class="s" x="16" y="514"><tspan class="b">Revisar:</tspan> Recalibrar o reemplazar</text>
+<text class="s" x="16" y="542"><tspan class="b">Acción:</tspan> Corregir con la calibración</text>
+<rect class="panel" x="410" y="300" width="380" height="280" rx="12"/>
+<text class="b m" x="426" y="330">5. Ruido excesivo</text>
+<line class="grid" x1="432" y1="406.4" x2="768" y2="406.4"/>
+<path class="series s-pie" d="M432.0,399.6 L437.7,395.7 L443.4,407.3 L449.1,407.9 L454.8,388.8 L460.5,416.4 L466.2,398.8 L471.9,383.4 L477.6,408.4 L483.3,395.7 L488.9,386.2 L494.6,401.2 L500.3,395.8 L506.0,393.1 L511.7,406.8 L517.4,400.6 L523.1,397.8 L528.8,393.9 L534.5,400.8 L540.2,402.3 L545.9,409.0 L551.6,404.5 L557.3,395.5 L563.0,402.1 L568.7,410.0 L574.4,410.5 L580.1,384.5 L585.8,396.8 L591.5,401.4 L597.2,426.7 L602.8,403.0 L608.5,404.7 L614.2,396.2 L619.9,406.5 L625.6,410.8 L631.3,406.9 L637.0,426.2 L642.7,404.0 L648.4,409.7 L654.1,417.9 L659.8,402.6 L665.5,399.1 L671.2,423.7 L676.9,418.0 L682.6,410.7 L688.3,411.3 L694.0,415.5 L699.7,419.6 L705.4,395.6 L711.1,403.4 L716.7,419.9 L722.4,420.5 L728.1,396.6 L733.8,401.4 L739.5,394.4 L745.2,401.4 L750.9,413.5 L756.6,404.1 L762.3,421.9 L768.0,410.4"/>
+<text class="s" x="426" y="486"><tspan class="b">Señal:</tspan> Oscila mucho entre lecturas</text>
+<text class="s" x="426" y="514"><tspan class="b">Revisar:</tspan> Revisar cableado y fuente</text>
+<text class="s" x="426" y="542"><tspan class="b">Acción:</tspan> Filtrar (media móvil)</text>
+<rect class="panel" x="820" y="300" width="380" height="280" rx="12"/>
+<text class="b m" x="836" y="330">6. Salto o escalón</text>
+<line class="grid" x1="842" y1="406.4" x2="1178" y2="406.4"/>
+<path class="series s-pie" d="M842.0,406.5 L847.7,405.0 L853.4,406.0 L859.1,404.5 L864.8,403.0 L870.5,402.5 L876.2,401.6 L881.9,401.6 L887.6,401.8 L893.3,399.9 L898.9,400.5 L904.6,401.4 L910.3,400.9 L916.0,400.0 L921.7,400.1 L927.4,399.7 L933.1,400.1 L938.8,400.0 L944.5,400.7 L950.2,402.5 L955.9,400.7 L961.6,400.3 L967.3,401.7 L973.0,403.1 L978.7,402.9 L984.4,405.4 L990.1,407.3 L995.8,405.4 L1001.5,407.5 L1007.2,406.0 L1012.8,409.1 L1018.5,411.8 L1024.2,393.0 L1029.9,390.2 L1035.6,393.4 L1041.3,395.3 L1047.0,395.0 L1052.7,393.7 L1058.4,394.1 L1064.1,394.9 L1069.8,393.4 L1075.5,394.6 L1081.2,395.6 L1086.9,394.8 L1092.6,393.3 L1098.3,394.0 L1104.0,393.7 L1109.7,396.1 L1115.4,394.5 L1121.1,392.9 L1126.7,393.8 L1132.4,391.4 L1138.1,391.4 L1143.8,390.3 L1149.5,391.1 L1155.2,386.8 L1160.9,387.8 L1166.6,389.0 L1172.3,387.9 L1178.0,383.9"/>
+<line class="thin dash s-ten" x1="1024.2" y1="352" x2="1024.2" y2="450"/>
+<text class="ten-txt s" x="1018.2" y="368" text-anchor="end">intervención</text>
+<text class="s" x="836" y="486"><tspan class="b">Señal:</tspan> Cambio brusco sin causa física</text>
+<text class="s" x="836" y="514"><tspan class="b">Revisar:</tspan> Documentar la intervención</text>
+<text class="s" x="836" y="542"><tspan class="b">Acción:</tspan> Corregir el offset</text>
+</svg>
+        </div>
+        <div class="callout callout-danger" style="margin-top: 12px;">
+          <span class="callout-icon">🛑</span>
+          <div class="callout-content" style="font-weight: 600;"><strong>Nunca se borra un dato «raro» sin explicación</strong>: se marca, se documenta y se decide. A veces el dato raro es la falla empezando.</div>
+        </div>
+      </section>
+
+
+
+
+
       <!-- SLIDE 6: ANÁLISIS DE TENDENCIAS (GRÁFICA) -->
       <section>
         <h2>Etapas de la interpretación: Análisis de Tendencias</h2>
@@ -242,6 +385,60 @@
 
         </div>
       </section>
+
+      <!-- NEW:05-smooth -->
+      <section>
+        <h2>Filtrado: la media móvil</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Quitar ruido sin perder la señal
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 10px; align-items: center; gap: 30px;">
+
+          <svg class="dg" viewBox="0 0 1000 480" role="img" aria-label="Suavizado con media móvil de ventana corta y larga"><defs><marker id="sm-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-rose)"/></marker></defs>
+<line class="grid" x1="90" y1="399.2" x2="970" y2="399.2"/><text class="s" x="80" y="405.2" text-anchor="end">20</text>
+<line class="grid" x1="90" y1="275.8" x2="970" y2="275.8"/><text class="s" x="80" y="281.8" text-anchor="end">40</text>
+<line class="grid" x1="90" y1="152.5" x2="970" y2="152.5"/><text class="s" x="80" y="158.5" text-anchor="end">60</text>
+<line class="ax" x1="90" y1="430" x2="970" y2="430"/><line class="ax" x1="90" y1="60" x2="90" y2="430"/>
+<path class="series s-gray" style="stroke-width: 1.8; opacity: 0.8" d="M90.0,371.5 L97.3,327.0 L104.7,309.9 L112.0,351.7 L119.3,374.4 L126.7,339.3 L134.0,324.2 L141.3,307.0 L148.7,371.2 L156.0,373.4 L163.3,317.9 L170.7,324.3 L178.0,294.9 L185.3,310.2 L192.7,340.3 L200.0,345.1 L207.3,266.2 L214.7,345.5 L222.0,359.3 L229.3,369.1 L236.7,334.9 L244.0,333.5 L251.3,347.1 L258.7,339.2 L266.0,329.9 L273.3,318.3 L280.7,307.1 L288.0,331.7 L295.3,387.2 L302.7,318.0 L310.0,376.9 L317.3,342.3 L324.7,378.4 L332.0,337.4 L339.3,359.1 L346.7,331.6 L354.0,245.9 L361.3,338.8 L368.7,314.1 L376.0,374.2 L383.3,345.5 L390.7,319.1 L398.0,340.1 L405.3,327.2 L412.7,334.6 L420.0,365.4 L427.3,314.5 L434.7,345.2 L442.0,263.4 L449.3,321.9 L456.7,281.5 L464.0,293.0 L471.3,259.3 L478.7,295.0 L486.0,243.2 L493.3,266.9 L500.7,221.0 L508.0,231.4 L515.3,237.4 L522.7,255.6 L530.0,205.2 L537.3,206.1 L544.7,166.1 L552.0,214.8 L559.3,181.5 L566.7,175.4 L574.0,174.2 L581.3,168.9 L588.7,162.2 L596.0,176.5 L603.3,180.7 L610.7,163.5 L618.0,136.1 L625.3,110.6 L632.7,125.4 L640.0,123.3 L647.3,130.9 L654.7,133.1 L662.0,147.4 L669.3,131.1 L676.7,103.3 L684.0,161.6 L691.3,171.8 L698.7,98.1 L706.0,145.7 L713.3,125.6 L720.7,128.3 L728.0,184.0 L735.3,85.0 L742.7,103.2 L750.0,147.6 L757.3,131.6 L764.7,149.0 L772.0,177.0 L779.3,155.6 L786.7,142.1 L794.0,121.5 L801.3,132.8 L808.7,150.8 L816.0,114.9 L823.3,173.6 L830.7,130.5 L838.0,121.6 L845.3,160.6 L852.7,202.2 L860.0,177.6 L867.3,145.9 L874.7,137.9 L882.0,109.5 L889.3,180.4 L896.7,152.4 L904.0,134.5 L911.3,156.9 L918.7,218.3 L926.0,130.1 L933.3,88.3 L940.7,124.6 L948.0,178.0 L955.3,163.9 L962.7,146.3 L970.0,83.4"/>
+<path class="series s-gray" style="stroke-width: 3; stroke-dasharray: 9 6" d="M90.0,337.5 L97.3,337.5 L104.7,337.5 L112.0,337.5 L119.3,337.5 L126.7,337.5 L134.0,337.5 L141.3,337.5 L148.7,337.5 L156.0,337.5 L163.3,337.5 L170.7,337.5 L178.0,337.5 L185.3,337.5 L192.7,337.5 L200.0,337.5 L207.3,337.5 L214.7,337.5 L222.0,337.5 L229.3,337.5 L236.7,337.5 L244.0,337.5 L251.3,337.5 L258.7,337.5 L266.0,337.5 L273.3,337.5 L280.7,337.5 L288.0,337.5 L295.3,337.5 L302.7,337.5 L310.0,337.5 L317.3,337.5 L324.7,337.5 L332.0,337.5 L339.3,337.5 L346.7,337.5 L354.0,337.5 L361.3,337.5 L368.7,337.5 L376.0,337.5 L383.3,337.5 L390.7,337.5 L398.0,337.5 L405.3,337.5 L412.7,337.5 L420.0,337.5 L427.3,330.1 L434.7,322.7 L442.0,315.3 L449.3,307.9 L456.7,300.5 L464.0,293.1 L471.3,285.7 L478.7,278.3 L486.0,270.9 L493.3,263.5 L500.7,256.1 L508.0,248.7 L515.3,241.3 L522.7,233.9 L530.0,226.5 L537.3,219.1 L544.7,211.7 L552.0,204.3 L559.3,196.9 L566.7,189.5 L574.0,182.1 L581.3,174.7 L588.7,167.3 L596.0,159.9 L603.3,152.5 L610.7,152.5 L618.0,152.5 L625.3,152.5 L632.7,152.5 L640.0,152.5 L647.3,152.5 L654.7,152.5 L662.0,152.5 L669.3,152.5 L676.7,152.5 L684.0,152.5 L691.3,152.5 L698.7,152.5 L706.0,152.5 L713.3,152.5 L720.7,152.5 L728.0,152.5 L735.3,152.5 L742.7,152.5 L750.0,152.5 L757.3,152.5 L764.7,152.5 L772.0,152.5 L779.3,152.5 L786.7,152.5 L794.0,152.5 L801.3,152.5 L808.7,152.5 L816.0,152.5 L823.3,152.5 L830.7,152.5 L838.0,152.5 L845.3,152.5 L852.7,152.5 L860.0,152.5 L867.3,152.5 L874.7,152.5 L882.0,152.5 L889.3,152.5 L896.7,152.5 L904.0,152.5 L911.3,152.5 L918.7,152.5 L926.0,152.5 L933.3,152.5 L940.7,152.5 L948.0,152.5 L955.3,152.5 L962.7,152.5 L970.0,152.5"/>
+<path class="series s-hum" style="stroke-width: 3.5" d="M90.0,371.5 L97.3,349.2 L104.7,336.1 L112.0,340.0 L119.3,346.9 L126.7,340.5 L134.0,339.9 L141.3,339.3 L148.7,343.2 L156.0,343.0 L163.3,338.8 L170.7,338.8 L178.0,336.4 L185.3,324.2 L192.7,317.6 L200.0,323.0 L207.3,311.4 L214.7,321.5 L222.0,331.3 L229.3,337.0 L236.7,335.0 L244.0,348.4 L251.3,348.8 L258.7,344.7 L266.0,336.9 L273.3,333.6 L280.7,328.3 L288.0,325.2 L295.3,334.8 L302.7,332.4 L310.0,344.2 L317.3,351.2 L324.7,360.5 L332.0,350.6 L339.3,358.8 L346.7,349.8 L354.0,330.5 L361.3,322.6 L368.7,317.9 L376.0,320.9 L383.3,323.7 L390.7,338.4 L398.0,338.6 L405.3,341.2 L412.7,333.3 L420.0,337.3 L427.3,336.4 L434.7,337.4 L442.0,324.6 L449.3,322.1 L456.7,305.3 L464.0,301.0 L471.3,283.8 L478.7,290.1 L486.0,274.4 L493.3,271.5 L500.7,257.1 L508.0,251.5 L515.3,240.0 L522.7,242.5 L530.0,230.1 L537.3,227.1 L544.7,214.1 L552.0,209.6 L559.3,194.7 L566.7,188.8 L574.0,182.4 L581.3,183.0 L588.7,172.5 L596.0,171.5 L603.3,172.5 L610.7,170.4 L618.0,163.8 L625.3,153.5 L632.7,143.2 L640.0,131.8 L647.3,125.3 L654.7,124.7 L662.0,132.0 L669.3,133.2 L676.7,129.2 L684.0,135.3 L691.3,143.0 L698.7,133.2 L706.0,136.1 L713.3,140.5 L720.7,133.9 L728.0,136.3 L735.3,133.7 L742.7,125.2 L750.0,129.6 L757.3,130.3 L764.7,123.3 L772.0,141.7 L779.3,152.2 L786.7,151.1 L794.0,149.1 L801.3,145.8 L808.7,140.6 L816.0,132.4 L823.3,138.7 L830.7,140.5 L838.0,138.3 L845.3,140.3 L852.7,157.7 L860.0,158.5 L867.3,161.6 L874.7,164.8 L882.0,154.6 L889.3,150.3 L896.7,145.2 L904.0,142.9 L911.3,146.7 L918.7,168.5 L926.0,158.4 L933.3,145.6 L940.7,143.6 L948.0,147.9 L955.3,137.0 L962.7,140.2 L970.0,139.3"/>
+<path class="series s-ten" style="stroke-width: 5" d="M90.0,371.5 L97.3,349.2 L104.7,336.1 L112.0,340.0 L119.3,346.9 L126.7,345.6 L134.0,342.6 L141.3,338.1 L148.7,341.8 L156.0,345.0 L163.3,342.5 L170.7,341.0 L178.0,337.5 L185.3,335.5 L192.7,335.8 L200.0,336.4 L207.3,332.3 L214.7,333.0 L222.0,334.4 L229.3,336.1 L236.7,336.1 L244.0,336.0 L251.3,336.4 L258.7,336.6 L266.0,336.3 L273.3,334.2 L280.7,333.4 L288.0,334.2 L295.3,335.6 L302.7,333.4 L310.0,334.9 L317.3,335.6 L324.7,338.5 L332.0,337.1 L339.3,336.6 L346.7,337.1 L354.0,334.0 L361.3,335.7 L368.7,335.9 L376.0,337.2 L383.3,337.2 L390.7,339.4 L398.0,339.1 L405.3,337.9 L412.7,336.5 L420.0,337.7 L427.3,336.9 L434.7,336.9 L442.0,333.8 L449.3,333.5 L456.7,332.0 L464.0,331.5 L471.3,328.6 L478.7,324.9 L486.0,321.9 L493.3,317.5 L500.7,312.7 L508.0,306.8 L515.3,302.8 L522.7,298.6 L530.0,293.6 L537.3,292.0 L544.7,285.1 L552.0,281.1 L559.3,273.4 L566.7,266.6 L574.0,260.8 L581.3,254.0 L588.7,247.4 L596.0,241.0 L603.3,233.6 L610.7,227.6 L618.0,219.2 L625.3,213.1 L632.7,205.3 L640.0,198.9 L647.3,192.4 L654.7,187.4 L662.0,181.5 L669.3,177.0 L676.7,170.5 L684.0,168.1 L691.3,165.7 L698.7,160.1 L706.0,155.7 L713.3,152.6 L720.7,149.4 L728.0,150.2 L735.3,145.0 L742.7,141.8 L750.0,140.7 L757.3,139.0 L764.7,138.2 L772.0,138.8 L779.3,138.0 L786.7,136.4 L794.0,134.8 L801.3,134.6 L808.7,136.2 L816.0,135.8 L823.3,137.8 L830.7,137.8 L838.0,137.4 L845.3,137.9 L852.7,140.7 L860.0,143.7 L867.3,143.1 L874.7,141.7 L882.0,142.2 L889.3,143.6 L896.7,144.6 L904.0,144.9 L911.3,143.8 L918.7,149.1 L926.0,150.2 L933.3,147.8 L940.7,147.6 L948.0,148.7 L955.3,148.2 L962.7,147.8 L970.0,145.5"/>
+<line class="s-rose" style="stroke-width: 3" x1="515.3" y1="245.0" x2="610.7" y2="245.0" marker-end="url(#sm-a)"/>
+<text class="rose-txt s" x="632.7" y="263.5">retraso de la</text>
+<text class="rose-txt s" x="632.7" y="283.5">ventana larga</text>
+<text class="s" x="530" y="462" text-anchor="middle">Tiempo (lecturas)</text>
+<text class="s" transform="translate(30,245) rotate(-90)" text-anchor="middle">Desplazamiento (mm)</text>
+<line class="s-gray" style="stroke-width: 2" x1="110" y1="30" x2="150" y2="30"/><text class="s" x="158" y="36">Dato crudo</text>
+<line class="s-hum" style="stroke-width: 4" x1="300" y1="30" x2="340" y2="30"/><text class="s" x="348" y="36">Media móvil de 5</text>
+<line class="s-ten" style="stroke-width: 5" x1="550" y1="30" x2="590" y2="30"/><text class="s" x="598" y="36">Media móvil de 25</text>
+<line class="s-gray" style="stroke-width: 3; stroke-dasharray: 9 6" x1="800" y1="30" x2="840" y2="30"/><text class="s" x="848" y="36">Real</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">🎚️</span><span>Ventana corta vs. larga</span></div>
+            <ul class="bullet-list" style="font-size: 0.78em;">
+              <li><strong>Corta:</strong> sigue rápido el cambio, pero deja pasar ruido.</li>
+              <li><strong>Larga:</strong> muy limpia, pero <strong>llega tarde</strong> a la aceleración.</li>
+              <li>En tiempo real la ventana solo mira al pasado, por eso siempre hay retraso.</li>
+            </ul>
+          </div>
+            <div class="mono-box" style="margin-top: 14px;">df['suave'] = (df['DE1']
+    .rolling(window=24, min_periods=1)
+    .mean())</div>
+          </div>
+
+        </div>
+        <div class="callout callout-warning" style="margin-top: 12px;">
+          <span class="callout-icon">⚖️</span>
+          <div class="callout-content" style="font-weight: 600;">Suavizar es un <strong>compromiso entre ruido y retraso</strong>. Para alertas, el retraso puede costar horas: elige la ventana según la velocidad del fenómeno.</div>
+        </div>
+      </section>
+
+
+
+
 
       <!-- SLIDE 8: ANÁLISIS DE DATOS: HERRAMIENTAS ESTADÍSTICAS -->
       <section>
@@ -311,6 +508,153 @@
         </div>
       </section>
 
+      <!-- NEW:05-inverse -->
+      <section>
+        <h2>Velocidad, aceleración y velocidad inversa</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Cuando la velocidad se dispara, el inverso apunta a la falla
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 6px; align-items: center; gap: 30px;">
+
+          <svg class="dg" style="max-height: 740px" viewBox="0 0 1000 660" role="img" aria-label="Método de la velocidad inversa para estimar el tiempo de falla">
+<rect class="panel" x="90" y="20" width="890" height="170" rx="10" style="fill-opacity: 0.4"/>
+<text class="b s" x="108" y="44">Desplazamiento acumulado (mm)</text>
+<rect class="panel" x="90" y="230" width="890" height="170" rx="10" style="fill-opacity: 0.4"/>
+<text class="b s" x="108" y="254">Velocidad (mm/día)</text>
+<rect class="panel" x="90" y="440" width="890" height="170" rx="10" style="fill-opacity: 0.4"/>
+<text class="b s" x="108" y="464">1 / velocidad (día/mm)</text>
+<path class="series s-pie thick" d="M100.0,175.6 L107.8,175.1 L115.6,174.5 L123.5,174.1 L131.3,173.6 L139.1,173.2 L146.9,172.6 L154.7,172.0 L162.5,171.4 L170.4,170.8 L178.2,170.2 L186.0,169.7 L193.8,169.2 L201.6,168.6 L209.5,168.0 L217.3,167.5 L225.1,166.8 L232.9,166.2 L240.7,165.6 L248.5,164.8 L256.4,164.1 L264.2,163.5 L272.0,162.9 L279.8,162.2 L287.6,161.6 L295.5,160.9 L303.3,160.1 L311.1,159.3 L318.9,158.6 L326.7,157.8 L334.5,156.9 L342.4,156.2 L350.2,155.5 L358.0,154.5 L365.8,153.8 L373.6,153.1 L381.5,152.2 L389.3,151.1 L397.1,150.4 L404.9,149.8 L412.7,148.8 L420.5,148.0 L428.4,147.2 L436.2,146.2 L444.0,145.3 L451.8,144.3 L459.6,143.4 L467.5,142.3 L475.3,141.1 L483.1,140.1 L490.9,139.2 L498.7,138.0 L506.5,136.9 L514.4,135.9 L522.2,134.9 L530.0,133.6 L537.8,132.4 L545.6,131.3 L553.5,130.0 L561.3,128.8 L569.1,127.5 L576.9,126.5 L584.7,124.8 L592.5,123.4 L600.4,122.1 L608.2,120.5 L616.0,118.9 L623.8,117.4 L631.6,115.6 L639.5,113.4 L647.3,111.6 L655.1,109.4 L662.9,107.1 L670.7,105.4 L678.5,103.5 L686.4,101.3 L694.2,99.6 L702.0,97.4 L709.8,94.7 L717.6,91.9 L725.5,89.2 L733.3,87.0 L741.1,83.3 L748.9,80.1 L756.7,76.6 L764.5,72.9 L772.4,70.0 L780.2,66.7 L788.0,63.0 L795.8,57.1 L803.6,52.5 L811.5,47.0 L819.3,40.8"/>
+<path class="series s-ten" d="M100.0,377.8 L107.8,377.7 L115.6,375.5 L123.5,378.6 L131.3,376.3 L139.1,378.4 L146.9,374.5 L154.7,375.6 L162.5,373.9 L170.4,376.2 L178.2,375.0 L186.0,375.7 L193.8,376.2 L201.6,374.9 L209.5,376.5 L217.3,375.3 L225.1,373.7 L232.9,374.5 L240.7,375.0 L248.5,370.8 L256.4,374.1 L264.2,374.8 L272.0,373.6 L279.8,374.5 L287.6,374.1 L295.5,373.9 L303.3,369.7 L311.1,373.0 L318.9,372.6 L326.7,371.5 L334.5,368.8 L342.4,372.6 L350.2,373.1 L358.0,367.0 L365.8,374.0 L373.6,372.1 L381.5,370.0 L389.3,366.2 L397.1,372.4 L404.9,374.4 L412.7,368.9 L420.5,370.9 L428.4,370.4 L436.2,368.4 L444.0,368.6 L451.8,368.2 L459.6,369.4 L467.5,365.1 L475.3,364.2 L483.1,367.4 L490.9,368.1 L498.7,364.9 L506.5,365.1 L514.4,368.2 L522.2,366.5 L530.0,362.1 L537.8,364.7 L545.6,364.8 L553.5,362.9 L561.3,363.0 L569.1,362.3 L576.9,366.7 L584.7,355.3 L592.5,359.8 L600.4,362.3 L608.2,355.6 L616.0,357.1 L623.8,357.3 L631.6,352.5 L639.5,345.9 L647.3,352.3 L655.1,346.5 L662.9,342.2 L670.7,355.0 L678.5,351.8 L686.4,344.4 L694.2,353.9 L702.0,346.1 L709.8,335.7 L717.6,334.9 L725.5,335.3 L733.3,346.3 L741.1,316.3 L748.9,326.5 L756.7,321.1 L764.5,319.0 L772.4,331.0 L780.2,324.7 L788.0,317.8 L795.8,277.7 L803.6,300.3 L811.5,283.8 L819.3,271.2"/>
+<circle cx="100.0" cy="442.6" r="3.6" class="f-hum"/>
+<circle cx="107.8" cy="444.7" r="3.6" class="f-hum"/>
+<circle cx="115.6" cy="475.6" r="3.6" class="f-hum"/>
+<circle cx="123.5" cy="425.9" r="3.6" class="f-hum"/>
+<circle cx="131.3" cy="466.0" r="3.6" class="f-hum"/>
+<circle cx="139.1" cy="430.2" r="3.6" class="f-hum"/>
+<circle cx="146.9" cy="486.3" r="3.6" class="f-hum"/>
+<circle cx="154.7" cy="475.2" r="3.6" class="f-hum"/>
+<circle cx="162.5" cy="491.9" r="3.6" class="f-hum"/>
+<circle cx="170.4" cy="467.3" r="3.6" class="f-hum"/>
+<circle cx="178.2" cy="481.8" r="3.6" class="f-hum"/>
+<circle cx="186.0" cy="473.4" r="3.6" class="f-hum"/>
+<circle cx="193.8" cy="468.0" r="3.6" class="f-hum"/>
+<circle cx="201.6" cy="482.2" r="3.6" class="f-hum"/>
+<circle cx="209.5" cy="462.9" r="3.6" class="f-hum"/>
+<circle cx="217.3" cy="477.9" r="3.6" class="f-hum"/>
+<circle cx="225.1" cy="493.1" r="3.6" class="f-hum"/>
+<circle cx="232.9" cy="486.3" r="3.6" class="f-hum"/>
+<circle cx="240.7" cy="481.3" r="3.6" class="f-hum"/>
+<circle cx="248.5" cy="513.1" r="3.6" class="f-hum"/>
+<circle cx="256.4" cy="490.2" r="3.6" class="f-hum"/>
+<circle cx="264.2" cy="483.2" r="3.6" class="f-hum"/>
+<circle cx="272.0" cy="494.1" r="3.6" class="f-hum"/>
+<circle cx="279.8" cy="486.9" r="3.6" class="f-hum"/>
+<circle cx="287.6" cy="490.0" r="3.6" class="f-hum"/>
+<circle cx="295.5" cy="491.9" r="3.6" class="f-hum"/>
+<circle cx="303.3" cy="518.7" r="3.6" class="f-hum"/>
+<circle cx="311.1" cy="499.1" r="3.6" class="f-hum"/>
+<circle cx="318.9" cy="502.1" r="3.6" class="f-hum"/>
+<circle cx="326.7" cy="508.8" r="3.6" class="f-hum"/>
+<circle cx="334.5" cy="522.8" r="3.6" class="f-hum"/>
+<circle cx="342.4" cy="501.6" r="3.6" class="f-hum"/>
+<circle cx="350.2" cy="498.4" r="3.6" class="f-hum"/>
+<circle cx="358.0" cy="529.7" r="3.6" class="f-hum"/>
+<circle cx="365.8" cy="491.3" r="3.6" class="f-hum"/>
+<circle cx="373.6" cy="505.6" r="3.6" class="f-hum"/>
+<circle cx="381.5" cy="517.4" r="3.6" class="f-hum"/>
+<circle cx="389.3" cy="532.2" r="3.6" class="f-hum"/>
+<circle cx="397.1" cy="503.5" r="3.6" class="f-hum"/>
+<circle cx="404.9" cy="487.3" r="3.6" class="f-hum"/>
+<circle cx="412.7" cy="522.2" r="3.6" class="f-hum"/>
+<circle cx="420.5" cy="512.4" r="3.6" class="f-hum"/>
+<circle cx="428.4" cy="515.1" r="3.6" class="f-hum"/>
+<circle cx="436.2" cy="524.2" r="3.6" class="f-hum"/>
+<circle cx="444.0" cy="523.4" r="3.6" class="f-hum"/>
+<circle cx="451.8" cy="525.3" r="3.6" class="f-hum"/>
+<circle cx="459.6" cy="520.3" r="3.6" class="f-hum"/>
+<circle cx="467.5" cy="535.6" r="3.6" class="f-hum"/>
+<circle cx="475.3" cy="538.2" r="3.6" class="f-hum"/>
+<circle cx="483.1" cy="528.4" r="3.6" class="f-hum"/>
+<circle cx="490.9" cy="525.7" r="3.6" class="f-hum"/>
+<circle cx="498.7" cy="536.3" r="3.6" class="f-hum"/>
+<circle cx="506.5" cy="535.7" r="3.6" class="f-hum"/>
+<circle cx="514.4" cy="525.1" r="3.6" class="f-hum"/>
+<circle cx="522.2" cy="531.3" r="3.6" class="f-hum"/>
+<circle cx="530.0" cy="543.2" r="3.6" class="f-hum"/>
+<circle cx="537.8" cy="536.7" r="3.6" class="f-hum"/>
+<circle cx="545.6" cy="536.5" r="3.6" class="f-hum"/>
+<circle cx="553.5" cy="541.5" r="3.6" class="f-hum"/>
+<circle cx="561.3" cy="541.2" r="3.6" class="f-hum"/>
+<circle cx="569.1" cy="542.7" r="3.6" class="f-hum"/>
+<circle cx="576.9" cy="530.5" r="3.6" class="f-hum"/>
+<circle cx="584.7" cy="555.0" r="3.6" class="f-hum"/>
+<circle cx="592.5" cy="547.9" r="3.6" class="f-hum"/>
+<circle cx="600.4" cy="542.8" r="3.6" class="f-hum"/>
+<circle cx="608.2" cy="554.6" r="3.6" class="f-hum"/>
+<circle cx="616.0" cy="552.4" r="3.6" class="f-hum"/>
+<circle cx="623.8" cy="552.2" r="3.6" class="f-hum"/>
+<circle cx="631.6" cy="558.4" r="3.6" class="f-hum"/>
+<circle cx="639.5" cy="564.5" r="3.6" class="f-hum"/>
+<circle cx="647.3" cy="558.6" r="3.6" class="f-hum"/>
+<circle cx="655.1" cy="564.1" r="3.6" class="f-hum"/>
+<circle cx="662.9" cy="567.2" r="3.6" class="f-hum"/>
+<circle cx="670.7" cy="555.4" r="3.6" class="f-hum"/>
+<circle cx="678.5" cy="559.1" r="3.6" class="f-hum"/>
+<circle cx="686.4" cy="565.7" r="3.6" class="f-hum"/>
+<circle cx="694.2" cy="556.8" r="3.6" class="f-hum"/>
+<circle cx="702.0" cy="564.4" r="3.6" class="f-hum"/>
+<circle cx="709.8" cy="570.9" r="3.6" class="f-hum"/>
+<circle cx="717.6" cy="571.3" r="3.6" class="f-hum"/>
+<circle cx="725.5" cy="571.2" r="3.6" class="f-hum"/>
+<circle cx="733.3" cy="564.2" r="3.6" class="f-hum"/>
+<circle cx="741.1" cy="577.9" r="3.6" class="f-hum"/>
+<circle cx="748.9" cy="574.8" r="3.6" class="f-hum"/>
+<circle cx="756.7" cy="576.6" r="3.6" class="f-hum"/>
+<circle cx="764.5" cy="577.2" r="3.6" class="f-hum"/>
+<circle cx="772.4" cy="573.1" r="3.6" class="f-hum"/>
+<circle cx="780.2" cy="575.4" r="3.6" class="f-hum"/>
+<circle cx="788.0" cy="577.5" r="3.6" class="f-hum"/>
+<circle cx="795.8" cy="584.4" r="3.6" class="f-hum"/>
+<circle cx="803.6" cy="581.3" r="3.6" class="f-hum"/>
+<circle cx="811.5" cy="583.7" r="3.6" class="f-hum"/>
+<circle cx="819.3" cy="585.0" r="3.6" class="f-hum"/>
+<line class="s-rose" style="stroke-width: 4; stroke-dasharray: 10 7" x1="506.5" y1="532.7" x2="879.4" y2="596.0"/>
+<circle cx="879.4" cy="596.0" r="9" class="f-rose"/>
+<line class="thin dash s-rose" x1="879.4" y1="20" x2="879.4" y2="610"/>
+<text class="rose-txt m" x="867.4" y="492" text-anchor="end">1/v → 0:</text>
+<text class="rose-txt m" x="867.4" y="518" text-anchor="end">falla estimada</text>
+<text class="s" x="100.0" y="632" text-anchor="middle">0</text>
+<text class="s" x="256.4" y="632" text-anchor="middle">20</text>
+<text class="s" x="412.7" y="632" text-anchor="middle">40</text>
+<text class="s" x="569.1" y="632" text-anchor="middle">60</text>
+<text class="s" x="725.5" y="632" text-anchor="middle">80</text>
+<text class="s" x="881.8" y="632" text-anchor="middle">100</text>
+<text class="s" x="530" y="652" text-anchor="middle">Tiempo (días)</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">⏳</span><span>Método de Fukuzono (1985)</span></div>
+            <ul class="bullet-list" style="font-size: 0.78em;">
+              <li>Antes de una rotura, la <strong>velocidad crece</strong> cada vez más rápido.</li>
+              <li>El inverso de la velocidad, <strong>1/v</strong>, se acerca a una <strong>línea recta</strong>.</li>
+              <li>Al extrapolar hasta <strong>1/v = 0</strong> se estima <strong>cuándo</strong> podría fallar.</li>
+            </ul>
+          </div>
+            <div class="callout callout-warning" style="margin-top: 14px; font-size: 0.85em !important;">
+              <span class="callout-icon">⚠️</span>
+              <div class="callout-content"><strong>Solo apoyo:</strong> con datos ruidosos o poco tiempo, la estimación varía mucho. No reemplaza el criterio de un experto.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+
       <!-- SLIDE 11: RELACIONES Y DISPERSIÓN -->
       <section>
         <h2>Etapas de la interpretación: Relaciones</h2>
@@ -378,6 +722,133 @@
 
         </div>
       </section>
+
+      <!-- NEW:05-lag -->
+      <section>
+        <h2>Relaciones con rezago</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          ¿Cuánto tarda el suelo en responder a la lluvia?
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" viewBox="0 0 1000 480" role="img" aria-label="Correlación cruzada con rezago entre lluvia y presión de poros"><defs><marker id="lg-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-rose)"/></marker></defs>
+<rect class="panel" x="60" y="10" width="564" height="195" rx="10" style="fill-opacity: 0.4"/>
+<rect class="panel" x="60" y="225" width="564" height="215" rx="10" style="fill-opacity: 0.4"/>
+<text class="b s" x="74" y="34">Lluvia (mm/h)</text>
+<text class="b s" x="74" y="249">Presión de poros (kPa)</text>
+<rect class="f-rain" x="66.5" y="187.5" width="7" height="2.5"/>
+<rect class="f-rain" x="74.0" y="185.8" width="7" height="4.2"/>
+<rect class="f-rain" x="81.5" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="89.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="96.5" y="188.0" width="7" height="2.0"/>
+<rect class="f-rain" x="104.0" y="181.2" width="7" height="8.8"/>
+<rect class="f-rain" x="111.5" y="178.5" width="7" height="11.5"/>
+<rect class="f-rain" x="119.0" y="169.3" width="7" height="20.7"/>
+<rect class="f-rain" x="126.5" y="147.1" width="7" height="42.9"/>
+<rect class="f-rain" x="134.0" y="124.2" width="7" height="65.8"/>
+<rect class="f-rain" x="141.5" y="112.3" width="7" height="77.7"/>
+<rect class="f-rain" x="149.0" y="124.0" width="7" height="66.0"/>
+<rect class="f-rain" x="156.5" y="145.8" width="7" height="44.2"/>
+<rect class="f-rain" x="164.0" y="166.4" width="7" height="23.6"/>
+<rect class="f-rain" x="171.5" y="179.3" width="7" height="10.7"/>
+<rect class="f-rain" x="179.0" y="189.0" width="7" height="1.0"/>
+<rect class="f-rain" x="186.5" y="189.1" width="7" height="0.9"/>
+<rect class="f-rain" x="194.0" y="188.9" width="7" height="1.1"/>
+<rect class="f-rain" x="201.5" y="184.7" width="7" height="5.3"/>
+<rect class="f-rain" x="209.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="216.5" y="186.9" width="7" height="3.1"/>
+<rect class="f-rain" x="224.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="231.5" y="187.0" width="7" height="3.0"/>
+<rect class="f-rain" x="239.0" y="188.4" width="7" height="1.6"/>
+<rect class="f-rain" x="246.5" y="187.8" width="7" height="2.2"/>
+<rect class="f-rain" x="254.0" y="178.6" width="7" height="11.4"/>
+<rect class="f-rain" x="261.5" y="159.1" width="7" height="30.9"/>
+<rect class="f-rain" x="269.0" y="134.5" width="7" height="55.5"/>
+<rect class="f-rain" x="276.5" y="93.7" width="7" height="96.3"/>
+<rect class="f-rain" x="284.0" y="59.7" width="7" height="130.3"/>
+<rect class="f-rain" x="291.5" y="46.1" width="7" height="143.9"/>
+<rect class="f-rain" x="299.0" y="59.3" width="7" height="130.7"/>
+<rect class="f-rain" x="306.5" y="100.9" width="7" height="89.1"/>
+<rect class="f-rain" x="314.0" y="132.4" width="7" height="57.6"/>
+<rect class="f-rain" x="321.5" y="164.0" width="7" height="26.0"/>
+<rect class="f-rain" x="329.0" y="175.5" width="7" height="14.5"/>
+<rect class="f-rain" x="336.5" y="185.9" width="7" height="4.1"/>
+<rect class="f-rain" x="344.0" y="188.2" width="7" height="1.8"/>
+<rect class="f-rain" x="351.5" y="188.2" width="7" height="1.8"/>
+<rect class="f-rain" x="359.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="366.5" y="189.6" width="7" height="0.4"/>
+<rect class="f-rain" x="374.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="381.5" y="183.4" width="7" height="6.6"/>
+<rect class="f-rain" x="389.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="396.5" y="189.8" width="7" height="0.2"/>
+<rect class="f-rain" x="404.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="411.5" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="419.0" y="189.7" width="7" height="0.3"/>
+<rect class="f-rain" x="426.5" y="178.7" width="7" height="11.3"/>
+<rect class="f-rain" x="434.0" y="166.7" width="7" height="23.3"/>
+<rect class="f-rain" x="441.5" y="150.2" width="7" height="39.8"/>
+<rect class="f-rain" x="449.0" y="135.4" width="7" height="54.6"/>
+<rect class="f-rain" x="456.5" y="120.1" width="7" height="69.9"/>
+<rect class="f-rain" x="464.0" y="136.6" width="7" height="53.4"/>
+<rect class="f-rain" x="471.5" y="153.8" width="7" height="36.2"/>
+<rect class="f-rain" x="479.0" y="167.6" width="7" height="22.4"/>
+<rect class="f-rain" x="486.5" y="184.4" width="7" height="5.6"/>
+<rect class="f-rain" x="494.0" y="186.2" width="7" height="3.8"/>
+<rect class="f-rain" x="501.5" y="186.1" width="7" height="3.9"/>
+<rect class="f-rain" x="509.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="516.5" y="188.6" width="7" height="1.4"/>
+<rect class="f-rain" x="524.0" y="189.8" width="7" height="0.2"/>
+<rect class="f-rain" x="531.5" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="539.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="546.5" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="554.0" y="189.9" width="7" height="0.1"/>
+<rect class="f-rain" x="561.5" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="569.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="576.5" y="189.2" width="7" height="0.8"/>
+<rect class="f-rain" x="584.0" y="185.7" width="7" height="4.3"/>
+<rect class="f-rain" x="591.5" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="599.0" y="190.0" width="7" height="0.0"/>
+<rect class="f-rain" x="606.5" y="189.2" width="7" height="0.8"/>
+<path class="series s-pie thick" d="M70.0,404.0 L77.5,411.8 L85.0,398.6 L92.5,409.5 L100.0,401.7 L107.5,407.0 L115.0,403.5 L122.5,397.0 L130.0,401.6 L137.5,404.4 L145.0,408.6 L152.5,404.2 L160.0,404.2 L167.5,384.4 L175.0,386.2 L182.5,372.5 L190.0,337.8 L197.5,331.3 L205.0,340.6 L212.5,345.8 L220.0,364.9 L227.5,376.7 L235.0,382.1 L242.5,390.1 L250.0,397.7 L257.5,393.9 L265.0,399.1 L272.5,403.3 L280.0,408.5 L287.5,403.2 L295.0,404.9 L302.5,400.3 L310.0,386.6 L317.5,375.4 L325.0,344.2 L332.5,308.9 L340.0,281.8 L347.5,258.2 L355.0,279.6 L362.5,288.7 L370.0,317.5 L377.5,335.3 L385.0,345.9 L392.5,379.8 L400.0,386.9 L407.5,392.3 L415.0,400.0 L422.5,399.8 L430.0,408.8 L437.5,399.9 L445.0,408.5 L452.5,410.1 L460.0,403.1 L467.5,403.6 L475.0,404.4 L482.5,397.1 L490.0,382.9 L497.5,367.8 L505.0,352.3 L512.5,350.6 L520.0,358.9 L527.5,351.5 L535.0,368.2 L542.5,383.8 L550.0,392.5 L557.5,396.1 L565.0,399.9 L572.5,410.6 L580.0,398.3 L587.5,403.5 L595.0,407.0 L602.5,404.5 L610.0,405.1"/>
+<line class="thin dash s-rose" x1="295.0" y1="20" x2="295.0" y2="430"/>
+<line class="thin dash s-rose" x1="355.0" y1="225" x2="355.0" y2="430"/>
+<line class="s-rose" style="stroke-width: 3.5" x1="295.0" y1="326" x2="353.0" y2="326" marker-end="url(#lg-a)"/>
+<text class="rose-txt s" x="285.0" y="332" text-anchor="end">rezago ≈ 8 h</text>
+<text class="s" x="340" y="466" text-anchor="middle">Tiempo (horas)</text>
+<rect class="panel" x="650" y="225" width="330" height="240" rx="10" style="fill-opacity: 0.4"/>
+<text class="b s" x="668" y="249">Correlación r según el rezago</text>
+<line class="ax" x1="700" y1="420" x2="960" y2="420"/><line class="ax" x1="700" y1="420" x2="700" y2="255"/>
+<path class="series s-ten thick" d="M700.0,420.0 L710.8,420.0 L721.7,420.0 L732.5,401.3 L743.3,359.1 L754.2,316.0 L765.0,279.3 L775.8,258.7 L786.7,258.5 L797.5,277.0 L808.3,309.4 L819.2,348.2 L830.0,388.7 L840.8,420.0 L851.7,420.0 L862.5,420.0 L873.3,420.0 L884.2,420.0 L895.0,420.0 L905.8,420.0 L916.7,420.0 L927.5,420.0 L938.3,420.0 L949.2,420.0 L960.0,420.0"/>
+<circle cx="786.7" cy="258.5" r="9" class="f-rose"/>
+<line class="thin dash s-rose" x1="786.7" y1="258.5" x2="786.7" y2="420"/>
+<text class="rose-txt s" x="955" y="284" text-anchor="end">r máx = 0.95</text>
+<text class="rose-txt s" x="955" y="306" text-anchor="end">a las 8 h</text>
+<text class="s" x="786.7" y="444" text-anchor="middle">8 h</text>
+<text class="s" x="830" y="462" text-anchor="middle">Rezago aplicado (h)</text>
+<text class="b m" x="650" y="60">Sin rezago (0 h):</text><text class="s" x="650" y="84">la lluvia y u parecen</text><text class="s" x="650" y="106">poco relacionadas.</text>
+<text class="b m" x="650" y="150">Con el rezago justo:</text><text class="s" x="650" y="174">r sube a 0.95 y se revela</text><text class="s" x="650" y="196">la respuesta de la ladera.</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">⏱️</span><span>El rezago es información</span></div>
+            <ul class="bullet-list" style="font-size: 0.76em;">
+              <li>El pico de correlación indica <strong>cuánto tarda la ladera</strong> en responder a la lluvia.</li>
+              <li>Ese tiempo es <strong>tiempo de anticipación</strong> disponible para la alerta.</li>
+              <li>Correlación no es causalidad: confirma con la física del proceso.</li>
+            </ul>
+          </div>
+            <div class="mono-box" style="margin-top: 12px;">for lag in range(0, 25):
+    r = df['lluvia'].shift(lag).corr(df['u'])</div>
+          </div>
+
+        </div>
+      </section>
+
+
+
+
 
       <!-- SLIDE 13: QUÉ BUSCAR EN LOS DATOS -->
       <section>
@@ -548,6 +1019,100 @@
         </div>
       </section>
 
+      <!-- NEW:05-percentiles -->
+      <section>
+        <h2>Estadística para definir umbrales</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Los datos normales dicen qué es «anormal»
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" viewBox="0 0 1000 460" role="img" aria-label="Histograma con percentiles como umbrales">
+<line class="ax" x1="70" y1="400" x2="960" y2="400"/>
+<rect class="f-ag" x="71.0" y="400.0" width="17.3" height="0.0" style="opacity: 0.85"/>
+<rect class="f-ag" x="90.3" y="394.5" width="17.3" height="5.5" style="opacity: 0.85"/>
+<rect class="f-ag" x="109.7" y="355.8" width="17.3" height="44.2" style="opacity: 0.85"/>
+<rect class="f-ag" x="129.0" y="281.3" width="17.3" height="118.7" style="opacity: 0.85"/>
+<rect class="f-ag" x="148.4" y="201.2" width="17.3" height="198.8" style="opacity: 0.85"/>
+<rect class="f-ag" x="167.7" y="127.5" width="17.3" height="272.5" style="opacity: 0.85"/>
+<rect class="f-ag" x="187.1" y="89.8" width="17.3" height="310.2" style="opacity: 0.85"/>
+<rect class="f-ag" x="206.4" y="93.5" width="17.3" height="306.5" style="opacity: 0.85"/>
+<rect class="f-ag" x="225.8" y="85.2" width="17.3" height="314.8" style="opacity: 0.85"/>
+<rect class="f-ag" x="245.1" y="120.2" width="17.3" height="279.8" style="opacity: 0.85"/>
+<rect class="f-ag" x="264.5" y="132.1" width="17.3" height="267.9" style="opacity: 0.85"/>
+<rect class="f-ag" x="283.8" y="198.4" width="17.3" height="201.6" style="opacity: 0.85"/>
+<rect class="f-ag" x="303.2" y="208.5" width="17.3" height="191.5" style="opacity: 0.85"/>
+<rect class="f-ag" x="322.5" y="245.4" width="17.3" height="154.6" style="opacity: 0.85"/>
+<rect class="f-ag" x="341.9" y="239.8" width="17.3" height="160.2" style="opacity: 0.85"/>
+<rect class="f-ag" x="361.2" y="273.9" width="17.3" height="126.1" style="opacity: 0.85"/>
+<rect class="f-ag" x="380.6" y="286.8" width="17.3" height="113.2" style="opacity: 0.85"/>
+<rect class="f-ag" x="399.9" y="311.6" width="17.3" height="88.4" style="opacity: 0.85"/>
+<rect class="f-ag" x="419.3" y="329.1" width="17.3" height="70.9" style="opacity: 0.85"/>
+<rect class="f-ag" x="438.6" y="333.7" width="17.3" height="66.3" style="opacity: 0.85"/>
+<rect class="f-ay" x="458.0" y="352.1" width="17.3" height="47.9" style="opacity: 0.85"/>
+<rect class="f-ay" x="477.3" y="355.8" width="17.3" height="44.2" style="opacity: 0.85"/>
+<rect class="f-ay" x="496.7" y="358.6" width="17.3" height="41.4" style="opacity: 0.85"/>
+<rect class="f-ay" x="516.0" y="362.3" width="17.3" height="37.7" style="opacity: 0.85"/>
+<rect class="f-ay" x="535.3" y="369.6" width="17.3" height="30.4" style="opacity: 0.85"/>
+<rect class="f-ao" x="554.7" y="368.7" width="17.3" height="31.3" style="opacity: 0.85"/>
+<rect class="f-ao" x="574.0" y="388.0" width="17.3" height="12.0" style="opacity: 0.85"/>
+<rect class="f-ao" x="593.4" y="371.5" width="17.3" height="28.5" style="opacity: 0.85"/>
+<rect class="f-ao" x="612.7" y="377.0" width="17.3" height="23.0" style="opacity: 0.85"/>
+<rect class="f-ao" x="632.1" y="389.0" width="17.3" height="11.0" style="opacity: 0.85"/>
+<rect class="f-ao" x="651.4" y="389.0" width="17.3" height="11.0" style="opacity: 0.85"/>
+<rect class="f-ao" x="670.8" y="389.9" width="17.3" height="10.1" style="opacity: 0.85"/>
+<rect class="f-ao" x="690.1" y="395.4" width="17.3" height="4.6" style="opacity: 0.85"/>
+<rect class="f-ao" x="709.5" y="394.5" width="17.3" height="5.5" style="opacity: 0.85"/>
+<rect class="f-ao" x="728.8" y="395.4" width="17.3" height="4.6" style="opacity: 0.85"/>
+<rect class="f-ao" x="748.2" y="391.7" width="17.3" height="8.3" style="opacity: 0.85"/>
+<rect class="f-ar" x="767.5" y="392.6" width="17.3" height="7.4" style="opacity: 0.85"/>
+<rect class="f-ar" x="786.9" y="394.5" width="17.3" height="5.5" style="opacity: 0.85"/>
+<rect class="f-ar" x="806.2" y="398.2" width="17.3" height="1.8" style="opacity: 0.85"/>
+<rect class="f-ar" x="825.6" y="395.4" width="17.3" height="4.6" style="opacity: 0.85"/>
+<rect class="f-ar" x="844.9" y="397.2" width="17.3" height="2.8" style="opacity: 0.85"/>
+<rect class="f-ar" x="864.3" y="395.4" width="17.3" height="4.6" style="opacity: 0.85"/>
+<rect class="f-ar" x="883.6" y="399.1" width="17.3" height="0.9" style="opacity: 0.85"/>
+<rect class="f-ar" x="903.0" y="397.2" width="17.3" height="2.8" style="opacity: 0.85"/>
+<rect class="f-ar" x="922.3" y="399.1" width="17.3" height="0.9" style="opacity: 0.85"/>
+<rect class="f-ar" x="941.7" y="400.0" width="17.3" height="0.0" style="opacity: 0.85"/>
+<line class="thin dash" x1="262.6" y1="60" x2="262.6" y2="400" style="stroke: var(--text-main); stroke-width: 2"/>
+<text class="ag-txt m" x="262.6" y="44" text-anchor="middle">P50</text>
+<line class="thin dash" x1="464.9" y1="60" x2="464.9" y2="400" style="stroke: var(--text-main); stroke-width: 2"/>
+<text class="ay-txt m" x="464.9" y="44" text-anchor="middle">P90</text>
+<line class="thin dash" x1="556.8" y1="60" x2="556.8" y2="400" style="stroke: var(--text-main); stroke-width: 2"/>
+<text class="ao-txt m" x="556.8" y="44" text-anchor="middle">P95</text>
+<line class="thin dash" x1="768.2" y1="60" x2="768.2" y2="400" style="stroke: var(--text-main); stroke-width: 2"/>
+<text class="ar-txt m" x="768.2" y="44" text-anchor="middle">P99</text>
+<line class="s-blue" style="stroke-width: 4; stroke-dasharray: 3 6" x1="558.8" y1="95" x2="558.8" y2="400"/>
+<text class="pie-txt s" x="568.8" y="118">μ + 2σ</text>
+<text class="s" x="515" y="440" text-anchor="middle">Velocidad diaria de deformación en el periodo de referencia (línea base)</text>
+<text class="s" transform="translate(26,230) rotate(-90)" text-anchor="middle">Frecuencia</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">📊</span><span>Umbrales estadísticos</span></div>
+            <ul class="bullet-list" style="font-size: 0.74em;">
+              <li>La <strong>línea base</strong> es el comportamiento normal: mínimo varios meses de datos.</li>
+              <li><strong>Percentiles</strong> (P90, P95, P99) funcionan con distribuciones sesgadas.</li>
+              <li>$\mu \pm k\sigma$ asume una campana simétrica: aquí $\mu - 2\sigma = -0.2$, un límite <strong>negativo</strong> para una velocidad.</li>
+              <li>Recalcula por <strong>temporada</strong> (lluvias / seco).</li>
+            </ul>
+          </div>
+          </div>
+
+        </div>
+        <div class="callout callout-info" style="margin-top: 12px;">
+          <span class="callout-icon">🎯</span>
+          <div class="callout-content" style="font-weight: 600;">Regla útil: <strong>P90 → atención, P95 → alerta, P99 → alarma</strong>. Son puntos de partida que se ajustan con eventos reales.</div>
+        </div>
+      </section>
+
+
+
+
+
       <!-- SLIDE 19: DEFINICIÓN DE UMBRALES Y PLAN DE ACCIÓN -->
       <section>
         <h2>Criterios de Alarma y Acción</h2>
@@ -683,6 +1248,544 @@
         </div>
       </section>
 
+      <!-- NEW:05-sat -->
+      <section>
+        <h2>Sistemas de alerta temprana (SAT)</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Cuatro componentes que deben funcionar juntos
+        </h3>
+
+        <div style="margin-top: 8px;">
+          <svg class="dg" style="max-height: 640px" viewBox="0 0 1000 560" role="img" aria-label="Los cuatro componentes de un sistema de alerta temprana"><defs><marker id="sat-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-muted)"/></marker></defs>
+<rect class="panel" x="60" y="30" width="380" height="180" rx="14"/>
+<path class="f-blue" d="M60,86 L60,44 Q60,30 74,30 L426,30 Q440,30 440,44 L440,86 Z"/>
+<text class="w" x="82" y="68" style="font-size: 26px">1 · Conocimiento del riesgo</text>
+<text class="m" x="82" y="122">Amenazas, exposición y</text>
+<text class="m" x="82" y="152">vulnerabilidad: mapas y</text>
+<text class="m" x="82" y="182">escenarios de falla.</text>
+<rect class="panel" x="560" y="30" width="380" height="180" rx="14"/>
+<path class="f-ao" d="M560,86 L560,44 Q560,30 574,30 L926,30 Q940,30 940,44 L940,86 Z"/>
+<text class="w" x="582" y="68" style="font-size: 26px">2 · Monitoreo y alerta</text>
+<text class="m" x="582" y="122">Sensores, umbrales y</text>
+<text class="m" x="582" y="152">pronóstico; el análisis</text>
+<text class="m" x="582" y="182">técnico de este módulo.</text>
+<rect class="panel" x="560" y="330" width="380" height="180" rx="14"/>
+<path class="f-rain" d="M560,386 L560,344 Q560,330 574,330 L926,330 Q940,330 940,344 L940,386 Z"/>
+<text class="w" x="582" y="368" style="font-size: 26px">3 · Difusión y comunicación</text>
+<text class="m" x="582" y="422">Mensajes claros, con</text>
+<text class="m" x="582" y="452">canales redundantes y</text>
+<text class="m" x="582" y="482">a tiempo.</text>
+<rect class="panel" x="60" y="330" width="380" height="180" rx="14"/>
+<path class="f-hum" d="M60,386 L60,344 Q60,330 74,330 L426,330 Q440,330 440,344 L440,386 Z"/>
+<text class="w" x="82" y="368" style="font-size: 26px">4 · Capacidad de respuesta</text>
+<text class="m" x="82" y="422">Planes, rutas de evacuación,</text>
+<text class="m" x="82" y="452">simulacros y comunidad</text>
+<text class="m" x="82" y="482">preparada.</text>
+<path d="M444,120 L554,120" class="ax" marker-end="url(#sat-a)"/>
+<path d="M750,214 L750,324" class="ax" marker-end="url(#sat-a)"/>
+<path d="M554,420 L444,420" class="ax" marker-end="url(#sat-a)"/>
+<path d="M250,324 L250,214" class="ax" marker-end="url(#sat-a)"/>
+<circle cx="500" cy="270" r="78" style="fill: var(--eafit-yellow); fill-opacity: 0.18; stroke: var(--eafit-yellow-text); stroke-width: 4"/>
+<text x="500" y="262" text-anchor="middle" style="font-size: 40px">🛡️</text>
+<text class="b m" x="500" y="288" text-anchor="middle" style="font-size: 22px">Personas</text>
+<text class="b m" x="500" y="312" text-anchor="middle" style="font-size: 22px">protegidas</text>
+</svg>
+        </div>
+        <div class="callout callout-warning" style="margin-top: 12px;">
+          <span class="callout-icon">⛓️</span>
+          <div class="callout-content" style="font-weight: 600;">Un sistema de alerta es tan fuerte como su <strong>eslabón más débil</strong>: el mejor sensor no sirve si el mensaje no llega o nadie sabe qué hacer.</div>
+        </div>
+      </section>
+      <!-- NEW:05-levels -->
+      <section>
+        <h2>Niveles de alerta: el semáforo</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Cada nivel dispara una acción distinta
+        </h3>
+
+        <table class="data-table alert-table" style="margin-top: 14px;">
+          <thead>
+            <tr>
+              <th style="width: 15%;"></th>
+              <th class="g">🟢 Normal</th>
+              <th class="y">🟡 Atención</th>
+              <th class="o">🟠 Alerta</th>
+              <th class="r">🔴 Alarma</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="rowh">Condición <span style="font-weight:500">(ejemplo)</span></td>
+              <td>Variables dentro del rango histórico</td>
+              <td>Superan el P90 o la lluvia acumulada supera el umbral bajo</td>
+              <td>Superan el P95, o hay velocidad creciente y sostenida</td>
+              <td>Umbral crítico superado y aceleración clara (1/v decrece)</td>
+            </tr>
+            <tr>
+              <td class="rowh">Acción técnica</td>
+              <td>Monitoreo rutinario</td>
+              <td>Más frecuencia de lectura e inspección visual</td>
+              <td>Verificar en campo; preparar la evacuación</td>
+              <td>Ejecutar el plan de emergencia</td>
+            </tr>
+            <tr>
+              <td class="rowh">Comunicación</td>
+              <td>Reportes periódicos</td>
+              <td>Aviso al equipo técnico</td>
+              <td>Aviso a autoridades y a la comunidad expuesta</td>
+              <td>Alarma directa (sirenas, mensajes, radio)</td>
+            </tr>
+            <tr>
+              <td class="rowh">Revisión</td>
+              <td>Semanal</td>
+              <td>Diaria</td>
+              <td>Cada hora</td>
+              <td>Continua</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout callout-warning" style="margin-top: 16px;">
+          <span class="callout-icon">📝</span>
+          <div class="callout-content" style="font-weight: 600;"><strong>Valores ilustrativos.</strong> Cada sitio calibra sus umbrales con su propia historia; lo que no cambia es que <strong>cada nivel tenga una acción y un responsable</strong>.</div>
+        </div>
+      </section>
+      <!-- NEW:05-rules -->
+      <section>
+        <h2>Umbrales combinados: reglas de decisión</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Una sola variable avisa; varias confirman
+        </h3>
+
+        <div style="margin-top: 10px;">
+          <svg class="dg" style="max-height: 600px" viewBox="0 0 1200 500" role="img" aria-label="Reglas de decisión multivariable para elevar el nivel de alerta">
+<rect class="panel" x="10" y="30" width="330" height="90" rx="12"/>
+<rect class="f-rain" x="10" y="30" width="10" height="90" rx="4"/>
+<text class="b m" x="36" y="68">Lluvia acumulada</text>
+<text class="s" x="36" y="96">72 h</text>
+<rect class="panel" x="10" y="150" width="330" height="90" rx="12"/>
+<rect class="f-hum" x="10" y="150" width="10" height="90" rx="4"/>
+<text class="b m" x="36" y="188">Humedad θ</text>
+<text class="s" x="36" y="216">sensor de humedad</text>
+<rect class="panel" x="10" y="270" width="330" height="90" rx="12"/>
+<rect class="f-pie" x="10" y="270" width="10" height="90" rx="4"/>
+<text class="b m" x="36" y="308">Presión de poros u</text>
+<text class="s" x="36" y="336">piezómetro</text>
+<rect class="panel" x="10" y="390" width="330" height="90" rx="12"/>
+<rect class="f-ten" x="10" y="390" width="10" height="90" rx="4"/>
+<text class="b m" x="36" y="428">Velocidad v</text>
+<text class="s" x="36" y="456">extensómetro / GNSS</text>
+<path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M340,75 L860,75 L860,45 L900,45"/>
+<path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M340,195 L470,255"/><path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M340,315 L470,255"/>
+<path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M500,255 L600,255 L600,172 L672,172"/>
+<path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M340,75 L640,75 L640,158 L672,158"/>
+<path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M340,315 L620,315 L620,412 L672,412"/>
+<path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M340,435 L620,435 L620,428 L672,428"/>
+<path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M732,165 L900,165"/><path style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" d="M732,420 L900,420"/>
+<circle cx="470" cy="255" r="30" class="f-gray" style="fill-opacity: 0.85"/><text class="w" x="470" y="264" text-anchor="middle" style="font-size: 26px">O</text>
+<circle cx="702" cy="165" r="30" class="f-gray" style="fill-opacity: 0.85"/><text class="w" x="702" y="174" text-anchor="middle" style="font-size: 26px">Y</text>
+<circle cx="702" cy="420" r="30" class="f-gray" style="fill-opacity: 0.85"/><text class="w" x="702" y="429" text-anchor="middle" style="font-size: 26px">Y</text>
+<rect class="f-ay" x="900" y="15" width="290" height="60" rx="12"/>
+<text class="dk" x="1045" y="54" text-anchor="middle" style="font-size: 27px">ATENCIÓN</text>
+<text class="s" x="1045" y="99" text-anchor="middle" style="font-size: 18px">Lluvia > L1</text>
+<rect class="f-ao" x="900" y="135" width="290" height="60" rx="12"/>
+<text class="dk" x="1045" y="174" text-anchor="middle" style="font-size: 27px">ALERTA</text>
+<text class="s" x="1045" y="219" text-anchor="middle" style="font-size: 18px">Lluvia > L1 Y (θ alto O u > U1)</text>
+<rect class="f-ar" x="900" y="390" width="290" height="60" rx="12"/>
+<text class="w" x="1045" y="429" text-anchor="middle" style="font-size: 27px">ALARMA</text>
+<text class="s" x="1045" y="474" text-anchor="middle" style="font-size: 18px">u > U2 Y v > V2</text>
+<text class="s" x="1045" y="300" text-anchor="middle">Y: deben cumplirse todas</text><text class="s" x="1045" y="324" text-anchor="middle">O: basta con una</text>
+</svg>
+        </div>
+        <div class="callout callout-info" style="margin-top: 12px;">
+          <span class="callout-icon">🧠</span>
+          <div class="callout-content" style="font-weight: 600;">Combinar variables <strong>reduce falsas alarmas</strong>: la lluvia sola avisa, pero la lluvia <em>con</em> el suelo respondiendo confirma.</div>
+        </div>
+      </section>
+      <!-- NEW:05-leadtime -->
+      <section>
+        <h2>Tiempo de anticipación vs. tiempo de respuesta <span class="key-badge">★ Diapositiva clave</span></h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          La alerta sirve si llega antes de lo que tarda la evacuación
+        </h3>
+
+        <div style="margin-top: 10px;">
+          <svg class="dg" style="max-height: 600px" viewBox="0 0 1200 500" role="img" aria-label="Comparación entre el tiempo de anticipación y el tiempo de respuesta">
+<line class="grid" x1="1120" y1="30" x2="1120" y2="430"/><text class="s" x="1120" y="452" text-anchor="middle">0</text>
+<line class="grid" x1="940" y1="30" x2="940" y2="430"/><text class="s" x="940" y="452" text-anchor="middle">2</text>
+<line class="grid" x1="760" y1="30" x2="760" y2="430"/><text class="s" x="760" y="452" text-anchor="middle">4</text>
+<line class="grid" x1="580" y1="30" x2="580" y2="430"/><text class="s" x="580" y="452" text-anchor="middle">6</text>
+<line class="grid" x1="400" y1="30" x2="400" y2="430"/><text class="s" x="400" y="452" text-anchor="middle">8</text>
+<line class="grid" x1="220" y1="30" x2="220" y2="430"/><text class="s" x="220" y="452" text-anchor="middle">10</text>
+<line class="grid" x1="40" y1="30" x2="40" y2="430"/><text class="s" x="40" y="452" text-anchor="middle">12</text>
+<text class="s" x="600" y="484" text-anchor="middle">Horas antes de la falla</text>
+<line x1="1120" y1="20" x2="1120" y2="436" style="stroke: var(--al-r); stroke-width: 5"/>
+<text class="ar-txt m" x="1120" y="16" text-anchor="middle">FALLA</text>
+<text class="b m" x="10" y="78">Tiempo de respuesta</text><text class="s" x="10" y="102">lo que necesitas</text>
+<rect class="f-pie" x="580" y="60" width="87" height="60" rx="8"/>
+<text class="w" x="625.0" y="98" text-anchor="middle" style="font-size: 17px">Detectar</text>
+<rect class="f-ten" x="670" y="60" width="87" height="60" rx="8"/>
+<text class="w" x="715.0" y="98" text-anchor="middle" style="font-size: 17px">Decidir</text>
+<rect class="f-rain" x="760" y="60" width="87" height="60" rx="8"/>
+<text class="w" x="805.0" y="98" text-anchor="middle" style="font-size: 17px">Avisar</text>
+<rect class="f-hum" x="850" y="60" width="267" height="60" rx="8"/>
+<text class="w" x="985.0" y="98" text-anchor="middle" style="font-size: 17px">Evacuar</text>
+<text class="b s" x="572" y="146" text-anchor="start">= 6 h en total</text>
+<text class="b m" x="10" y="218">Umbral alto</text><text class="s" x="10" y="242">alerta tardía</text>
+<rect class="f-ar" x="850" y="200" width="270" height="60" rx="8" style="opacity: 0.9"/>
+<text class="w" x="985.0" y="238" text-anchor="middle" style="font-size: 21px">3 h</text>
+<text class="ar-txt m" x="836" y="238" text-anchor="end">Insuficiente: faltan 3 h ✗</text>
+<text class="b m" x="10" y="338">Umbral bajo</text><text class="s" x="10" y="362">alerta temprana</text>
+<rect class="f-ag" x="310" y="320" width="810" height="60" rx="8" style="opacity: 0.9"/>
+<text class="dk" x="715.0" y="358" text-anchor="middle" style="font-size: 21px">9 h de anticipación</text>
+<rect x="580" y="318" width="540" height="64" rx="8" style="fill: none; stroke: var(--text-main); stroke-width: 3; stroke-dasharray: 8 6"/>
+<text class="ag-txt s" x="316" y="404">✓ sobran 3 h de margen</text>
+</svg>
+        </div>
+        <div class="callout callout-warning" style="margin-top: 12px;">
+          <span class="callout-icon">⏱️</span>
+          <div class="callout-content" style="font-weight: 600;">El umbral no se elige solo por precisión: <strong>debe dar más tiempo del que necesita la respuesta</strong>. Bajarlo da margen… pero cuesta más falsas alarmas.</div>
+        </div>
+      </section>
+      <!-- NEW:05-errors -->
+      <section>
+        <h2>Falsas alarmas y alarmas perdidas</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Todo umbral es un compromiso
+        </h3>
+
+        <div class="split-2" style="margin-top: 10px; align-items: center; gap: 30px;">
+
+          <svg class="dg" style="max-height: 520px" viewBox="0 0 600 462" role="img" aria-label="Distribuciones con y sin falla y umbral de alerta">
+<line class="ax" x1="40" y1="380" x2="560" y2="380"/>
+<path d="M310.4,380.0 L310.4,338.8 L315.6,345.8 L320.8,351.8 L326.0,357.0 L331.2,361.3 L336.4,365.0 L341.6,368.1 L346.8,370.6 L352.0,372.6 L357.2,374.3 L362.4,375.6 L367.6,376.6 L372.8,377.4 L378.0,378.1 L383.2,378.6 L388.4,378.9 L393.6,379.2 L398.8,379.4 L404.0,379.6 L409.2,379.7 L414.4,379.8 L419.6,379.9 L424.8,379.9 L430.0,379.9 L435.2,380.0 L440.4,380.0 L445.6,380.0 L450.8,380.0 L456.0,380.0 L461.2,380.0 L466.4,380.0 L471.6,380.0 L476.8,380.0 L482.0,380.0 L487.2,380.0 L492.4,380.0 L497.6,380.0 L502.8,380.0 L508.0,380.0 L513.2,380.0 L518.4,380.0 L523.6,380.0 L528.8,380.0 L534.0,380.0 L539.2,380.0 L544.4,380.0 L549.6,380.0 L554.8,380.0 L560.0,380.0 L560.0,380.0 Z" class="f-ar" style="opacity: 0.6"/>
+<path d="M40.0,380.0 L40.0,380.0 L45.2,380.0 L50.4,380.0 L55.6,380.0 L60.8,380.0 L66.0,380.0 L71.2,380.0 L76.4,380.0 L81.6,380.0 L86.8,380.0 L92.0,380.0 L97.2,380.0 L102.4,380.0 L107.6,380.0 L112.8,380.0 L118.0,380.0 L123.2,380.0 L128.4,380.0 L133.6,379.9 L138.8,379.9 L144.0,379.9 L149.2,379.9 L154.4,379.8 L159.6,379.7 L164.8,379.6 L170.0,379.5 L175.2,379.3 L180.4,379.1 L185.6,378.8 L190.8,378.4 L196.0,378.0 L201.2,377.4 L206.4,376.6 L211.6,375.7 L216.8,374.5 L222.0,373.1 L227.2,371.3 L232.4,369.2 L237.6,366.6 L242.8,363.6 L248.0,360.0 L253.2,355.8 L258.4,350.9 L263.6,345.2 L268.8,338.8 L274.0,331.4 L279.2,323.2 L284.4,314.1 L289.6,304.0 L294.8,293.0 L300.0,281.1 L305.2,268.3 L310.4,254.7 L310.4,380.0 Z" class="f-ay" style="opacity: 0.7"/>
+<path class="series s-hum thick" d="M40.0,372.6 L45.2,370.6 L50.4,368.1 L55.6,365.0 L60.8,361.3 L66.0,357.0 L71.2,351.8 L76.4,345.8 L81.6,338.8 L86.8,330.7 L92.0,321.6 L97.2,311.4 L102.4,300.1 L107.6,287.7 L112.8,274.2 L118.0,259.7 L123.2,244.4 L128.4,228.4 L133.6,211.9 L138.8,195.2 L144.0,178.4 L149.2,161.9 L154.4,146.1 L159.6,131.1 L164.8,117.4 L170.0,105.2 L175.2,94.7 L180.4,86.4 L185.6,80.2 L190.8,76.5 L196.0,75.2 L201.2,76.5 L206.4,80.2 L211.6,86.4 L216.8,94.7 L222.0,105.2 L227.2,117.4 L232.4,131.1 L237.6,146.1 L242.8,161.9 L248.0,178.4 L253.2,195.2 L258.4,211.9 L263.6,228.4 L268.8,244.4 L274.0,259.7 L279.2,274.2 L284.4,287.7 L289.6,300.1 L294.8,311.4 L300.0,321.6 L305.2,330.7 L310.4,338.8 L315.6,345.8 L320.8,351.8 L326.0,357.0 L331.2,361.3 L336.4,365.0 L341.6,368.1 L346.8,370.6 L352.0,372.6 L357.2,374.3 L362.4,375.6 L367.6,376.6 L372.8,377.4 L378.0,378.1 L383.2,378.6 L388.4,378.9 L393.6,379.2 L398.8,379.4 L404.0,379.6 L409.2,379.7 L414.4,379.8 L419.6,379.9 L424.8,379.9 L430.0,379.9 L435.2,380.0 L440.4,380.0 L445.6,380.0 L450.8,380.0 L456.0,380.0 L461.2,380.0 L466.4,380.0 L471.6,380.0 L476.8,380.0 L482.0,380.0 L487.2,380.0 L492.4,380.0 L497.6,380.0 L502.8,380.0 L508.0,380.0 L513.2,380.0 L518.4,380.0 L523.6,380.0 L528.8,380.0 L534.0,380.0 L539.2,380.0 L544.4,380.0 L549.6,380.0 L554.8,380.0 L560.0,380.0"/>
+<path class="series s-rose thick" d="M40.0,380.0 L45.2,380.0 L50.4,380.0 L55.6,380.0 L60.8,380.0 L66.0,380.0 L71.2,380.0 L76.4,380.0 L81.6,380.0 L86.8,380.0 L92.0,380.0 L97.2,380.0 L102.4,380.0 L107.6,380.0 L112.8,380.0 L118.0,380.0 L123.2,380.0 L128.4,380.0 L133.6,379.9 L138.8,379.9 L144.0,379.9 L149.2,379.9 L154.4,379.8 L159.6,379.7 L164.8,379.6 L170.0,379.5 L175.2,379.3 L180.4,379.1 L185.6,378.8 L190.8,378.4 L196.0,378.0 L201.2,377.4 L206.4,376.6 L211.6,375.7 L216.8,374.5 L222.0,373.1 L227.2,371.3 L232.4,369.2 L237.6,366.6 L242.8,363.6 L248.0,360.0 L253.2,355.8 L258.4,350.9 L263.6,345.2 L268.8,338.8 L274.0,331.4 L279.2,323.2 L284.4,314.1 L289.6,304.0 L294.8,293.0 L300.0,281.1 L305.2,268.3 L310.4,254.7 L315.6,240.5 L320.8,225.7 L326.0,210.5 L331.2,195.2 L336.4,179.8 L341.6,164.6 L346.8,150.0 L352.0,136.0 L357.2,122.9 L362.4,111.0 L367.6,100.6 L372.8,91.7 L378.0,84.6 L383.2,79.4 L388.4,76.3 L393.6,75.2 L398.8,76.3 L404.0,79.4 L409.2,84.6 L414.4,91.7 L419.6,100.6 L424.8,111.0 L430.0,122.9 L435.2,136.0 L440.4,150.0 L445.6,164.6 L450.8,179.8 L456.0,195.2 L461.2,210.5 L466.4,225.7 L471.6,240.5 L476.8,254.7 L482.0,268.3 L487.2,281.1 L492.4,293.0 L497.6,304.0 L502.8,314.1 L508.0,323.2 L513.2,331.4 L518.4,338.8 L523.6,345.2 L528.8,350.9 L534.0,355.8 L539.2,360.0 L544.4,363.6 L549.6,366.6 L554.8,369.2 L560.0,371.3"/>
+<line x1="310.4" y1="40" x2="310.4" y2="380" style="stroke: var(--text-main); stroke-width: 4; stroke-dasharray: 10 6"/>
+<text class="b m" x="310.4" y="30" text-anchor="middle">Umbral</text>
+<text class="hum-txt m" x="150" y="52" text-anchor="middle">Condición normal</text>
+<text class="rose-txt m" x="480" y="52" text-anchor="middle">Antes de una falla</text>
+<text class="ar-txt s" x="383.2" y="404" text-anchor="middle">falsas</text><text class="ar-txt s" x="383.2" y="424" text-anchor="middle">alarmas</text>
+<text class="ten-txt s" x="237.6" y="404" text-anchor="middle">alarmas</text><text class="ten-txt s" x="237.6" y="424" text-anchor="middle">perdidas</text>
+<text class="s" x="300" y="452" text-anchor="middle">Valor del indicador (p. ej. velocidad o lluvia acumulada)</text>
+</svg>
+
+          <div>
+          <table class="data-table" style="font-size: 0.72em !important; margin: 0;">
+            <thead><tr><th></th><th style="text-align:center">Hubo falla</th><th style="text-align:center">No hubo falla</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Se emitió alerta</strong></td><td style="background: rgba(22,163,74,0.16)">✅ <strong>Acierto</strong></td><td style="background: rgba(220,38,38,0.16)">❌ <strong>Falsa alarma</strong></td></tr>
+              <tr><td><strong>No se emitió</strong></td><td style="background: rgba(234,179,8,0.22)">⚠️ <strong>Alarma perdida</strong></td><td style="background: rgba(22,163,74,0.16)">✅ Normal correcto</td></tr>
+            </tbody>
+          </table>
+            <div class="callout callout-danger" style="margin-top: 14px; font-size: 0.8em !important;">
+              <span class="callout-icon">🔻</span>
+              <div class="callout-content"><strong>Alarma perdida</strong> = una falla sin aviso. Es el error más grave: el umbral debe tender a cubrirla.</div>
+            </div>
+            <div class="callout callout-warning" style="margin-top: 10px; font-size: 0.8em !important;">
+              <span class="callout-icon">📢</span>
+              <div class="callout-content"><strong>Demasiadas falsas alarmas</strong> erosionan la confianza: la comunidad deja de reaccionar («síndrome del lobo»).</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="callout callout-info" style="margin-top: 12px;">
+          <span class="callout-icon">⚖️</span>
+          <div class="callout-content" style="font-weight: 600;">Mover el umbral <strong>a la izquierda</strong> pierde menos fallas pero genera más falsas alarmas; <strong>a la derecha</strong>, lo contrario. Se evalúa con eventos históricos.</div>
+        </div>
+      </section>
+      <!-- NEW:05-protocol -->
+      <section>
+        <h2>Protocolo de acción y comunicación</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          De la señal del sensor a la reacción de las personas
+        </h3>
+
+        <div class="step-flow n5" style="margin-top: 22px;">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-icon">📡</div>
+            <div class="step-title">Detecta</div>
+            <p>Un sensor supera un umbral y se genera la señal.</p>
+            <span class="sensor-chip chip-pie">Sistema</span>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-icon">🔍</div>
+            <div class="step-title">Verifica</div>
+            <p>Se descartan errores de datos y se confirma con otras variables.</p>
+            <span class="sensor-chip chip-hum">Equipo técnico</span>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-icon">🧑‍⚖️</div>
+            <div class="step-title">Decide</div>
+            <p>Quien tiene la responsabilidad autoriza el nivel de alerta.</p>
+            <span class="sensor-chip chip-ten">Autoridad</span>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-icon">📣</div>
+            <div class="step-title">Comunica</div>
+            <p>El mensaje sale por varios canales y llega a la comunidad.</p>
+            <span class="sensor-chip chip-rain">Comunicaciones</span>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-icon">🏃</div>
+            <div class="step-title">Actúa</div>
+            <p>La comunidad y las entidades ejecutan el plan de respuesta.</p>
+            <span class="sensor-chip chip-def">Comunidad</span>
+          </div>
+        </div>
+
+        <div class="grid-4" style="margin-top: 26px; gap: 14px;">
+          <div class="card" style="padding: 16px 20px; align-items: center; text-align: center;"><div style="font-size: 1.6em;">❓</div><strong>¿Qué pasa?</strong><span style="font-size: 0.72em;">Descripción simple del fenómeno</span></div>
+          <div class="card" style="padding: 16px 20px; align-items: center; text-align: center;"><div style="font-size: 1.6em;">📍</div><strong>¿Dónde?</strong><span style="font-size: 0.72em;">Zonas y barrios afectables</span></div>
+          <div class="card" style="padding: 16px 20px; align-items: center; text-align: center;"><div style="font-size: 1.6em;">⏰</div><strong>¿Cuándo?</strong><span style="font-size: 0.72em;">Tiempo disponible para actuar</span></div>
+          <div class="card" style="padding: 16px 20px; align-items: center; text-align: center;"><div style="font-size: 1.6em;">✋</div><strong>¿Qué hago?</strong><span style="font-size: 0.72em;">Una instrucción clara y concreta</span></div>
+        </div>
+        <div class="callout callout-info" style="margin-top: 18px;">
+          <span class="callout-icon">💬</span>
+          <div class="callout-content" style="font-weight: 600;">Un buen mensaje de alerta responde <strong>cuatro preguntas</strong>. Sin la última («¿qué hago?»), la gente se queda mirando.</div>
+        </div>
+      </section>
+      <!-- NEW:05-example -->
+      <section>
+        <h2>Ejemplo integrado: una tormenta sobre una ladera <span class="key-badge">★ Diapositiva clave</span></h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Así cambia el nivel de alerta a medida que responden los sensores
+        </h3>
+
+        <div style="margin-top: 6px;">
+          <svg class="dg" style="max-height: 700px" viewBox="0 0 1400 590" role="img" aria-label="Ejemplo integrado: cómo cambia el nivel de alerta durante una tormenta">
+<rect class="panel" x="182" y="20" width="1206" height="130" rx="8" style="fill-opacity: 0.4"/>
+<rect class="panel" x="182" y="160" width="1206" height="80" rx="8" style="fill-opacity: 0.4"/>
+<rect class="panel" x="182" y="250" width="1206" height="110" rx="8" style="fill-opacity: 0.4"/>
+<rect class="panel" x="182" y="370" width="1206" height="90" rx="8" style="fill-opacity: 0.4"/>
+<text class="rain-txt m" x="10" y="91" style="font-size: 19px">Lluvia</text>
+<text class="hum-txt m" x="10" y="206" style="font-size: 19px">Humedad θ</text>
+<text class="pie-txt m" x="10" y="311" style="font-size: 19px">Presión de poros u</text>
+<text class="ten-txt m" x="10" y="421" style="font-size: 19px">Velocidad v</text>
+<text class="b m" x="10" y="512">Nivel de alerta</text>
+<rect class="f-rain" x="187.0" y="141.3" width="6" height="0.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="199.4" y="137.5" width="6" height="4.5" style="opacity: 0.85"/>
+<rect class="f-rain" x="211.8" y="140.0" width="6" height="2.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="224.2" y="140.0" width="6" height="2.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="236.6" y="140.8" width="6" height="1.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="249.0" y="141.3" width="6" height="0.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="261.4" y="140.8" width="6" height="1.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="273.8" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="286.2" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="298.6" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="311.0" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="323.4" y="140.1" width="6" height="1.9" style="opacity: 0.85"/>
+<rect class="f-rain" x="335.8" y="138.3" width="6" height="3.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="348.1" y="134.1" width="6" height="7.9" style="opacity: 0.85"/>
+<rect class="f-rain" x="360.5" y="132.7" width="6" height="9.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="372.9" y="128.2" width="6" height="13.8" style="opacity: 0.85"/>
+<rect class="f-rain" x="385.3" y="121.4" width="6" height="20.6" style="opacity: 0.85"/>
+<rect class="f-rain" x="397.7" y="115.8" width="6" height="26.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="410.1" y="112.5" width="6" height="29.5" style="opacity: 0.85"/>
+<rect class="f-rain" x="422.5" y="101.5" width="6" height="40.5" style="opacity: 0.85"/>
+<rect class="f-rain" x="434.9" y="100.5" width="6" height="41.5" style="opacity: 0.85"/>
+<rect class="f-rain" x="447.3" y="97.4" width="6" height="44.6" style="opacity: 0.85"/>
+<rect class="f-rain" x="459.7" y="97.8" width="6" height="44.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="472.1" y="91.9" width="6" height="50.1" style="opacity: 0.85"/>
+<rect class="f-rain" x="484.5" y="94.2" width="6" height="47.8" style="opacity: 0.85"/>
+<rect class="f-rain" x="496.9" y="92.8" width="6" height="49.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="509.3" y="91.0" width="6" height="51.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="521.7" y="80.8" width="6" height="61.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="534.1" y="76.7" width="6" height="65.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="546.5" y="65.7" width="6" height="76.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="558.9" y="64.4" width="6" height="77.6" style="opacity: 0.85"/>
+<rect class="f-rain" x="571.3" y="57.7" width="6" height="84.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="583.7" y="54.5" width="6" height="87.5" style="opacity: 0.85"/>
+<rect class="f-rain" x="596.1" y="59.3" width="6" height="82.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="608.5" y="62.0" width="6" height="80.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="620.9" y="68.7" width="6" height="73.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="633.2" y="75.8" width="6" height="66.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="645.6" y="88.0" width="6" height="54.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="658.0" y="95.6" width="6" height="46.4" style="opacity: 0.85"/>
+<rect class="f-rain" x="670.4" y="102.3" width="6" height="39.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="682.8" y="117.3" width="6" height="24.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="695.2" y="123.2" width="6" height="18.8" style="opacity: 0.85"/>
+<rect class="f-rain" x="707.6" y="126.6" width="6" height="15.4" style="opacity: 0.85"/>
+<rect class="f-rain" x="720.0" y="133.1" width="6" height="8.9" style="opacity: 0.85"/>
+<rect class="f-rain" x="732.4" y="137.7" width="6" height="4.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="744.8" y="135.0" width="6" height="7.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="757.2" y="137.4" width="6" height="4.6" style="opacity: 0.85"/>
+<rect class="f-rain" x="769.6" y="138.2" width="6" height="3.8" style="opacity: 0.85"/>
+<rect class="f-rain" x="782.0" y="138.9" width="6" height="3.1" style="opacity: 0.85"/>
+<rect class="f-rain" x="794.4" y="139.9" width="6" height="2.1" style="opacity: 0.85"/>
+<rect class="f-rain" x="806.8" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="819.2" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="831.6" y="140.8" width="6" height="1.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="844.0" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="856.4" y="141.7" width="6" height="0.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="868.8" y="141.0" width="6" height="1.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="881.2" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="893.6" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="906.0" y="138.5" width="6" height="3.5" style="opacity: 0.85"/>
+<rect class="f-rain" x="918.4" y="140.3" width="6" height="1.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="930.8" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="943.1" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="955.5" y="141.8" width="6" height="0.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="967.9" y="140.7" width="6" height="1.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="980.3" y="140.4" width="6" height="1.6" style="opacity: 0.85"/>
+<rect class="f-rain" x="992.7" y="141.9" width="6" height="0.1" style="opacity: 0.85"/>
+<rect class="f-rain" x="1005.1" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1017.5" y="140.1" width="6" height="1.9" style="opacity: 0.85"/>
+<rect class="f-rain" x="1029.9" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1042.3" y="139.6" width="6" height="2.4" style="opacity: 0.85"/>
+<rect class="f-rain" x="1054.7" y="141.1" width="6" height="0.9" style="opacity: 0.85"/>
+<rect class="f-rain" x="1067.1" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1079.5" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1091.9" y="141.3" width="6" height="0.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="1104.3" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1116.7" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1129.1" y="141.1" width="6" height="0.9" style="opacity: 0.85"/>
+<rect class="f-rain" x="1141.5" y="139.1" width="6" height="2.9" style="opacity: 0.85"/>
+<rect class="f-rain" x="1153.9" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1166.3" y="141.7" width="6" height="0.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="1178.7" y="141.9" width="6" height="0.1" style="opacity: 0.85"/>
+<rect class="f-rain" x="1191.1" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1203.5" y="141.1" width="6" height="0.9" style="opacity: 0.85"/>
+<rect class="f-rain" x="1215.9" y="140.3" width="6" height="1.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="1228.2" y="141.8" width="6" height="0.2" style="opacity: 0.85"/>
+<rect class="f-rain" x="1240.6" y="140.2" width="6" height="1.8" style="opacity: 0.85"/>
+<rect class="f-rain" x="1253.0" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1265.4" y="141.4" width="6" height="0.6" style="opacity: 0.85"/>
+<rect class="f-rain" x="1277.8" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1290.2" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1302.6" y="141.4" width="6" height="0.6" style="opacity: 0.85"/>
+<rect class="f-rain" x="1315.0" y="141.6" width="6" height="0.4" style="opacity: 0.85"/>
+<rect class="f-rain" x="1327.4" y="140.3" width="6" height="1.7" style="opacity: 0.85"/>
+<rect class="f-rain" x="1339.8" y="140.7" width="6" height="1.3" style="opacity: 0.85"/>
+<rect class="f-rain" x="1352.2" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<rect class="f-rain" x="1364.6" y="139.5" width="6" height="2.5" style="opacity: 0.85"/>
+<rect class="f-rain" x="1377.0" y="142.0" width="6" height="0.0" style="opacity: 0.85"/>
+<path class="series" style="stroke: var(--text-main); stroke-dasharray: 8 5; stroke-width: 3" d="M190.0,141.9 L202.4,141.5 L214.8,141.4 L227.2,141.2 L239.6,141.1 L252.0,141.0 L264.4,140.9 L276.8,140.9 L289.2,140.9 L301.6,140.9 L314.0,140.9 L326.4,140.7 L338.8,140.5 L351.1,140.2 L363.5,139.5 L375.9,138.5 L388.3,136.7 L400.7,134.5 L413.1,132.0 L425.5,128.4 L437.9,124.7 L450.3,120.7 L462.7,116.8 L475.1,112.5 L487.5,108.6 L499.9,104.9 L512.3,101.2 L524.7,97.0 L537.1,93.0 L549.5,88.6 L561.9,84.3 L574.3,80.4 L586.7,76.3 L599.1,72.9 L611.5,69.7 L623.9,67.7 L636.2,66.0 L648.6,65.6 L661.0,66.0 L673.4,67.9 L685.8,71.5 L698.2,76.7 L710.6,82.2 L723.0,88.9 L735.4,96.3 L747.8,103.0 L760.2,109.7 L772.6,115.9 L785.0,121.5 L797.4,126.1 L809.8,130.2 L822.2,133.8 L834.6,135.9 L847.0,137.5 L859.4,138.9 L871.8,139.6 L884.2,139.9 L896.6,140.6 L909.0,140.7 L921.4,140.9 L933.8,141.1 L946.1,141.3 L958.5,141.3 L970.9,141.2 L983.3,141.1 L995.7,141.1 L1008.1,141.2 L1020.5,141.1 L1032.9,141.1 L1045.3,140.9 L1057.7,141.1 L1070.1,141.3 L1082.5,141.3 L1094.9,141.2 L1107.3,141.2 L1119.7,141.3 L1132.1,141.4 L1144.5,141.2 L1156.9,141.2 L1169.3,141.3 L1181.7,141.3 L1194.1,141.5 L1206.5,141.5 L1218.9,141.3 L1231.2,141.3 L1243.6,141.2 L1256.0,141.2 L1268.4,141.2 L1280.8,141.2 L1293.2,141.5 L1305.6,141.4 L1318.0,141.4 L1330.4,141.3 L1342.8,141.2 L1355.2,141.3 L1367.6,141.2 L1380.0,141.2"/>
+<line class="thin dash s-ao" x1="190" y1="110.3" x2="1380" y2="110.3" style="stroke-width: 2.5"/><text class="ao-txt s" x="1374" y="104.3" text-anchor="end">L1 (acum. 6 h)</text>
+<text class="s" x="198" y="40">barras: mm/h  ·  línea: acumulada 6 h</text>
+<path class="series s-hum thick" d="M190.0,225.4 L202.4,225.4 L214.8,225.3 L227.2,225.3 L239.6,225.2 L252.0,225.2 L264.4,225.1 L276.8,225.1 L289.2,225.1 L301.6,225.0 L314.0,225.0 L326.4,225.0 L338.8,224.9 L351.1,224.8 L363.5,224.7 L375.9,224.5 L388.3,224.2 L400.7,223.8 L413.1,223.3 L425.5,222.6 L437.9,221.7 L450.3,220.7 L462.7,219.6 L475.1,218.3 L487.5,216.9 L499.9,215.5 L512.3,213.9 L524.7,212.2 L537.1,210.3 L549.5,208.2 L561.9,205.9 L574.3,203.5 L586.7,200.8 L599.1,198.1 L611.5,195.8 L623.9,193.7 L636.2,191.9 L648.6,190.3 L661.0,188.9 L673.4,187.7 L685.8,186.6 L698.2,185.7 L710.6,184.9 L723.0,184.2 L735.4,183.6 L747.8,183.0 L760.2,182.6 L772.6,182.1 L785.0,181.8 L797.4,181.5 L809.8,181.2 L822.2,181.4 L834.6,181.9 L847.0,182.8 L859.4,184.0 L871.8,185.6 L884.2,187.5 L896.6,189.6 L909.0,191.9 L921.4,194.3 L933.8,196.8 L946.1,199.3 L958.5,201.7 L970.9,204.1 L983.3,206.3 L995.7,208.3 L1008.1,210.2 L1020.5,211.9 L1032.9,213.4 L1045.3,214.7 L1057.7,215.9 L1070.1,217.0 L1082.5,217.9 L1094.9,218.7 L1107.3,219.5 L1119.7,220.1 L1132.1,220.7 L1144.5,221.2 L1156.9,221.6 L1169.3,222.0 L1181.7,222.3 L1194.1,222.6 L1206.5,222.8 L1218.9,223.0 L1231.2,223.2 L1243.6,223.4 L1256.0,223.6 L1268.4,223.7 L1280.8,223.8 L1293.2,223.9 L1305.6,224.0 L1318.0,224.1 L1330.4,224.2 L1342.8,224.2 L1355.2,224.3 L1367.6,224.3 L1380.0,224.4"/>
+<line class="thin dash s-ao" x1="190" y1="202.3" x2="1380" y2="202.3" style="stroke-width: 2.5"/><text class="ao-txt s" x="1374" y="196.3" text-anchor="end">T1</text>
+<path class="series s-pie thick" d="M190.0,343.6 L202.4,343.5 L214.8,343.5 L227.2,343.5 L239.6,343.5 L252.0,343.4 L264.4,343.4 L276.8,343.4 L289.2,343.3 L301.6,343.3 L314.0,343.3 L326.4,343.2 L338.8,343.2 L351.1,343.1 L363.5,343.0 L375.9,342.8 L388.3,342.6 L400.7,342.3 L413.1,341.9 L425.5,341.4 L437.9,340.7 L450.3,339.9 L462.7,339.0 L475.1,338.0 L487.5,336.8 L499.9,335.5 L512.3,334.1 L524.7,332.5 L537.1,330.8 L549.5,328.9 L561.9,326.8 L574.3,324.5 L586.7,322.0 L599.1,319.4 L611.5,316.5 L623.9,313.7 L636.2,311.1 L648.6,308.6 L661.0,306.3 L673.4,304.1 L685.8,302.0 L698.2,300.0 L710.6,298.1 L723.0,296.4 L735.4,294.7 L747.8,293.1 L760.2,291.7 L772.6,290.3 L785.0,288.9 L797.4,287.7 L809.8,286.5 L822.2,285.4 L834.6,284.3 L847.0,283.3 L859.4,282.4 L871.8,281.5 L884.2,280.7 L896.6,279.9 L909.0,279.1 L921.4,278.4 L933.8,277.8 L946.1,277.1 L958.5,276.5 L970.9,276.0 L983.3,275.4 L995.7,274.9 L1008.1,274.5 L1020.5,274.0 L1032.9,273.6 L1045.3,273.2 L1057.7,272.8 L1070.1,272.5 L1082.5,272.3 L1094.9,272.3 L1107.3,272.5 L1119.7,272.9 L1132.1,273.5 L1144.5,274.4 L1156.9,275.5 L1169.3,276.8 L1181.7,278.5 L1194.1,280.3 L1206.5,282.3 L1218.9,284.5 L1231.2,286.8 L1243.6,289.2 L1256.0,291.6 L1268.4,294.1 L1280.8,296.5 L1293.2,298.8 L1305.6,301.1 L1318.0,303.2 L1330.4,305.3 L1342.8,307.3 L1355.2,309.1 L1367.6,310.9 L1380.0,312.6"/>
+<line class="thin dash s-ao" x1="190" y1="305.0" x2="1380" y2="305.0" style="stroke-width: 2.5"/><text class="ao-txt s" x="1374" y="325.0" text-anchor="end">U1</text>
+<line class="thin dash s-ar" x1="190" y1="285.7" x2="1380" y2="285.7" style="stroke-width: 2.5"/><text class="ar-txt s" x="1374" y="279.7" text-anchor="end">U2</text>
+<path class="series s-ten thick" d="M190.0,448.8 L202.4,448.8 L214.8,448.8 L227.2,448.8 L239.6,448.8 L252.0,448.8 L264.4,448.8 L276.8,448.8 L289.2,448.8 L301.6,448.8 L314.0,448.8 L326.4,448.8 L338.8,448.8 L351.1,448.8 L363.5,448.8 L375.9,448.8 L388.3,448.8 L400.7,448.8 L413.1,448.8 L425.5,448.8 L437.9,448.8 L450.3,448.8 L462.7,448.8 L475.1,448.8 L487.5,448.8 L499.9,448.8 L512.3,448.8 L524.7,448.8 L537.1,448.8 L549.5,448.8 L561.9,448.8 L574.3,448.8 L586.7,448.8 L599.1,448.8 L611.5,448.8 L623.9,448.8 L636.2,448.3 L648.6,447.3 L661.0,445.9 L673.4,444.1 L685.8,442.0 L698.2,439.8 L710.6,437.3 L723.0,434.7 L735.4,432.0 L747.8,429.3 L760.2,426.5 L772.6,423.7 L785.0,420.8 L797.4,418.1 L809.8,415.3 L822.2,412.6 L834.6,409.9 L847.0,407.3 L859.4,404.8 L871.8,402.4 L884.2,400.0 L896.6,397.7 L909.0,395.4 L921.4,393.3 L933.8,391.2 L946.1,389.3 L958.5,387.4 L970.9,385.5 L983.3,383.8 L995.7,382.1 L1008.1,380.5 L1020.5,379.0 L1032.9,377.5 L1045.3,376.1 L1057.7,374.8 L1070.1,373.5 L1082.5,372.8 L1094.9,372.8 L1107.3,373.5 L1119.7,374.9 L1132.1,377.1 L1144.5,380.1 L1156.9,383.9 L1169.3,388.3 L1181.7,393.4 L1194.1,398.9 L1206.5,404.6 L1218.9,410.4 L1231.2,416.1 L1243.6,421.5 L1256.0,426.4 L1268.4,430.9 L1280.8,434.9 L1293.2,438.2 L1305.6,441.0 L1318.0,443.3 L1330.4,445.1 L1342.8,446.5 L1355.2,447.5 L1367.6,448.2 L1380.0,448.7"/>
+<line class="thin dash s-ar" x1="190" y1="420.8" x2="1380" y2="420.8" style="stroke-width: 2.5"/><text class="ar-txt s" x="1374" y="414.8" text-anchor="end">V2 (mm/día)</text>
+<rect class="f-ag" x="190.0" y="475" width="297.5" height="60"/>
+<text class="w" x="338.8" y="512" text-anchor="middle" style="font-size: 20px">Normal</text>
+<rect class="f-ay" x="487.5" y="475" width="99.2" height="60"/>
+<text class="dk" x="537.1" y="512" text-anchor="middle" style="font-size: 20px">Atención</text>
+<line x1="487.5" y1="20" x2="487.5" y2="475" style="stroke: var(--text-dim); stroke-width: 1.5; stroke-dasharray: 4 5"/>
+<rect class="f-ao" x="586.7" y="475" width="235.5" height="60"/>
+<text class="dk" x="704.4" y="512" text-anchor="middle" style="font-size: 20px">Alerta</text>
+<line x1="586.7" y1="20" x2="586.7" y2="475" style="stroke: var(--text-dim); stroke-width: 1.5; stroke-dasharray: 4 5"/>
+<rect class="f-ar" x="822.2" y="475" width="409.1" height="60"/>
+<text class="w" x="1026.7" y="512" text-anchor="middle" style="font-size: 20px">Alarma</text>
+<line x1="822.2" y1="20" x2="822.2" y2="475" style="stroke: var(--text-dim); stroke-width: 1.5; stroke-dasharray: 4 5"/>
+<rect class="f-ao" x="1231.2" y="475" width="99.2" height="60"/>
+<text class="dk" x="1280.8" y="512" text-anchor="middle" style="font-size: 20px">Alerta</text>
+<line x1="1231.2" y1="20" x2="1231.2" y2="475" style="stroke: var(--text-dim); stroke-width: 1.5; stroke-dasharray: 4 5"/>
+<rect class="f-ag" x="1330.4" y="475" width="49.6" height="60"/>
+<line x1="1330.4" y1="20" x2="1330.4" y2="475" style="stroke: var(--text-dim); stroke-width: 1.5; stroke-dasharray: 4 5"/>
+<text class="s" x="190.0" y="560" text-anchor="middle">0</text>
+<text class="s" x="487.5" y="560" text-anchor="middle">12</text>
+<text class="s" x="785.0" y="560" text-anchor="middle">24</text>
+<text class="s" x="1082.5" y="560" text-anchor="middle">36</text>
+<text class="s" x="1380.0" y="560" text-anchor="middle">48</text>
+<text class="s" x="785" y="582" text-anchor="middle">Tiempo (horas)</text>
+</svg>
+        </div>
+        <div class="callout callout-info" style="margin-top: 10px;">
+          <span class="callout-icon">🎞️</span>
+          <div class="callout-content" style="font-weight: 600;">Lectura: cada variable cruza su umbral <strong>en un momento distinto</strong> y el nivel sube por etapas; al ceder la lluvia, baja de forma gradual. Valores ilustrativos.</div>
+        </div>
+      </section>
+      <!-- NEW:05-design -->
+      <section>
+        <h2>Diseñar y mantener un SAT</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Seis pasos para construirlo y tres cosas para que no se apague
+        </h3>
+
+        <div class="step-flow" style="margin-top: 20px;">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-icon">🎯</div>
+            <div class="step-title">Escenarios</div>
+            <p>Qué puede fallar, dónde y a quién afectaría.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-icon">🧰</div>
+            <div class="step-title">Variables y sensores</div>
+            <p>Elige qué medir y en qué zona.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-icon">📏</div>
+            <div class="step-title">Línea base</div>
+            <p>Meses de datos para saber qué es «normal».</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-icon">🚦</div>
+            <div class="step-title">Umbrales y niveles</div>
+            <p>Cada nivel con su condición y su acción.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-icon">📋</div>
+            <div class="step-title">Protocolos</div>
+            <p>Quién decide, quién avisa y cómo se responde.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-icon">🧪</div>
+            <div class="step-title">Pruebas</div>
+            <p>Simulacros y validación con eventos pasados.</p>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 26px; gap: 18px;">
+          <div class="card" style="padding: 18px 22px;"><div class="card-title" style="font-size: 0.95em;"><span class="card-icon">🔧</span><span>Mantener los sensores</span></div><p style="font-size: 0.72em !important;">Calibración, limpieza, energía y comunicaciones con respaldo.</p></div>
+          <div class="card" style="padding: 18px 22px;"><div class="card-title" style="font-size: 0.95em;"><span class="card-icon">🔁</span><span>Umbrales vivos</span></div><p style="font-size: 0.72em !important;">Se revisan tras cada evento, falsa alarma o cambio en el terreno.</p></div>
+          <div class="card" style="padding: 18px 22px;"><div class="card-title" style="font-size: 0.95em;"><span class="card-icon">👥</span><span>Mantener a las personas</span></div><p style="font-size: 0.72em !important;">Capacitación, simulacros periódicos y relevo de responsables.</p></div>
+        </div>
+        <div class="callout callout-warning" style="margin-top: 18px;">
+          <span class="callout-icon">📄</span>
+          <div class="callout-content" style="font-weight: 600;"><strong>Tu informe final</strong> debe traducir estos seis pasos en una tabla de niveles (normal, atención, alerta, alarma) con condición de activación y acción recomendada.</div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <!-- SLIDE 24: INFORME TÉCNICO Y CIERRE -->
       <section class="slide-cover">
         <div class="cover-badge">Módulo 05 &bull; Entrega Final</div>
@@ -694,11 +1797,11 @@
         </p>
 
         <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center;">
-          <a href="00_presentacion_curso.html#/10" class="header-btn" style="display: inline-flex; font-size: 1em; padding: 12px 24px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
+          <a href="00_presentacion_curso.html#/11" class="header-btn" style="display: inline-flex; font-size: 1em; padding: 12px 24px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
             <span>📋</span> Ver Estructura del Reporte (Clase 00)
           </a>
-          <a href="et_avenidas_torrenciales.html" class="header-btn" style="display: inline-flex; font-size: 1em; padding: 12px 24px; background: var(--eafit-yellow); color: var(--eafit-blue-deep); border-radius: 8px; text-decoration: none; font-weight: 700;">
-            <span>🌊</span> Módulo Especial &bull; Avenidas Torrenciales
+          <a href="../index.html#ruta" class="header-btn" style="display: inline-flex; font-size: 1em; padding: 12px 24px; background: var(--eafit-yellow); color: var(--eafit-blue-deep); border-radius: 8px; text-decoration: none; font-weight: 700;">
+            <span>🏠</span> Volver al índice del curso
           </a>
         </div>
       </section>

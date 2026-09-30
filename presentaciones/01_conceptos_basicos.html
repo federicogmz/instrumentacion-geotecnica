@@ -12,6 +12,7 @@
   
   <!-- Tema Institucional EAFIT -->
   <link rel="stylesheet" href="css/presentation-theme.css">
+  <link rel="stylesheet" href="css/diagrams.css">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
       <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
       <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
       <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
-      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+      <a href="../index.html#ruta" class="header-btn"><span>🏠</span> Salir al índice</a>
     </div>
   </header>
 
@@ -508,7 +509,7 @@
             <div class="callout callout-warning">
               <span class="callout-icon">❓</span>
               <div class="callout-content" style="font-size: 1em;">
-                ¿Realmente se pudo alertar o prevenir a través de instrumentación tradicional? <strong>Tal vez no. 9883298832</strong>
+                ¿Realmente se pudo alertar o prevenir a través de instrumentación tradicional? <strong>Tal vez no.</strong>
               </div>
             </div>
 
@@ -579,15 +580,72 @@
         </div>
       </section>
 
+      <!-- NEW:01-arch -->
+      <section>
+        <h2>Anatomía de un sistema de monitoreo</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Del sensor en campo a la alerta en el teléfono
+        </h3>
+
+        <div style="margin-top: 6px;">
+          <svg class="dg" style="max-height: 640px" viewBox="0 0 1200 510" role="img" aria-label="Arquitectura de un sistema de monitoreo geotécnico: del sensor a la alerta"><defs><marker id="ar-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-muted)"/></marker></defs>
+<polygon class="f-soil-dry" points="0,470 0,300 160,238 330,292 480,390 520,470"/>
+<polygon class="f-soil-sat" points="0,470 0,430 200,400 400,428 520,470" style="fill-opacity: 0.7"/>
+<polygon class="f-rain" points="84,236 116,236 108,262 92,262"/><rect class="f-gray" x="98" y="262" width="4" height="26"/>
+<text class="s" x="100" y="226" text-anchor="middle" style="paint-order: stroke; stroke: var(--bg-surface); stroke-width: 6px; stroke-linejoin: round">lluvia</text>
+<path d="M214,262 l8,14 l-10,12 l8,12" style="fill: none; stroke: var(--text-main); stroke-width: 3"/>
+<rect class="f-hum" x="196" y="246" width="12" height="26" rx="3"/><rect class="f-hum" x="232" y="262" width="12" height="26" rx="3"/>
+<line x1="208" y1="256" x2="232" y2="270" style="stroke: var(--sensor-hum); stroke-width: 3.5"/>
+<text class="s" x="222" y="236" text-anchor="middle">grieta</text>
+<rect class="f-gray" style="fill-opacity: 0.7" x="322" y="300" width="10" height="96"/><rect class="f-pie" x="318" y="396" width="18" height="18" rx="3"/>
+<rect class="f-blue" x="324" y="352" width="6" height="44"/>
+<text class="s" x="327" y="290" text-anchor="middle">poros</text>
+<rect class="f-gray" x="446" y="332" width="6" height="66"/>
+<rect class="f-ao" x="424" y="336" width="50" height="38" rx="5"/><text class="w" x="449" y="360" text-anchor="middle" style="font-size: 14px">LOG</text>
+<polygon class="f-blue" points="418,318 486,318 496,296 428,296" style="fill-opacity: 0.85"/>
+<text class="s" x="404" y="300" text-anchor="end" style="paint-order: stroke; stroke: var(--bg-surface); stroke-width: 6px; stroke-linejoin: round">panel solar</text>
+<path d="M100,288 Q140,340 424,356" style="fill: none; stroke: var(--text-dim); stroke-width: 2.5; stroke-dasharray: 7 5"/>
+<path d="M226,288 Q300,350 424,362" style="fill: none; stroke: var(--text-dim); stroke-width: 2.5; stroke-dasharray: 7 5"/>
+<path d="M327,352 Q380,350 424,368" style="fill: none; stroke: var(--text-dim); stroke-width: 2.5; stroke-dasharray: 7 5"/>
+<line x1="500" y1="336" x2="500" y2="290" style="stroke: var(--text-main); stroke-width: 4"/><circle cx="500" cy="286" r="6" class="f-ar"/>
+<path d="M506.6,266.2 A22,22 0 0 1 506.6,305.8" style="fill: none; stroke: var(--sensor-rain); stroke-width: 3.5; opacity: 0.95"/>
+<path d="M512.0,250.0 A40,40 0 0 1 512.0,322.0" style="fill: none; stroke: var(--sensor-rain); stroke-width: 3.5; opacity: 0.7"/>
+<path d="M517.4,233.8 A58,58 0 0 1 517.4,338.2" style="fill: none; stroke: var(--sensor-rain); stroke-width: 3.5; opacity: 0.44999999999999996"/>
+<g class="f-gray" style="fill-opacity: 0.55"><ellipse cx="700" cy="150" rx="70" ry="38"/><ellipse cx="760" cy="128" rx="58" ry="40"/><ellipse cx="650" cy="164" rx="46" ry="28"/></g>
+<text class="b m" x="720" y="228" text-anchor="middle">Servidor en la nube</text><text class="s" x="720" y="252" text-anchor="middle">almacena y respalda</text>
+<path d="M580,270 Q610,215 636,192" style="fill: none; stroke: var(--sensor-rain); stroke-width: 3.5; stroke-dasharray: 8 6" marker-end="url(#ar-a)"/>
+<rect class="panel" x="850" y="110" width="200" height="130" rx="10"/>
+<path d="M866,210 L890,190 L912,200 L936,160 L960,176 L984,140 L1032,128" style="fill: none; stroke: var(--sensor-pie); stroke-width: 4"/>
+<rect x="866" y="222" width="34" height="8" class="f-ag"/><rect x="904" y="222" width="34" height="8" class="f-ay"/><rect x="942" y="222" width="34" height="8" class="f-ao"/><rect x="980" y="222" width="34" height="8" class="f-ar"/>
+<text class="b m" x="950" y="270" text-anchor="middle">Plataforma de análisis</text><text class="s" x="950" y="294" text-anchor="middle">gráficas y umbrales</text>
+<path d="M780,150 L846,160" style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" marker-end="url(#ar-a)"/>
+<rect class="panel" x="1100" y="290" width="70" height="120" rx="12"/><polygon class="f-ao" points="1135,318 1158,358 1112,358"/><text class="dk" x="1135" y="352" text-anchor="middle" style="font-size: 20px">!</text>
+<text class="b m" x="1135" y="440" text-anchor="middle">Alertas</text><text class="s" x="1135" y="464" text-anchor="middle">a los responsables</text>
+<path d="M1054,180 Q1100,230 1110,286" style="fill: none; stroke: var(--text-muted); stroke-width: 3.5" marker-end="url(#ar-a)"/>
+<text class="b m" x="250" y="500" text-anchor="middle">Sensores en campo</text>
+<text class="s" x="466" y="398" text-anchor="start" style="paint-order: stroke; stroke: var(--bg-surface); stroke-width: 6px; stroke-linejoin: round">datalogger</text><text class="s" x="330" y="446" text-anchor="middle" style="paint-order: stroke; stroke: var(--bg-surface); stroke-width: 6px; stroke-linejoin: round">piezómetro</text>
+<text class="b m" x="560" y="330" text-anchor="start" style="fill: var(--sensor-rain)">Telemetría</text><text class="s" x="560" y="354" text-anchor="start">4G · LoRa · satelital</text>
+</svg>
+        </div>
+        <div class="callout callout-info" style="margin-top: 10px;">
+          <span class="callout-icon">🔌</span>
+          <div class="callout-content" style="font-weight: 600;">Un sistema de monitoreo es <strong>más que sensores</strong>: necesita energía autónoma, comunicaciones, almacenamiento y una plataforma que convierta los datos en decisiones.</div>
+        </div>
+      </section>
+
+
+
       <!-- SLIDE 15: DEFINICIÓN DE RIESGO -->
       <section>
         <h2>¿Cuándo se habla de riesgo?</h2>
         
         <div class="card card-highlight" style="margin-top: 20px; text-align: center; padding: 25px;">
-          <div style="display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 1.5em; font-weight: 800;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: nowrap; font-size: 1.02em; font-weight: 800;">
             <span style="color: var(--accent-rose);">Amenaza</span>
             <span style="color: var(--text-muted); font-size: 1.2em;">&times;</span>
-            <span style="color: var(--accent-cyan);">Exposición / Vulnerabilidad</span>
+            <span style="color: var(--accent-cyan);">Exposición</span>
+            <span style="color: var(--text-muted); font-size: 1.2em;">&times;</span>
+            <span style="color: var(--sensor-ten);">Vulnerabilidad</span>
             <span style="color: var(--text-muted); font-size: 1.2em;">=</span>
             <span style="color: var(--eafit-yellow-text); font-size: 1.2em;">Riesgo</span>
           </div>
@@ -604,6 +662,46 @@
           </div>
         </div>
       </section>
+
+      <!-- NEW:01-risk -->
+      <section>
+        <h2>Componentes del riesgo</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Tres ingredientes que se combinan
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" style="max-height: 620px" viewBox="0 0 700 590" role="img" aria-label="Riesgo como intersección de amenaza, exposición y vulnerabilidad">
+<circle cx="250" cy="230" r="140" class="f-rose" style="fill-opacity: 0.32; stroke: var(--accent-rose); stroke-width: 4"/>
+<circle cx="450" cy="230" r="140" class="f-blue" style="fill-opacity: 0.32; stroke: var(--accent-cyan); stroke-width: 4"/>
+<circle cx="350" cy="370" r="140" class="f-ten" style="fill-opacity: 0.32; stroke: var(--sensor-ten); stroke-width: 4"/>
+<text class="rose-txt l" x="130" y="52" text-anchor="middle">Amenaza</text><text class="s" x="130" y="78" text-anchor="middle">lo que puede pasar</text>
+<text class="pie-txt l" x="570" y="52" text-anchor="middle">Exposición</text><text class="s" x="570" y="78" text-anchor="middle">lo que está en el camino</text>
+<text class="ten-txt l" x="350" y="550" text-anchor="middle">Vulnerabilidad</text><text class="s" x="350" y="576" text-anchor="middle">qué tan fácil se daña</text>
+<circle cx="350" cy="288" r="52" style="fill: var(--eafit-yellow); stroke: var(--text-main); stroke-width: 3"/>
+<text class="dk" x="350" y="296" text-anchor="middle" style="font-size: 23px">RIESGO</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">🛡️</span><span>¿Cómo ayuda la instrumentación?</span></div>
+            <ul class="bullet-list" style="font-size: 0.76em;">
+              <li><strong style="color: var(--accent-rose)">Amenaza:</strong> se <strong>monitorea</strong> (lluvia, presión de poros, deformación).</li>
+              <li><strong style="color: var(--accent-cyan)">Exposición:</strong> la alerta permite <strong>sacar</strong> a las personas del camino.</li>
+              <li><strong style="color: var(--sensor-ten)">Vulnerabilidad:</strong> se detecta el <strong>deterioro</strong> antes de que falle.</li>
+            </ul>
+          </div>
+          </div>
+
+        </div>
+        <div class="callout callout-info" style="margin-top: 12px;">
+          <span class="callout-icon">📐</span>
+          <div class="callout-content" style="font-weight: 600;">Riesgo = <strong>Amenaza × Exposición × Vulnerabilidad</strong>. Si alguno de los tres es cero, el riesgo es cero: por eso se puede reducir actuando sobre cualquiera.</div>
+        </div>
+      </section>
+
+
 
       <!-- SLIDE 16: CIERRE / PREGUNTA DE TRANSICIÓN -->
       <section class="slide-cover">

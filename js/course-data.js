@@ -376,7 +376,7 @@ df_lluvia = None
 # 3. Imprime las dimensiones y las primeras filas:
 if df_lluvia is not None:
     print(f"Dimensiones del registro de lluvia: {df_lluvia.shape}")
-    print("\nPrimeras lecturas del pluviómetro (canales p1 y p2):")
+    print("\\nPrimeras lecturas del pluviómetro (canales p1 y p2):")
     print(df_lluvia.head(3))
 else:
     print("Completa: df_lluvia = pd.read_csv('pluviometro.csv', index_col=0)")
@@ -388,7 +388,7 @@ df_lluvia = pd.read_csv('pluviometro.csv', index_col=0)
 df_lluvia.index = pd.to_datetime(df_lluvia.index)
 
 print(f"Dimensiones del registro de lluvia: {df_lluvia.shape}")
-print("\nPrimeras lecturas del pluviómetro (canales p1 y p2):")
+print("\\nPrimeras lecturas del pluviómetro (canales p1 y p2):")
 print(df_lluvia.head(3))`,
         validator: (output) => output.includes("p1") && output.includes("p2") && (output.includes("229345") || output.includes("Dimensiones del registro de lluvia:"))
       },
@@ -429,7 +429,7 @@ lluvia_activa = None
 # 3. Imprime la cantidad de registros encontrados y un vistazo:
 if lluvia_activa is not None and df['p'] is not None:
     print(f"Registros con lluvia activa: {len(lluvia_activa)}")
-    print("\nPrimeros eventos registrados:")
+    print("\\nPrimeros eventos registrados:")
     print(lluvia_activa[['p1', 'p2', 'p']].head(4))
 else:
     print("Define: df['p'] = df[['p1', 'p2']].max(axis=1) y lluvia_activa = df[df['p'] > 0]")
@@ -444,7 +444,7 @@ df['p'] = df[['p1', 'p2']].max(axis=1)
 lluvia_activa = df[df['p'] > 0]
 
 print(f"Registros con lluvia activa: {len(lluvia_activa)}")
-print("\nPrimeros eventos registrados:")
+print("\\nPrimeros eventos registrados:")
 print(lluvia_activa[['p1', 'p2', 'p']].head(4))`,
         validator: (output) => output.includes("Registros con lluvia activa:") && !output.includes("None") && output.includes("p")
       },
@@ -497,8 +497,8 @@ df_ladera = None
 # 3. Explora el DataFrame integrado de monitoreo:
 if df_ladera is not None:
     print(f"Dimensiones del monitoreo integrado: {df_ladera.shape}")
-    print("\nColumnas integradas:", list(df_ladera.columns))
-    print("\nResumen estadístico de los sensores de ladera:")
+    print("\\nColumnas integradas:", list(df_ladera.columns))
+    print("\\nResumen estadístico de los sensores de ladera:")
     print(df_ladera.describe().round(2))
 else:
     print("Completa: df_ladera = pd.concat([df_pluv, df_hum, df_ext], axis=1)")
@@ -518,8 +518,8 @@ df_ext.index = pd.to_datetime(df_ext.index)
 df_ladera = pd.concat([df_pluv, df_hum, df_ext], axis=1)
 
 print(f"Dimensiones del monitoreo integrado: {df_ladera.shape}")
-print("\nColumnas integradas:", list(df_ladera.columns))
-print("\nResumen estadístico de los sensores de ladera:")
+print("\\nColumnas integradas:", list(df_ladera.columns))
+print("\\nResumen estadístico de los sensores de ladera:")
 print(df_ladera.describe().round(2))`,
         validator: (output) => output.includes("Dimensiones del monitoreo integrado:") && output.includes("sh1") && output.includes("DE1") && (output.includes("p1") || output.includes("p2"))
       }
@@ -910,7 +910,7 @@ plt.show()`,
         id: "m3_l3",
         title: "3.3 Velocidad de Deformación con .diff()",
         concept: `
-          <p>La <strong>velocidad de apertura de grietas</strong> ($\Delta DE1 / \Delta t$) indica la aceleración del talud. En Pandas se calcula con la primera diferencia discreta: <code>.diff()</code>.</p>
+          <p>La <strong>velocidad de apertura de grietas</strong> ($\\Delta DE1 / \\Delta t$) indica la aceleración del talud. En Pandas se calcula con la primera diferencia discreta: <code>.diff()</code>.</p>
           
           <!-- Contenedor Interactivo de Velocidad y Aceleración -->
           <div id="velocity-acceleration-container"></div>

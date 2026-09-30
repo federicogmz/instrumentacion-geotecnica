@@ -19,8 +19,9 @@
 > [!TIP]
 > 🌐 **¡Plataforma Web Interactiva en Vivo (GitHub Pages)!**  
 > Puedes estudiar la teoría y programar en Python directamente en tu navegador sin instalar nada:  
-> 👉 **[Entrar a la Plataforma Web Interactiva](https://federicogmz.github.io/instrumentacion-geotecnica/)**  
-> *(Incluye explicaciones interactivas, quizzes con retroalimentación inmediata, editor de Python con ejecución en WebAssembly y laboratorio libre)*.
+> 👉 **[Entrar al índice del curso](https://federicogmz.github.io/instrumentacion-geotecnica/)** (ruta de módulos, presentaciones, evaluación y recursos)  
+> 👉 **[Ir directo al laboratorio de Python](https://federicogmz.github.io/instrumentacion-geotecnica/webapp.html)**  
+> *(El laboratorio incluye explicaciones interactivas, quizzes con retroalimentación inmediata, editor de Python con ejecución en WebAssembly y laboratorio libre)*.
 
 ---
 
@@ -115,7 +116,9 @@ Si prefieres trabajar de forma local en tu propia máquina (con VS Code o Jupyte
 
 ```text
 instrumentacion-geotecnica/
-├── index.html                  # Plataforma web interactiva para GitHub Pages
+├── index.html                  # Índice / portada del curso (GitHub Pages)
+├── webapp.html                 # Laboratorio web interactivo de Python
+├── presentaciones/             # 6 presentaciones teóricas (Reveal.js)
 ├── GUIA_INICIO_RAPIDO.md       # Guía paso a paso para estudiantes principiantes
 ├── README.md                   # Presentación del componente práctico
 ├── requirements.txt            # Librerías de Python requeridas

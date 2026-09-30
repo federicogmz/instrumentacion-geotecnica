@@ -92,7 +92,7 @@
               <div class="md-method-tag">1. <code>df.dropna()</code> &bull; Eliminación Directa</div>
               <div class="md-desc">
                 Corta y borra las filas con <code>NaN</code>. <strong style="color:#ef4444;">¡Peligro en series temporales!</strong>
-                Destruye el paso de tiempo regular ($\Delta t = 1\text{ h}$), impidiendo calcular derivadas y ventanas móviles con precisión.
+                Destruye el paso de tiempo regular ($\\Delta t = 1\\text{ h}$), impidiendo calcular derivadas y ventanas móviles con precisión.
               </div>
             </div>
 

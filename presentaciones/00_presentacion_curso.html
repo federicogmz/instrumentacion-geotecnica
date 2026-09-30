@@ -12,6 +12,7 @@
   
   <!-- Tema Institucional EAFIT -->
   <link rel="stylesheet" href="css/presentation-theme.css">
+  <link rel="stylesheet" href="css/diagrams.css">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
       <button class="header-btn" id="btn-overview" title="Vista Cuadrícula (Esc)"><span>▦</span> Resumen</button>
       <button class="header-btn header-btn-theme" id="btn-theme-toggle" title="Alternar Modo Claro / Oscuro (Tecla T)"><span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span></button>
       <button class="header-btn" id="btn-fullscreen" title="Pantalla Completa (F)"><span>⛶</span> Pantalla Completa</button>
-      <a href="index.html" class="header-btn"><span>🏠</span> Salir al Hub</a>
+      <a href="../index.html#ruta" class="header-btn"><span>🏠</span> Salir al índice</a>
     </div>
   </header>
 
@@ -114,7 +115,7 @@
                 <li>Variables hidrometeorológicas</li>
                 <li>El agua en el suelo</li>
                 <li>Medición de deformaciones</li>
-                <li>Interpretación y análisis de datos</li>
+                <li>Interpretación de datos y alerta temprana</li>
               </ul>
             </div>
 
@@ -137,6 +138,66 @@
 
         </div>
       </section>
+
+      <!-- NEW:00-roadmap -->
+      <section>
+        <h2>Ruta del curso</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Del sensor a la decisión, en cinco módulos
+        </h3>
+
+        <div style="margin-top: 4px;">
+          <svg class="dg" style="max-height: 760px" viewBox="0 0 1200 650" role="img" aria-label="Ruta del curso: cinco módulos, práctica en Python y proyecto integrador">
+<line x1="60" y1="250" x2="1140" y2="250" style="stroke: var(--text-dim); stroke-width: 8; stroke-linecap: round"/>
+<circle cx="120" cy="250" r="34" class="f-blue" style="stroke: var(--bg-card); stroke-width: 6"/>
+<text class="w" x="120" y="262" text-anchor="middle" style="font-size: 32px">1</text>
+<rect class="panel" x="6" y="40" width="228" height="150" rx="12"/>
+<text x="120" y="90" text-anchor="middle" style="font-size: 36px">🏔️</text>
+<text class="b m" x="120" y="124" text-anchor="middle" style="font-size: 22px">Conceptos básicos</text>
+<text class="s" x="120" y="150" text-anchor="middle" style="font-size: 18px">¿Para qué sirve</text>
+<text class="s" x="120" y="172" text-anchor="middle" style="font-size: 18px">instrumentar?</text>
+<line x1="120" y1="190" x2="120" y2="216" style="stroke: var(--text-dim); stroke-width: 3"/>
+<circle cx="360" cy="250" r="34" class="f-rain" style="stroke: var(--bg-card); stroke-width: 6"/>
+<text class="w" x="360" y="262" text-anchor="middle" style="font-size: 32px">2</text>
+<rect class="panel" x="246" y="320" width="228" height="150" rx="12"/>
+<text x="360" y="370" text-anchor="middle" style="font-size: 36px">🌧️</text>
+<text class="b m" x="360" y="404" text-anchor="middle" style="font-size: 22px">Variables</text>
+<text class="s" x="360" y="430" text-anchor="middle" style="font-size: 18px">hidrometeorológicas</text>
+<text class="s" x="360" y="452" text-anchor="middle" style="font-size: 18px">La lluvia y su monitoreo</text>
+<line x1="360" y1="284" x2="360" y2="320" style="stroke: var(--text-dim); stroke-width: 3"/>
+<circle cx="600" cy="250" r="34" class="f-pie" style="stroke: var(--bg-card); stroke-width: 6"/>
+<text class="w" x="600" y="262" text-anchor="middle" style="font-size: 32px">3</text>
+<rect class="panel" x="486" y="40" width="228" height="150" rx="12"/>
+<text x="600" y="90" text-anchor="middle" style="font-size: 36px">💧</text>
+<text class="b m" x="600" y="124" text-anchor="middle" style="font-size: 22px">El agua en el suelo</text>
+<text class="s" x="600" y="150" text-anchor="middle" style="font-size: 18px">Humedad, succión y</text>
+<text class="s" x="600" y="172" text-anchor="middle" style="font-size: 18px">presión de poros</text>
+<line x1="600" y1="190" x2="600" y2="216" style="stroke: var(--text-dim); stroke-width: 3"/>
+<circle cx="840" cy="250" r="34" class="f-ten" style="stroke: var(--bg-card); stroke-width: 6"/>
+<text class="w" x="840" y="262" text-anchor="middle" style="font-size: 32px">4</text>
+<rect class="panel" x="726" y="320" width="228" height="150" rx="12"/>
+<text x="840" y="370" text-anchor="middle" style="font-size: 36px">📏</text>
+<text class="b m" x="840" y="404" text-anchor="middle" style="font-size: 22px">Deformaciones</text>
+<text class="s" x="840" y="430" text-anchor="middle" style="font-size: 18px">Sensores cinemáticos</text>
+<text class="s" x="840" y="452" text-anchor="middle" style="font-size: 18px">y remotos</text>
+<line x1="840" y1="284" x2="840" y2="320" style="stroke: var(--text-dim); stroke-width: 3"/>
+<circle cx="1080" cy="250" r="34" class="f-ar" style="stroke: var(--bg-card); stroke-width: 6"/>
+<text class="w" x="1080" y="262" text-anchor="middle" style="font-size: 32px">5</text>
+<rect class="panel" x="966" y="40" width="228" height="150" rx="12"/>
+<text x="1080" y="90" text-anchor="middle" style="font-size: 36px">🚨</text>
+<text class="b m" x="1080" y="124" text-anchor="middle" style="font-size: 22px">Análisis y alerta</text>
+<text class="s" x="1080" y="150" text-anchor="middle" style="font-size: 18px">De los datos a las</text>
+<text class="s" x="1080" y="172" text-anchor="middle" style="font-size: 18px">decisiones</text>
+<line x1="1080" y1="190" x2="1080" y2="216" style="stroke: var(--text-dim); stroke-width: 3"/>
+<rect x="60" y="500" width="1080" height="56" rx="14" class="f-hum" style="fill-opacity: 0.22; stroke: var(--sensor-hum); stroke-width: 3"/>
+<text class="b m" x="600" y="535" text-anchor="middle">🐍 Práctica en Python: introducción → visualización → análisis de series temporales</text>
+<rect x="60" y="576" width="1080" height="56" rx="14" style="fill: var(--eafit-yellow); fill-opacity: 0.25; stroke: var(--eafit-yellow-text); stroke-width: 3"/>
+<text class="b m" x="600" y="611" text-anchor="middle">🎓 Proyecto integrador: informe técnico + sustentación (con umbrales y alerta)</text>
+</svg>
+        </div>
+      </section>
+
+
 
       <!-- SLIDE 4: METODOLOGÍA -->
       <section>

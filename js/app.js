@@ -187,9 +187,17 @@ class CourseApp {
     }
 
     // Renderizar sección inicial (restaurando posición)
+    // Enlace profundo desde el índice del curso: webapp.html?modulo=modulo2[&leccion=0]
+    const params      = new URLSearchParams(window.location.search);
+    const linkedSec   = params.get("modulo");
+    const linkedLesson = parseInt(params.get("leccion") || "0", 10) || 0;
     const savedSection = localStorage.getItem("ig_last_section");
     const savedLesson  = parseInt(localStorage.getItem("ig_last_lesson") || "0", 10);
-    if (savedSection && savedSection !== "teoria") {
+    if (linkedSec && ["teoria", "modulo1", "modulo2", "modulo3", "sandbox"].includes(linkedSec)) {
+      this.currentSection   = linkedSec;
+      this.currentLessonIdx = linkedLesson;
+      this.switchSection(linkedSec, linkedLesson);
+    } else if (savedSection && savedSection !== "teoria") {
       this.currentSection   = savedSection;
       this.currentLessonIdx = savedLesson;
       this.switchSection(savedSection, savedLesson);
@@ -1017,4 +1025,34 @@ class CourseApp {
 // ── Bootstrap ──────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   window.courseApp = new CourseApp();
+  setupMathRendering();
 });
+
+// ── Fórmulas LaTeX ($...$) con KaTeX ───────────────────────────────────────────
+// Las lecciones y widgets re-renderizan su HTML con frecuencia, por eso se observa el DOM.
+function setupMathRendering() {
+  const roots = ["theory-pane", "sidebar-content"]
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  let pending = false;
+  const renderAll = () => {
+    pending = false;
+    if (typeof window.renderMathInElement !== "function") return;
+    roots.forEach(el => window.renderMathInElement(el, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    }));
+  };
+  const schedule = () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(renderAll);
+  };
+  const observer = new MutationObserver(schedule);
+  roots.forEach(el => observer.observe(el, { childList: true, subtree: true }));
+  window.addEventListener("load", schedule);
+}

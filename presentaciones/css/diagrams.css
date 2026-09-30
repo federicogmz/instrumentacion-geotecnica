@@ -1,0 +1,262 @@
+/* ==========================================================================
+   Universidad EAFIT - Instrumentación Geotécnica
+   Diagramas SVG y componentes didácticos (módulo 03: El agua en el suelo)
+   Usa las variables de presentation-theme.css (modo claro / oscuro).
+   ========================================================================== */
+:root {
+  --soil-dry: #EAD9B8;
+  --soil-cap: #D6BF95;
+  --soil-sat: #A9C4D6;
+  --soil-solid: #C9AE7E;
+  --sensor-hum: #059669;
+  --sensor-ten: #d97706;
+  --sensor-pie: #0369a1;
+  --sensor-rain: #7c3aed;
+}
+
+[data-theme="dark"] {
+  --soil-dry: #5B4A30;
+  --soil-cap: #4E4A40;
+  --soil-sat: #1F4566;
+  --soil-solid: #7A6440;
+  --sensor-hum: #34d399;
+  --sensor-ten: #fbbf24;
+  --sensor-pie: #38bdf8;
+  --sensor-rain: #a78bfa;
+}
+
+/* ---------- SVG ---------- */
+.dg {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.formula-inline { font-size: 0.85em; }
+.formula-inline .katex-display { margin: 0.3em 0; }
+
+.dg text {
+  font-family: var(--font-sans);
+  fill: var(--text-body);
+  font-size: 22px;
+}
+
+.dg .b { font-weight: 800; fill: var(--text-main); }
+.dg .s { font-size: 18px; fill: var(--text-muted); }
+.dg .m { font-size: 21px; }
+.dg .l { font-size: 27px; font-weight: 800; fill: var(--text-main); }
+.dg .ax { stroke: var(--text-muted); stroke-width: 2.5; fill: none; }
+.dg .thin { stroke: var(--text-dim); stroke-width: 1.6; fill: none; }
+.dg .dash { stroke-dasharray: 9 6; }
+.dg .panel { fill: var(--bg-card); stroke: var(--border-card); stroke-width: 2; }
+.dg .f-soil-dry { fill: var(--soil-dry); }
+.dg .f-soil-cap { fill: var(--soil-cap); }
+.dg .f-soil-sat { fill: var(--soil-sat); }
+.dg .f-solid { fill: var(--soil-solid); }
+.dg .f-water { fill: var(--accent-cyan); fill-opacity: 0.55; }
+.dg .f-hum { fill: var(--sensor-hum); } .dg .s-hum { stroke: var(--sensor-hum); }
+.dg .f-ten { fill: var(--sensor-ten); } .dg .s-ten { stroke: var(--sensor-ten); }
+.dg .f-pie { fill: var(--sensor-pie); } .dg .s-pie { stroke: var(--sensor-pie); }
+.dg .f-rain { fill: var(--sensor-rain); } .dg .s-rain { stroke: var(--sensor-rain); }
+.dg .f-rose { fill: var(--accent-rose); } .dg .s-rose { stroke: var(--accent-rose); }
+.dg .f-blue { fill: var(--accent-cyan); } .dg .s-blue { stroke: var(--accent-cyan); }
+.dg .f-gray { fill: var(--text-dim); } .dg .s-gray { stroke: var(--text-dim); }
+.dg text.w { fill: #FFFFFF; font-weight: 800; }
+.dg .curve { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.dg .grains { fill: var(--text-dim); fill-opacity: 0.35; }
+.dg .hum-txt { fill: var(--sensor-hum); font-weight: 800; }
+.dg .ten-txt { fill: var(--sensor-ten); font-weight: 800; }
+.dg .pie-txt { fill: var(--sensor-pie); font-weight: 800; }
+.dg .rain-txt { fill: var(--sensor-rain); font-weight: 800; }
+.dg .rose-txt { fill: var(--accent-rose); font-weight: 800; }
+
+/* ---------- Cadena causa → consecuencia ---------- */
+.chain {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.chain-box {
+  border-radius: 14px;
+  padding: 14px 22px;
+  border: 2px solid var(--border-card);
+  background: var(--bg-card);
+  box-shadow: var(--card-shadow);
+}
+
+.chain-tag {
+  display: inline-block;
+  font-size: 0.58em;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.chain-box strong { display: block; font-size: 1.02em; line-height: 1.25; }
+.chain-box .sub { display: block; font-size: 0.74em; color: var(--text-muted); margin-top: 4px; line-height: 1.35; }
+.chain-arrow { text-align: center; font-size: 1.3em; color: var(--eafit-yellow-text); line-height: 1; font-weight: 800; }
+.chain-cause { border-color: var(--accent-cyan); }
+.chain-cause .chain-tag { background: rgba(2, 132, 199, 0.15); color: var(--accent-cyan); }
+.chain-mid { border-color: var(--eafit-yellow-text); }
+.chain-mid .chain-tag { background: rgba(217, 119, 6, 0.15); color: var(--eafit-yellow-text); }
+.chain-effect { border-color: var(--accent-rose); }
+.chain-effect .chain-tag { background: rgba(225, 29, 72, 0.12); color: var(--accent-rose); }
+
+/* ---------- Secuencia de eventos ---------- */
+.step-flow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 30px;
+  margin-top: 26px;
+}
+
+.step {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-top: 6px solid var(--eafit-blue);
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.step:not(:last-child)::after {
+  content: "\27A4";
+  position: absolute;
+  right: -27px;
+  top: 42%;
+  color: var(--eafit-yellow-text);
+  font-size: 1.1em;
+}
+
+.step-num {
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 50%;
+  background: var(--eafit-blue);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-icon { font-size: 1.5em; line-height: 1; }
+.step-title { font-weight: 800; color: var(--text-main); line-height: 1.2; font-size: 0.92em; }
+.reveal .step p { font-size: 0.72em !important; line-height: 1.4; margin: 0; color: var(--text-body); }
+
+.sensor-chip {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 0.62em;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  line-height: 1.2;
+}
+
+.chip-hum { color: var(--sensor-hum); }
+.chip-ten { color: var(--sensor-ten); }
+.chip-pie { color: var(--sensor-pie); }
+.chip-rain { color: var(--sensor-rain); }
+.chip-def { color: var(--accent-rose); }
+.chip-calc { color: var(--text-muted); }
+
+/* ---------- Insignia "diapositiva clave" ---------- */
+.key-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--eafit-yellow);
+  color: #0B192C;
+  font-size: 0.42em;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  vertical-align: middle;
+  margin-left: 16px;
+  -webkit-text-fill-color: #0B192C;
+}
+
+.reveal table.data-table .dot {
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.formula-inline {
+  background: var(--formula-bg);
+  border: 1px solid var(--formula-border);
+  border-radius: 12px;
+  padding: 6px 14px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* ---------- Colores de niveles de alerta ---------- */
+:root {
+  --al-g: #16a34a;
+  --al-y: #eab308;
+  --al-o: #f97316;
+  --al-r: #dc2626;
+}
+
+[data-theme="dark"] {
+  --al-g: #34d399;
+  --al-y: #facc15;
+  --al-o: #fb923c;
+  --al-r: #f87171;
+}
+
+.dg .f-ag { fill: var(--al-g); } .dg .s-ag { stroke: var(--al-g); }
+.dg .f-ay { fill: var(--al-y); } .dg .s-ay { stroke: var(--al-y); }
+.dg .f-ao { fill: var(--al-o); } .dg .s-ao { stroke: var(--al-o); }
+.dg .f-ar { fill: var(--al-r); } .dg .s-ar { stroke: var(--al-r); }
+.dg text.dk { fill: #0B192C; font-weight: 800; }
+.dg .ag-txt { fill: var(--al-g); font-weight: 800; }
+.dg .ay-txt { fill: var(--al-y); font-weight: 800; }
+.dg .ao-txt { fill: var(--al-o); font-weight: 800; }
+.dg .ar-txt { fill: var(--al-r); font-weight: 800; }
+.dg .series { fill: none; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.dg .thick { stroke-width: 5; }
+.dg .grid { stroke: var(--border-subtle); stroke-width: 1.2; }
+
+.step-flow.n5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.step-flow.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.alert-table th.g { background: var(--al-g); color: #fff; }
+.alert-table th.y { background: var(--al-y); color: #0B192C; }
+.alert-table th.o { background: var(--al-o); color: #0B192C; }
+.alert-table th.r { background: var(--al-r); color: #fff; }
+.reveal table.alert-table th { border-bottom: 4px solid var(--bg-card); text-align: center; }
+.reveal table.alert-table td { font-size: 0.86em; vertical-align: top; }
+.reveal table.alert-table td.rowh { font-weight: 800; color: var(--text-main); white-space: nowrap; }
+
+.mono-box {
+  font-family: var(--font-mono);
+  font-size: 0.62em;
+  line-height: 1.5;
+  background: var(--formula-bg);
+  border: 1px solid var(--formula-border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: var(--text-main);
+  white-space: pre;
+  text-align: left;
+}

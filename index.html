@@ -3,309 +3,723 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Laboratorio Interactivo de Instrumentación Geotécnica | Universidad EAFIT</title>
-
-  <!-- Metadatos SEO -->
-  <meta name="description" content="Plataforma web interactiva para el análisis computacional de sensores geotécnicos con Python y Pandas. Caso de estudio real de Ancón Norte (Copacabana - SIATA).">
+  <title>Instrumentación Geotécnica | Universidad EAFIT</title>
+  <meta name="description" content="Curso de Instrumentación Geotécnica de la Universidad EAFIT: presentaciones teóricas, laboratorio de Python en el navegador, datos reales y sistemas de alerta temprana.">
   <meta name="author" content="M.Eng. Federico Gómez, M.Eng. Juliana Álvarez - Universidad EAFIT">
-  <meta name="keywords" content="Instrumentación Geotécnica, Python, Pandas, Matplotlib, Geotecnia, Sensores, Ancón Norte, SIATA, Deslizamientos, EAFIT">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Laboratorio Interactivo de Instrumentación Geotécnica">
-  <meta property="og:description" content="Aprende análisis de sensores geotécnicos con Python interactivo directamente en el navegador.">
-  <meta property="og:type" content="website">
-
-  <!-- Google Fonts -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- CodeMirror CSS & Themes -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/eclipse.min.css">
+  <script>
+    // Tema antes de pintar (evita parpadeo). Comparte la clave con las presentaciones.
+    (function () {
+      try {
+        var saved = localStorage.getItem('eafit-theme');
+        var t = saved || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+    })();
+  </script>
 
-  <!-- Estilos CSS -->
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <style>
+    :root {
+      --blue: #004B85;
+      --blue-dark: #002855;
+      --yellow: #FFB903;
+      --yellow-text: #B45309;
+      --bg: #F8FAFC;
+      --bg-soft: #EEF3F9;
+      --card: #FFFFFF;
+      --card-border: rgba(0, 75, 133, 0.14);
+      --text: #0B192C;
+      --text-body: #1E293B;
+      --text-muted: #475569;
+      --shadow: 0 10px 28px -8px rgba(0, 75, 133, 0.14), 0 3px 10px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 18px 38px -8px rgba(0, 75, 133, 0.25), 0 6px 14px rgba(0, 0, 0, 0.06);
+      --cyan: #0284c7;
+      --green: #059669;
+      --amber: #d97706;
+      --rose: #e11d48;
+      --purple: #7c3aed;
+      --soil-dry: #EAD9B8;
+      --soil-cap: #D6BF95;
+      --soil-sat: #A9C4D6;
+      --hero-glow: radial-gradient(circle at 12% 18%, rgba(0, 75, 133, 0.10) 0, transparent 45%), radial-gradient(circle at 88% 80%, rgba(255, 185, 3, 0.16) 0, transparent 50%);
+      --bar: rgba(255, 255, 255, 0.9);
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+      --logo-filter: none;
+    }
 
-  <!-- Favicon SVG -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
+    [data-theme="dark"] {
+      --blue: #4C9BE0;
+      --yellow-text: #FFB903;
+      --bg: #060D1F;
+      --bg-soft: #0A142C;
+      --card: #0E1A36;
+      --card-border: rgba(148, 197, 255, 0.16);
+      --text: #FFFFFF;
+      --text-body: #E2E8F0;
+      --text-muted: #94A3B8;
+      --shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.55);
+      --shadow-hover: 0 18px 38px -8px rgba(0, 75, 133, 0.55);
+      --cyan: #38bdf8;
+      --green: #34d399;
+      --amber: #fbbf24;
+      --rose: #fb7185;
+      --purple: #a78bfa;
+      --soil-dry: #5B4A30;
+      --soil-cap: #4E4A40;
+      --soil-sat: #1F4566;
+      --hero-glow: radial-gradient(circle at 12% 18%, rgba(0, 75, 133, 0.35) 0, transparent 45%), radial-gradient(circle at 88% 80%, rgba(255, 185, 3, 0.08) 0, transparent 50%);
+      --bar: rgba(6, 13, 31, 0.86);
+      --logo-filter: brightness(0) invert(1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      background-image: var(--hero-glow);
+      background-attachment: fixed;
+      color: var(--text-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+    /* ---------- Barra superior ---------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bar);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; height: 68px; }
+    .brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+    .brand img { height: 34px; filter: var(--logo-filter); }
+    .brand strong { font-size: 1.02rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; white-space: nowrap; }
+    .nav { display: flex; align-items: center; gap: 4px; }
+    .nav a { padding: 8px 13px; border-radius: 9px; font-size: 0.86rem; font-weight: 700; color: var(--text-muted); transition: 0.2s; }
+    .nav a:hover { color: var(--text); background: var(--bg-soft); }
+    .actions { display: flex; align-items: center; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 11px;
+      font-weight: 800; font-size: 0.9rem; border: 1.5px solid transparent;
+      cursor: pointer; font-family: inherit; transition: 0.2s;
+    }
+    .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 6px 16px -4px rgba(0, 75, 133, 0.5); }
+    [data-theme="dark"] .btn-primary { background: #1D6FBF; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -4px rgba(0, 75, 133, 0.6); }
+    .btn-accent { background: var(--yellow); color: #0B192C; box-shadow: 0 6px 16px -4px rgba(255, 185, 3, 0.55); }
+    .btn-accent:hover { transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text); border-color: var(--card-border); }
+    .btn-ghost:hover { background: var(--bg-soft); }
+    .btn-icon { width: 40px; height: 40px; padding: 0; justify-content: center; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 64px 0 40px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #fff; border: 2px solid var(--yellow);
+      font-size: 0.74rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 7px 18px; border-radius: 999px;
+    }
+    [data-theme="dark"] .badge { background: rgba(0, 75, 133, 0.5); color: var(--yellow); }
+    h1 { font-size: clamp(2.4rem, 5vw, 3.9rem); line-height: 1.06; letter-spacing: -0.03em; color: var(--text); margin: 22px 0 16px; font-weight: 800; }
+    h1 span { color: var(--blue); background: linear-gradient(135deg, var(--blue) 30%, var(--cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .lead { font-size: 1.14rem; color: var(--text-muted); max-width: 640px; margin: 0 0 26px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.82rem; font-weight: 700; color: var(--text-body);
+      background: var(--card); border: 1px solid var(--card-border);
+      padding: 6px 14px; border-radius: 999px;
+    }
+    .hero-art { background: var(--card); border: 1px solid var(--card-border); border-radius: 26px; padding: 16px; box-shadow: var(--shadow); }
+    .hero-art svg { width: 100%; height: auto; display: block; }
+    .hero-art text { font-family: var(--font); fill: var(--text-body); font-size: 15px; }
+    .hero-art .b { font-weight: 800; fill: var(--text); }
+    .hero-art .w { fill: #fff; font-weight: 800; }
+
+    /* ---------- Cifras ---------- */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 20px 0 8px; }
+    .stat { background: var(--card); border: 1px solid var(--card-border); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow); }
+    .stat b { display: block; font-size: 2.1rem; line-height: 1.1; color: var(--blue); font-weight: 800; }
+    [data-theme="dark"] .stat b { color: var(--yellow); }
+    .stat span { font-size: 0.86rem; color: var(--text-muted); font-weight: 600; }
+
+    /* ---------- Secciones ---------- */
+    section.block { padding: 64px 0 8px; }
+    .eyebrow { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow-text); }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.02em; color: var(--text); margin: 6px 0 10px; font-weight: 800; }
+    .sub { color: var(--text-muted); max-width: 760px; margin: 0 0 30px; font-size: 1.02rem; }
+
+    /* ---------- Ruta de módulos ---------- */
+    .route { position: relative; display: grid; gap: 22px; }
+    .route::before {
+      content: ""; position: absolute; left: 33px; top: 30px; bottom: 30px; width: 4px;
+      background: linear-gradient(var(--blue), var(--yellow)); border-radius: 4px; opacity: 0.45;
+    }
+    .mod { position: relative; display: grid; grid-template-columns: 68px 1fr; gap: 22px; }
+    .mod-num {
+      width: 68px; height: 68px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: 1.5rem;
+      border: 5px solid var(--bg); box-shadow: var(--shadow); z-index: 1;
+    }
+    .mod-card {
+      background: var(--card); border: 1px solid var(--card-border); border-radius: 20px;
+      padding: 24px 28px; box-shadow: var(--shadow); transition: 0.25s;
+      display: grid; grid-template-columns: 1.35fr 1fr; gap: 26px;
+    }
+    .mod-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .mod-card h3 { margin: 0 0 6px; font-size: 1.3rem; color: var(--text); letter-spacing: -0.01em; }
+    .mod-card h3 small { display: block; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow-text); margin-bottom: 4px; }
+    .mod-card p { margin: 0 0 12px; color: var(--text-muted); font-size: 0.95rem; }
+    .mod-card ul { margin: 0; padding: 0; list-style: none; }
+    .mod-card li { position: relative; padding-left: 20px; margin-bottom: 5px; font-size: 0.9rem; }
+    .mod-card li::before { content: ""; position: absolute; left: 3px; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); }
+    .mod-side { display: flex; flex-direction: column; gap: 10px; justify-content: space-between; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .meta span { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); background: var(--bg-soft); padding: 4px 11px; border-radius: 999px; }
+    .practice {
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 13px;
+      background: var(--bg-soft); border: 1px dashed var(--card-border); font-size: 0.85rem; font-weight: 700; color: var(--text-body);
+      transition: 0.2s;
+    }
+    .practice:hover { border-style: solid; border-color: var(--green); }
+    .practice em { font-style: normal; color: var(--green); font-weight: 800; display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .mod-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .mod-actions .btn { padding: 9px 16px; font-size: 0.85rem; }
+    .special { margin-top: 26px; background: linear-gradient(135deg, rgba(0, 75, 133, 0.10), rgba(255, 185, 3, 0.14)); border: 1px solid var(--card-border); border-radius: 20px; padding: 24px 28px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .special .ic { font-size: 2.4rem; }
+    .special div.t { flex: 1; min-width: 260px; }
+    .special h3 { margin: 0 0 4px; color: var(--text); }
+    .special p { margin: 0; color: var(--text-muted); font-size: 0.94rem; }
+
+    .keys { margin-top: 30px; }
+    .keys .keys-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 20px; font-size: 0.9rem; }
+    kbd { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; background: var(--bg-soft); border: 1px solid var(--card-border); border-bottom-width: 3px; border-radius: 7px; padding: 2px 8px; color: var(--text); }
+
+    /* ---------- Laboratorio de Python ---------- */
+    .lab { background: linear-gradient(135deg, var(--blue-dark), #0B3C73); color: #E2E8F0; border-radius: 28px; padding: 40px; box-shadow: var(--shadow-hover); position: relative; overflow: hidden; }
+    .lab::after { content: "🐍"; position: absolute; right: 30px; top: -10px; font-size: 9rem; opacity: 0.08; }
+    .lab h2 { color: #fff; }
+    .lab .sub { color: #B6C6DA; }
+    .lab-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 22px; }
+    .lab-item { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px; transition: 0.2s; color: #fff; }
+    .lab-item:hover { background: rgba(255, 255, 255, 0.16); transform: translateY(-3px); }
+    .lab-item .ic { font-size: 1.7rem; }
+    .lab-item strong { font-size: 0.98rem; line-height: 1.25; }
+    .lab-item span { font-size: 0.8rem; color: #B6C6DA; }
+    .bar { height: 7px; border-radius: 6px; background: rgba(255, 255, 255, 0.18); overflow: hidden; margin-top: auto; }
+    .bar i { display: block; height: 100%; width: 0; background: var(--yellow); border-radius: 6px; transition: width 0.6s; }
+    .lab-foot { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .lab-foot .note { font-size: 0.85rem; color: #B6C6DA; margin-left: auto; }
+    .colab { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.16); align-items: center; }
+    .colab span { font-size: 0.86rem; color: #B6C6DA; font-weight: 600; }
+    .colab a { font-size: 0.82rem; font-weight: 800; color: #fff; padding: 7px 14px; border-radius: 9px; border: 1px solid rgba(255, 255, 255, 0.3); }
+    .colab a:hover { background: rgba(255, 255, 255, 0.14); }
+
+    /* ---------- Evaluación ---------- */
+    .eval-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: start; }
+    .panel { background: var(--card); border: 1px solid var(--card-border); border-radius: 20px; padding: 26px 28px; box-shadow: var(--shadow); }
+    .split-bar { display: flex; height: 54px; border-radius: 14px; overflow: hidden; margin: 8px 0 16px; font-weight: 800; color: #fff; }
+    .split-bar div { display: flex; align-items: center; justify-content: center; font-size: 1.05rem; }
+    .legend { display: grid; gap: 10px; }
+    .legend div { display: flex; gap: 12px; align-items: baseline; font-size: 0.92rem; }
+    .legend i { width: 12px; height: 12px; border-radius: 4px; display: inline-block; flex: none; transform: translateY(1px); }
+    .panel ul { margin: 0; padding-left: 20px; }
+    .panel li { margin-bottom: 6px; font-size: 0.93rem; }
+    .panel h3 { margin: 0 0 10px; color: var(--text); font-size: 1.15rem; }
+
+    /* ---------- Recursos y docentes ---------- */
+    .res-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .res { background: var(--card); border: 1px solid var(--card-border); border-radius: 18px; padding: 20px; box-shadow: var(--shadow); transition: 0.2s; display: flex; flex-direction: column; gap: 6px; }
+    .res:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .res .ic { font-size: 1.8rem; }
+    .res strong { color: var(--text); font-size: 0.98rem; }
+    .res span { font-size: 0.84rem; color: var(--text-muted); }
+    .teachers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .teacher { display: flex; gap: 20px; align-items: center; }
+    .avatar { width: 68px; height: 68px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; color: #fff; background: linear-gradient(135deg, var(--blue), var(--cyan)); flex: none; }
+    .teacher h4 { margin: 0; color: var(--text); font-size: 1.1rem; }
+    .teacher p { margin: 2px 0; font-size: 0.86rem; color: var(--text-muted); }
+    .teacher a.mail { font-weight: 700; color: var(--blue); font-size: 0.86rem; }
+    [data-theme="dark"] .teacher a.mail { color: var(--cyan); }
+
+    footer { margin-top: 72px; padding: 30px 0 44px; border-top: 1px solid var(--card-border); text-align: center; font-size: 0.86rem; color: var(--text-muted); }
+    footer a { color: var(--blue); font-weight: 700; }
+    [data-theme="dark"] footer a { color: var(--cyan); }
+
+    @media (max-width: 1080px) {
+      .keys .keys-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-art { max-width: 640px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .lab-grid { grid-template-columns: repeat(2, 1fr); }
+      .res-grid { grid-template-columns: repeat(2, 1fr); }
+      .eval-grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
+    }
+    @media (max-width: 760px) {
+      .wrap { padding: 0 18px; }
+      .mod { grid-template-columns: 1fr; }
+      .mod-num { width: 54px; height: 54px; font-size: 1.2rem; }
+      .route::before { display: none; }
+      .mod-card { grid-template-columns: 1fr; padding: 20px; }
+      .teachers { grid-template-columns: 1fr; }
+      .lab { padding: 26px 20px; }
+      .lab-foot .note { margin-left: 0; }
+      .brand strong { font-size: 0.9rem; }
+      .actions .btn-ghost.hide-sm { display: none; }
+    }
+    @media (max-width: 600px) {
+      .brand strong { display: none; }
+      .stat b { font-size: 1.6rem; }
+    }
+    @media (max-width: 480px) {
+      .lab-grid, .res-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  </style>
 </head>
 <body>
 
-  <!-- CONFETTI CANVAS (overlay, hidden by default) -->
-  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
-
-  <!-- BADGE TOAST (injected by JS) -->
-
-  <!-- MODAL: Módulo Completo -->
-  <div class="module-complete-modal" id="module-complete-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="mcm-title">
-    <div class="mcm-backdrop" id="module-complete-close"></div>
-    <div class="mcm-card">
-      <div class="mcm-emoji" id="mcm-emoji"><span class="mcm-module-emoji"></span></div>
-      <h2 class="mcm-title" id="mcm-title">¡<span class="mcm-module-name"></span> Completado! 🎉</h2>
-      <p class="mcm-subtitle">Has terminado todos los ejercicios de este módulo.</p>
-      <div class="mcm-stats">
-        <div class="mcm-stat">
-          <span class="mcm-stat-val mcm-lessons-done"></span>
-          <span class="mcm-stat-label">completados</span>
-        </div>
-      </div>
-      <div class="mcm-actions">
-        <button class="btn-run mcm-btn-next" id="module-complete-next">Siguiente módulo →</button>
-        <button class="btn-tool mcm-btn-close" onclick="document.getElementById('module-complete-modal').style.display='none'">Cerrar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===================================================================
-       ENCABEZADO PRINCIPAL (HEADER)
-       =================================================================== -->
-  <header class="site-header">
-    <div class="header-container">
-
-      <!-- Marca / Logo -->
-      <div class="brand-wrapper">
-        <div class="brand-icon">🏔️</div>
-        <div class="brand-text">
-          <h1>Instrumentación Geotécnica</h1>
-          <p>Universidad EAFIT | Laboratorio Computacional</p>
-        </div>
-      </div>
-
-      <!-- Pestañas de Navegación con indicadores de progreso -->
-      <nav class="nav-tabs" aria-label="Navegación del Curso">
-        <button class="nav-tab-btn active" data-target="teoria" id="nav-btn-teoria">
-          <span>📖</span> Caso Ancón
-        </button>
-        <button class="nav-tab-btn" data-target="modulo1" id="nav-btn-m1">
-          <span>🐍</span> M1: Python
-          <span class="nav-progress-badge" id="nav-badge-modulo1">0/8</span>
-        </button>
-        <button class="nav-tab-btn" data-target="modulo2" id="nav-btn-m2">
-          <span>📊</span> M2: Gráficos
-          <span class="nav-progress-badge" id="nav-badge-modulo2">0/4</span>
-        </button>
-        <button class="nav-tab-btn" data-target="modulo3" id="nav-btn-m3">
-          <span>🔬</span> M3: Análisis
-          <span class="nav-progress-badge" id="nav-badge-modulo3">0/4</span>
-        </button>
-        <button class="nav-tab-btn" data-target="sandbox" id="nav-btn-sandbox">
-          <span>🧪</span> Sandbox
-        </button>
-        <a href="presentaciones/index.html" class="nav-tab-btn nav-tab-presentations" id="nav-btn-presentaciones"
-           title="Ver las presentaciones teóricas oficiales en Reveal.js">
-          <span>🏛️</span> Presentaciones
-        </a>
+  <!-- ================= BARRA SUPERIOR ================= -->
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#inicio" aria-label="Inicio">
+        <img src="presentaciones/img/brand/eafit_logo.png" alt="EAFIT" onerror="this.style.display='none'">
+        <strong>Instrumentación Geotécnica</strong>
+      </a>
+      <nav class="nav" aria-label="Secciones">
+        <a href="#ruta">Ruta del curso</a>
+        <a href="#laboratorio">Laboratorio Python</a>
+        <a href="#evaluacion">Evaluación</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#docentes">Docentes</a>
       </nav>
-
-      <!-- Estado de Pyodide, Tema, GitHub -->
-      <div class="header-actions">
-        <button class="btn-theme" id="btn-theme-toggle" title="Cambiar a Modo Claro / Oscuro" aria-label="Alternar modo claro u oscuro">
-          🌓
-        </button>
-        <div class="pyodide-status-badge loading" id="pyodide-status" title="Estado del motor de Python WebAssembly">
-          <span class="status-dot"></span>
-          <span id="pyodide-status-text">Iniciando Python...</span>
-        </div>
-        <a href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" rel="noopener noreferrer" class="github-link" title="Ver repositorio en GitHub">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
-        </a>
+      <div class="actions">
+        <button class="btn btn-ghost btn-icon" id="theme-btn" title="Alternar modo claro / oscuro" aria-label="Alternar modo claro u oscuro">🌓</button>
+        <a class="btn btn-primary" href="webapp.html">🧪 <span>Laboratorio</span></a>
       </div>
-
     </div>
   </header>
 
-  <!-- ===================================================================
-       CONTENEDOR PRINCIPAL
-       =================================================================== -->
-  <main class="main-container">
+  <main id="inicio">
 
-    <!-- BARRA DE PROGRESO GAMIFICADA -->
-    <section class="progress-ribbon" aria-label="Progreso del estudiante">
-      <div class="progress-info">
-        <span>🚀 Progreso:</span>
-        <strong id="progress-count">0 / 0 ejercicios (0%)</strong>
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="badge">Universidad EAFIT · Ingeniería Civil</span>
+          <h1>Instrumentación <span>Geotécnica</span></h1>
+          <p class="lead">
+            Aprende a medir, analizar e interpretar el comportamiento del terreno y de las estructuras:
+            <strong>desde el sensor en campo hasta el sistema de alerta temprana</strong>.
+            Teoría con presentaciones interactivas y práctica con Python, sin instalar nada.
+          </p>
+          <div class="cta">
+            <a class="btn btn-accent" href="#ruta">🧭 Ver la ruta del curso</a>
+            <a class="btn btn-primary" href="webapp.html">🧪 Abrir laboratorio de Python</a>
+          </div>
+          <div class="chips">
+            <span class="chip">⏱️ 144 h · 3 Umes</span>
+            <span class="chip">🏫 Presencial teórico-práctico</span>
+            <span class="chip">📡 Datos reales de SIATA</span>
+            <span class="chip">🚨 Alerta temprana</span>
+          </div>
+        </div>
+
+        <!-- Ilustración: el perfil, los sensores y la alerta -->
+        <div class="hero-art">
+          <svg viewBox="0 0 560 440" role="img" aria-label="Perfil del suelo con sensores de humedad, succión y presión de poros, lluvia, satélite y alarma">
+            <defs>
+              <pattern id="hg" width="22" height="22" patternUnits="userSpaceOnUse">
+                <circle cx="5" cy="6" r="2.2" fill="currentColor" opacity="0.28"/><circle cx="16" cy="14" r="2.8" fill="currentColor" opacity="0.28"/>
+              </pattern>
+            </defs>
+            <g style="color: var(--text-muted)">
+              <ellipse cx="110" cy="52" rx="44" ry="22" fill="currentColor" opacity="0.35"/><ellipse cx="148" cy="42" rx="36" ry="24" fill="currentColor" opacity="0.35"/><ellipse cx="80" cy="58" rx="28" ry="15" fill="currentColor" opacity="0.35"/>
+            </g>
+            <g stroke="#7c3aed" stroke-width="3.2" stroke-linecap="round">
+              <line x1="86" y1="84" x2="79" y2="102"/><line x1="112" y1="84" x2="105" y2="102"/><line x1="138" y1="84" x2="131" y2="102"/><line x1="164" y1="84" x2="157" y2="102"/>
+              <line x1="99" y1="108" x2="92" y2="126"/><line x1="125" y1="108" x2="118" y2="126"/><line x1="151" y1="108" x2="144" y2="126"/>
+            </g>
+            <text class="b" x="196" y="60">Lluvia</text><text x="196" y="78" style="font-size: 12.5px">pluviómetro · radar</text>
+            <!-- satélite -->
+            <rect x="392" y="30" width="28" height="22" rx="4" fill="#7c3aed"/><rect x="360" y="35" width="28" height="12" fill="#0284c7"/><rect x="424" y="35" width="28" height="12" fill="#0284c7"/>
+            <line x1="406" y1="56" x2="406" y2="148" stroke="#7c3aed" stroke-width="2.6" stroke-dasharray="7 5"/>
+            <text class="b" x="406" y="20" text-anchor="middle" style="font-size: 13px">Satélite · humedad superficial</text>
+            <!-- terreno -->
+            <rect x="10" y="150" width="540" height="100" fill="var(--soil-dry)"/>
+            <rect x="10" y="250" width="540" height="44" fill="var(--soil-cap)"/>
+            <rect x="10" y="294" width="540" height="136" fill="var(--soil-sat)"/>
+            <rect x="10" y="150" width="540" height="280" fill="url(#hg)" style="color: var(--text-muted)"/>
+            <line x1="4" y1="150" x2="556" y2="150" stroke="var(--text-muted)" stroke-width="2.5"/>
+            <line x1="10" y1="294" x2="550" y2="294" stroke="#0284c7" stroke-width="3" stroke-dasharray="8 6"/>
+            <text class="b" x="22" y="178" style="font-size: 14px">Zona no saturada</text>
+            <text class="b" x="22" y="276" style="font-size: 14px">Franja capilar</text>
+            <text class="b" x="22" y="322" style="font-size: 14px">Zona saturada</text>
+            <!-- pluviómetro -->
+            <polygon points="46,132 70,132 64,150 52,150" fill="#7c3aed"/>
+            <!-- humedad -->
+            <line x1="150" y1="150" x2="150" y2="200" stroke="#059669" stroke-width="3"/><rect x="140" y="200" width="20" height="30" rx="5" fill="#059669"/>
+            <line x1="215" y1="150" x2="215" y2="240" stroke="#059669" stroke-width="3"/><rect x="205" y="240" width="20" height="30" rx="5" fill="#059669"/>
+            <circle cx="150" cy="134" r="13" fill="#059669"/><text class="w" x="150" y="139" text-anchor="middle" style="font-size: 14px">1</text>
+            <circle cx="215" cy="134" r="13" fill="#059669"/><text class="w" x="215" y="139" text-anchor="middle" style="font-size: 14px">1</text>
+            <!-- tensiómetro -->
+            <rect x="290" y="150" width="9" height="122" fill="var(--text-muted)" opacity="0.85"/><ellipse cx="294.5" cy="280" rx="10" ry="14" fill="#d97706"/>
+            <circle cx="294" cy="134" r="13" fill="#d97706"/><text class="w" x="294" y="139" text-anchor="middle" style="font-size: 14px">2</text>
+            <!-- piezómetro -->
+            <rect x="370" y="150" width="14" height="250" fill="var(--text-muted)" opacity="0.55"/><rect x="372" y="294" width="10" height="106" fill="#38bdf8"/><rect x="367" y="396" width="20" height="22" rx="4" fill="#0369a1"/>
+            <circle cx="377" cy="134" r="13" fill="#0369a1"/><text class="w" x="377" y="139" text-anchor="middle" style="font-size: 14px">3</text>
+            <!-- datalogger + sirena -->
+            <rect x="448" y="112" width="7" height="38" fill="var(--text-muted)"/><rect x="434" y="96" width="36" height="24" rx="4" fill="#f97316"/><text class="w" x="452" y="113" text-anchor="middle" style="font-size: 11px">LOG</text>
+            <rect x="512" y="98" width="7" height="52" fill="var(--text-muted)"/><circle cx="515.5" cy="90" r="12" fill="#dc2626"/>
+            <g fill="none" stroke="#dc2626" stroke-width="2.6" opacity="0.7"><path d="M532,80 A20,20 0 0 1 532,100"/><path d="M542,72 A32,32 0 0 1 542,108"/></g>
+            <path d="M470,106 Q495,92 502,90" fill="none" stroke="var(--text-muted)" stroke-width="2.4" stroke-dasharray="5 4"/>
+            <text class="b" x="500" y="60" text-anchor="middle" style="font-size: 13px">Alerta</text>
+          </svg>
+        </div>
       </div>
-      <!-- Barra global -->
-      <div class="progress-bar-track">
-        <div class="progress-bar-fill" id="progress-fill"></div>
+
+      <div class="wrap">
+        <div class="stats" aria-label="El curso en cifras">
+          <div class="stat"><b>6</b><span>presentaciones: apertura y cinco módulos</span></div>
+          <div class="stat"><b>170</b><span>diapositivas con diagramas y esquemas</span></div>
+          <div class="stat"><b>16</b><span>lecciones de Python con quizzes y retos</span></div>
+          <div class="stat"><b>5</b><span>series reales de sensores (Ancón Norte)</span></div>
+        </div>
       </div>
-      <!-- Barras segmentadas por módulo -->
-      <div class="progress-segments" id="progress-segments"></div>
-      <!-- Badges -->
-      <div class="badges-container" id="badges-container"></div>
     </section>
 
-    <!-- BARRA CONTROL DE DISPOSICIÓN -->
-    <div class="workspace-layout-bar" id="workspace-layout-bar">
-      <div class="layout-slider-group">
-        <span class="layout-label-text"><span>📖</span> <strong>Teoría</strong></span>
-        <div class="layout-slider-track-wrap">
-          <input type="range" min="0" max="100" value="55" step="1"
-                 id="workspace-layout-slider" class="workspace-split-slider"
-                 title="Arrastra para cambiar el ancho de los paneles">
-          <div class="layout-slider-ticks">
-            <span class="tick-label">0%</span>
-            <span class="tick-label">25%</span>
-            <span class="tick-label">50%</span>
-            <span class="tick-label">75%</span>
-            <span class="tick-label">100%</span>
+    <!-- ================= RUTA ================= -->
+    <section class="block" id="ruta">
+      <div class="wrap">
+        <div class="eyebrow">Ruta del curso</div>
+        <h2>De la medición a la decisión</h2>
+        <p class="sub">Cada módulo tiene su presentación y una práctica sugerida en el laboratorio de Python. Sigue el orden: cada uno se apoya en el anterior.</p>
+
+        <div class="route">
+
+          <!-- Clase 00 -->
+          <div class="mod">
+            <div class="mod-num" style="background: #64748B">0</div>
+            <div class="mod-card">
+              <div>
+                <h3><small>Punto de partida · Clase 00</small>📋 Presentación del curso</h3>
+                <p>Cómo funciona el curso, cómo se evalúa y qué herramientas usarás.</p>
+                <ul>
+                  <li>Metodología, presencialidad y espacios digitales</li>
+                  <li>Estructura del reporte técnico y de la sustentación</li>
+                  <li>Ruta del curso: de los sensores a la alerta</li>
+                </ul>
+              </div>
+              <div class="mod-side">
+                <div class="meta"><span>📄 18 diapositivas</span><span>⏱️ 1 h</span></div>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/00_presentacion_curso.html">Ver diapositivas →</a></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- M1 -->
+          <div class="mod">
+            <div class="mod-num" style="background: var(--cyan)">1</div>
+            <div class="mod-card">
+              <div>
+                <h3><small>Módulo 1 · Fundamentos y escalas</small>🏔️ Conceptos básicos</h3>
+                <p>Para qué se instrumenta, qué se mide y a qué escala.</p>
+                <ul>
+                  <li>Casos reales: Malpasset, Túnel de la Línea, Las Playas</li>
+                  <li>Qué variables monitorear, sensores en sitio y remotos</li>
+                  <li>Anatomía de un sistema de monitoreo y componentes del riesgo</li>
+                </ul>
+              </div>
+              <div class="mod-side">
+                <div class="meta"><span>📄 18 diapositivas</span><span>⏱️ 2 h</span></div>
+                <a class="practice" href="webapp.html?modulo=teoria"><span>🏔️</span><div><em>Práctica sugerida</em>Caso Ancón Norte (SIATA)</div></a>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/01_conceptos_basicos.html">Ver diapositivas →</a></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- M2 -->
+          <div class="mod">
+            <div class="mod-num" style="background: var(--purple)">2</div>
+            <div class="mod-card">
+              <div>
+                <h3><small>Módulo 2 · La lluvia y su monitoreo</small>🌧️ Variables hidrometeorológicas</h3>
+                <p>La lluvia como detonante y cómo medirla desde el punto hasta la región.</p>
+                <ul>
+                  <li>Umbrales de intensidad-duración y lluvia antecedente</li>
+                  <li>Pluviómetros, radar meteorológico (dBZ) y satélites</li>
+                  <li>Integración de sensores para alertas por lluvia</li>
+                </ul>
+              </div>
+              <div class="mod-side">
+                <div class="meta"><span>📄 30 diapositivas</span><span>⏱️ 3 h</span></div>
+                <a class="practice" href="webapp.html?modulo=modulo1"><span>🐍</span><div><em>Práctica sugerida</em>Python M1 · Pandas con pluviómetros</div></a>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/02_variables_hidrometeorologicas.html">Ver diapositivas →</a></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- M3 -->
+          <div class="mod">
+            <div class="mod-num" style="background: #0369a1">3</div>
+            <div class="mod-card">
+              <div>
+                <h3><small>Módulo 3 · Hidráulica de suelos y sensores</small>💧 El agua en el suelo</h3>
+                <p>Cómo el agua cambia la resistencia del suelo y con qué sensor se ve.</p>
+                <ul>
+                  <li>Succión, presión de poros y esfuerzos efectivos</li>
+                  <li>Infiltración, curva de retención y ciclos de humedecimiento</li>
+                  <li>Mapa variable → sensor: humedad, tensiómetros, piezómetros</li>
+                </ul>
+              </div>
+              <div class="mod-side">
+                <div class="meta"><span>📄 33 diapositivas</span><span>⏱️ 3 h</span></div>
+                <a class="practice" href="webapp.html?modulo=modulo2"><span>📊</span><div><em>Práctica sugerida</em>Python M2 · Visualización de sensores</div></a>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/03_agua_en_el_suelo.html">Ver diapositivas →</a></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- M4 -->
+          <div class="mod">
+            <div class="mod-num" style="background: var(--amber)">4</div>
+            <div class="mod-card">
+              <div>
+                <h3><small>Módulo 4 · Sensores cinemáticos y remotos</small>📏 Medición de deformaciones</h3>
+                <p>Cómo se mueve el terreno y cómo detectarlo, desde una grieta hasta un satélite.</p>
+                <ul>
+                  <li>Curva esfuerzo–deformación y fluencia lenta en tres etapas</li>
+                  <li>Extensómetros, acelerómetros, inclinómetros, TDR y celdas</li>
+                  <li>Drones e InSAR; cómo elegir el instrumento</li>
+                </ul>
+              </div>
+              <div class="mod-side">
+                <div class="meta"><span>📄 33 diapositivas</span><span>⏱️ 3 h</span></div>
+                <a class="practice" href="webapp.html?modulo=modulo3"><span>🔬</span><div><em>Práctica sugerida</em>Python M3 · Velocidad de deformación</div></a>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/04_medicion_deformaciones.html">Ver diapositivas →</a></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- M5 -->
+          <div class="mod">
+            <div class="mod-num" style="background: var(--rose)">5</div>
+            <div class="mod-card">
+              <div>
+                <h3><small>Módulo 5 · De los sensores a la toma de decisiones</small>🚨 Análisis de datos y alerta temprana</h3>
+                <p>Convertir series de datos en umbrales y en un sistema de alerta que funcione.</p>
+                <ul>
+                  <li>Calidad de datos, filtrado, velocidad inversa y rezagos</li>
+                  <li>Umbrales estadísticos, reglas combinadas y niveles de alerta</li>
+                  <li>Tiempo de anticipación, falsas alarmas y protocolos</li>
+                </ul>
+              </div>
+              <div class="mod-side">
+                <div class="meta"><span>📄 38 diapositivas</span><span>⏱️ 4 h</span></div>
+                <a class="practice" href="webapp.html?modulo=modulo3"><span>🚦</span><div><em>Práctica sugerida</em>Lluvia antecedente, rezago y semáforo</div></a>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/05_analisis_datos_umbrales.html">Ver diapositivas →</a></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="panel keys">
+          <h3>⌨️ Atajos de teclado para las presentaciones</h3>
+          <div class="keys-grid">
+            <div><kbd>Espacio</kbd> / <kbd>→</kbd> avanzar</div>
+            <div><kbd>←</kbd> retroceder</div>
+            <div><kbd>F</kbd> pantalla completa</div>
+            <div><kbd>T</kbd> modo claro / oscuro</div>
+            <div><kbd>Esc</kbd> vista en cuadrícula</div>
+            <div><kbd>S</kbd> modo orador</div>
+            <div><kbd>B</kbd> pantalla en negro</div>
+            <div><kbd>?print-pdf</kbd> exportar a PDF</div>
           </div>
         </div>
-        <span class="layout-label-text"><strong>Editor</strong> <span>💻</span></span>
-        <span class="layout-badge" id="layout-pct-badge">55% Teoría / 45% Editor</span>
       </div>
+    </section>
 
-      <div class="layout-presets-group">
-        <button class="layout-preset-btn" data-pct="100" title="Teoría al 100%">📖 100%</button>
-        <button class="layout-preset-btn" data-pct="65" title="65% Teoría / 35% Editor">📑 65/35</button>
-        <button class="layout-preset-btn" data-pct="55" title="Modo Equilibrado">⚖️ 55/45</button>
-        <button class="layout-preset-btn" data-pct="35" title="Código Amplio">💻 35/65</button>
-        <button class="layout-preset-btn" data-pct="0" title="Editor al 100%">⚡ 100% Ed.</button>
+    <!-- ================= LABORATORIO ================= -->
+    <section class="block" id="laboratorio">
+      <div class="wrap">
+        <div class="lab">
+          <div class="eyebrow" style="color: var(--yellow)">Práctica</div>
+          <h2>Laboratorio de Python en tu navegador</h2>
+          <p class="sub">Programa con datos reales de sensores geotécnicos sin instalar nada: explicaciones, quizzes con retroalimentación, editor de Python en WebAssembly y un laboratorio libre.</p>
+
+          <div class="lab-grid">
+            <a class="lab-item" href="webapp.html?modulo=teoria">
+              <div class="ic">🏔️</div><strong>Caso Ancón Norte</strong><span>Contexto del movimiento en masa y de los datos.</span>
+            </a>
+            <a class="lab-item" href="webapp.html?modulo=modulo1">
+              <div class="ic">🐍</div><strong>M1 · Python y Pandas</strong><span id="lab-m1-txt">8 lecciones</span>
+              <div class="bar"><i id="lab-m1-bar"></i></div>
+            </a>
+            <a class="lab-item" href="webapp.html?modulo=modulo2">
+              <div class="ic">📊</div><strong>M2 · Visualización</strong><span id="lab-m2-txt">4 lecciones</span>
+              <div class="bar"><i id="lab-m2-bar"></i></div>
+            </a>
+            <a class="lab-item" href="webapp.html?modulo=modulo3">
+              <div class="ic">🔬</div><strong>M3 · Análisis temporal</strong><span id="lab-m3-txt">4 lecciones</span>
+              <div class="bar"><i id="lab-m3-bar"></i></div>
+            </a>
+            <a class="lab-item" href="webapp.html?modulo=sandbox">
+              <div class="ic">🧪</div><strong>Sandbox</strong><span>Espacio libre con los datos de Ancón.</span>
+            </a>
+          </div>
+
+          <div class="lab-foot">
+            <a class="btn btn-accent" id="lab-continue" href="webapp.html">▶ Abrir el laboratorio</a>
+            <span class="note">Tu progreso se guarda en este navegador.</span>
+          </div>
+
+          <div class="colab">
+            <span>¿Prefieres Google Colab?</span>
+            <a href="https://colab.research.google.com/github/federicogmz/instrumentacion-geotecnica/blob/main/notebooks/Modulo_1_Introduccion_Python.ipynb" target="_blank" rel="noopener noreferrer">Notebook 1 · Introducción</a>
+            <a href="https://colab.research.google.com/github/federicogmz/instrumentacion-geotecnica/blob/main/notebooks/Modulo_2_Visualizacion_Datos.ipynb" target="_blank" rel="noopener noreferrer">Notebook 2 · Visualización</a>
+            <a href="https://colab.research.google.com/github/federicogmz/instrumentacion-geotecnica/blob/main/notebooks/Modulo_3_Analisis_Datos.ipynb" target="_blank" rel="noopener noreferrer">Notebook 3 · Análisis</a>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- WORKSPACE GRID -->
-    <div class="workspace-grid" id="workspace-grid">
-
-      <!-- SIDEBAR: Mapa de Curso -->
-      <aside class="course-sidebar" id="course-sidebar" style="display:none;" aria-label="Mapa de lecciones">
-        <button class="btn-sidebar-toggle" id="btn-sidebar-toggle" title="Ocultar panel lateral">
-          <span>◀</span> Lecciones
-        </button>
-        <div class="sidebar-content" id="sidebar-content"></div>
-      </aside>
-
-      <!-- PANEL IZQUIERDO: Teoría -->
-      <section class="theory-pane" id="theory-pane" aria-label="Contenido pedagógico y enunciados">
-        <!-- Rellenado dinámicamente por app.js -->
-      </section>
-
-      <!-- DIVISOR DESLIZABLE -->
-      <div class="workspace-resizer" id="workspace-resizer" title="Arrastra para redimensionar o doble clic para 50/50">
-        <div class="resizer-handle">
-          <button class="resizer-btn btn-collapse-left"  id="btn-collapse-theory" title="Ocultar Teoría">◀</button>
-          <div class="resizer-dots"><span></span><span></span><span></span></div>
-          <button class="resizer-btn btn-collapse-right" id="btn-collapse-editor" title="Ocultar Editor">▶</button>
+    <!-- ================= EVALUACIÓN ================= -->
+    <section class="block" id="evaluacion">
+      <div class="wrap">
+        <div class="eyebrow">Evaluación</div>
+        <h2>Un proyecto integrador, de principio a fin</h2>
+        <p class="sub">Trabajas con un caso de estudio asignado: defines el monitoreo, analizas los datos y propones un sistema de umbrales y alerta.</p>
+        <div class="eval-grid">
+          <div class="panel">
+            <h3>Distribución de la nota</h3>
+            <div class="split-bar" role="img" aria-label="40 por ciento reporte, 25 por ciento entregas parciales, 35 por ciento sustentación">
+              <div style="width: 40%; background: var(--blue)">40%</div>
+              <div style="width: 25%; background: var(--amber)">25%</div>
+              <div style="width: 35%; background: var(--green)">35%</div>
+            </div>
+            <div class="legend">
+              <div><i style="background: var(--blue)"></i><span><strong>Documento tipo reporte</strong> · PDF, máximo 12 páginas</span></div>
+              <div><i style="background: var(--amber)"></i><span><strong>Entregas parciales</strong> · avances durante el curso</span></div>
+              <div><i style="background: var(--green)"></i><span><strong>Sustentación</strong> · 20 minutos</span></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Qué debe incluir tu informe</h3>
+            <ul>
+              <li>Introducción y problemática geotécnica</li>
+              <li>Esquema de monitoreo (sensores, variables, ubicación)</li>
+              <li>Análisis temporal y espacial de los resultados</li>
+              <li><strong>Umbrales y sistema de alerta:</strong> niveles normal, atención, alerta y alarma, con su condición y acción</li>
+              <li>Conclusiones clave (highlights) y referencias</li>
+            </ul>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- PANEL DERECHO: Editor -->
-      <section class="editor-pane" id="editor-pane" aria-label="Editor de código y consola interactiva">
+    <!-- ================= RECURSOS ================= -->
+    <section class="block" id="recursos">
+      <div class="wrap">
+        <div class="eyebrow">Recursos</div>
+        <h2>Todo el material en un solo lugar</h2>
+        <p class="sub">Datos, guías y código del curso, abiertos y listos para usar.</p>
+        <div class="res-grid">
+          <a class="res" href="#ruta"><div class="ic">🏛️</div><strong>Ruta y presentaciones</strong><span>La ruta completa de las 6 presentaciones.</span></a>
+          <a class="res" href="data/Caso%20Estudio.pdf" target="_blank" rel="noopener noreferrer"><div class="ic">📄</div><strong>Caso de estudio</strong><span>Informe del movimiento en masa de Ancón Norte (PDF).</span></a>
+          <a class="res" href="https://github.com/federicogmz/instrumentacion-geotecnica/tree/main/data" target="_blank" rel="noopener noreferrer"><div class="ic">🗂️</div><strong>Datos de sensores</strong><span>Lluvia, humedad, extensómetro y acelerómetro (CSV).</span></a>
+          <a class="res" href="https://github.com/federicogmz/instrumentacion-geotecnica/blob/main/GUIA_INICIO_RAPIDO.md" target="_blank" rel="noopener noreferrer"><div class="ic">🧭</div><strong>Guía de inicio rápido</strong><span>Python desde cero, paso a paso.</span></a>
+          <a class="res" href="https://github.com/federicogmz/instrumentacion-geotecnica/tree/main/notebooks" target="_blank" rel="noopener noreferrer"><div class="ic">📓</div><strong>Notebooks</strong><span>Los tres módulos prácticos en Jupyter.</span></a>
+          <a class="res" href="webapp.html?modulo=sandbox"><div class="ic">🧪</div><strong>Sandbox</strong><span>Experimenta libremente con los datos.</span></a>
+          <a class="res" href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" rel="noopener noreferrer"><div class="ic">💻</div><strong>Repositorio</strong><span>Código y contenidos en GitHub.</span></a>
+          <a class="res" href="https://github.com/federicogmz/instrumentacion-geotecnica/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><div class="ic">⚖️</div><strong>Licencia</strong><span>CC BY-NC-SA 4.0.</span></a>
+        </div>
+      </div>
+    </section>
 
-        <!-- Tarjeta del Editor -->
-        <div class="editor-card">
-          <div class="editor-toolbar">
-            <div class="editor-title">
-              <span>🐍</span> editor.py &bull; <small style="color:var(--text-dim)">Python 3 WebAssembly</small>
-            </div>
-            <div class="editor-actions">
-              <button class="btn-tool" id="btn-reset" title="Reiniciar código inicial"><span>🔄</span> Reiniciar</button>
-              <button class="btn-tool" id="btn-hint"  title="Ver pista"><span>💡</span> Pista</button>
-              <button class="btn-tool" id="btn-solution" title="Mostrar solución"><span>👁️</span> Solución</button>
-              <button class="btn-run" id="btn-run" disabled title="Ejecutar código (Ctrl+Enter)">
-                <span>▶</span> Ejecutar Código
-              </button>
-            </div>
-          </div>
-
-          <!-- Pistas -->
-          <div class="accordion-box hint-accordion" id="hint-box" style="display:none; margin:0.5rem 1rem 0;">
-            <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
-              <span class="accordion-title">💡 Pista de Ayuda</span>
-              <span class="accordion-icon">▼</span>
-            </div>
-            <div class="accordion-body open" id="hint-content"></div>
-          </div>
-
-          <!-- Solución -->
-          <div class="accordion-box solution-accordion" id="solution-box" style="display:none; margin:0.5rem 1rem 0;">
-            <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
-              <span class="accordion-title">👁️ Solución Sugerida</span>
-              <span class="accordion-icon">▼</span>
-            </div>
-            <div class="accordion-body open">
-              <pre id="solution-content" class="solution-code"></pre>
+    <!-- ================= DOCENTES ================= -->
+    <section class="block" id="docentes">
+      <div class="wrap">
+        <div class="eyebrow">Equipo docente</div>
+        <h2>Quiénes te acompañan</h2>
+        <p class="sub">Ambos lideran proyectos del SIATA, por lo que los ejemplos vienen de monitoreo real.</p>
+        <div class="teachers">
+          <div class="panel teacher">
+            <div class="avatar">FG</div>
+            <div>
+              <h4>Federico Gómez, MSc.</h4>
+              <p>Ingeniero Geólogo · Líder de Teledetección, proyecto SIATA</p>
+              <p><a class="mail" href="mailto:fjgomezc@eafit.edu.co">fjgomezc@eafit.edu.co</a></p>
             </div>
           </div>
-
-          <!-- Editor de código -->
-          <div class="code-area-wrapper">
-            <div class="line-numbers" id="line-numbers" aria-hidden="true"></div>
-            <textarea class="code-textarea" id="code-input" spellcheck="false"
-                      aria-label="Editor de código Python"
-                      placeholder="Escribe tu código Python aquí..."></textarea>
+          <div class="panel teacher">
+            <div class="avatar" style="background: linear-gradient(135deg, var(--rose), var(--amber))">JA</div>
+            <div>
+              <h4>Juliana Álvarez, MSc.</h4>
+              <p>Ingeniera Civil · Líder del observatorio de amenazas y riesgos, proyecto SIATA</p>
+              <p><a class="mail" href="mailto:jalvarezz@eafit.edu.co">jalvarezz@eafit.edu.co</a></p>
+            </div>
           </div>
         </div>
-
-        <!-- Banner de Validación -->
-        <div class="validation-banner" id="validation-banner">
-          🎉 ¡Excelente trabajo! Ejercicio completado con éxito.
-        </div>
-
-        <!-- Consola -->
-        <div class="console-card">
-          <div class="console-header">
-            <div class="console-tabs">
-              <button class="console-tab-btn active" id="tab-console">Terminal (Texto)</button>
-              <button class="console-tab-btn" id="tab-plot">Gráfico Matplotlib 📊</button>
-            </div>
-            <button class="clear-btn" id="btn-clear-console" title="Limpiar consola">Limpiar</button>
-          </div>
-          <div class="console-output-area" id="console-output" aria-live="polite">
-            Esperando ejecución de código... Haz clic en "Ejecutar Código" o presiona Ctrl + Enter.
-          </div>
-          <div class="plot-display-area" id="plot-display" aria-label="Visualización de gráficos">
-            <p style="color:var(--text-dim); font-size:0.85rem;">No hay gráficos generados aún. Llama a <code>plt.show()</code> en tu código.</p>
-          </div>
-        </div>
-
-      </section>
-
-    </div>
-
-    <!-- Botones Flotantes de Restauración -->
-    <button class="floating-restore-pill restore-theory" id="btn-restore-theory" title="Restaurar panel de teoría">📖 Mostrar Teoría</button>
-    <button class="floating-restore-pill restore-editor" id="btn-restore-editor" title="Restaurar panel de editor">💻 Mostrar Editor</button>
+      </div>
+    </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <p>Curso de <strong>Instrumentación Geotécnica</strong> &bull; Departamento de Ingeniería Civil &bull; <strong>Universidad EAFIT</strong></p>
-    <p style="margin-top:0.35rem; font-size:0.78rem;">
-      Docentes: M.Eng. Federico Gómez (<a href="mailto:fjgomezc@eafit.edu.co">fjgomezc@eafit.edu.co</a>) &amp; M.Eng. Juliana Álvarez (<a href="mailto:jalvarezz@eafit.edu.co">jalvarezz@eafit.edu.co</a>)
-    </p>
+  <footer>
+    <div class="wrap">
+      Universidad EAFIT · Departamento de Ingeniería Civil · Curso de Instrumentación Geotécnica<br>
+      <a href="#ruta">Presentaciones</a> · <a href="webapp.html">Laboratorio de Python</a> ·
+      <a href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" rel="noopener noreferrer">GitHub</a> · Licencia CC BY-NC-SA 4.0
+    </div>
   </footer>
 
-  <!-- CodeMirror JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+  <script>
+    // Tema claro / oscuro
+    (function () {
+      var btn = document.getElementById('theme-btn');
+      btn.addEventListener('click', function () {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('eafit-theme', next); } catch (e) {}
+      });
+    })();
 
-  <!-- Scripts -->
-  <script src="js/course-data.js?v=3"></script>
-  <script src="js/pyodide-runner.js?v=3"></script>
-  <script src="js/list-indexing.js?v=3"></script>
-  <script src="js/conditional-flow.js?v=3"></script>
-  <script src="js/function-anatomy.js?v=3"></script>
-  <script src="js/for-loop-flow.js?v=3"></script>
-  <script src="js/boolean-filter.js?v=3"></script>
-  <script src="js/dataframe-anatomy.js?v=3"></script>
-  <script src="js/sensor-concat.js?v=3"></script>
-  <script src="js/boxplot-anatomy.js?v=3"></script>
-  <script src="js/threshold-bands.js?v=3"></script>
-  <script src="js/dual-axis-rain.js?v=3"></script>
-  <script src="js/missing-data.js?v=3"></script>
-  <script src="js/rolling-window.js?v=3"></script>
-  <script src="js/velocity-acceleration.js?v=3"></script>
-  <script src="js/lag-correlation.js?v=3"></script>
-  <script src="js/layout-resizer.js?v=3"></script>
-  <script src="js/app.js?v=3"></script>
-
+    // Progreso del laboratorio (misma clave que la webapp)
+    (function () {
+      var done = [];
+      var last = null;
+      try {
+        done = JSON.parse(localStorage.getItem('ig_completed_lessons') || '[]');
+        last = localStorage.getItem('ig_last_section');
+      } catch (e) {}
+      var totals = { m1: 8, m2: 4, m3: 4 };
+      Object.keys(totals).forEach(function (k) {
+        var n = done.filter(function (id) { return String(id).indexOf(k + '_') === 0; }).length;
+        var txt = document.getElementById('lab-' + k + '-txt');
+        var bar = document.getElementById('lab-' + k + '-bar');
+        if (txt) txt.textContent = n + ' de ' + totals[k] + ' lecciones completadas';
+        if (bar) bar.style.width = Math.round(n / totals[k] * 100) + '%';
+      });
+      var cont = document.getElementById('lab-continue');
+      if (cont && last && last !== 'teoria') cont.textContent = '▶ Continuar donde lo dejaste';
+    })();
+  </script>
 </body>
 </html>
