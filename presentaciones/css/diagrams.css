@@ -260,3 +260,6 @@
   white-space: pre;
   text-align: left;
 }
+
+/* Texto con contorno para leerse sobre fondos con patrón */
+.dg .halo { paint-order: stroke; stroke: var(--bg-surface); stroke-width: 6px; stroke-linejoin: round; }

@@ -48,11 +48,10 @@
           </div>
           <div class="cover-meta-item">
             <span class="cover-meta-label">Módulo</span>
-            <span class="cover-meta-value">03 &bull; Hidráulica de Suelos y Sensores</span>
+            <span class="cover-meta-value">03 &bull; El Agua en el Suelo</span>
           </div>
         </div>
       </section>
-
       <!-- NUEVA: POR QUÉ MONITOREAR EL AGUA EN EL SUELO -->
       <section>
         <h2>¿Por qué monitorear el agua en el suelo?</h2>
@@ -68,7 +67,7 @@
               <li><strong>Falla de presas</strong> por filtración y erosión interna.</li>
               <li><strong>Inestabilidad de excavaciones</strong> y taludes de corte.</li>
               <li><strong>Asentamientos por consolidación</strong> al disiparse la presión de poros.</li>
-              <li><strong>Suelos expansivos y colapsables</strong> que cambian de volumen al mojarse.</li>
+              <li><strong>Suelos expansivos y colapsables</strong> con cambios volumétricos.</li>
             </ul>
           </div>
 
@@ -101,7 +100,6 @@
           </div>
         </div>
       </section>
-
       <!-- NUEVA: CASOS HISTÓRICOS -->
       <section>
         <h2>Casos históricos: cuando el agua gana</h2>
@@ -179,7 +177,6 @@
           </div>
         </div>
       </section>
-
       <!-- SLIDE 2: POR QUÉ SE PRODUCEN LAS FALLAS -->
       <section>
         <h2>¿Por qué se producen las fallas en estructuras, en el suelo o en las rocas?</h2>
@@ -228,7 +225,6 @@
 
         </div>
       </section>
-
       <!-- NUEVA: MECANISMOS - ZONAS DEL PERFIL Y PRESIÓN DE PORPS -->
       <section>
         <h2>Mecanismos: el agua en el perfil del suelo</h2>
@@ -253,7 +249,7 @@
             <text class="s" x="10" y="40">Superficie</text>
             <text class="b l" x="45" y="108" style="font-size: 22px">Zona no saturada</text>
             <text class="s" x="45" y="134">(vadosa): aire y agua</text>
-            <text class="b l" x="45" y="258" style="font-size: 22px">Franja capilar</text>
+            <text class="b l" x="45" y="258" style="font-size: 19px">Zona parcialmente saturada</text>
             <text class="s" x="45" y="282">el agua asciende</text>
             <text class="b l" x="45" y="372" style="font-size: 22px">Zona saturada</text>
             <text class="s" x="45" y="398">poros llenos de agua</text>
@@ -284,7 +280,7 @@
             </div>
             <ul class="bullet-list" style="font-size: 0.82em;">
               <li><strong>Zona no saturada:</strong> poros con aire y agua; u&nbsp;&lt;&nbsp;0.</li>
-              <li><strong>Franja capilar:</strong> casi saturada, pero todavía con succión.</li>
+              <li><strong>Zona parcialmente saturada:</strong> casi saturada, aún con succión (incluye la franja capilar).</li>
               <li><strong>Zona saturada:</strong> bajo el nivel freático; u&nbsp;&gt;&nbsp;0.</li>
               <li>El <strong>nivel freático</strong> es donde u = 0.</li>
             </ul>
@@ -299,7 +295,6 @@
           </div>
         </div>
       </section>
-
       <!-- SLIDE 3: LLUVIA Y HUMEDAD: TERZAGHI -->
       <section>
         <h2>La lluvia y la humedad como factores</h2>
@@ -339,138 +334,169 @@
           </div>
 
         </div>
-      </section>
-
-      <!-- NUEVA: EXTENSIÓN AL SUELO NO SATURADO -->
+      </section>      <!-- NEW:03-bishop -->
       <section>
-        <h2>Esfuerzos efectivos en suelos no saturados</h2>
+        <h2>Esfuerzo efectivo en suelos no saturados</h2>
         <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Extendiendo el principio de Terzaghi por encima del nivel freático
+          Bishop (1959): la succión actúa como un «pegamento» entre partículas
         </h3>
 
-        <div class="split-2" style="margin-top: 20px; gap: 30px;">
+        <div class="split-2" style="margin-top: 8px; align-items: center; gap: 30px;">
 
-          <div class="card card-highlight">
-            <div class="card-title" style="color: var(--eafit-blue);">
-              <span class="card-icon">🧮</span>
-              <span>Esfuerzo efectivo de Bishop (1959)</span>
-            </div>
+          <svg class="dg" style="max-height: 640px" viewBox="0 0 640 570" role="img" aria-label="Suelo no saturado: partículas, agua en los contactos y aire en los poros"><defs><marker id="bs-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-rose)"/></marker></defs>
+<rect class="panel" x="40" y="120" width="560" height="360" rx="14" style="fill-opacity: 0.55"/>
+<line x1="110" y1="40" x2="110" y2="112" style="stroke: var(--accent-rose); stroke-width: 6" marker-end="url(#bs-r)"/>
+<line x1="220" y1="40" x2="220" y2="112" style="stroke: var(--accent-rose); stroke-width: 6" marker-end="url(#bs-r)"/>
+<line x1="330" y1="40" x2="330" y2="112" style="stroke: var(--accent-rose); stroke-width: 6" marker-end="url(#bs-r)"/>
+<line x1="440" y1="40" x2="440" y2="112" style="stroke: var(--accent-rose); stroke-width: 6" marker-end="url(#bs-r)"/>
+<line x1="550" y1="40" x2="550" y2="112" style="stroke: var(--accent-rose); stroke-width: 6" marker-end="url(#bs-r)"/>
+<text class="rose-txt m" x="320" y="30" text-anchor="middle">σ: esfuerzo total aplicado</text>
+<circle cx="149.0" cy="175.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="325.0" cy="175.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="303.0" cy="213.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="501.0" cy="175.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="171.0" cy="213.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="171.0" cy="289.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="259.0" cy="213.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="259.0" cy="289.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="347.0" cy="213.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="435.0" cy="213.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="457.0" cy="251.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="523.0" cy="213.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="127.0" cy="289.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="149.0" cy="327.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="127.0" cy="365.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="215.0" cy="289.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="215.0" cy="365.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="325.0" cy="327.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="391.0" cy="365.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="479.0" cy="289.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="479.0" cy="365.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="171.0" cy="365.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="259.0" cy="365.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="281.0" cy="403.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="347.0" cy="365.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="369.0" cy="403.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="457.0" cy="403.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="523.0" cy="365.0" r="12.5" class="f-water" style="fill-opacity: 0.9"/>
+<circle cx="105" cy="175" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="193" cy="175" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="281" cy="175" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="369" cy="175" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="457" cy="175" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="545" cy="175" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="149" cy="251" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="237" cy="251" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="325" cy="251" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="413" cy="251" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="501" cy="251" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="105" cy="327" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="193" cy="327" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="281" cy="327" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="369" cy="327" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="457" cy="327" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="545" cy="327" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="149" cy="403" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="237" cy="403" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="325" cy="403" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="413" cy="403" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<circle cx="501" cy="403" r="34" class="f-solid" style="stroke: var(--text-muted); stroke-width: 2"/>
+<line x1="150" y1="213" x2="110" y2="500" class="thin" style="stroke-width: 2"/>
+<text class="b m" x="40" y="522">Partículas</text>
+<line x1="237" y1="213" x2="300" y2="500" class="thin" style="stroke: var(--accent-cyan); stroke-width: 2"/>
+<text class="pie-txt m" x="200" y="522">Agua en contactos: u_w</text>
+<line x1="460" y1="253" x2="480" y2="534" class="thin" style="stroke-width: 2"/>
+<text class="b m" x="400" y="552">Aire en poros: u_a</text>
+</svg>
+
+          <div>
             <div class="formula-inline">
               $$\sigma' = (\sigma - u_a) + \chi\,(u_a - u_w)$$
             </div>
-            <ul class="bullet-list" style="font-size: 0.85em;">
-              <li>$u_a$: presión del aire; $u_w$: presión del agua.</li>
-              <li>$(u_a - u_w)$ es la <strong>succión matricial</strong>.</li>
-              <li>$\chi$ va de 0 (suelo seco) a 1 (saturado).</li>
-              <li>Si $\chi = 1$ y $u_a = 0$ se recupera <strong>Terzaghi</strong>: $\sigma' = \sigma - u$.</li>
+            <ul class="bullet-list" style="font-size: 0.74em; margin-bottom: 8px;">
+              <li>El aire empuja con $u_a$; el agua, en los contactos, <strong>tira</strong> con $u_w$ menor que $u_a$.</li>
+              <li>$(u_a - u_w)$ es la <strong>succión matricial</strong>: mantiene unidas las partículas.</li>
             </ul>
+            <svg class="dg" style="max-height: 360px" viewBox="0 0 520 345" role="img" aria-label="Parámetro chi de Bishop en función del grado de saturación">
+<line class="ax" x1="70" y1="300" x2="490" y2="300"/><line class="ax" x1="70" y1="300" x2="70" y2="34"/>
+<path class="series s-gray" style="stroke-dasharray: 8 6" d="M70.0,300.0 L80.2,293.5 L90.5,287.0 L100.8,280.5 L111.0,274.0 L121.2,267.5 L131.5,261.0 L141.8,254.5 L152.0,248.0 L162.2,241.5 L172.5,235.0 L182.8,228.5 L193.0,222.0 L203.2,215.5 L213.5,209.0 L223.8,202.5 L234.0,196.0 L244.2,189.5 L254.5,183.0 L264.8,176.5 L275.0,170.0 L285.2,163.5 L295.5,157.0 L305.8,150.5 L316.0,144.0 L326.2,137.5 L336.5,131.0 L346.8,124.5 L357.0,118.0 L367.2,111.5 L377.5,105.0 L387.8,98.5 L398.0,92.0 L408.2,85.5 L418.5,79.0 L428.8,72.5 L439.0,66.0 L449.2,59.5 L459.5,53.0 L469.8,46.5 L480.0,40.0"/>
+<path class="curve s-pie" d="M70.0,300.0 L80.2,298.2 L90.5,295.4 L100.8,292.1 L111.0,288.4 L121.2,284.3 L131.5,279.9 L141.8,275.3 L152.0,270.4 L162.2,265.3 L172.5,260.0 L182.8,254.5 L193.0,248.8 L203.2,243.0 L213.5,237.0 L223.8,230.8 L234.0,224.5 L244.2,218.1 L254.5,211.5 L264.8,204.8 L275.0,198.0 L285.2,191.1 L295.5,184.0 L305.8,176.8 L316.0,169.5 L326.2,162.1 L336.5,154.7 L346.8,147.1 L357.0,139.4 L367.2,131.6 L377.5,123.7 L387.8,115.7 L398.0,107.6 L408.2,99.5 L418.5,91.2 L428.8,82.9 L439.0,74.5 L449.2,66.0 L459.5,57.4 L469.8,48.7 L480.0,40.0"/>
+<circle cx="70.0" cy="300.0" r="9" class="f-ten"/><circle cx="480.0" cy="40.0" r="9" class="f-hum"/>
+<text class="ten-txt s" x="190" y="268">Seco: χ = 0</text><text class="s" x="190" y="288">la succión no suma</text>
+<text class="hum-txt s" x="490" y="24" text-anchor="end">Saturado: χ = 1 · se recupera Terzaghi</text>
+<text class="s" x="280" y="334" text-anchor="middle">Grado de saturación (seco → saturado)</text>
+<text class="s" transform="translate(30,170) rotate(-90)" text-anchor="middle">χ (peso de la succión)</text>
+</svg>
           </div>
 
-          <div class="card card-highlight" style="border-left-color: var(--accent-cyan) !important;">
-            <div class="card-title" style="color: var(--accent-cyan);">
-              <span class="card-icon">🧩</span>
-              <span>Variables de esfuerzo independientes</span>
-            </div>
-            <div class="formula-inline">
+        </div>
+        <div class="callout callout-info" style="margin-top: 10px;">
+          <span class="callout-icon">🧲</span>
+          <div class="callout-content" style="font-weight: 600;">Cuanto más húmedo el suelo, <strong>menos pesa la succión</strong> (χ sube hacia 1). Con χ = 1 queda la ecuación de Terzaghi.</div>
+        </div>
+      </section>
+      <!-- NEW:03-envelope -->
+      <section>
+        <h2>Resistencia al corte con succión</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Fredlund y Morgenstern (1977): cada nivel de succión desplaza la recta hacia arriba
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" style="max-height: 620px" viewBox="0 0 780 500" role="img" aria-label="Envolventes de resistencia al corte para distintas succiones"><defs><marker id="ev-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-main)"/></marker></defs>
+<line class="ax" x1="170" y1="440" x2="730" y2="440"/><line class="ax" x1="170" y1="440" x2="170" y2="40"/>
+<line class="s-rose" style="stroke-width: 5; stroke-linecap: round" x1="170.0" y1="402.0" x2="612.8" y2="215.0"/>
+<line class="s-ten" style="stroke-width: 5; stroke-linecap: round" x1="170.0" y1="272.8" x2="612.8" y2="85.8"/>
+<line class="s-hum" style="stroke-width: 5; stroke-linecap: round" x1="170.0" y1="151.2" x2="386.0" y2="60.0"/>
+<line class="s-rose" style="stroke-width: 5; stroke-linecap: round" x1="500" y1="330" x2="540" y2="330"/><text class="b s" x="550" y="336">ψ = 0 (saturado)</text>
+<line class="s-ten" style="stroke-width: 5; stroke-linecap: round" x1="500" y1="360" x2="540" y2="360"/><text class="b s" x="550" y="366">ψ intermedia</text>
+<line class="s-hum" style="stroke-width: 5; stroke-linecap: round" x1="500" y1="390" x2="540" y2="390"/><text class="b s" x="550" y="396">ψ alta (suelo seco)</text>
+<line x1="156" y1="440.0" x2="156" y2="402.0" style="stroke: var(--text-main); stroke-width: 6"/>
+<text class="b s" x="144" y="427.0" text-anchor="end">c′</text>
+<line x1="156" y1="402.0" x2="156" y2="151.2" style="stroke: var(--sensor-hum); stroke-width: 6"/>
+<text class="hum-txt s" x="144" y="272.6" text-anchor="end">aporte de</text><text class="hum-txt s" x="144" y="292.6" text-anchor="end">la succión</text>
+<line x1="480.8" y1="164.2" x2="480.8" y2="271.4" style="stroke: var(--text-main); stroke-width: 5" marker-end="url(#ev-a)"/>
+<text class="b s" x="466.8" y="212.8" text-anchor="end">al llover,</text><text class="b s" x="466.8" y="232.8" text-anchor="end">ψ baja y se pierde</text>
+<text class="s" x="450" y="480" text-anchor="middle">Esfuerzo normal neto, (σ − u_a)</text>
+<text class="s" transform="translate(22,250) rotate(-90)" text-anchor="middle">Resistencia al corte, τ</text>
+<text class="s" x="500" y="420">rectas paralelas: mismo φ′</text>
+</svg>
+
+          <div>
+            <div class="formula-inline" style="font-size: 0.7em;">
               $$\tau = c' + (\sigma - u_a)\tan\phi' + (u_a - u_w)\tan\phi^{b}$$
             </div>
-            <ul class="bullet-list" style="font-size: 0.85em;">
-              <li>$(\sigma - u_a)$: esfuerzo normal neto.</li>
-              <li>$(u_a - u_w)$: succión matricial, $\psi$.</li>
-              <li>$\phi^{b}$: cuánto aumenta la resistencia por cada unidad de succión.</li>
-              <li>Fredlund y Morgenstern (1977).</li>
+            <ul class="bullet-list" style="font-size: 0.72em;">
+              <li><strong>$c'$</strong>: cohesión efectiva (donde la recta corta el eje).</li>
+              <li><strong>$(\sigma - u_a)\tan\phi'$</strong>: fricción; da la <strong>pendiente</strong>.</li>
+              <li><strong>$(u_a - u_w)\tan\phi^{b}$</strong>: lo que aporta la succión; <strong>sube</strong> la recta.</li>
             </ul>
           </div>
 
         </div>
-
-        <div class="callout callout-danger" style="margin-top: 20px;">
+        <div class="callout callout-danger" style="margin-top: 10px;">
           <span class="callout-icon">⚠️</span>
-          <div class="callout-content" style="font-weight: 600;">
-            Más succión = más resistencia aparente. Al llover, <strong>$\psi \to 0$ y esa resistencia se pierde</strong>: por eso hay que medir la succión, no solo la humedad.
-          </div>
+          <div class="callout-content" style="font-weight: 600;">La succión eleva la recta; la lluvia la hace bajar. <strong>A la misma carga, el suelo húmedo resiste menos</strong>: por eso es peligroso un talud «seco» que se moja.</div>
         </div>
       </section>
-
-      <!-- NUEVA: CURVA DE RETENCIÓN (SWCC) -->
+      <!-- NEW:03-infiltration -->
       <section>
-        <h2>Curva de retención de agua (SWCC)</h2>
+        <h2>Infiltración</h2>
         <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          El puente entre humedad, succión y presión de poros
+          El concepto
         </h3>
 
-        <div class="split-2-1" style="margin-top: 16px; align-items: center; gap: 30px;">
+        <div class="split-2" style="margin-top: 20px; align-items: center; gap: 36px;">
 
-          <svg class="dg" viewBox="0 0 1000 540" role="img" aria-label="Curva de retención de agua del suelo: contenido de agua contra succión">
-            <rect x="110" y="60" width="140" height="400" style="fill: var(--accent-cyan); fill-opacity: 0.12"/>
-            <rect x="250" y="60" width="350" height="400" style="fill: var(--accent-amber); fill-opacity: 0.12"/>
-            <rect x="600" y="60" width="330" height="400" style="fill: var(--accent-rose); fill-opacity: 0.09"/>
-            <text class="b m" x="180" y="84" text-anchor="middle">Saturado</text>
-            <text class="b m" x="425" y="84" text-anchor="middle">Desaturación</text>
-            <text class="b m" x="765" y="84" text-anchor="middle">Residual</text>
-            <line class="ax" x1="110" y1="460" x2="940" y2="460"/>
-            <line class="ax" x1="110" y1="460" x2="110" y2="56"/>
-            <polygon class="f-gray" points="950,460 932,452 932,468"/>
-            <polygon class="f-gray" points="110,48 102,66 118,66"/>
-            <line class="thin dash" x1="110" y1="110" x2="930" y2="110"/>
-            <line class="thin dash" x1="110" y1="410" x2="930" y2="410"/>
-            <text class="b m" x="98" y="116" text-anchor="end">θs</text>
-            <text class="b m" x="98" y="416" text-anchor="end">θr</text>
-            <path class="curve s-blue" d="M110,110 L250,112 C340,118 400,190 460,270 C520,350 580,400 700,408 L930,412"/>
-            <circle cx="250" cy="112" r="8" class="f-gray"/>
-            <text class="b m" x="245" y="152" text-anchor="end">AEV</text>
-            <text class="s" x="245" y="172" text-anchor="end">entrada de aire</text>
-            <!-- Un punto de la curva -->
-            <line class="thin dash s-hum" style="stroke-width: 3" x1="110" y1="270" x2="460" y2="270"/>
-            <line class="thin dash s-ten" style="stroke-width: 3" x1="460" y1="270" x2="460" y2="460"/>
-            <circle cx="460" cy="270" r="10" style="fill: var(--eafit-yellow); stroke: var(--text-main); stroke-width: 2.5"/>
-            <text class="b m" x="98" y="276" text-anchor="end">θ₁</text>
-            <text class="b m" x="460" y="486" text-anchor="middle">ψ₁</text>
-            <text class="hum-txt m" x="125" y="256">Sensor de humedad → θ</text>
-            <text class="ten-txt m" x="448" y="352" text-anchor="end">Tensiómetro → ψ</text>
-            <text class="pie-txt m" x="122" y="206">Piezómetro</text>
-            <text class="s" x="122" y="228">u &gt; 0 (ψ = 0)</text>
-            <text class="l" transform="translate(44,262) rotate(-90)" text-anchor="middle" style="font-size: 21px">Contenido volumétrico de agua, θ</text>
-            <text class="l" x="525" y="524" text-anchor="middle" style="font-size: 21px">Succión matricial, ψ (escala logarítmica) →</text>
-          </svg>
-
-          <div class="card">
-            <div class="card-title" style="color: var(--eafit-blue);">
-              <span class="card-icon">🌉</span>
-              <span>¿Por qué es el «puente»?</span>
-            </div>
-            <ul class="bullet-list" style="font-size: 0.82em;">
-              <li>Cada suelo tiene <strong>su</strong> curva que relaciona θ con ψ.</li>
-              <li>Con humedad <em>y</em> succión medidas juntas, se puede <strong>calibrar y validar</strong> la curva en campo.</li>
-              <li>El piezómetro cubre el extremo saturado, donde ψ = 0 y u &gt; 0.</li>
-              <li><strong>Histéresis:</strong> humedecer y secar no siguen el mismo camino.</li>
-            </ul>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- SLIDE 4: INFILTRACIÓN -->
-      <section>
-        <h2>Impacto del agua en los suelos</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Infiltración desde una perspectiva geotécnica
-        </h3>
-
-        <div class="split-2" style="margin-top: 20px; align-items: center;">
-          
           <div>
             <div class="card">
-              <p style="font-size: 1em; line-height: 1.6;">
-                La <strong>infiltración</strong> es el proceso mediante el cual el agua de la superficie del terreno, como la proveniente de la lluvia o el riego, se introduce y se mueve hacia el interior del suelo a través de sus poros.
-              </p>
-              <p style="font-size: 0.95em; line-height: 1.5; margin-top: 10px; color: var(--text-muted);">
-                Este proceso es fundamental para el ciclo hidrológico y tiene una influencia directa sobre la cantidad de agua disponible en el subsuelo, afectando tanto la agricultura como la estabilidad geotécnica de los terrenos.
+              <p style="font-size: 1.05em; line-height: 1.6;">
+                La <strong>infiltración</strong> es el proceso mediante el cual el agua de la superficie del terreno, como la proveniente de la <strong>lluvia o el riego</strong>, se introduce y se mueve hacia el interior del suelo a través de sus poros.
               </p>
             </div>
-
             <div class="card card-highlight" style="margin-top: 15px; border-left: 4px solid var(--accent-cyan);">
-              <strong style="color: var(--accent-cyan);">Factores claves:</strong>
+              <strong style="color: var(--accent-cyan);">Depende de:</strong>
               <ul class="bullet-list" style="margin-top: 8px; font-size: 0.95em;">
                 <li>Propiedades del suelo.</li>
                 <li>Humedad inicial del suelo.</li>
@@ -480,8 +506,19 @@
             </div>
           </div>
 
-          <div style="text-align: center;">
-            <img src="img/p03/image7.png" alt="Proceso de Infiltración en el Suelo" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <div>
+            <svg class="dg" style="max-height: 420px" viewBox="0 0 400 400" role="img" aria-label="La lluvia se infiltra en el suelo a través de los poros"><defs><pattern id="inf-g" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="6" cy="7" r="2.4" class="grains"/><circle cx="18" cy="16" r="3" class="grains"/></pattern><marker id="inf-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-cyan)"/></marker></defs>
+<g class="f-gray" style="fill-opacity: 0.5"><ellipse cx="150" cy="50" rx="52" ry="26"/><ellipse cx="200" cy="38" rx="42" ry="28"/><ellipse cx="108" cy="58" rx="32" ry="17"/></g>
+<g class="s-rain" style="stroke-width: 4; stroke-linecap: round"><line x1="110" y1="92" x2="102" y2="116"/><line x1="145" y1="92" x2="137" y2="116"/><line x1="180" y1="92" x2="172" y2="116"/><line x1="215" y1="92" x2="207" y2="116"/><line x1="127" y1="124" x2="119" y2="148"/><line x1="162" y1="124" x2="154" y2="148"/><line x1="197" y1="124" x2="189" y2="148"/></g>
+<rect class="f-soil-dry" x="20" y="170" width="360" height="220" rx="4"/>
+<rect x="20" y="170" width="360" height="220" fill="url(#inf-g)" rx="4"/>
+<line class="ax" x1="10" y1="170" x2="390" y2="170"/>
+<line x1="80" y1="176" x2="80" y2="280" style="stroke: var(--accent-cyan); stroke-width: 6" marker-end="url(#inf-a)"/>
+<line x1="150" y1="176" x2="150" y2="280" style="stroke: var(--accent-cyan); stroke-width: 6" marker-end="url(#inf-a)"/>
+<line x1="220" y1="176" x2="220" y2="280" style="stroke: var(--accent-cyan); stroke-width: 6" marker-end="url(#inf-a)"/>
+<line x1="290" y1="176" x2="290" y2="280" style="stroke: var(--accent-cyan); stroke-width: 6" marker-end="url(#inf-a)"/>
+<text class="pie-txt m" x="200" y="332" text-anchor="middle">el agua entra por los poros</text>
+</svg>
           </div>
 
         </div>
@@ -553,7 +590,6 @@
           </div>
         </div>
       </section>
-
       <!-- SLIDE 5: CAPILARIDAD Y SUCCIÓN MATRICIAL -->
       <section>
         <h2>Impacto del agua en los suelos</h2>
@@ -598,7 +634,6 @@
           </div>
         </div>
       </section>
-
       <!-- NUEVA: PROCESO - CICLOS DE HUMEDECIMIENTO Y SECADO -->
       <section>
         <h2>Proceso: ciclos de humedecimiento y secado</h2>
@@ -674,6 +709,108 @@
             Con cada ciclo estacional cambian la succión y la resistencia aparente. <strong>Las grietas son vías de infiltración preferencial</strong> y aceleran la respuesta a la siguiente lluvia.
           </div>
         </div>
+      </section>      <!-- NEW:03-swcc1 -->
+      <section>
+        <h2>Curva de retención de agua (SWCC)</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Cuánta agua queda en el suelo según la succión que se le aplica
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 28px;">
+
+          <svg class="dg" style="max-height: 620px" viewBox="0 0 1000 520" role="img" aria-label="Curva característica suelo-agua con zonas saturado, desaturación y residual">
+<rect x="110.0" y="70" width="245.2" height="370" style="fill: var(--accent-cyan); fill-opacity: 0.3"/>
+<rect x="144.6" y="74" width="176" height="34" rx="17" style="fill: var(--accent-cyan)"/>
+<text x="232.6" y="97" text-anchor="middle" style="fill: #FFFFFF; font-weight: 800; font-size: 20px">Saturado</text>
+<text class="s" x="232.6" y="130" text-anchor="middle" style="font-size: 17px">poros llenos de agua</text>
+<rect x="355.2" y="70" width="332.0" height="370" style="fill: var(--eafit-yellow); fill-opacity: 0.38"/>
+<rect x="433.2" y="74" width="176" height="34" rx="17" style="fill: var(--eafit-yellow)"/>
+<text x="521.2" y="97" text-anchor="middle" style="fill: #0B192C; font-weight: 800; font-size: 20px">Desaturación</text>
+<text class="s" x="521.2" y="130" text-anchor="middle" style="font-size: 17px">agua y aire</text>
+<rect x="687.2" y="70" width="252.8" height="370" style="fill: var(--accent-rose); fill-opacity: 0.3"/>
+<rect x="725.6" y="74" width="176" height="34" rx="17" style="fill: var(--accent-rose)"/>
+<text x="813.6" y="97" text-anchor="middle" style="fill: #FFFFFF; font-weight: 800; font-size: 20px">Residual</text>
+<text class="s" x="813.6" y="130" text-anchor="middle" style="font-size: 17px">solo película de agua</text>
+<circle cx="232.6" cy="172" r="24" style="fill: var(--bg-card); stroke: var(--text-main); stroke-width: 3"/>
+<circle cx="232.6" cy="172" r="21" class="f-water" style="fill-opacity: 0.95"/>
+<circle cx="521.2" cy="172" r="24" style="fill: var(--bg-card); stroke: var(--text-main); stroke-width: 3"/>
+<path d="M500.2,172 A21,21 0 0 0 542.2,172 Z" class="f-water" style="fill-opacity: 0.95"/>
+<circle cx="813.6" cy="172" r="24" style="fill: var(--bg-card); stroke: var(--text-main); stroke-width: 3"/>
+<circle cx="813.6" cy="172" r="21" style="fill: none; stroke: var(--accent-cyan); stroke-width: 5; opacity: 0.9"/>
+<line class="ax" x1="110" y1="440" x2="950" y2="440"/><line class="ax" x1="110" y1="440" x2="110" y2="66"/>
+<polygon class="f-gray" points="960,440 942,432 942,448"/><polygon class="f-gray" points="110,56 102,74 118,74"/>
+<line class="thin" x1="110.0" y1="440" x2="110.0" y2="448"/><text class="s" x="110.0" y="470" text-anchor="middle">0,1</text>
+<line class="thin" x1="276.0" y1="440" x2="276.0" y2="448"/><text class="s" x="276.0" y="470" text-anchor="middle">1</text>
+<line class="thin" x1="442.0" y1="440" x2="442.0" y2="448"/><text class="s" x="442.0" y="470" text-anchor="middle">10</text>
+<line class="thin" x1="608.0" y1="440" x2="608.0" y2="448"/><text class="s" x="608.0" y="470" text-anchor="middle">100</text>
+<line class="thin" x1="774.0" y1="440" x2="774.0" y2="448"/><text class="s" x="774.0" y="470" text-anchor="middle">1000</text>
+<line class="thin" x1="940.0" y1="440" x2="940.0" y2="448"/><text class="s" x="940.0" y="470" text-anchor="middle">10⁴</text>
+<line class="thin dash" x1="110" y1="107.0" x2="950" y2="107.0"/><text class="b m" x="100" y="113.0" text-anchor="end">θs</text>
+<line class="thin dash" x1="110" y1="403.0" x2="950" y2="403.0"/><text class="b m" x="100" y="409.0" text-anchor="end">θr</text>
+<path class="curve s-pie" style="stroke-width: 6" d="M110.0,107.0 L114.2,107.0 L118.3,107.0 L122.4,107.0 L126.6,107.0 L130.8,107.0 L134.9,107.0 L139.1,107.0 L143.2,107.0 L147.3,107.0 L151.5,107.0 L155.7,107.1 L159.8,107.1 L163.9,107.1 L168.1,107.1 L172.2,107.1 L176.4,107.1 L180.6,107.1 L184.7,107.1 L188.8,107.1 L193.0,107.1 L197.2,107.2 L201.3,107.2 L205.4,107.2 L209.6,107.2 L213.8,107.3 L217.9,107.3 L222.1,107.3 L226.2,107.4 L230.3,107.4 L234.5,107.5 L238.7,107.5 L242.8,107.6 L246.9,107.7 L251.1,107.7 L255.2,107.8 L259.4,107.9 L263.6,108.0 L267.7,108.2 L271.9,108.3 L276.0,108.5 L280.1,108.6 L284.3,108.8 L288.4,109.1 L292.6,109.3 L296.8,109.6 L300.9,109.9 L305.1,110.3 L309.2,110.6 L313.4,111.1 L317.5,111.6 L321.6,112.1 L325.8,112.7 L330.0,113.4 L334.1,114.1 L338.2,115.0 L342.4,115.9 L346.6,117.0 L350.7,118.1 L354.9,119.4 L359.0,120.8 L363.1,122.3 L367.3,124.0 L371.4,125.9 L375.6,128.0 L379.8,130.3 L383.9,132.7 L388.1,135.4 L392.2,138.4 L396.4,141.6 L400.5,145.0 L404.6,148.7 L408.8,152.7 L412.9,156.9 L417.1,161.4 L421.2,166.2 L425.4,171.2 L429.6,176.5 L433.7,182.0 L437.9,187.8 L442.0,193.7 L446.1,199.8 L450.3,206.1 L454.5,212.4 L458.6,218.9 L462.8,225.4 L466.9,232.0 L471.0,238.5 L475.2,245.0 L479.4,251.5 L483.5,257.9 L487.6,264.2 L491.8,270.4 L496.0,276.4 L500.1,282.3 L504.2,288.0 L508.4,293.5 L512.5,298.9 L516.7,304.0 L520.9,309.0 L525.0,313.8 L529.1,318.3 L533.3,322.7 L537.5,326.9 L541.6,330.9 L545.8,334.7 L549.9,338.3 L554.0,341.8 L558.2,345.1 L562.4,348.2 L566.5,351.2 L570.6,354.0 L574.8,356.7 L579.0,359.2 L583.1,361.6 L587.2,363.9 L591.4,366.0 L595.5,368.1 L599.7,370.0 L603.8,371.8 L608.0,373.5 L612.1,375.2 L616.3,376.7 L620.5,378.2 L624.6,379.6 L628.8,380.9 L632.9,382.1 L637.0,383.3 L641.2,384.4 L645.4,385.4 L649.5,386.4 L653.6,387.3 L657.8,388.2 L662.0,389.0 L666.1,389.8 L670.2,390.5 L674.4,391.2 L678.5,391.9 L682.7,392.5 L686.9,393.1 L691.0,393.6 L695.1,394.2 L699.3,394.7 L703.5,395.1 L707.6,395.6 L711.8,396.0 L715.9,396.4 L720.0,396.7 L724.2,397.1 L728.4,397.4 L732.5,397.7 L736.6,398.0 L740.8,398.3 L745.0,398.6 L749.1,398.8 L753.2,399.1 L757.4,399.3 L761.5,399.5 L765.7,399.7 L769.9,399.9 L774.0,400.0 L778.2,400.2 L782.3,400.4 L786.5,400.5 L790.6,400.6 L794.8,400.8 L798.9,400.9 L803.0,401.0 L807.2,401.1 L811.4,401.2 L815.5,401.3 L819.7,401.4 L823.8,401.5 L828.0,401.6 L832.1,401.7 L836.2,401.8 L840.4,401.8 L844.5,401.9 L848.7,401.9 L852.8,402.0 L857.0,402.1 L861.1,402.1 L865.3,402.2 L869.5,402.2 L873.6,402.3 L877.8,402.3 L881.9,402.3 L886.0,402.4 L890.2,402.4 L894.3,402.4 L898.5,402.5 L902.7,402.5 L906.8,402.5 L911.0,402.6 L915.1,402.6 L919.2,402.6 L923.4,402.6 L927.5,402.6 L931.7,402.7 L935.8,402.7 L940.0,402.7"/>
+<circle cx="355.2" cy="119.5" r="10" style="fill: var(--eafit-yellow); stroke: var(--text-main); stroke-width: 3"/>
+<text class="b m" x="339.2" y="153.5" text-anchor="end">AEV</text>
+<text class="b l" x="530" y="508" text-anchor="middle" style="font-size: 22px">Succión matricial, ψ (kPa, escala logarítmica) →</text>
+<text class="b l" transform="translate(40,260) rotate(-90)" text-anchor="middle" style="font-size: 22px">Contenido de agua, θ</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">📘</span><span>Conceptos de la curva</span></div>
+            <ul class="bullet-list" style="font-size: 0.7em;">
+              <li><strong>θs:</strong> contenido de agua con todos los poros llenos.</li>
+              <li><strong>AEV</strong> (entrada de aire): la succión a la que el aire empieza a entrar en los poros más grandes.</li>
+              <li><strong>Desaturación:</strong> el agua sale de poros cada vez más pequeños.</li>
+              <li><strong>θr:</strong> agua residual, solo como película entre partículas.</li>
+              <li>ψ en <strong>escala logarítmica</strong>: varía muchos órdenes de magnitud.</li>
+            </ul>
+          </div>
+          </div>
+
+        </div>
+      </section>
+      <!-- NEW:03-swcc2 -->
+      <section>
+        <h2>Cada suelo, su curva</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Tipo de suelo e histéresis
+        </h3>
+
+        <div style="margin-top: 8px;">
+          <svg class="dg" style="max-height: 560px" viewBox="0 0 1200 470" role="img" aria-label="Curvas de retención de arena, limo y arcilla, y efecto de histéresis">
+<rect class="panel" x="20" y="20" width="560" height="440" rx="12" style="fill-opacity: 0.35"/>
+<line class="ax" x1="80" y1="400" x2="560" y2="400"/><line class="ax" x1="80" y1="400" x2="80" y2="90"/>
+<text class="s" x="80.0" y="424" text-anchor="middle">0,1</text>
+<text class="s" x="272.0" y="424" text-anchor="middle">10</text>
+<text class="s" x="464.0" y="424" text-anchor="middle">10³</text>
+<text class="s" x="320" y="448" text-anchor="middle">ψ (kPa, log)</text>
+<text class="s" transform="translate(36,250) rotate(-90)" text-anchor="middle">θ</text>
+<rect class="panel" x="620" y="20" width="540" height="440" rx="12" style="fill-opacity: 0.35"/>
+<line class="ax" x1="680" y1="400" x2="1140" y2="400"/><line class="ax" x1="680" y1="400" x2="680" y2="90"/>
+<text class="s" x="680.0" y="424" text-anchor="middle">0,1</text>
+<text class="s" x="864.0" y="424" text-anchor="middle">10</text>
+<text class="s" x="1048.0" y="424" text-anchor="middle">10³</text>
+<text class="s" x="910" y="448" text-anchor="middle">ψ (kPa, log)</text>
+<text class="s" transform="translate(636,250) rotate(-90)" text-anchor="middle">θ</text>
+<text class="b m" x="320" y="48" text-anchor="middle">Cada suelo tiene su curva</text>
+<path class="curve s-ten" d="M80.0,152.7 L84.0,152.7 L88.0,152.7 L92.0,152.7 L96.0,152.7 L100.0,152.7 L104.0,152.7 L108.0,152.7 L112.0,152.8 L116.0,152.8 L120.0,152.8 L124.0,152.8 L128.0,152.9 L132.0,153.0 L136.0,153.2 L140.0,153.5 L144.0,154.0 L148.0,154.8 L152.0,156.0 L156.0,158.0 L160.0,161.2 L164.0,166.0 L168.0,173.4 L172.0,184.1 L176.0,199.1 L180.0,218.6 L184.0,242.0 L188.0,267.2 L192.0,292.0 L196.0,314.1 L200.0,332.3 L204.0,346.4 L208.0,356.8 L212.0,364.4 L216.0,369.7 L220.0,373.4 L224.0,375.9 L228.0,377.7 L232.0,378.9 L236.0,379.7 L240.0,380.3 L244.0,380.6 L248.0,380.9 L252.0,381.1 L256.0,381.2 L260.0,381.3 L264.0,381.3 L268.0,381.4 L272.0,381.4 L276.0,381.4 L280.0,381.4 L284.0,381.4 L288.0,381.4 L292.0,381.4 L296.0,381.4 L300.0,381.5 L304.0,381.5 L308.0,381.5 L312.0,381.5 L316.0,381.5 L320.0,381.5 L324.0,381.5 L328.0,381.5 L332.0,381.5 L336.0,381.5 L340.0,381.5 L344.0,381.5 L348.0,381.5 L352.0,381.5 L356.0,381.5 L360.0,381.5 L364.0,381.5 L368.0,381.5 L372.0,381.5 L376.0,381.5 L380.0,381.5 L384.0,381.5 L388.0,381.5 L392.0,381.5 L396.0,381.5 L400.0,381.5 L404.0,381.5 L408.0,381.5 L412.0,381.5 L416.0,381.5 L420.0,381.5 L424.0,381.5 L428.0,381.5 L432.0,381.5 L436.0,381.5 L440.0,381.5 L444.0,381.5 L448.0,381.5 L452.0,381.5 L456.0,381.5 L460.0,381.5 L464.0,381.5 L468.0,381.5 L472.0,381.5 L476.0,381.5 L480.0,381.5 L484.0,381.5 L488.0,381.5 L492.0,381.5 L496.0,381.5 L500.0,381.5 L504.0,381.5 L508.0,381.5 L512.0,381.5 L516.0,381.5 L520.0,381.5 L524.0,381.5 L528.0,381.5 L532.0,381.5 L536.0,381.5 L540.0,381.5 L544.0,381.5 L548.0,381.5 L552.0,381.5 L556.0,381.5 L560.0,381.5"/>
+<path class="curve s-hum" d="M80.0,121.8 L84.0,121.8 L88.0,121.8 L92.0,121.8 L96.0,121.8 L100.0,121.9 L104.0,121.9 L108.0,121.9 L112.0,121.9 L116.0,121.9 L120.0,121.9 L124.0,121.9 L128.0,121.9 L132.0,122.0 L136.0,122.0 L140.0,122.0 L144.0,122.1 L148.0,122.1 L152.0,122.2 L156.0,122.3 L160.0,122.4 L164.0,122.5 L168.0,122.7 L172.0,122.8 L176.0,123.0 L180.0,123.3 L184.0,123.6 L188.0,124.0 L192.0,124.4 L196.0,125.0 L200.0,125.6 L204.0,126.4 L208.0,127.4 L212.0,128.5 L216.0,129.8 L220.0,131.4 L224.0,133.3 L228.0,135.6 L232.0,138.2 L236.0,141.2 L240.0,144.8 L244.0,148.9 L248.0,153.6 L252.0,158.8 L256.0,164.7 L260.0,171.3 L264.0,178.4 L268.0,186.1 L272.0,194.2 L276.0,202.8 L280.0,211.7 L284.0,220.7 L288.0,229.9 L292.0,239.0 L296.0,247.9 L300.0,256.6 L304.0,265.0 L308.0,273.0 L312.0,280.6 L316.0,287.8 L320.0,294.5 L324.0,300.8 L328.0,306.6 L332.0,312.0 L336.0,317.0 L340.0,321.6 L344.0,325.8 L348.0,329.7 L352.0,333.2 L356.0,336.4 L360.0,339.4 L364.0,342.0 L368.0,344.5 L372.0,346.7 L376.0,348.8 L380.0,350.6 L384.0,352.3 L388.0,353.8 L392.0,355.2 L396.0,356.5 L400.0,357.6 L404.0,358.7 L408.0,359.6 L412.0,360.5 L416.0,361.3 L420.0,362.0 L424.0,362.6 L428.0,363.2 L432.0,363.8 L436.0,364.3 L440.0,364.7 L444.0,365.1 L448.0,365.5 L452.0,365.8 L456.0,366.1 L460.0,366.4 L464.0,366.6 L468.0,366.8 L472.0,367.0 L476.0,367.2 L480.0,367.4 L484.0,367.6 L488.0,367.7 L492.0,367.8 L496.0,367.9 L500.0,368.0 L504.0,368.1 L508.0,368.2 L512.0,368.3 L516.0,368.4 L520.0,368.4 L524.0,368.5 L528.0,368.6 L532.0,368.6 L536.0,368.7 L540.0,368.7 L544.0,368.7 L548.0,368.8 L552.0,368.8 L556.0,368.8 L560.0,368.8"/>
+<path class="curve s-pie" d="M80.0,90.9 L84.0,90.9 L88.0,90.9 L92.0,90.9 L96.0,90.9 L100.0,90.9 L104.0,90.9 L108.0,90.9 L112.0,90.9 L116.0,90.9 L120.0,90.9 L124.0,90.9 L128.0,90.9 L132.0,90.9 L136.0,90.9 L140.0,90.9 L144.0,90.9 L148.0,90.9 L152.0,90.9 L156.0,91.0 L160.0,91.0 L164.0,91.0 L168.0,91.0 L172.0,91.0 L176.0,91.0 L180.0,91.0 L184.0,91.0 L188.0,91.0 L192.0,91.0 L196.0,91.1 L200.0,91.1 L204.0,91.1 L208.0,91.1 L212.0,91.2 L216.0,91.2 L220.0,91.3 L224.0,91.3 L228.0,91.4 L232.0,91.4 L236.0,91.5 L240.0,91.6 L244.0,91.7 L248.0,91.8 L252.0,92.0 L256.0,92.1 L260.0,92.3 L264.0,92.5 L268.0,92.7 L272.0,92.9 L276.0,93.2 L280.0,93.5 L284.0,93.9 L288.0,94.3 L292.0,94.8 L296.0,95.3 L300.0,95.9 L304.0,96.6 L308.0,97.4 L312.0,98.3 L316.0,99.3 L320.0,100.4 L324.0,101.6 L328.0,103.0 L332.0,104.5 L336.0,106.2 L340.0,108.0 L344.0,110.1 L348.0,112.4 L352.0,114.8 L356.0,117.5 L360.0,120.4 L364.0,123.5 L368.0,126.8 L372.0,130.3 L376.0,134.1 L380.0,138.0 L384.0,142.1 L388.0,146.4 L392.0,150.8 L396.0,155.3 L400.0,159.9 L404.0,164.6 L408.0,169.4 L412.0,174.2 L416.0,179.0 L420.0,183.7 L424.0,188.5 L428.0,193.2 L432.0,197.9 L436.0,202.5 L440.0,207.1 L444.0,211.5 L448.0,215.8 L452.0,220.1 L456.0,224.2 L460.0,228.3 L464.0,232.2 L468.0,236.0 L472.0,239.7 L476.0,243.2 L480.0,246.7 L484.0,250.0 L488.0,253.3 L492.0,256.4 L496.0,259.4 L500.0,262.3 L504.0,265.1 L508.0,267.9 L512.0,270.5 L516.0,273.0 L520.0,275.4 L524.0,277.8 L528.0,280.0 L532.0,282.2 L536.0,284.3 L540.0,286.3 L544.0,288.3 L548.0,290.1 L552.0,292.0 L556.0,293.7 L560.0,295.4"/>
+<text class="ten-txt m" x="262.4" y="319.6">Arena</text>
+<text class="hum-txt m" x="358.4" y="233.1">Limo</text>
+<text class="pie-txt m" x="483.2" y="177.5">Arcilla</text>
+<text class="s" x="320" y="76" text-anchor="middle">arena: baja de golpe · arcilla: baja poco a poco</text>
+<text class="b m" x="910" y="48" text-anchor="middle">Histéresis: secar ≠ humedecer</text>
+<path class="curve s-rose" d="M680.0,121.8 L683.8,121.8 L687.7,121.8 L691.5,121.8 L695.3,121.8 L699.2,121.8 L703.0,121.8 L706.8,121.8 L710.7,121.8 L714.5,121.8 L718.3,121.8 L722.2,121.8 L726.0,121.8 L729.8,121.8 L733.7,121.9 L737.5,121.9 L741.3,121.9 L745.2,121.9 L749.0,121.9 L752.8,121.9 L756.7,121.9 L760.5,122.0 L764.3,122.0 L768.2,122.0 L772.0,122.1 L775.8,122.2 L779.7,122.2 L783.5,122.3 L787.3,122.5 L791.2,122.6 L795.0,122.8 L798.8,123.0 L802.7,123.3 L806.5,123.6 L810.3,124.1 L814.2,124.6 L818.0,125.2 L821.8,126.0 L825.7,127.0 L829.5,128.1 L833.3,129.6 L837.2,131.3 L841.0,133.4 L844.8,135.9 L848.7,138.8 L852.5,142.4 L856.3,146.5 L860.2,151.4 L864.0,157.0 L867.8,163.4 L871.7,170.6 L875.5,178.5 L879.3,187.2 L883.2,196.5 L887.0,206.4 L890.8,216.5 L894.7,226.9 L898.5,237.4 L902.3,247.7 L906.2,257.7 L910.0,267.3 L913.8,276.5 L917.7,285.1 L921.5,293.1 L925.3,300.6 L929.2,307.4 L933.0,313.7 L936.8,319.4 L940.7,324.5 L944.5,329.2 L948.3,333.4 L952.2,337.2 L956.0,340.6 L959.8,343.6 L963.7,346.4 L967.5,348.8 L971.3,351.0 L975.2,353.0 L979.0,354.7 L982.8,356.3 L986.7,357.6 L990.5,358.9 L994.3,360.0 L998.2,361.0 L1002.0,361.9 L1005.8,362.6 L1009.7,363.3 L1013.5,364.0 L1017.3,364.5 L1021.2,365.0 L1025.0,365.5 L1028.8,365.9 L1032.7,366.2 L1036.5,366.5 L1040.3,366.8 L1044.2,367.1 L1048.0,367.3 L1051.8,367.5 L1055.7,367.6 L1059.5,367.8 L1063.3,367.9 L1067.2,368.1 L1071.0,368.2 L1074.8,368.3 L1078.7,368.4 L1082.5,368.4 L1086.3,368.5 L1090.2,368.6 L1094.0,368.6 L1097.8,368.7 L1101.7,368.7 L1105.5,368.8 L1109.3,368.8 L1113.2,368.8 L1117.0,368.9 L1120.8,368.9 L1124.7,368.9 L1128.5,368.9 L1132.3,368.9 L1136.2,369.0 L1140.0,369.0"/><path class="curve s-pie" style="stroke-dasharray: 2 10" d="M680.0,121.8 L683.8,121.8 L687.7,121.8 L691.5,121.9 L695.3,121.9 L699.2,121.9 L703.0,121.9 L706.8,121.9 L710.7,121.9 L714.5,121.9 L718.3,122.0 L722.2,122.0 L726.0,122.1 L729.8,122.1 L733.7,122.2 L737.5,122.3 L741.3,122.4 L745.2,122.5 L749.0,122.7 L752.8,122.9 L756.7,123.1 L760.5,123.4 L764.3,123.8 L768.2,124.3 L772.0,124.9 L775.8,125.6 L779.7,126.4 L783.5,127.5 L787.3,128.7 L791.2,130.3 L795.0,132.2 L798.8,134.4 L802.7,137.1 L806.5,140.4 L810.3,144.2 L814.2,148.6 L818.0,153.8 L821.8,159.8 L825.7,166.5 L829.5,174.1 L833.3,182.4 L837.2,191.3 L841.0,200.9 L844.8,210.9 L848.7,221.2 L852.5,231.6 L856.3,242.0 L860.2,252.2 L864.0,262.1 L867.8,271.5 L871.7,280.4 L875.5,288.8 L879.3,296.6 L883.2,303.7 L887.0,310.3 L890.8,316.3 L894.7,321.8 L898.5,326.7 L902.3,331.2 L906.2,335.2 L910.0,338.8 L913.8,342.0 L917.7,344.9 L921.5,347.5 L925.3,349.8 L929.2,351.9 L933.0,353.8 L936.8,355.4 L940.7,356.9 L944.5,358.2 L948.3,359.4 L952.2,360.5 L956.0,361.4 L959.8,362.2 L963.7,363.0 L967.5,363.6 L971.3,364.2 L975.2,364.8 L979.0,365.2 L982.8,365.6 L986.7,366.0 L990.5,366.4 L994.3,366.7 L998.2,366.9 L1002.0,367.2 L1005.8,367.4 L1009.7,367.6 L1013.5,367.7 L1017.3,367.9 L1021.2,368.0 L1025.0,368.1 L1028.8,368.2 L1032.7,368.3 L1036.5,368.4 L1040.3,368.5 L1044.2,368.5 L1048.0,368.6 L1051.8,368.7 L1055.7,368.7 L1059.5,368.7 L1063.3,368.8 L1067.2,368.8 L1071.0,368.8 L1074.8,368.9 L1078.7,368.9 L1082.5,368.9 L1086.3,368.9 L1090.2,369.0 L1094.0,369.0 L1097.8,369.0 L1101.7,369.0 L1105.5,369.0 L1109.3,369.0 L1113.2,369.0 L1117.0,369.0 L1120.8,369.0 L1124.7,369.0 L1128.5,369.0 L1132.3,369.1 L1136.2,369.1 L1140.0,369.1"/>
+<text class="rose-txt s" x="900.8" y="109.5">secando</text>
+<text class="pie-txt s" x="992.8" y="196.0">humedeciendo</text>
+<text class="s" x="910" y="76" text-anchor="middle">para una misma succión, hay más agua al secar</text>
+</svg>
+        </div>
+        <div class="callout callout-info" style="margin-top: 10px;">
+          <span class="callout-icon">🧬</span>
+          <div class="callout-content" style="font-weight: 600;">La curva depende del <strong>tamaño de los poros</strong> (tipo de suelo) y de la <strong>historia de humedecimiento y secado</strong>. Por eso se mide en cada sitio y no se copia de un libro.</div>
+        </div>
       </section>
 
       <!-- SLIDE 6: MONITOREO DEL AGUA EN EL SUELO - ESCALAS -->
@@ -712,7 +849,6 @@
 
         </div>
       </section>
-
       <!-- NUEVA (CLAVE): MAPA VARIABLE → SENSOR: PERFIL VERTICAL -->
       <section>
         <h2>Mapa variable → sensor <span class="key-badge">★ Diapositiva clave</span></h2>
@@ -754,7 +890,7 @@
             <text class="pie-txt s" x="672" y="440">nivel freático</text>
             <text class="b l" x="36" y="184">Zona no saturada</text>
             <text class="m" x="36" y="210">θ variable · u &lt; 0</text>
-            <text class="b l" x="36" y="372">Franja capilar</text>
+            <text class="b l" x="36" y="372" style="font-size: 23px">Zona parcialmente saturada</text>
             <text class="m" x="36" y="398">el agua asciende</text>
             <text class="b l" x="36" y="456">Zona saturada</text>
             <text class="m" x="36" y="482">θ = θs · u &gt; 0</text>
@@ -790,7 +926,7 @@
             <rect class="f-ten" x="830" y="302" width="9" height="150" rx="4"/>
             <circle class="f-ten" cx="872" cy="338" r="17"/><text class="w" x="872" y="346" text-anchor="middle">2</text>
             <text class="ten-txt l" x="900" y="347">Tensiómetros</text>
-            <text class="m" x="858" y="388" style="font-size: 23px"><tspan class="b">Zona:</tspan> no saturada y franja capilar</text>
+            <text class="m" x="858" y="388" style="font-size: 22px"><tspan class="b">Zona:</tspan> no saturada y parcialmente saturada</text>
             <text class="m" x="858" y="416" style="font-size: 23px"><tspan class="b">Mide:</tspan> succión matricial ψ</text>
             <text class="m" x="858" y="444" style="font-size: 23px"><tspan class="b">Dice:</tspan> cuánta resistencia aparente queda</text>
 
@@ -804,7 +940,6 @@
           </svg>
         </div>
       </section>
-
       <!-- NUEVA (CLAVE): TABLA VARIABLE → ZONA → SENSOR → QUÉ TE DICE -->
       <section>
         <h2>Mapa variable → sensor <span class="key-badge">★ Diapositiva clave</span></h2>
@@ -830,7 +965,7 @@
             </tr>
             <tr>
               <td><strong>Succión matricial</strong> (presión negativa)</td>
-              <td>No saturada y franja capilar</td>
+              <td>No saturada y parcialmente saturada</td>
               <td><span class="dot" style="background: var(--sensor-ten)"></span>Tensiómetros</td>
               <td>Resistencia aparente y cuánto falta para saturarse</td>
             </tr>
@@ -862,7 +997,6 @@
           </div>
         </div>
       </section>
-
       <!-- NUEVA: RESPUESTA TEMPORAL COMBINADA DE LOS SENSORES -->
       <section>
         <h2>Leer los sensores en conjunto</h2>
@@ -927,7 +1061,6 @@
 
         </div>
       </section>
-
       <!-- SLIDE 7: SENSORES DE HUMEDAD: ¿QUÉ MIDEN? -->
       <section>
         <h2>Sensores de humedad</h2>
@@ -960,7 +1093,6 @@
 
         </div>
       </section>
-
       <!-- SLIDE 8: SENSORES DE HUMEDAD: VENTAJAS Y LIMITACIONES -->
       <section>
         <h2>Sensores de humedad</h2>
@@ -996,37 +1128,37 @@
             ¡Es fundamental el análisis de los datos para cada punto específico!
           </div>
         </div>
-      </section>
-
-      <!-- SLIDE 9: SENSORES DE HUMEDAD EN CAMPO 1 -->
+      </section>      <!-- SENSORES DE HUMEDAD EN CAMPO -->
       <section>
         <h2>Sensores de humedad: Monitoreo en campo</h2>
-        <div style="text-align: center; margin-top: 25px;">
-          <img src="img/p03/image13.jpeg" alt="Instalación de Sensor de Humedad en Talud" style="max-height: 440px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        <div style="text-align: center; margin-top: 18px;">
+          <img src="img/p03/image13.jpeg" alt="Humedad volumétrica a tres profundidades y precipitación acumulada" style="width: auto; max-width: 100%; max-height: 720px; object-fit: contain; border-radius: 10px; background: #FFFFFF; box-shadow: var(--card-shadow); padding: 6px;">
+          <p style="font-size: 0.85em; color: var(--text-muted); margin-top: 8px;">Humedad volumétrica a tres profundidades (h1, h2, h3) y precipitación acumulada · estación 188, pluviómetro 189</p>
+        </div>
+      </section>      <!-- NEW:03-hum-process -->
+      <section>
+        <h2>Sensores de humedad: de la medición a los umbrales</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Instalar, analizar el histórico y definir bandas
+        </h3>
+
+        <div style="margin-top: 20px; text-align: center;">
+          <img src="img/p03/image15.png" alt="De la instalación del sensor a la umbralización de la humedad" style="width: 100%; max-height: 640px; object-fit: contain; border-radius: 12px; background: #FFFFFF; box-shadow: var(--card-shadow); padding: 8px; box-sizing: border-box;">
+        </div>
+        <div class="callout callout-info" style="margin-top: 16px;">
+          <span class="callout-icon">📊</span>
+          <div class="callout-content" style="font-weight: 600;">Con <strong>1 o 2 meses de histórico</strong> se calculan percentiles y se fijan las bandas <strong>muy bajo, bajo, normal, alto y muy alto</strong>. La humedad se interpreta contra la historia del propio punto.</div>
         </div>
       </section>
-
-      <!-- SLIDE 10: SENSORES DE HUMEDAD EN CAMPO 2 -->
+      <!-- NEW:03-hum-case -->
       <section>
-        <h2>Sensores de humedad: Monitoreo en campo</h2>
-        <div style="text-align: center; margin-top: 25px;">
-          <img src="img/p03/image13.jpeg" alt="Detalle Instalación Sensor Humedad" style="max-height: 440px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
-          <p style="font-size: 0.9em; color: var(--text-muted); margin-top: 10px;">Perfil de instalación del sensor a diferentes profundidades en el talud</p>
-        </div>
-      </section>
+        <h2>Sensores de humedad: humedad antecedente y deslizamiento</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Estación a 1 m de profundidad, Montanita (Medellín)
+        </h3>
 
-      <!-- SLIDE 11: SENSORES DE HUMEDAD: CALIBRACIÓN Y CURVAS -->
-      <section>
-        <h2>Sensores de humedad: Calibración y Curvas</h2>
-        <div class="split-2" style="margin-top: 25px; align-items: center;">
-          <div style="text-align: center;">
-            <img src="img/p03/image14.png" alt="Curva de Calibración de Sensor" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
-            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 6px;">Curva de calibración sensor vs. contenido volumétrico</p>
-          </div>
-          <div style="text-align: center;">
-            <img src="img/p03/image15.png" alt="Registro Temporal de Humedad" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
-            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 6px;">Serie temporal de respuesta ante eventos de lluvia</p>
-          </div>
+        <div style="margin-top: 14px; text-align: center;">
+          <img src="img/p03/image14.png" alt="Humedad antecedente muy alta antes de un deslizamiento en Montanita, Medellín" style="width: 100%; max-height: 760px; object-fit: contain; border-radius: 12px; background: #FFFFFF; box-shadow: var(--card-shadow); padding: 8px; box-sizing: border-box;">
         </div>
       </section>
 
@@ -1061,7 +1193,6 @@
 
         </div>
       </section>
-
       <!-- SLIDE 13: TENSIÓMETROS: VENTAJAS Y LIMITACIONES -->
       <section>
         <h2>Tensiómetros</h2>
@@ -1099,23 +1230,19 @@
             ¡Es fundamental el análisis de los datos para cada punto específico!
           </div>
         </div>
-      </section>
-
-      <!-- SLIDE 14: TENSIÓMETROS EN CAMPO -->
+      </section>      <!-- NEW:03-station -->
       <section>
-        <h2>Tensiómetros: Monitoreo en campo</h2>
-        <div style="text-align: center; margin-top: 25px;">
-          <img src="img/p03/image18.png" alt="Tensiómetros Instalados en Campo" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
-        </div>
-      </section>
+        <h2>Tensiómetros: monitoreo en campo</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          Estación La Palma: humedad, succión y lluvia juntas
+        </h3>
 
-      <!-- SLIDE 15: MONITOREO DEL AGUA EN EL SUELO: REGISTROS -->
-      <section>
-        <h2>Monitoreo del agua en el suelo</h2>
-        <div style="display: flex; gap: 20px; justify-content: center; align-items: center; margin-top: 30px;">
-          <img src="img/p03/image19.png" alt="Curva de Succión vs Humedad" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
-          <img src="img/p03/image20.png" alt="Respuesta de Succión ante Lluvia" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
-          <img src="img/p03/image21.png" alt="Esquema de Instalación" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        <div style="display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; justify-content: center; margin-top: 14px;">
+          <img src="img/p03/image19.png" alt="Humedad volumétrica a 1,0 m y 1,5 m, estación La Palma" style="max-height: 700px; width: auto; border-radius: 10px; background: #FFFFFF; box-shadow: var(--card-shadow); padding: 6px;">
+          <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+            <img src="img/p03/image20.png" alt="Tensiómetro 800, La Palma" style="max-height: 340px; width: auto; max-width: 100%; border-radius: 10px; background: #FFFFFF; box-shadow: var(--card-shadow); padding: 6px;">
+            <img src="img/p03/image21.png" alt="Pluviómetro 798, La Palma" style="max-height: 340px; width: auto; max-width: 100%; border-radius: 10px; background: #FFFFFF; box-shadow: var(--card-shadow); padding: 6px;">
+          </div>
         </div>
       </section>
 
@@ -1151,19 +1278,71 @@
           </div>
 
         </div>
-      </section>
-
-      <!-- SLIDE 17: PIEZÓMETROS: INSTALACIÓN -->
+      </section>      <!-- PIEZÓMETROS: PRINCIPIO -->
       <section>
-        <h2>Piezómetros: Instalación en sondeos</h2>
-        <div style="text-align: center; margin-top: 25px;">
-          <img src="img/p03/image22.png" alt="Esquema de Instalación Piezométrica" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        <h2>Piezómetros: principio de funcionamiento</h2>
+        <div style="text-align: center; margin-top: 18px;">
+          <img src="img/p03/image22.png" alt="Principio de funcionamiento de un piezómetro en cuatro pasos" style="width: auto; max-width: 100%; max-height: 820px; object-fit: contain; border-radius: 12px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>      <!-- NEW:03-piezo-pressure -->
+      <section>
+        <h2>Piezómetro de tubo abierto: cómo mide</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          La altura del agua en el tubo es la presión de poros
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" style="max-height: 620px" viewBox="0 0 760 490" role="img" aria-label="Piezómetro de tubo abierto: altura del agua sobre el filtro"><defs><pattern id="pz-g" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="6" cy="7" r="2.4" class="grains"/><circle cx="18" cy="16" r="3" class="grains"/></pattern><marker id="pz-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-cyan)"/></marker><marker id="pz-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-main)"/></marker></defs>
+<rect class="f-soil-dry" x="40" y="110" width="400" height="110"/>
+<rect class="f-soil-sat" x="40" y="220" width="400" height="250"/>
+<rect x="40" y="110" width="400" height="360" fill="url(#pz-g)"/>
+<line class="ax" x1="30" y1="110" x2="450" y2="110"/>
+<line class="thin dash s-blue" style="stroke-width: 3.5" x1="40" y1="220" x2="440" y2="220"/>
+<rect x="198" y="50" width="24" height="330" style="fill: var(--bg-card); stroke: var(--text-main); stroke-width: 3"/>
+<rect x="201" y="170" width="18" height="210" class="f-water" style="fill-opacity: 0.9"/>
+<rect x="186" y="300" width="48" height="50" style="fill: var(--text-dim); opacity: 0.7"/>
+<rect class="f-ten" x="192" y="380" width="36" height="52" rx="4"/>
+<line x1="140" y1="398" x2="186" y2="404" style="stroke: var(--accent-cyan); stroke-width: 5" marker-end="url(#pz-a)"/>
+<line x1="140" y1="424" x2="186" y2="418" style="stroke: var(--accent-cyan); stroke-width: 5" marker-end="url(#pz-a)"/>
+<line x1="280" y1="398" x2="234" y2="404" style="stroke: var(--accent-cyan); stroke-width: 5" marker-end="url(#pz-a)"/>
+<line x1="280" y1="424" x2="234" y2="418" style="stroke: var(--accent-cyan); stroke-width: 5" marker-end="url(#pz-a)"/>
+<line x1="330" y1="172" x2="330" y2="380" style="stroke: var(--text-main); stroke-width: 3.5" marker-start="url(#pz-b)" marker-end="url(#pz-b)"/>
+<text class="b m halo" x="344" y="268">h_w</text><text class="s halo" x="344" y="290">altura del agua</text><text class="s halo" x="344" y="310">sobre el filtro</text>
+<line x1="222" y1="170" x2="468" y2="170" class="thin" style="stroke-width: 2"/>
+<text class="pie-txt m" x="476" y="176">Nivel piezométrico</text>
+<text class="s" x="476" y="198">hasta donde sube el agua</text>
+<line x1="440" y1="220" x2="468" y2="230" class="thin" style="stroke-width: 2"/>
+<text class="pie-txt m" x="476" y="236">Nivel freático</text>
+<text class="s" x="476" y="258">donde u = 0</text>
+<line x1="234" y1="326" x2="468" y2="330" class="thin" style="stroke-width: 2"/>
+<text class="b m" x="476" y="336">Sello de bentonita</text>
+<text class="s" x="476" y="358">aísla el filtro</text>
+<line x1="228" y1="408" x2="468" y2="414" class="thin" style="stroke-width: 2"/>
+<text class="ten-txt m" x="476" y="420">Filtro</text>
+<text class="s" x="476" y="442">aquí se mide u</text>
+</svg>
+
+          <div>
+            <div class="formula-inline" style="font-size: 0.95em;">
+              $$u = \gamma_w \cdot h_w$$
+            </div>
+            <ul class="bullet-list" style="font-size: 0.74em;">
+              <li>El agua sube por el tubo hasta <strong>equilibrar</strong> la presión en el filtro.</li>
+              <li>$\gamma_w \approx 9{,}81\ \text{kN/m}^3$: <strong>cada metro de agua ≈ 10 kPa</strong>.</li>
+            </ul>
+            <div class="callout callout-info" style="margin-top: 12px; font-size: 0.78em !important;">
+              <span class="callout-icon">🧮</span>
+              <div class="callout-content"><strong>Ejemplo:</strong> si el agua sube 5 m sobre el filtro, $u \approx 9{,}81 \times 5 \approx 49\ \text{kPa}$.</div>
+            </div>
+          </div>
+
         </div>
       </section>
 
       <!-- SLIDE 18: PIEZÓMETROS: INTERPRETACIÓN Y TIPOS -->
       <section>
-        <h2>Piezómetros: Interpretación y tipos de sensores</h2>
+        <h2>Piezómetros: tipos de sensores</h2>
         <div class="split-2" style="margin-top: 20px; align-items: center;">
           
           <div style="display: flex; flex-direction: column; gap: 20px;">
@@ -1193,6 +1372,106 @@
           </div>
 
         </div>
+      </section>      <!-- NEW:03-piezo-vw -->
+      <section>
+        <h2>Piezómetro de cuerda vibrante: cómo mide</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          La presión del agua cambia la frecuencia de una cuerda
+        </h3>
+
+        <div style="margin-top: 8px;">
+          <svg class="dg" style="max-height: 560px" viewBox="0 0 900 460" role="img" aria-label="Piezómetro de cuerda vibrante: presión, diafragma, cuerda y bobina"><defs><marker id="vw-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--accent-cyan)"/></marker></defs>
+<rect x="170" y="130" width="520" height="130" rx="22" style="fill: var(--bg-card); stroke: var(--text-main); stroke-width: 4"/>
+<rect x="100" y="140" width="70" height="110" rx="10" class="f-solid" style="stroke: var(--text-main); stroke-width: 3"/>
+<circle cx="118" cy="160" r="3" class="grains"/>
+<circle cx="146" cy="170" r="3" class="grains"/>
+<circle cx="118" cy="180" r="3" class="grains"/>
+<circle cx="146" cy="190" r="3" class="grains"/>
+<circle cx="118" cy="200" r="3" class="grains"/>
+<circle cx="146" cy="210" r="3" class="grains"/>
+<circle cx="118" cy="220" r="3" class="grains"/>
+<circle cx="146" cy="230" r="3" class="grains"/>
+<text class="b s" x="135" y="280" text-anchor="middle">Piedra</text><text class="b s" x="135" y="300" text-anchor="middle">porosa</text>
+<path d="M250,136 Q268,195 250,254" style="fill: none; stroke: var(--sensor-pie); stroke-width: 9; stroke-linecap: round"/>
+<text class="pie-txt s" x="250" y="116" text-anchor="middle">Diafragma</text>
+<path d="M260.0,195.0 L265.0,198.9 L270.0,199.9 L275.0,197.1 L280.0,192.8 L285.0,190.1 L290.0,191.1 L295.0,195.1 L300.0,199.0 L305.0,199.8 L310.0,197.1 L315.0,192.7 L320.0,190.1 L325.0,191.2 L330.0,195.2 L335.0,199.0 L340.0,199.8 L345.0,197.0 L350.0,192.6 L355.0,190.1 L360.0,191.2 L365.0,195.3 L370.0,199.1 L375.0,199.8 L380.0,196.9 L385.0,192.6 L390.0,190.1 L395.0,191.3 L400.0,195.3 L405.0,199.1 L410.0,199.8 L415.0,196.8 L420.0,192.5 L425.0,190.1 L430.0,191.4 L435.0,195.4 L440.0,199.2 L445.0,199.8 L450.0,196.7 L455.0,192.4 L460.0,190.0 L465.0,191.4 L470.0,195.5 L475.0,199.2 L480.0,199.7 L485.0,196.7 L490.0,192.3 L495.0,190.0 L500.0,191.5 L505.0,195.6 L510.0,199.3 L515.0,199.7 L520.0,196.6 L525.0,192.3 L530.0,190.0 L535.0,191.5 L540.0,195.7 L545.0,199.3 L550.0,199.7 L555.0,196.5 L560.0,192.2 L565.0,190.0 L570.0,191.6 L575.0,195.8 L580.0,199.3 L585.0,199.6 L590.0,196.4 L595.0,192.1 L600.0,190.0 L605.0,191.7 L610.0,195.8 L615.0,199.4 L620.0,199.6 L625.0,196.4 L630.0,192.1 L635.0,190.0 L640.0,191.7" style="fill: none; stroke: var(--sensor-hum); stroke-width: 4"/>
+<text class="hum-txt s" x="400" y="170" text-anchor="middle">Cuerda vibrante</text>
+<rect x="500" y="204" width="5" height="34" rx="2" class="f-ten"/>
+<rect x="509" y="204" width="5" height="34" rx="2" class="f-ten"/>
+<rect x="518" y="204" width="5" height="34" rx="2" class="f-ten"/>
+<rect x="527" y="204" width="5" height="34" rx="2" class="f-ten"/>
+<rect x="536" y="204" width="5" height="34" rx="2" class="f-ten"/>
+<rect x="545" y="204" width="5" height="34" rx="2" class="f-ten"/>
+<rect x="554" y="204" width="5" height="34" rx="2" class="f-ten"/>
+<text class="ten-txt s" x="532" y="284" text-anchor="middle">Bobina</text>
+<line x1="690" y1="195" x2="800" y2="195" style="stroke: var(--text-dim); stroke-width: 7"/>
+<rect class="f-ao" x="800" y="160" width="90" height="70" rx="8"/><text class="dk" x="845" y="203" text-anchor="middle" style="font-size: 17px">Lector</text>
+<line x1="30" y1="160" x2="92" y2="160" style="stroke: var(--accent-cyan); stroke-width: 6" marker-end="url(#vw-a)"/>
+<line x1="30" y1="195" x2="92" y2="195" style="stroke: var(--accent-cyan); stroke-width: 6" marker-end="url(#vw-a)"/>
+<line x1="30" y1="230" x2="92" y2="230" style="stroke: var(--accent-cyan); stroke-width: 6" marker-end="url(#vw-a)"/>
+<text class="pie-txt m" x="30" y="132">Presión u</text>
+<rect class="panel" x="20" y="340" width="206" height="96" rx="12"/>
+<circle cx="50" cy="388" r="17" class="f-pie"/><text class="w" x="50" y="395" text-anchor="middle" style="font-size: 17px">1</text>
+<text class="m" x="78" y="380" style="font-size: 19px">u empuja</text><text class="m" x="78" y="406" style="font-size: 19px">el diafragma</text>
+<rect class="panel" x="240" y="340" width="206" height="96" rx="12"/>
+<circle cx="270" cy="388" r="17" class="f-hum"/><text class="w" x="270" y="395" text-anchor="middle" style="font-size: 17px">2</text>
+<text class="m" x="298" y="380" style="font-size: 19px">se tensa</text><text class="m" x="298" y="406" style="font-size: 19px">la cuerda</text>
+<rect class="panel" x="460" y="340" width="206" height="96" rx="12"/>
+<circle cx="490" cy="388" r="17" class="f-ten"/><text class="w" x="490" y="395" text-anchor="middle" style="font-size: 17px">3</text>
+<text class="m" x="518" y="380" style="font-size: 19px">la bobina lee</text><text class="m" x="518" y="406" style="font-size: 19px">su frecuencia, f</text>
+<rect class="panel" x="680" y="340" width="206" height="96" rx="12"/>
+<circle cx="710" cy="388" r="17" class="f-ao"/><text class="w" x="710" y="395" text-anchor="middle" style="font-size: 17px">4</text>
+<text class="m" x="738" y="380" style="font-size: 19px">el lector</text><text class="m" x="738" y="406" style="font-size: 19px">calcula u</text>
+</svg>
+        </div>
+        <div class="split-2" style="margin-top: 12px; gap: 24px; align-items: center;">
+          <div class="callout callout-info" style="margin: 0; font-size: 0.82em !important;">
+            <span class="callout-icon">🎸</span>
+            <div class="callout-content"><strong>Como una cuerda de guitarra:</strong> a más presión, más tensa y más aguda (mayor frecuencia).</div>
+          </div>
+          <div class="formula-inline" style="margin: 0; font-size: 0.8em;">
+            $$u \propto f^{2} - f_0^{2}$$
+          </div>
+        </div>
+      </section>
+      <!-- NEW:03-piezo-response -->
+      <section>
+        <h2>Tubo abierto vs. cuerda vibrante</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          La rapidez de respuesta cambia lo que puedes vigilar
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 30px;">
+
+          <svg class="dg" style="max-height: 560px" viewBox="0 0 700 470" role="img" aria-label="Tiempo de respuesta de un piezómetro de tubo abierto y uno de cuerda vibrante">
+<line class="ax" x1="110" y1="400" x2="660" y2="400"/><line class="ax" x1="110" y1="400" x2="110" y2="60"/>
+<path class="series" style="stroke: var(--text-main); stroke-width: 3.5; stroke-dasharray: 9 6" d="M110.0,337.1 L115.3,337.1 L120.6,337.1 L125.9,337.1 L131.2,337.1 L136.5,337.1 L141.8,337.1 L147.1,337.1 L152.4,337.1 L157.7,337.1 L163.0,337.1 L168.3,337.1 L173.6,337.1 L178.9,337.1 L184.2,337.1 L189.5,337.1 L194.8,337.1 L200.1,337.1 L205.4,337.1 L210.7,337.1 L216.0,117.1 L221.3,117.1 L226.6,117.1 L231.9,117.1 L237.2,117.1 L242.5,117.1 L247.8,117.1 L253.1,117.1 L258.4,117.1 L263.7,117.1 L269.0,117.1 L274.3,117.1 L279.6,117.1 L284.9,117.1 L290.2,117.1 L295.5,117.1 L300.8,117.1 L306.1,117.1 L311.4,117.1 L316.7,117.1 L322.0,117.1 L327.3,117.1 L332.6,117.1 L337.9,117.1 L343.2,117.1 L348.5,117.1 L353.8,117.1 L359.1,117.1 L364.4,117.1 L369.7,117.1 L375.0,117.1 L380.3,117.1 L385.6,117.1 L390.9,117.1 L396.2,117.1 L401.5,117.1 L406.8,117.1 L412.1,117.1 L417.4,117.1 L422.7,117.1 L428.0,117.1 L433.3,117.1 L438.6,117.1 L443.9,117.1 L449.2,117.1 L454.5,117.1 L459.8,117.1 L465.1,117.1 L470.4,117.1 L475.7,117.1 L481.0,117.1 L486.3,117.1 L491.6,117.1 L496.9,117.1 L502.2,117.1 L507.5,117.1 L512.8,117.1 L518.1,117.1 L523.4,117.1 L528.7,117.1 L534.0,117.1 L539.3,117.1 L544.6,117.1 L549.9,117.1 L555.2,117.1 L560.5,117.1 L565.8,117.1 L571.1,117.1 L576.4,117.1 L581.7,117.1 L587.0,117.1 L592.3,117.1 L597.6,117.1 L602.9,117.1 L608.2,117.1 L613.5,117.1 L618.8,117.1 L624.1,117.1 L629.4,117.1 L634.7,117.1 L640.0,117.1"/>
+<path class="curve s-hum" d="M110.0,337.1 L115.3,337.1 L120.6,337.1 L125.9,337.1 L131.2,337.1 L136.5,337.1 L141.8,337.1 L147.1,337.1 L152.4,337.1 L157.7,337.1 L163.0,337.1 L168.3,337.1 L173.6,337.1 L178.9,337.1 L184.2,337.1 L189.5,337.1 L194.8,337.1 L200.1,337.1 L205.4,337.1 L210.7,337.1 L216.0,337.1 L221.3,212.8 L226.6,158.7 L231.9,135.2 L237.2,125.0 L242.5,120.6 L247.8,118.6 L253.1,117.8 L258.4,117.4 L263.7,117.3 L269.0,117.2 L274.3,117.2 L279.6,117.2 L284.9,117.1 L290.2,117.1 L295.5,117.1 L300.8,117.1 L306.1,117.1 L311.4,117.1 L316.7,117.1 L322.0,117.1 L327.3,117.1 L332.6,117.1 L337.9,117.1 L343.2,117.1 L348.5,117.1 L353.8,117.1 L359.1,117.1 L364.4,117.1 L369.7,117.1 L375.0,117.1 L380.3,117.1 L385.6,117.1 L390.9,117.1 L396.2,117.1 L401.5,117.1 L406.8,117.1 L412.1,117.1 L417.4,117.1 L422.7,117.1 L428.0,117.1 L433.3,117.1 L438.6,117.1 L443.9,117.1 L449.2,117.1 L454.5,117.1 L459.8,117.1 L465.1,117.1 L470.4,117.1 L475.7,117.1 L481.0,117.1 L486.3,117.1 L491.6,117.1 L496.9,117.1 L502.2,117.1 L507.5,117.1 L512.8,117.1 L518.1,117.1 L523.4,117.1 L528.7,117.1 L534.0,117.1 L539.3,117.1 L544.6,117.1 L549.9,117.1 L555.2,117.1 L560.5,117.1 L565.8,117.1 L571.1,117.1 L576.4,117.1 L581.7,117.1 L587.0,117.1 L592.3,117.1 L597.6,117.1 L602.9,117.1 L608.2,117.1 L613.5,117.1 L618.8,117.1 L624.1,117.1 L629.4,117.1 L634.7,117.1 L640.0,117.1"/>
+<path class="curve s-ten" d="M110.0,337.1 L115.3,337.1 L120.6,337.1 L125.9,337.1 L131.2,337.1 L136.5,337.1 L141.8,337.1 L147.1,337.1 L152.4,337.1 L157.7,337.1 L163.0,337.1 L168.3,337.1 L173.6,337.1 L178.9,337.1 L184.2,337.1 L189.5,337.1 L194.8,337.1 L200.1,337.1 L205.4,337.1 L210.7,337.1 L216.0,337.1 L221.3,326.4 L226.6,316.2 L231.9,306.5 L237.2,297.3 L242.5,288.5 L247.8,280.1 L253.1,272.2 L258.4,264.6 L263.7,257.4 L269.0,250.6 L274.3,244.1 L279.6,237.9 L284.9,232.0 L290.2,226.4 L295.5,221.1 L300.8,216.0 L306.1,211.2 L311.4,206.6 L316.7,202.2 L322.0,198.1 L327.3,194.1 L332.6,190.4 L337.9,186.8 L343.2,183.4 L348.5,180.2 L353.8,177.1 L359.1,174.2 L364.4,171.4 L369.7,168.7 L375.0,166.2 L380.3,163.8 L385.6,161.6 L390.9,159.4 L396.2,157.3 L401.5,155.4 L406.8,153.5 L412.1,151.7 L417.4,150.0 L422.7,148.4 L428.0,146.9 L433.3,145.5 L438.6,144.1 L443.9,142.8 L449.2,141.5 L454.5,140.3 L459.8,139.2 L465.1,138.1 L470.4,137.1 L475.7,136.1 L481.0,135.2 L486.3,134.3 L491.6,133.5 L496.9,132.7 L502.2,131.9 L507.5,131.2 L512.8,130.5 L518.1,129.9 L523.4,129.2 L528.7,128.7 L534.0,128.1 L539.3,127.6 L544.6,127.1 L549.9,126.6 L555.2,126.1 L560.5,125.7 L565.8,125.3 L571.1,124.9 L576.4,124.5 L581.7,124.1 L587.0,123.8 L592.3,123.5 L597.6,123.2 L602.9,122.9 L608.2,122.6 L613.5,122.3 L618.8,122.1 L624.1,121.8 L629.4,121.6 L634.7,121.4 L640.0,121.2"/>
+<line class="s-gray" style="stroke-dasharray: 9 6; stroke-width: 3.5; stroke-linecap: round" x1="330" y1="300" x2="370" y2="300"/><text class="b s" x="380" y="306">Presión real</text>
+<line class="s-hum" style="stroke-width: 5; stroke-linecap: round" x1="330" y1="330" x2="370" y2="330"/><text class="b s" x="380" y="336">Cuerda vibrante: casi al instante</text>
+<line class="s-ten" style="stroke-width: 5; stroke-linecap: round" x1="330" y1="360" x2="370" y2="360"/><text class="b s" x="380" y="366">Tubo abierto: llega tarde</text>
+<line class="thin dash" x1="216.0" y1="70" x2="216.0" y2="400"/><text class="s" x="216.0" y="424" text-anchor="middle">sube la presión</text>
+<text class="s" x="385" y="458" text-anchor="middle">Tiempo →</text>
+<text class="s" transform="translate(48,235) rotate(-90)" text-anchor="middle">Lectura del piezómetro</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">⏱️</span><span>Por qué el tubo se demora</span></div>
+            <ul class="bullet-list" style="font-size: 0.74em;">
+              <li>Para que suba el agua en el tubo, <strong>debe entrar agua por el filtro</strong>.</li>
+              <li>En suelos poco permeables (arcillas) puede tardar <strong>horas o días</strong>.</li>
+              <li>La cuerda vibrante casi <strong>no necesita que fluya agua</strong>: responde rápido.</li>
+            </ul>
+          </div>
+          </div>
+
+        </div>
+        <div class="callout callout-warning" style="margin-top: 12px;">
+          <span class="callout-icon">🚨</span>
+          <div class="callout-content" style="font-weight: 600;">Para <strong>alertas</strong>, donde importa cada hora, se prefiere el sensor eléctrico o de cuerda vibrante. El tubo abierto sirve como <strong>referencia sencilla y confiable</strong>.</div>
+        </div>
       </section>
 
       <!-- SLIDE 19: SERIES PIEZOMÉTRICAS Y PERCENTILES -->
@@ -1204,6 +1483,57 @@
 
         <div style="text-align: center; margin-top: 20px;">
           <img src="img/p03/image24.png" alt="Serie Piezométrica con Bandas de Percentiles" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+      </section>      <!-- NEW:03-swcc3 -->
+      <section>
+        <h2>Curva de retención: dónde mide cada sensor</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+          La misma curva, ahora con los instrumentos
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; align-items: center; gap: 28px;">
+
+          <svg class="dg" style="max-height: 620px" viewBox="0 0 1000 540" role="img" aria-label="Curva de retención con la zona que mide cada sensor"><defs><marker id="sw-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill: var(--text-main)"/></marker></defs>
+<rect x="110.0" y="70" width="245.2" height="330" style="fill: var(--accent-cyan); fill-opacity: 0.3"/>
+<rect x="355.2" y="70" width="332.0" height="330" style="fill: var(--eafit-yellow); fill-opacity: 0.38"/>
+<rect x="687.2" y="70" width="252.8" height="330" style="fill: var(--accent-rose); fill-opacity: 0.3"/>
+<line class="ax" x1="110" y1="400" x2="950" y2="400"/><line class="ax" x1="110" y1="400" x2="110" y2="66"/>
+<polygon class="f-gray" points="960,400 942,392 942,408"/><polygon class="f-gray" points="110,56 102,74 118,74"/>
+<text class="s" x="110.0" y="424" text-anchor="middle">0,1</text>
+<text class="s" x="276.0" y="424" text-anchor="middle">1</text>
+<text class="s" x="442.0" y="424" text-anchor="middle">10</text>
+<text class="s" x="608.0" y="424" text-anchor="middle">100</text>
+<text class="s" x="774.0" y="424" text-anchor="middle">1000</text>
+<text class="s" x="940.0" y="424" text-anchor="middle">10⁴</text>
+<path class="curve s-pie" style="stroke-width: 6" d="M110.0,103.0 L114.2,103.0 L118.3,103.0 L122.4,103.0 L126.6,103.0 L130.8,103.0 L134.9,103.0 L139.1,103.0 L143.2,103.0 L147.3,103.0 L151.5,103.0 L155.7,103.0 L159.8,103.1 L163.9,103.1 L168.1,103.1 L172.2,103.1 L176.4,103.1 L180.6,103.1 L184.7,103.1 L188.8,103.1 L193.0,103.1 L197.2,103.1 L201.3,103.2 L205.4,103.2 L209.6,103.2 L213.8,103.2 L217.9,103.3 L222.1,103.3 L226.2,103.3 L230.3,103.4 L234.5,103.4 L238.7,103.5 L242.8,103.5 L246.9,103.6 L251.1,103.7 L255.2,103.7 L259.4,103.8 L263.6,103.9 L267.7,104.0 L271.9,104.2 L276.0,104.3 L280.1,104.5 L284.3,104.6 L288.4,104.8 L292.6,105.1 L296.8,105.3 L300.9,105.6 L305.1,105.9 L309.2,106.3 L313.4,106.6 L317.5,107.1 L321.6,107.6 L325.8,108.1 L330.0,108.7 L334.1,109.4 L338.2,110.1 L342.4,111.0 L346.6,111.9 L350.7,112.9 L354.9,114.0 L359.0,115.3 L363.1,116.7 L367.3,118.2 L371.4,119.9 L375.6,121.7 L379.8,123.7 L383.9,126.0 L388.1,128.4 L392.2,131.0 L396.4,133.8 L400.5,136.9 L404.6,140.2 L408.8,143.7 L412.9,147.5 L417.1,151.5 L421.2,155.8 L425.4,160.3 L429.6,165.0 L433.7,169.9 L437.9,175.0 L442.0,180.3 L446.1,185.8 L450.3,191.3 L454.5,197.0 L458.6,202.8 L462.8,208.6 L466.9,214.5 L471.0,220.3 L475.2,226.1 L479.4,231.9 L483.5,237.6 L487.6,243.2 L491.8,248.7 L496.0,254.1 L500.1,259.3 L504.2,264.4 L508.4,269.4 L512.5,274.1 L516.7,278.7 L520.9,283.1 L525.0,287.4 L529.1,291.5 L533.3,295.4 L537.5,299.1 L541.6,302.7 L545.8,306.1 L549.9,309.3 L554.0,312.4 L558.2,315.3 L562.4,318.1 L566.5,320.8 L570.6,323.3 L574.8,325.7 L579.0,327.9 L583.1,330.1 L587.2,332.1 L591.4,334.0 L595.5,335.8 L599.7,337.6 L603.8,339.2 L608.0,340.7 L612.1,342.2 L616.3,343.6 L620.5,344.9 L624.6,346.1 L628.8,347.3 L632.9,348.4 L637.0,349.4 L641.2,350.4 L645.4,351.3 L649.5,352.2 L653.6,353.0 L657.8,353.8 L662.0,354.5 L666.1,355.2 L670.2,355.9 L674.4,356.5 L678.5,357.1 L682.7,357.6 L686.9,358.2 L691.0,358.7 L695.1,359.1 L699.3,359.6 L703.5,360.0 L707.6,360.4 L711.8,360.7 L715.9,361.1 L720.0,361.4 L724.2,361.7 L728.4,362.0 L732.5,362.3 L736.6,362.6 L740.8,362.8 L745.0,363.1 L749.1,363.3 L753.2,363.5 L757.4,363.7 L761.5,363.9 L765.7,364.0 L769.9,364.2 L774.0,364.4 L778.2,364.5 L782.3,364.6 L786.5,364.8 L790.6,364.9 L794.8,365.0 L798.9,365.1 L803.0,365.2 L807.2,365.3 L811.4,365.4 L815.5,365.5 L819.7,365.6 L823.8,365.7 L828.0,365.8 L832.1,365.8 L836.2,365.9 L840.4,365.9 L844.5,366.0 L848.7,366.1 L852.8,366.1 L857.0,366.2 L861.1,366.2 L865.3,366.3 L869.5,366.3 L873.6,366.3 L877.8,366.4 L881.9,366.4 L886.0,366.4 L890.2,366.5 L894.3,366.5 L898.5,366.5 L902.7,366.6 L906.8,366.6 L911.0,366.6 L915.1,366.6 L919.2,366.6 L923.4,366.7 L927.5,366.7 L931.7,366.7 L935.8,366.7 L940.0,366.7"/>
+<path d="M597.2,297.6 L587.4,291.5 L577.6,284.6 L567.9,276.9 L558.1,268.3 L548.4,258.7 L538.6,248.2 L528.8,236.7 L519.1,224.4 L509.3,211.4 L499.6,197.8 L489.8,184.1 L480.0,170.5 L470.3,157.3 L460.5,144.9 L450.7,133.6 L441.0,123.5 L431.2,114.7 L421.5,107.2 L411.7,101.0 L401.9,95.9" style="fill: none; stroke: var(--text-main); stroke-width: 4; stroke-dasharray: 9 6" marker-end="url(#sw-a)"/>
+<circle cx="571.2" cy="323.6" r="9" style="fill: var(--eafit-yellow); stroke: var(--text-main); stroke-width: 3"/>
+<circle cx="375.9" cy="121.9" r="9" style="fill: var(--eafit-yellow); stroke: var(--text-main); stroke-width: 3"/>
+<text class="b s halo" x="587.2" y="311.6">suelo seco</text>
+<text class="b s halo" x="359.9" y="155.9" text-anchor="end">tras la lluvia</text>
+<text class="b s halo" x="533.6" y="158.7">al llover: ψ baja y θ sube</text>
+<path d="M96,96.4 L82,96.4 L82,373.6 L96,373.6" style="fill: none; stroke: var(--sensor-hum); stroke-width: 5"/>
+<text class="hum-txt m" transform="translate(58,235) rotate(-90)" text-anchor="middle">Sensor de humedad → θ</text>
+<rect x="110.0" y="440" width="166.0" height="30" rx="8" class="f-pie"/>
+<text class="w" x="193.0" y="461" text-anchor="middle" style="font-size: 17px">Piezómetro</text>
+<rect x="276.0" y="440" width="315.9" height="30" rx="8" class="f-ten"/>
+<text class="dk" x="434.0" y="461" text-anchor="middle" style="font-size: 17px">Tensiómetro (hasta ~80 kPa)</text>
+<text class="s" x="114.0" y="490">u &gt; 0 (ψ = 0)</text>
+<text class="b l" x="530" y="524" text-anchor="middle" style="font-size: 22px">Succión matricial, ψ (kPa, escala logarítmica) →</text>
+</svg>
+
+          <div>
+          <div class="card card-highlight">
+            <div class="card-title" style="color: var(--eafit-blue);"><span class="card-icon">🎯</span><span>Dónde mide cada sensor</span></div>
+            <ul class="bullet-list" style="font-size: 0.7em;">
+              <li><strong style="color: var(--sensor-hum)">Humedad:</strong> lee el eje vertical, θ.</li>
+              <li><strong style="color: var(--sensor-ten)">Tensiómetro:</strong> lee el eje horizontal, ψ, hasta unos 80 kPa.</li>
+              <li><strong style="color: var(--sensor-pie)">Piezómetro:</strong> cubre el extremo saturado (ψ = 0, u &gt; 0).</li>
+              <li>Cada par (ψ, θ) <strong>cae sobre la curva</strong>: así se calibra y valida.</li>
+            </ul>
+          </div>
+          </div>
+
         </div>
       </section>
 
@@ -1229,7 +1559,6 @@
           </div>
         </div>
       </section>
-
       <!-- SLIDE 21: MISIÓN SMAP -->
       <section>
         <h2>Satélites: Misión SMAP (NASA)</h2>
@@ -1255,7 +1584,6 @@
 
         </div>
       </section>
-
       <!-- SLIDE 22: MISIÓN SMOS -->
       <section>
         <h2>Satélites: Misión SMOS (ESA)</h2>
@@ -1280,7 +1608,6 @@
 
         </div>
       </section>
-
       <!-- SLIDE 23: SENTINEL-1 Y LANDSAT -->
       <section class="slide-cover">
         <div class="cover-badge">Módulo 03 &bull; Sensores Remotos y Síntesis</div>
