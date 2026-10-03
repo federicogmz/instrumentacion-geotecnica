@@ -210,24 +210,99 @@
     kbd { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; background: var(--bg-soft); border: 1px solid var(--card-border); border-bottom-width: 3px; border-radius: 7px; padding: 2px 8px; color: var(--text); }
 
     /* ---------- Laboratorio de Python ---------- */
-    .lab { background: linear-gradient(135deg, var(--blue-dark), #0B3C73); color: #E2E8F0; border-radius: 28px; padding: 40px; box-shadow: var(--shadow-hover); position: relative; overflow: hidden; }
-    .lab::after { content: "🐍"; position: absolute; right: 30px; top: -10px; font-size: 9rem; opacity: 0.08; }
-    .lab h2 { color: #fff; }
-    .lab .sub { color: #B6C6DA; }
+    .lab {
+      background: linear-gradient(135deg, rgba(0, 75, 133, 0.05) 0%, rgba(255, 185, 3, 0.08) 100%), var(--card);
+      border: 1.5px solid var(--card-border);
+      color: var(--text-body);
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    .lab::after { content: "🐍"; position: absolute; right: 30px; top: -10px; font-size: 9rem; opacity: 0.06; }
+    .lab h2 { color: var(--text); }
+    .lab .sub { color: var(--text-muted); }
     .lab-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 22px; }
-    .lab-item { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 6px; transition: 0.2s; color: #fff; }
-    .lab-item:hover { background: rgba(255, 255, 255, 0.16); transform: translateY(-3px); }
+    .lab-item {
+      background: var(--bg-soft);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: 0.2s;
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(0, 75, 133, 0.04);
+    }
+    .lab-item:hover {
+      background: #ffffff;
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px -4px rgba(0, 75, 133, 0.15);
+    }
     .lab-item .ic { font-size: 1.7rem; }
-    .lab-item strong { font-size: 0.98rem; line-height: 1.25; }
-    .lab-item span { font-size: 0.8rem; color: #B6C6DA; }
-    .bar { height: 7px; border-radius: 6px; background: rgba(255, 255, 255, 0.18); overflow: hidden; margin-top: auto; }
+    .lab-item strong { font-size: 0.98rem; line-height: 1.25; color: var(--text); }
+    .lab-item span { font-size: 0.8rem; color: var(--text-muted); }
+    .bar { height: 7px; border-radius: 6px; background: rgba(0, 75, 133, 0.12); overflow: hidden; margin-top: auto; }
     .bar i { display: block; height: 100%; width: 0; background: var(--yellow); border-radius: 6px; transition: width 0.6s; }
     .lab-foot { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .lab-foot .note { font-size: 0.85rem; color: #B6C6DA; margin-left: auto; }
-    .colab { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.16); align-items: center; }
-    .colab span { font-size: 0.86rem; color: #B6C6DA; font-weight: 600; }
-    .colab a { font-size: 0.82rem; font-weight: 800; color: #fff; padding: 7px 14px; border-radius: 9px; border: 1px solid rgba(255, 255, 255, 0.3); }
-    .colab a:hover { background: rgba(255, 255, 255, 0.14); }
+    .lab-foot .note { font-size: 0.85rem; color: var(--text-muted); margin-left: auto; }
+    .colab { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--card-border); align-items: center; }
+    .colab span { font-size: 0.86rem; color: var(--text-muted); font-weight: 600; }
+    .colab a {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--blue);
+      background: var(--card);
+      padding: 7px 14px;
+      border-radius: 9px;
+      border: 1px solid var(--card-border);
+      transition: 0.2s;
+    }
+    .colab a:hover {
+      background: var(--bg-soft);
+      border-color: var(--blue);
+    }
+
+    /* .lab en Modo Oscuro */
+    [data-theme="dark"] .lab {
+      background: linear-gradient(135deg, var(--blue-dark), #0B3C73);
+      border-color: rgba(148, 197, 255, 0.16);
+      color: #E2E8F0;
+      box-shadow: var(--shadow-hover);
+    }
+    [data-theme="dark"] .lab::after { opacity: 0.08; }
+    [data-theme="dark"] .lab h2 { color: #fff; }
+    [data-theme="dark"] .lab .sub { color: #B6C6DA; }
+    [data-theme="dark"] .lab-item {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      box-shadow: none;
+    }
+    [data-theme="dark"] .lab-item:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 10px 22px -4px rgba(0, 0, 0, 0.3);
+    }
+    [data-theme="dark"] .lab-item strong { color: #fff; }
+    [data-theme="dark"] .lab-item span { color: #B6C6DA; }
+    [data-theme="dark"] .bar { background: rgba(255, 255, 255, 0.18); }
+    [data-theme="dark"] .lab-foot .note { color: #B6C6DA; }
+    [data-theme="dark"] .colab { border-top-color: rgba(255, 255, 255, 0.16); }
+    [data-theme="dark"] .colab span { color: #B6C6DA; }
+    [data-theme="dark"] .colab a {
+      color: #fff;
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    [data-theme="dark"] .colab a:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
 
     /* ---------- Evaluación ---------- */
     .eval-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 26px; align-items: start; }
@@ -565,7 +640,7 @@
     <section class="block" id="laboratorio">
       <div class="wrap">
         <div class="lab">
-          <div class="eyebrow" style="color: var(--yellow)">Práctica</div>
+          <div class="eyebrow" style="color: var(--yellow-text); font-weight: 800;">Práctica</div>
           <h2>Laboratorio de Python en tu navegador</h2>
           <p class="sub">Programa con datos reales de sensores geotécnicos sin instalar nada: explicaciones, quizzes con retroalimentación, editor de Python en WebAssembly y un laboratorio libre.</p>
 
@@ -703,7 +778,10 @@
       btn.addEventListener('click', function () {
         var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
-        try { localStorage.setItem('eafit-theme', next); } catch (e) {}
+        try {
+          localStorage.setItem('eafit-theme', next);
+          localStorage.setItem('ig_theme', next);
+        } catch (e) {}
       });
     })();
 

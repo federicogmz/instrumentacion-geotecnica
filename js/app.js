@@ -21,7 +21,8 @@ class CourseApp {
     // ── Estado principal ──────────────────────────────────────────────────────
     this.currentSection  = localStorage.getItem("ig_last_section")  || "teoria";
     this.currentLessonIdx = parseInt(localStorage.getItem("ig_last_lesson") || "0", 10);
-    this.currentTheme    = localStorage.getItem("ig_theme")          || "dark";
+    const savedTheme     = localStorage.getItem("ig_theme") || localStorage.getItem("eafit-theme");
+    this.currentTheme    = savedTheme || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     this.completedLessons = new Set(
       JSON.parse(localStorage.getItem("ig_completed_lessons") || "[]")
     );
@@ -130,6 +131,11 @@ class CourseApp {
   _init() {
     this.applyTheme(this.currentTheme);
     this.initEditor();
+
+    // Theme toggle
+    if (this.dom.btnThemeToggle && !this.dom.btnThemeToggle.onclick) {
+      this.dom.btnThemeToggle.addEventListener("click", () => this.toggleTheme());
+    }
 
     // Nav tabs
     this.dom.navTabs.forEach((btn) => {
@@ -270,11 +276,24 @@ class CourseApp {
   applyTheme(theme) {
     this.currentTheme = theme;
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("ig_theme", theme);
-    this.dom.btnThemeToggle.textContent = theme === "light" ? "🌙" : "☀️";
+    try {
+      localStorage.setItem("ig_theme", theme);
+      localStorage.setItem("eafit-theme", theme);
+    } catch (e) {}
+    if (this.dom.btnThemeToggle) {
+      this.dom.btnThemeToggle.textContent = theme === "light" ? "🌙" : "☀️";
+      this.dom.btnThemeToggle.setAttribute("title", theme === "light" ? "Cambiar a modo oscuro" : "Cambiar a modo claro");
+      this.dom.btnThemeToggle.setAttribute("aria-label", theme === "light" ? "Cambiar a modo oscuro" : "Cambiar a modo claro");
+    }
     if (this.editor) this.editor.setOption("theme", theme === "light" ? "eclipse" : "dracula");
   }
-  toggleTheme() { this.applyTheme(this.currentTheme === "light" ? "dark" : "light"); }
+  toggleTheme() {
+    if (typeof window.toggleThemeGlobal === "function") {
+      window.toggleThemeGlobal();
+    } else {
+      this.applyTheme(this.currentTheme === "light" ? "dark" : "light");
+    }
+  }
 
   // ───────────────────────────────────────────────────────────────────────────
   //  NAVEGACIÓN PRINCIPAL

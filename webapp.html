@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Laboratorio Interactivo de Instrumentación Geotécnica | Universidad EAFIT</title>
 
   <!-- Metadatos SEO -->
@@ -27,10 +30,51 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
 
   <!-- Estilos CSS -->
-  <link rel="stylesheet" href="css/styles.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=5">
 
   <!-- Favicon SVG -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
+
+  <!-- Tema inicial anti-FOUC y conmutador global -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ig_theme') || localStorage.getItem('eafit-theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+    })();
+
+    function toggleThemeGlobal() {
+      var current = document.documentElement.getAttribute('data-theme') || 'dark';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('ig_theme', next);
+        localStorage.setItem('eafit-theme', next);
+      } catch (e) {}
+      var btn = document.getElementById('btn-theme-toggle');
+      if (btn) {
+        btn.textContent = next === 'light' ? '🌙' : '☀️';
+        btn.setAttribute('title', next === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+        btn.setAttribute('aria-label', next === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      }
+      if (window.courseApp) {
+        window.courseApp.currentTheme = next;
+        if (window.courseApp.editor) {
+          window.courseApp.editor.setOption('theme', next === 'light' ? 'eclipse' : 'dracula');
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var t = document.documentElement.getAttribute('data-theme') || 'dark';
+      var btn = document.getElementById('btn-theme-toggle');
+      if (btn) {
+        btn.textContent = t === 'light' ? '🌙' : '☀️';
+        btn.setAttribute('title', t === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      }
+    });
+  </script>
 </head>
 <body>
 
@@ -108,7 +152,7 @@
 
       <!-- Estado de Pyodide, Tema, GitHub -->
       <div class="header-actions">
-        <button class="btn-theme" id="btn-theme-toggle" title="Cambiar a Modo Claro / Oscuro" aria-label="Alternar modo claro u oscuro">
+        <button class="btn-theme" id="btn-theme-toggle" onclick="toggleThemeGlobal()" title="Cambiar a Modo Claro / Oscuro" aria-label="Alternar modo claro u oscuro">
           🌓
         </button>
         <div class="pyodide-status-badge loading" id="pyodide-status" title="Estado del motor de Python WebAssembly">
@@ -297,24 +341,24 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"></script>
 
   <!-- Scripts -->
-  <script src="js/course-data.js?v=4"></script>
-  <script src="js/pyodide-runner.js?v=4"></script>
-  <script src="js/list-indexing.js?v=4"></script>
-  <script src="js/conditional-flow.js?v=4"></script>
-  <script src="js/function-anatomy.js?v=4"></script>
-  <script src="js/for-loop-flow.js?v=4"></script>
-  <script src="js/boolean-filter.js?v=4"></script>
-  <script src="js/dataframe-anatomy.js?v=4"></script>
-  <script src="js/sensor-concat.js?v=4"></script>
-  <script src="js/boxplot-anatomy.js?v=4"></script>
-  <script src="js/threshold-bands.js?v=4"></script>
-  <script src="js/dual-axis-rain.js?v=4"></script>
-  <script src="js/missing-data.js?v=4"></script>
-  <script src="js/rolling-window.js?v=4"></script>
-  <script src="js/velocity-acceleration.js?v=4"></script>
-  <script src="js/lag-correlation.js?v=4"></script>
-  <script src="js/layout-resizer.js?v=4"></script>
-  <script src="js/app.js?v=4"></script>
+  <script src="js/course-data.js?v=5"></script>
+  <script src="js/pyodide-runner.js?v=5"></script>
+  <script src="js/list-indexing.js?v=5"></script>
+  <script src="js/conditional-flow.js?v=5"></script>
+  <script src="js/function-anatomy.js?v=5"></script>
+  <script src="js/for-loop-flow.js?v=5"></script>
+  <script src="js/boolean-filter.js?v=5"></script>
+  <script src="js/dataframe-anatomy.js?v=5"></script>
+  <script src="js/sensor-concat.js?v=5"></script>
+  <script src="js/boxplot-anatomy.js?v=5"></script>
+  <script src="js/threshold-bands.js?v=5"></script>
+  <script src="js/dual-axis-rain.js?v=5"></script>
+  <script src="js/missing-data.js?v=5"></script>
+  <script src="js/rolling-window.js?v=5"></script>
+  <script src="js/velocity-acceleration.js?v=5"></script>
+  <script src="js/lag-correlation.js?v=5"></script>
+  <script src="js/layout-resizer.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
 
 </body>
 </html>
