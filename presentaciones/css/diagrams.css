@@ -263,3 +263,17 @@
 
 /* Texto con contorno para leerse sobre fondos con patrón */
 .dg .halo { paint-order: stroke; stroke: var(--bg-surface); stroke-width: 6px; stroke-linejoin: round; }
+
+/* ---------- Diapositiva de lecturas ---------- */
+.reading-list { display: flex; flex-direction: column; gap: 12px; }
+.reading-row { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; background: var(--bg-card); border: 1px solid var(--border-card); border-left: 6px solid var(--eafit-yellow); border-radius: 14px; padding: 12px 18px; box-shadow: var(--card-shadow); }
+.reading-row .lv { font-size: 0.5em; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; margin-top: 4px; white-space: nowrap; background: rgba(2, 132, 199, 0.14); color: var(--accent-cyan); }
+.reading-row .lv.esencial { background: var(--eafit-yellow); color: #0B192C; }
+.reading-row .rd { font-size: 0.74em; line-height: 1.35; color: var(--text-body); }
+.reading-row .rd strong { color: var(--text-main); font-size: 1.04em; }
+.reading-row .rd .how { display: block; margin-top: 3px; font-size: 0.86em; color: var(--text-muted); }
+.qr-card { background: #FFFFFF; color: #0B192C; border-radius: 20px; padding: 18px 20px 16px; text-align: center; box-shadow: var(--card-shadow); border: 2px solid var(--eafit-yellow); display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.qr-card svg { width: 100%; max-width: 330px; height: auto; display: block; }
+.qr-card strong { font-size: 0.9em; color: #002855; }
+.qr-card span { font-size: 0.62em; line-height: 1.3; color: #334155; }
+.qr-card code { font-family: var(--font-mono); font-size: 0.5em; color: #004B85; word-break: break-all; }

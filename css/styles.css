@@ -5069,3 +5069,6 @@ body.is-resizing-workspace * {
   .mcm-card { padding: 1.5rem; }
   .mcm-title { font-size: 1.3rem; }
 }
+
+/* Enlaces de navegación (Inicio, Lecturas, Presentaciones) sin subrayado */
+a.nav-tab-btn { text-decoration: none; }

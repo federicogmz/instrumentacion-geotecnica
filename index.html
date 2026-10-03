@@ -104,7 +104,7 @@
     .brand img { height: 34px; filter: var(--logo-filter); }
     .brand strong { font-size: 1.02rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; white-space: nowrap; }
     .nav { display: flex; align-items: center; gap: 4px; }
-    .nav a { padding: 8px 13px; border-radius: 9px; font-size: 0.86rem; font-weight: 700; color: var(--text-muted); transition: 0.2s; }
+    .nav a { padding: 8px 11px; border-radius: 9px; font-size: 0.86rem; font-weight: 700; color: var(--text-muted); transition: 0.2s; white-space: nowrap; }
     .nav a:hover { color: var(--text); background: var(--bg-soft); }
     .actions { display: flex; align-items: center; gap: 10px; }
     .btn {
@@ -260,6 +260,9 @@
     footer a { color: var(--blue); font-weight: 700; }
     [data-theme="dark"] footer a { color: var(--cyan); }
 
+    @media (max-width: 1180px) {
+      .nav { display: none; }
+    }
     @media (max-width: 1080px) {
       .keys .keys-grid { grid-template-columns: repeat(2, 1fr); }
       .hero-grid { grid-template-columns: 1fr; }
@@ -304,6 +307,7 @@
       <nav class="nav" aria-label="Secciones">
         <a href="#ruta">Ruta del curso</a>
         <a href="#laboratorio">Laboratorio Python</a>
+        <a href="lecturas.html">Lecturas</a>
         <a href="#evaluacion">Evaluación</a>
         <a href="#recursos">Recursos</a>
         <a href="#docentes">Docentes</a>
@@ -337,6 +341,7 @@
             <span class="chip">🏫 Presencial teórico-práctico</span>
             <span class="chip">📡 Datos reales de SIATA</span>
             <span class="chip">🚨 Alerta temprana</span>
+            <span class="chip">📚 Lecturas con QR</span>
           </div>
         </div>
 
@@ -396,7 +401,7 @@
       <div class="wrap">
         <div class="stats" aria-label="El curso en cifras">
           <div class="stat"><b>6</b><span>presentaciones: apertura y cinco módulos</span></div>
-          <div class="stat"><b>175</b><span>diapositivas con diagramas y esquemas</span></div>
+          <div class="stat"><b>180</b><span>diapositivas con diagramas y esquemas</span></div>
           <div class="stat"><b>16</b><span>lecciones de Python con quizzes y retos</span></div>
           <div class="stat"><b>5</b><span>series reales de sensores (Ancón Norte)</span></div>
         </div>
@@ -426,8 +431,8 @@
                 </ul>
               </div>
               <div class="mod-side">
-                <div class="meta"><span>📄 18 diapositivas</span><span>⏱️ 1 h</span></div>
-                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/00_presentacion_curso.html">Ver diapositivas →</a></div>
+                <div class="meta"><span>📄 19 diapositivas</span><span>⏱️ 1 h</span></div>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/00_presentacion_curso.html">Ver diapositivas →</a><a class="btn btn-ghost" href="lecturas.html#m0">📚 Lecturas (3)</a></div>
               </div>
             </div>
           </div>
@@ -446,9 +451,9 @@
                 </ul>
               </div>
               <div class="mod-side">
-                <div class="meta"><span>📄 18 diapositivas</span><span>⏱️ 2 h</span></div>
+                <div class="meta"><span>📄 19 diapositivas</span><span>⏱️ 2 h</span></div>
                 <a class="practice" href="webapp.html?modulo=teoria"><span>🏔️</span><div><em>Práctica sugerida</em>Caso Ancón Norte (SIATA)</div></a>
-                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/01_conceptos_basicos.html">Ver diapositivas →</a></div>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/01_conceptos_basicos.html">Ver diapositivas →</a><a class="btn btn-ghost" href="lecturas.html#m1">📚 Lecturas (4)</a></div>
               </div>
             </div>
           </div>
@@ -467,9 +472,9 @@
                 </ul>
               </div>
               <div class="mod-side">
-                <div class="meta"><span>📄 30 diapositivas</span><span>⏱️ 3 h</span></div>
+                <div class="meta"><span>📄 31 diapositivas</span><span>⏱️ 3 h</span></div>
                 <a class="practice" href="webapp.html?modulo=modulo1"><span>🐍</span><div><em>Práctica sugerida</em>Python M1 · Pandas con pluviómetros</div></a>
-                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/02_variables_hidrometeorologicas.html">Ver diapositivas →</a></div>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/02_variables_hidrometeorologicas.html">Ver diapositivas →</a><a class="btn btn-ghost" href="lecturas.html#m2">📚 Lecturas (4)</a></div>
               </div>
             </div>
           </div>
@@ -490,7 +495,7 @@
               <div class="mod-side">
                 <div class="meta"><span>📄 38 diapositivas</span><span>⏱️ 3 h</span></div>
                 <a class="practice" href="webapp.html?modulo=modulo2"><span>📊</span><div><em>Práctica sugerida</em>Python M2 · Visualización de sensores</div></a>
-                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/03_agua_en_el_suelo.html">Ver diapositivas →</a></div>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/03_agua_en_el_suelo.html">Ver diapositivas →</a><a class="btn btn-ghost" href="lecturas.html#m3">📚 Lecturas (9)</a></div>
               </div>
             </div>
           </div>
@@ -509,9 +514,9 @@
                 </ul>
               </div>
               <div class="mod-side">
-                <div class="meta"><span>📄 33 diapositivas</span><span>⏱️ 3 h</span></div>
+                <div class="meta"><span>📄 34 diapositivas</span><span>⏱️ 3 h</span></div>
                 <a class="practice" href="webapp.html?modulo=modulo3"><span>🔬</span><div><em>Práctica sugerida</em>Python M3 · Velocidad de deformación</div></a>
-                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/04_medicion_deformaciones.html">Ver diapositivas →</a></div>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/04_medicion_deformaciones.html">Ver diapositivas →</a><a class="btn btn-ghost" href="lecturas.html#m4">📚 Lecturas (6)</a></div>
               </div>
             </div>
           </div>
@@ -530,9 +535,9 @@
                 </ul>
               </div>
               <div class="mod-side">
-                <div class="meta"><span>📄 38 diapositivas</span><span>⏱️ 4 h</span></div>
+                <div class="meta"><span>📄 39 diapositivas</span><span>⏱️ 4 h</span></div>
                 <a class="practice" href="webapp.html?modulo=modulo3"><span>🚦</span><div><em>Práctica sugerida</em>Lluvia antecedente, rezago y semáforo</div></a>
-                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/05_analisis_datos_umbrales.html">Ver diapositivas →</a></div>
+                <div class="mod-actions"><a class="btn btn-primary" href="presentaciones/05_analisis_datos_umbrales.html">Ver diapositivas →</a><a class="btn btn-ghost" href="lecturas.html#m5">📚 Lecturas (6)</a></div>
               </div>
             </div>
           </div>
@@ -641,6 +646,7 @@
         <h2>Todo el material en un solo lugar</h2>
         <p class="sub">Datos, guías y código del curso, abiertos y listos para usar.</p>
         <div class="res-grid">
+          <a class="res" href="lecturas.html"><div class="ic">📚</div><strong>Lecturas por módulo</strong><span>32 lecturas con preguntas guía y PDF abiertos.</span></a>
           <a class="res" href="#ruta"><div class="ic">🏛️</div><strong>Ruta y presentaciones</strong><span>La ruta completa de las 6 presentaciones.</span></a>
           <a class="res" href="data/Caso%20Estudio.pdf" target="_blank" rel="noopener noreferrer"><div class="ic">📄</div><strong>Caso de estudio</strong><span>Informe del movimiento en masa de Ancón Norte (PDF).</span></a>
           <a class="res" href="https://github.com/federicogmz/instrumentacion-geotecnica/tree/main/data" target="_blank" rel="noopener noreferrer"><div class="ic">🗂️</div><strong>Datos de sensores</strong><span>Lluvia, humedad, extensómetro y acelerómetro (CSV).</span></a>
@@ -685,7 +691,7 @@
   <footer>
     <div class="wrap">
       Universidad EAFIT · Departamento de Ingeniería Civil · Curso de Instrumentación Geotécnica<br>
-      <a href="#ruta">Presentaciones</a> · <a href="webapp.html">Laboratorio de Python</a> ·
+      <a href="#ruta">Presentaciones</a> · <a href="lecturas.html">Lecturas</a> · <a href="webapp.html">Laboratorio de Python</a> ·
       <a href="https://github.com/federicogmz/instrumentacion-geotecnica" target="_blank" rel="noopener noreferrer">GitHub</a> · Licencia CC BY-NC-SA 4.0
     </div>
   </footer>
