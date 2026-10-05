@@ -1,177 +1,63 @@
 /**
  * list-indexing.js
- * Componente visual interactivo para la enseñanza de Listas, Indexación y Slicing en Python.
- * Contexto Geotécnico: Batería de sensores piezométricos a lo largo de un sondeo (PZ-01 a PZ-05).
+ * Componente visual interactivo y conceptual integrado para la enseñanza de Listas,
+ * Indexación (base 0 y negativa) y Slicing en Python aplicado a Geotecnia.
+ * Contexto: Serie temporal diaria de deformaciones en un extensómetro de grieta (Ancón Norte).
  */
 
 (function () {
   let state = {
-    mode: "simulator", // 'simulator' o 'whiteboard'
     selectedIndex: 0,
-    sliceStart: 1,
-    sliceStop: 4,
+    sliceStart: 2,
+    sliceStop: 5,
     activeTab: "single", // 'single', 'slicing', 'aggregations'
-    sensors: [
-      { id: "PZ-01", depth: "2.0 m", pressure: 12.5, status: "Normal" },
-      { id: "PZ-02", depth: "5.0 m", pressure: 18.2, status: "Normal" },
-      { id: "PZ-03", depth: "8.5 m", pressure: 25.0, status: "Normal" },
-      { id: "PZ-04", depth: "12.0 m", pressure: 31.4, status: "Alerta" },
-      { id: "PZ-05", depth: "16.0 m", pressure: 42.8, status: "Crítico" },
+    readings: [
+      { id: "Día 1", time: "t0", val: 0.2, status: "Línea Base", tagClass: "tag-baseline", note: "Instalación del sensor en la corona y calibración a cero" },
+      { id: "Día 2", time: "t1", val: 0.5, status: "Normal", tagClass: "tag-normal", note: "Deformación elástica inicial del macizo rocoso" },
+      { id: "Día 3", time: "t2", val: 0.9, status: "Normal", tagClass: "tag-normal", note: "Inicio de lluvias continuas registradas por pluviómetro" },
+      { id: "Día 4", time: "t3", val: 1.4, status: "Atención", tagClass: "tag-alert", note: "Aceleración leve de la grieta por infiltración de agua" },
+      { id: "Día 5", time: "t4", val: 2.2, status: "Alerta", tagClass: "tag-alert", note: "Apertura progresiva y saturación del talud" },
+      { id: "Día 6", time: "t5", val: 2.9, status: "Alerta", tagClass: "tag-alert", note: "Superación del umbral preventivo de seguridad" },
+      { id: "Día 7", time: "t6", val: 3.8, status: "Crítico", tagClass: "tag-critical", note: "Lectura más reciente en tiempo real (alerta de evacuación)" }
     ]
   };
+
+  const slicePresets = [
+    { label: "📅 Línea Base (Día 1 a 3)", start: 0, stop: 3 },
+    { label: "🌧️ Evento de Lluvias (Día 3 a 5)", start: 2, stop: 5 },
+    { label: "🚨 Ventana Crítica (Día 5 a 7)", start: 4, stop: 7 },
+    { label: "📊 Registro Completo (7 Días)", start: 0, stop: 7 }
+  ];
 
   function renderWidget() {
     const container = document.getElementById("list-indexing-container");
     if (!container) return;
 
-    const n = state.sensors.length;
-
-    let contentHtml = "";
-    if (state.mode === "whiteboard") {
-      contentHtml = renderWhiteboardMode(n);
-    } else {
-      contentHtml = renderSimulatorMode(n);
-    }
+    const n = state.readings.length;
+    const sel = state.selectedIndex;
+    // Normalizar índice si es negativo para ubicar nodo físico
+    const normIdx = sel >= 0 ? sel : n + sel;
+    const currentReading = state.readings[normIdx] || state.readings[0];
+    const sliceItems = state.readings.slice(state.sliceStart, state.sliceStop);
 
     container.innerHTML = `
       <div class="interactive-flow-card">
+        <!-- Encabezado Unificado -->
         <div class="flow-header">
           <div class="flow-title-group">
-            <span class="flow-badge">Módulo 1 &bull; Lección 1.2</span>
-            <h4 class="flow-title">Batería de Sensores: Indexación y Slicing en Python</h4>
-          </div>
-          <div class="flow-mode-toggle">
-            <button class="flow-mode-btn ${state.mode === 'simulator' ? 'active' : ''}" id="idx-mode-sim">
-              ⚡ Simulador Interactivo
-            </button>
-            <button class="flow-mode-btn ${state.mode === 'whiteboard' ? 'active' : ''}" id="idx-mode-wb">
-              📋 Esquema Conceptual (Pizarra)
-            </button>
+            <span class="flow-badge">Módulo 1 &bull; Lección 1.2 &bull; Serie Temporal en Tiempo Real</span>
+            <h4 class="flow-title">📈 Extensómetro de Corona: Anatomía de una Serie Temporal en Memoria</h4>
           </div>
         </div>
 
-        ${contentHtml}
-      </div>
-    `;
+        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.55;">
+          La variable <code>deformaciones = [0.2, 0.5, 0.9, 1.4, 2.2, 2.9, 3.8]</code> registra 7 días de monitoreo milimétrico de grieta en el talud de <strong>Ancón Norte</strong>. Haz clic en cualquier día o índice para interactuar:
+        </p>
 
-    attachEvents();
-  }
-
-  function renderWhiteboardMode(n) {
-    return `
-      <div class="whiteboard-view animate-fade-in">
-        <div class="wb-diagram-col">
-          <div class="wb-title-badge">MEMORIA CONTIGUA DE SENSORES: <code>presiones_kpa</code></div>
-          
-          <div class="wb-index-table-wrapper">
-            <!-- Índices Positivos -->
-            <div class="wb-idx-row pos-row">
-              <span class="wb-idx-label">Índice Positivo ➔</span>
-              <div class="wb-cells-group">
-                ${state.sensors.map((s, i) => `
-                  <div class="wb-idx-cell pos-cell">
-                    <span class="idx-num">[ ${i} ]</span>
-                    <span class="idx-arrow">▼</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <!-- Cajas de Datos en Memoria -->
-            <div class="wb-data-row">
-              <span class="wb-idx-label">Valor en Lista ➔</span>
-              <div class="wb-cells-group">
-                ${state.sensors.map((s, i) => `
-                  <div class="wb-data-cell">
-                    <span class="cell-sensor">${s.id}</span>
-                    <span class="cell-val">${s.pressure}</span>
-                    <span class="cell-unit">kPa (${s.depth})</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <!-- Índices Negativos -->
-            <div class="wb-idx-row neg-row">
-              <span class="wb-idx-label">Índice Negativo ➔</span>
-              <div class="wb-cells-group">
-                ${state.sensors.map((s, i) => `
-                  <div class="wb-idx-cell neg-cell">
-                    <span class="idx-arrow">▲</span>
-                    <span class="idx-num">[ ${i - n} ]</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-
-          <div class="wb-annotations-grid">
-            <div class="wb-note-card">
-              <span class="wb-note-icon">💡</span>
-              <div class="wb-note-text">
-                <strong>¿Por qué empieza en 0?</strong><br>
-                El índice indica el <em>desplazamiento (offset)</em> en la memoria RAM desde el puntero inicial.
-                El primer elemento está a <code>0</code> pasos de distancia.
-              </div>
-            </div>
-            <div class="wb-note-card highlight-danger">
-              <span class="wb-note-icon">📌</span>
-              <div class="wb-note-text">
-                <strong>Último elemento con <code>[-1]</code>:</strong><br>
-                No necesitas calcular <code>len(lista) - 1</code>. En geotecnia, <code>presiones[-1]</code> extrae directamente la lectura del sensor más profundo o más reciente.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wb-rules-col">
-          <div class="wb-card-glass">
-            <h5 style="color:var(--accent-blue); margin-top:0;">✂️ Regla de Oro del Slicing: <code>[inicio : fin]</code></h5>
-            <div class="wb-code-block">
-# Sintaxis de rebanado
-sub_tramo = presiones[1:4]
-# Toma los índices: 1, 2, 3
-# Resultado: [18.2, 25.0, 31.4]
-# ¡El índice 4 (fin) NUNCA se incluye!</div>
-            <ul class="bullet-list" style="margin-top:12px; font-size:0.88em; gap:8px;">
-              <li><strong>Inicio (inclusivo):</strong> Comienza en el índice especificado. Si se omite <code>[:3]</code>, empieza desde <code>0</code>.</li>
-              <li><strong>Fin (exclusivo):</strong> Se detiene estrictamente en <code>fin - 1</code>. Si se omite <code>[2:]</code>, va hasta el final.</li>
-              <li><strong>Longitud resultante:</strong> Siempre es exactamente <code>fin - inicio</code> (aquí: 4 - 1 = 3 elementos).</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  function renderSimulatorMode(n) {
-    const sel = state.selectedIndex;
-    // normalizar indice positivo si es negativo
-    const normIdx = sel >= 0 ? sel : n + sel;
-    const currentSensor = state.sensors[normIdx] || state.sensors[0];
-
-    // Slicing slice
-    const sliceItems = state.sensors.slice(state.sliceStart, state.sliceStop);
-
-    return `
-      <div class="simulator-view animate-fade-in">
-        <!-- Sub-pestañas de simulación -->
-        <div class="idx-subtabs">
-          <button class="idx-subtab-btn ${state.activeTab === 'single' ? 'active' : ''}" data-tab="single">
-            🎯 Acceso por Índice Directo
-          </button>
-          <button class="idx-subtab-btn ${state.activeTab === 'slicing' ? 'active' : ''}" data-tab="slicing">
-            ✂️ Rebanado (Slicing [start:stop])
-          </button>
-          <button class="idx-subtab-btn ${state.activeTab === 'aggregations' ? 'active' : ''}" data-tab="aggregations">
-            📊 Funciones Nativas (len, sum, min, max)
-          </button>
-        </div>
-
-        <!-- Visualizador Central de Memoria Contigua -->
+        <!-- Visualizador Central de Serie Temporal (Memoria Contigua) -->
         <div class="idx-visual-memory">
           <div class="memory-grid">
-            ${state.sensors.map((s, i) => {
+            ${state.readings.map((r, i) => {
               let isSelected = false;
               let isSliceSelected = false;
 
@@ -184,13 +70,14 @@ sub_tramo = presiones[1:4]
               }
 
               return `
-                <div class="memory-node ${isSelected ? 'node-selected' : ''} ${isSliceSelected ? 'node-sliced' : ''}">
+                <div class="memory-node ${isSelected ? 'node-selected' : ''} ${isSliceSelected ? 'node-sliced' : ''}" data-idx="${i}" title="Clic para seleccionar ${r.id}">
                   <div class="node-pos-idx">i = ${i}</div>
                   <div class="node-body">
-                    <span class="node-sensor-id">${s.id}</span>
-                    <span class="node-val">${s.pressure}</span>
-                    <span class="node-unit">kPa</span>
-                    <span class="node-depth">${s.depth}</span>
+                    <span class="node-sensor-id">${r.id}</span>
+                    <span class="node-val">${r.val}</span>
+                    <span class="node-unit">mm</span>
+                    <span class="node-tag-badge ${r.tagClass}">${r.status}</span>
+                    <span class="node-depth">${r.time}</span>
                   </div>
                   <div class="node-neg-idx">i = ${i - n}</div>
                 </div>
@@ -199,34 +86,67 @@ sub_tramo = presiones[1:4]
           </div>
         </div>
 
-        <!-- Panel de Control y Código Dinámico -->
+        <!-- Sub-pestañas de Operación -->
+        <div class="idx-subtabs">
+          <button class="idx-subtab-btn ${state.activeTab === 'single' ? 'active' : ''}" data-tab="single">
+            🎯 Acceso por Índice Directo
+          </button>
+          <button class="idx-subtab-btn ${state.activeTab === 'slicing' ? 'active' : ''}" data-tab="slicing">
+            ✂️ Rebanado Temporal (Slicing [start:stop])
+          </button>
+          <button class="idx-subtab-btn ${state.activeTab === 'aggregations' ? 'active' : ''}" data-tab="aggregations">
+            📈 Estadísticos de Serie (len, sum, promedio)
+          </button>
+        </div>
+
+        <!-- Panel de Control y Salida en Vivo -->
         <div class="idx-controls-panel">
-          ${renderTabControls(n, normIdx, currentSensor, sliceItems)}
+          ${renderTabControls(n, normIdx, currentReading, sliceItems)}
+        </div>
+
+        <!-- Pizarra Conceptual Integrada al Pie -->
+        <div class="idx-conceptual-footer">
+          <div class="idx-concept-pill-card">
+            <span class="idx-concept-icon">💡</span>
+            <div class="idx-concept-text">
+              <strong>¿Por qué en series de tiempo empezamos en índice 0?</strong><br>
+              En física y programación, el índice representa el <em>tiempo transcurrido o desplazamiento (offset)</em> respecto al origen: en el momento inicial $t_0$, han pasado exactamente <code>0</code> intervalos de muestreo.
+            </div>
+          </div>
+          <div class="idx-concept-pill-card">
+            <span class="idx-concept-icon">🚨</span>
+            <div class="idx-concept-text">
+              <strong>Poder de <code>[-1]</code> en Telemetría y Alerta Temprana:</strong><br>
+              En sistemas de monitoreo continuo (SAT), <code>deformaciones[-1]</code> consulta al instante la <strong>lectura más reciente del datalogger</strong> sin requerir saber cuántos días o miles de muestras tiene la serie.
+            </div>
+          </div>
         </div>
       </div>
     `;
+
+    attachEvents();
   }
 
-  function renderTabControls(n, normIdx, currentSensor, sliceItems) {
+  function renderTabControls(n, normIdx, currentReading, sliceItems) {
     if (state.activeTab === 'single') {
       return `
         <div class="idx-tab-content">
           <div class="idx-control-group">
-            <label class="idx-control-title">Selecciona el índice a consultar en <code>presiones</code>:</label>
+            <label class="idx-control-title">Selecciona el día o posición a consultar en <code>deformaciones</code>:</label>
             <div class="idx-btn-pills">
               <span class="pills-label">Positivos:</span>
-              ${state.sensors.map((s, i) => `
-                <button class="idx-pill-btn ${state.selectedIndex === i ? 'active' : ''}" data-idx="${i}">
+              ${state.readings.map((r, i) => `
+                <button class="idx-pill-btn ${state.selectedIndex === i ? 'active' : ''}" data-idx="${i}" title="${r.id} (${r.time})">
                   [${i}]
                 </button>
               `).join('')}
             </div>
-            <div class="idx-btn-pills" style="margin-top:6px;">
+            <div class="idx-btn-pills" style="margin-top:0.45rem;">
               <span class="pills-label">Negativos:</span>
-              ${state.sensors.map((s, i) => {
+              ${state.readings.map((r, i) => {
                 const neg = i - n;
                 return `
-                  <button class="idx-pill-btn neg-pill ${state.selectedIndex === neg ? 'active' : ''}" data-idx="${neg}">
+                  <button class="idx-pill-btn neg-pill ${state.selectedIndex === neg ? 'active' : ''}" data-idx="${neg}" title="${r.id} (${r.time})">
                     [${neg}]
                   </button>
                 `;
@@ -236,18 +156,13 @@ sub_tramo = presiones[1:4]
 
           <div class="idx-result-card">
             <div class="idx-code-snippet">
-              <span class="code-comment"># Extracción en tiempo real</span>
-              <code>lectura = presiones[${state.selectedIndex}]</code>
-              <span class="code-comment"># Sensor: ${currentSensor.id} (${currentSensor.depth})</span>
-              <div class="code-output">➔ Valor retornado: <strong>${currentSensor.pressure} kPa</strong> (${currentSensor.status})</div>
+              <span class="code-comment"># Consulta en tiempo real por índice temporal</span>
+              <code>lectura = deformaciones[${state.selectedIndex}]</code>
+              <span class="code-comment"># Registro: ${currentReading.id} (${currentReading.time}) &bull; Condición: ${currentReading.status}</span>
+              <div class="code-output">➔ Valor retornado: <strong>${currentReading.val} mm</strong> (${currentReading.status})</div>
             </div>
             <div class="idx-explanation">
-              ${state.selectedIndex === 0 
-                ? '⭐ <strong>Índice [0]:</strong> Primer elemento de la lista (sensor más superficial PZ-01 a 2.0 m).'
-                : state.selectedIndex === -1
-                ? '🚨 <strong>Índice [-1]:</strong> Último elemento de la lista (sensor más profundo PZ-05 a 16.0 m). ¡Ideal para lecturas en tiempo real!'
-                : `Acceso al sensor <strong>${currentSensor.id}</strong> ubicado a <strong>${currentSensor.depth}</strong>.`
-              }
+              ${getIndexExplanation(state.selectedIndex, n, currentReading)}
             </div>
           </div>
         </div>
@@ -255,33 +170,71 @@ sub_tramo = presiones[1:4]
     }
 
     if (state.activeTab === 'slicing') {
+      // Buscar si la selección actual coincide con algún preset
+      const currentPresetIdx = slicePresets.findIndex(
+        p => p.start === state.sliceStart && p.stop === state.sliceStop
+      );
+
+      const sliceVals = sliceItems.map(r => r.val);
+
       return `
         <div class="idx-tab-content">
-          <div class="idx-control-group">
-            <label class="idx-control-title">Ajusta los extremos del corte <code>presiones[start : stop]</code>:</label>
-            <div class="slicing-sliders-grid">
-              <div class="slider-field">
-                <span>Inicio (start, inclusivo): <strong id="val-slice-start">${state.sliceStart}</strong></span>
-                <input type="range" min="0" max="3" step="1" value="${state.sliceStart}" id="slider-slice-start" class="flow-slider">
+          <div class="discrete-slice-box">
+            <!-- 1. Presets Geotécnicos de Ventana Rápida -->
+            <div class="slice-presets-container">
+              <span class="slice-presets-label">⚡ Ventanas de Monitoreo Geotécnico Típicas:</span>
+              <div class="slice-presets-pills">
+                ${slicePresets.map((p, idx) => `
+                  <button class="slice-preset-btn ${currentPresetIdx === idx ? 'active' : ''}" data-preset="${idx}">
+                    ${p.label} <code>[${p.start}:${p.stop}]</code>
+                  </button>
+                `).join('')}
               </div>
-              <div class="slider-field">
-                <span>Fin (stop, exclusivo): <strong id="val-slice-stop">${state.sliceStop}</strong></span>
-                <input type="range" min="1" max="5" step="1" value="${state.sliceStop}" id="slider-slice-stop" class="flow-slider">
+            </div>
+
+            <!-- 2. Selectores Discretos para Inicio y Fin -->
+            <div class="discrete-pickers-grid">
+              <!-- Selector de Inicio (Start) -->
+              <div class="picker-column">
+                <span class="picker-label">Inicio de Ventana (<code>start</code>, inclusivo): <strong>Día ${state.sliceStart + 1} (i = ${state.sliceStart})</strong></span>
+                <div class="picker-buttons-row">
+                  ${[0, 1, 2, 3, 4, 5].map(idx => `
+                    <button class="discrete-idx-btn ${state.sliceStart === idx ? 'active-start' : ''}" data-pick-start="${idx}">
+                      [${idx}] Día ${idx + 1}
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Selector de Fin (Stop) -->
+              <div class="picker-column">
+                <span class="picker-label">Fin de Ventana (<code>stop</code>, exclusivo): <strong>Corta antes de Día ${state.sliceStop + 1} (i = ${state.sliceStop})</strong></span>
+                <div class="picker-buttons-row">
+                  ${[1, 2, 3, 4, 5, 6, 7].map(idx => `
+                    <button class="discrete-idx-btn ${state.sliceStop === idx ? 'active-stop' : ''}" data-pick-stop="${idx}">
+                      [:${idx}]
+                    </button>
+                  `).join('')}
+                </div>
               </div>
             </div>
           </div>
 
           <div class="idx-result-card">
             <div class="idx-code-snippet">
-              <span class="code-comment"># Rebanado de lista en Python</span>
-              <code>tramo = presiones[${state.sliceStart} : ${state.sliceStop}]</code>
+              <span class="code-comment"># Rebanado (slicing) de ventana temporal en Python</span>
+              <code>ventana = deformaciones[${state.sliceStart} : ${state.sliceStop}]</code>
               <div class="code-output">
-                ➔ Sublista resultante: <strong>[ ${sliceItems.map(s => s.pressure).join(', ')} ]</strong>
+                ➔ Sublista resultante: <strong>[ ${sliceVals.join(', ')} ]</strong> mm
               </div>
             </div>
             <div class="idx-explanation">
-              Elementos extraídos: <strong>${sliceItems.length}</strong> (desde el índice <code>${state.sliceStart}</code> hasta el <code>${state.sliceStop - 1}</code>).
-              ${state.sliceStop <= state.sliceStart ? '<span style="color:var(--accent-red);">⚠️ Cuando start &gt;= stop, Python retorna una lista vacía <code>[]</code>.</span>' : ''}
+              ${state.sliceStop <= state.sliceStart ? `
+                <span style="color:#ef4444; font-weight:700;">⚠️ Cuando start &gt;= stop (${state.sliceStart} &gt;= ${state.sliceStop}), Python retorna una lista vacía <code>[]</code> porque el intervalo temporal carece de duración positiva.</span>
+              ` : `
+                Lecturas aisladas: <strong>${sliceItems.length} días</strong> (desde índice <code>${state.sliceStart}</code> [${sliceItems[0]?.id}] hasta <code>${state.sliceStop - 1}</code> [${sliceItems[sliceItems.length - 1]?.id}]).<br>
+                <strong>¿Por qué el extremo <code>stop</code> (${state.sliceStop}) es exclusivo?</strong> En series de tiempo, la resta algebraica <code>stop - start = ${state.sliceStop} - ${state.sliceStart} = ${sliceItems.length}</code> determina exactamente la duración en días de la ventana analizada.
+              `}
             </div>
           </div>
         </div>
@@ -289,34 +242,40 @@ sub_tramo = presiones[1:4]
     }
 
     if (state.activeTab === 'aggregations') {
-      const pressures = state.sensors.map(s => s.pressure);
-      const sum = pressures.reduce((a, b) => a + b, 0);
-      const avg = (sum / pressures.length).toFixed(2);
-      const min = Math.min(...pressures);
-      const max = Math.max(...pressures);
+      const vals = state.readings.map(r => r.val);
+      const sum = vals.reduce((a, b) => a + b, 0);
+      const avg = (sum / vals.length).toFixed(2);
+      const min = Math.min(...vals);
+      const max = Math.max(...vals);
+      const totalDelta = (vals[vals.length - 1] - vals[0]).toFixed(1);
 
       return `
         <div class="idx-tab-content">
           <div class="aggregations-grid">
             <div class="agg-card">
-              <span class="agg-fn">len(presiones)</span>
-              <span class="agg-val">${pressures.length}</span>
-              <span class="agg-desc">Número total de sensores en el pozo</span>
+              <span class="agg-fn">len(deformaciones)</span>
+              <span class="agg-val">${vals.length} <small>días</small></span>
+              <span class="agg-desc">Número de muestras temporales registradas</span>
             </div>
             <div class="agg-card">
-              <span class="agg-fn">sum(presiones)</span>
-              <span class="agg-val">${sum.toFixed(1)} <small>kPa</small></span>
-              <span class="agg-desc">Suma acumulada de presiones</span>
+              <span class="agg-fn">sum(deformaciones)</span>
+              <span class="agg-val">${sum.toFixed(1)} <small>mm</small></span>
+              <span class="agg-desc">Suma total de lecturas del sensor</span>
             </div>
             <div class="agg-card highlight">
               <span class="agg-fn">sum() / len()</span>
-              <span class="agg-val">${avg} <small>kPa</small></span>
-              <span class="agg-desc">Presión de poros promedio</span>
+              <span class="agg-val">${avg} <small>mm</small></span>
+              <span class="agg-desc">Deformación promedio de la serie analizada</span>
             </div>
             <div class="agg-card">
               <span class="agg-fn">min() / max()</span>
-              <span class="agg-val">${min} / ${max} <small>kPa</small></span>
-              <span class="agg-desc">Rango de presiones en el perfil</span>
+              <span class="agg-val">${min} / ${max} <small>mm</small></span>
+              <span class="agg-desc">Rango de apertura (Línea Base vs Máximo)</span>
+            </div>
+            <div class="agg-card">
+              <span class="agg-fn">[-1] - [0]</span>
+              <span class="agg-val">+${totalDelta} <small>mm</small></span>
+              <span class="agg-desc">Apertura neta acumulada durante los 7 días</span>
             </div>
           </div>
         </div>
@@ -324,24 +283,36 @@ sub_tramo = presiones[1:4]
     }
   }
 
+  function getIndexExplanation(idx, n, current) {
+    if (idx === 0) {
+      return `⭐ <strong>Índice [0] (Línea Base de Referencia):</strong> Corresponde a la primera lectura en $t_0$ (${current.val} mm) tras fijar y calibrar el sensor. Cualquier desplazamiento acumulado futuro se calcula restando este valor inicial.`;
+    }
+    if (idx === -1 || idx === n - 1) {
+      return `🚨 <strong>Índice [-1] (Lectura en Tiempo Real):</strong> Corresponde a la última transmisión del datalogger (${current.val} mm en ${current.id}). En sistemas de alerta temprana (SAT), <code>deformaciones[-1]</code> permite consultar la condición actual inmediata sin importar cuántos miles de datos contenga la serie histórica.`;
+    }
+    if (idx === -2 || idx === n - 2) {
+      const vPrev = current.val;
+      const vLast = state.readings[n - 1].val;
+      const rate = (vLast - vPrev).toFixed(1);
+      return `⚡ <strong>Índice [-2] (Día Anterior):</strong> Lectura de la víspera (${vPrev} mm). ¡Fundamental para calcular la velocidad de deformación diaria!: <code>velocidad = deformaciones[-1] - deformaciones[-2]</code> (${vLast} - ${vPrev} = <strong>${rate} mm/día</strong>).`;
+    }
+    return `📅 <strong>${current.id} (${current.time}):</strong> Lectura registrada de <strong>${current.val} mm</strong>. Contexto: <em>${current.note}</em>.`;
+  }
+
   function attachEvents() {
-    const btnSim = document.getElementById("idx-mode-sim");
-    const btnWb = document.getElementById("idx-mode-wb");
-
-    if (btnSim) {
-      btnSim.addEventListener("click", () => {
-        state.mode = "simulator";
-        renderWidget();
+    // 1. Clics directos en los nodos de memoria
+    document.querySelectorAll(".memory-node").forEach(node => {
+      node.addEventListener("click", () => {
+        const idx = parseInt(node.dataset.idx, 10);
+        if (!isNaN(idx)) {
+          state.selectedIndex = idx;
+          state.activeTab = "single";
+          renderWidget();
+        }
       });
-    }
-    if (btnWb) {
-      btnWb.addEventListener("click", () => {
-        state.mode = "whiteboard";
-        renderWidget();
-      });
-    }
+    });
 
-    // Tabs
+    // 2. Pestañas de operación
     document.querySelectorAll(".idx-subtab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         state.activeTab = btn.dataset.tab;
@@ -349,7 +320,7 @@ sub_tramo = presiones[1:4]
       });
     });
 
-    // Pills single index
+    // 3. Botones de índice directo (Positivos y Negativos)
     document.querySelectorAll(".idx-pill-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         state.selectedIndex = parseInt(btn.dataset.idx, 10);
@@ -357,27 +328,41 @@ sub_tramo = presiones[1:4]
       });
     });
 
-    // Slicing sliders
-    const sStart = document.getElementById("slider-slice-start");
-    const sStop = document.getElementById("slider-slice-stop");
+    // 4. Presets rápidos de Slicing Geotécnico
+    document.querySelectorAll(".slice-preset-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const pIdx = parseInt(btn.dataset.preset, 10);
+        if (!isNaN(pIdx) && slicePresets[pIdx]) {
+          state.sliceStart = slicePresets[pIdx].start;
+          state.sliceStop = slicePresets[pIdx].stop;
+          renderWidget();
+        }
+      });
+    });
 
-    if (sStart && sStop) {
-      sStart.addEventListener("input", (e) => {
-        state.sliceStart = parseInt(e.target.value, 10);
+    // 5. Selectores discretos de Start
+    document.querySelectorAll("[data-pick-start]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const val = parseInt(btn.dataset.pickStart, 10);
+        state.sliceStart = val;
         if (state.sliceStart >= state.sliceStop) {
-          state.sliceStop = Math.min(5, state.sliceStart + 1);
+          state.sliceStop = Math.min(7, state.sliceStart + 1);
         }
         renderWidget();
       });
+    });
 
-      sStop.addEventListener("input", (e) => {
-        state.sliceStop = parseInt(e.target.value, 10);
+    // 6. Selectores discretos de Stop
+    document.querySelectorAll("[data-pick-stop]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const val = parseInt(btn.dataset.pickStop, 10);
+        state.sliceStop = val;
         if (state.sliceStop <= state.sliceStart) {
           state.sliceStart = Math.max(0, state.sliceStop - 1);
         }
         renderWidget();
       });
-    }
+    });
   }
 
   window.initListIndexingWidget = function () {

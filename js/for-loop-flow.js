@@ -1,16 +1,19 @@
 /**
  * for-loop-flow.js
- * Componente visual interactivo para la enseñanza de Bucles FOR e iteración en Python.
- * Contexto Geotécnico: Cinta transportadora de lecturas de extensómetro y detección de umbrales críticos.
+ * Componente visual interactivo y conceptual integrado para la enseñanza de Bucles FOR e iteración en Python.
+ * Contexto Geotécnico: Cinta transportadora de lecturas de extensómetro y aplicación de funciones de evaluación.
+ * 
+ * Integra:
+ * 1. Pizarra de Anatomía Sintáctica del bucle for (palabra clave, variable de ciclo, in, serie, dos puntos, sangría).
+ * 2. Aplicación directa de una función clasificadora sobre cada dato (sin métodos no vistos como .append()).
+ * 3. Cinta transportadora interactiva con trazado de código y terminal de salida en tiempo real.
  */
 
 (function () {
   let state = {
-    mode: "simulator", // 'simulator' o 'whiteboard'
     currentIndex: 0,
     isPlaying: false,
     timer: null,
-    threshold: 10.0,
     readings: [
       { id: "L-01", val: 4.2, time: "08:00" },
       { id: "L-02", val: 8.5, time: "09:00" },
@@ -18,149 +21,128 @@
       { id: "L-04", val: 7.8, time: "11:00" },
       { id: "L-05", val: 15.3, time: "12:00" }
     ],
-    results: [],
   };
 
-  function computeResultsUpTo(index) {
-    const res = [];
-    for (let i = 0; i <= index && i < state.readings.length; i++) {
-      const item = state.readings[i];
-      if (item.val >= state.threshold) {
-        res.push({
-          idx: i,
-          id: item.id,
-          val: item.val,
-          time: item.time,
-          status: "CRÍTICO (>= 10.0 mm)"
-        });
-      }
+  // Función geotécnica pura que clasifica cada lectura (reutilizando el concepto de la Lección 1.4)
+  function evaluarDeformacion(val) {
+    if (val >= 10.0) {
+      return { tag: "🚨 ALERTA CRÍTICA", color: "#ef4444", status: "crítico" };
+    } else if (val >= 6.0) {
+      return { tag: "⚠️ PREVENTIVA", color: "#f59e0b", status: "alerta" };
+    } else {
+      return { tag: "✅ NORMAL", color: "#10b981", status: "normal" };
     }
-    return res;
   }
 
   function renderWidget() {
     const container = document.getElementById("for-loop-container");
     if (!container) return;
 
-    let contentHtml = "";
-    if (state.mode === "whiteboard") {
-      contentHtml = renderWhiteboardMode();
-    } else {
-      contentHtml = renderSimulatorMode();
+    const total = state.readings.length;
+    const isCompleted = state.currentIndex >= total;
+    const currentItem = isCompleted ? null : state.readings[state.currentIndex];
+    const currentEval = currentItem ? evaluarDeformacion(currentItem.val) : null;
+
+    // Generar las líneas de salida impresas en la terminal hasta el ciclo actual
+    const printedLogs = [];
+    for (let i = 0; i < state.currentIndex && i < total; i++) {
+      const r = state.readings[i];
+      const ev = evaluarDeformacion(r.val);
+      printedLogs.push({
+        idx: i + 1,
+        text: `[${r.time}] ${r.id}: ${r.val.toFixed(1)} mm ➔ ${ev.tag}`,
+        color: ev.color
+      });
     }
 
     container.innerHTML = `
       <div class="interactive-flow-card">
+        <!-- Encabezado Unificado -->
         <div class="flow-header">
           <div class="flow-title-group">
-            <span class="flow-badge">Módulo 1 &bull; Lección 1.5</span>
-            <h4 class="flow-title">Bucles con <code>for</code>: La Cinta Transportadora de Sensores</h4>
+            <span class="flow-badge">Módulo 1 &bull; Lección 1.5 &bull; Pizarra Sintáctica &amp; Simulador en Tiempo Real</span>
+            <h4 class="flow-title">🔁 Anatomía del Bucle <code>for</code>: Aplicación de Funciones a Series Temporales</h4>
           </div>
-          <div class="flow-mode-toggle">
-            <button class="flow-mode-btn ${state.mode === 'simulator' ? 'active' : ''}" id="loop-mode-sim">
-              ⚡ Simulador Paso a Paso
-            </button>
-            <button class="flow-mode-btn ${state.mode === 'whiteboard' ? 'active' : ''}" id="loop-mode-wb">
-              📋 Esquema Conceptual (Pizarra)
-            </button>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:0.75rem; background:rgba(56,189,248,0.12); color:#38bdf8; border:1px solid rgba(56,189,248,0.3); border-radius:12px; padding:4px 10px; font-weight:600;">
+              📏 Extensómetro Ancón Norte
+            </span>
           </div>
         </div>
 
-        ${contentHtml}
-      </div>
-    `;
+        <!-- 1. PIZARRA CONCEPTUAL: ESTRUCTURA SINTÁCTICA DEL BUCLE FOR -->
+        <div class="for-syntax-whiteboard">
+          <div class="for-syntax-header">
+            <div style="font-size:0.78rem; font-weight:800; color:var(--accent-primary); letter-spacing:0.8px; text-transform:uppercase;">
+              📋 Pizarra: Las 5 Partes de la Declaración del Bucle <code>for</code>
+            </div>
+            <span style="font-size:0.72rem; color:var(--text-muted);">Sintaxis estándar de Python</span>
+          </div>
 
-    attachEvents();
-  }
-
-  function renderWhiteboardMode() {
-    return `
-      <div class="whiteboard-view animate-fade-in">
-        <div class="wb-diagram-col">
-          <div class="wb-title-badge">CÓMO FUNCIONA UN BUCLE <code>for</code> EN MEMORIA</div>
-
-          <div class="wb-conveyor-schematic">
-            <!-- 1. Lista Fuente -->
-            <div class="conveyor-source-box">
-              <span class="source-tag">1. COLECCIÓN FUENTE (Iterable)</span>
-              <div class="source-items-preview">
-                <code>lecturas = [4.2, 8.5, 12.1, 7.8, 15.3]</code>
+          <!-- Tokens de la Cabecera del Bucle -->
+          <div class="for-syntax-tokens-row">
+            <!-- Token 1: for -->
+            <div class="for-token-card" style="border-top:3px solid var(--accent-primary);">
+              <div class="for-token-pill" style="color:var(--accent-primary);">for</div>
+              <div class="for-token-desc">
+                <strong>Palabra clave:</strong> Inicia la instrucción de iteración automática.
               </div>
             </div>
 
-            <!-- Flecha hacia extractor -->
-            <div class="conveyor-arrow">▼ toma 1 elemento por ciclo ▼</div>
-
-            <!-- 2. Variable Iteradora -->
-            <div class="conveyor-iterator-box">
-              <span class="iterator-tag">2. VARIABLE TEMPORAL: <code>for lectura in lecturas:</code></span>
-              <div class="iterator-badge">
-                <span class="it-var">lectura</span> = valor actual del turno
+            <!-- Token 2: variable de ciclo -->
+            <div class="for-token-card" style="border-top:3px solid #38bdf8;">
+              <div class="for-token-pill" style="color:#38bdf8;">lectura</div>
+              <div class="for-token-desc">
+                <strong>Variable de ciclo:</strong> Adopta el valor del dato en cada vuelta.
               </div>
             </div>
 
-            <!-- Flecha hacia estación de proceso -->
-            <div class="conveyor-arrow">▼ ingresa al bloque indentado ▼</div>
-
-            <!-- 3. Estación de Proceso -->
-            <div class="conveyor-station-box">
-              <span class="station-tag">3. ESTACIÓN DE PROCESAMIENTO (4 espacios)</span>
-              <div class="station-logic">
-                <div class="logic-code">
-                  <code>if lectura >= 10.0:</code><br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;<code>alertas.append(lectura)</code>
-                </div>
+            <!-- Token 3: in -->
+            <div class="for-token-card" style="border-top:3px solid var(--accent-primary);">
+              <div class="for-token-pill" style="color:var(--accent-primary);">in</div>
+              <div class="for-token-desc">
+                <strong>Pertenencia:</strong> Enlaza la variable con la colección de datos.
               </div>
             </div>
 
-            <!-- Flecha hacia colector -->
-            <div class="conveyor-arrow">▼ acumula si se cumple ▼</div>
-
-            <!-- 4. Lista Acumuladora -->
-            <div class="conveyor-accumulator-box">
-              <span class="acc-tag">4. RESULTADO ACUMULADO</span>
-              <div class="acc-items-preview">
-                <code>alertas ➔ [12.1, 15.3]</code>
+            <!-- Token 4: colección -->
+            <div class="for-token-card" style="border-top:3px solid #f59e0b;">
+              <div class="for-token-pill" style="color:#f59e0b;">deformaciones</div>
+              <div class="for-token-desc">
+                <strong>Serie o Lista:</strong> Colección secuencial de valores a recorrer.
               </div>
+            </div>
+
+            <!-- Token 5: dos puntos -->
+            <div class="for-token-card" style="border-top:3px solid #ec4899; max-width:90px;">
+              <div class="for-token-pill" style="color:#ec4899;">:</div>
+              <div class="for-token-desc">
+                <strong>Dos puntos:</strong> Abren el bloque de instrucciones subordinadas.
+              </div>
+            </div>
+          </div>
+
+          <!-- Cuerpo Indentado: Aplicación de la Función -->
+          <div class="for-body-indent-box">
+            <div style="font-size:0.74rem; font-weight:700; color:var(--accent-primary); text-transform:uppercase; letter-spacing:0.5px;">
+              ↳ Sangría Obligatoria (4 Espacios) — Cuerpo de Ejecución por Cada Elemento:
+            </div>
+            <div style="font-family:var(--font-mono); font-size:0.82rem; color:var(--text-main); margin-top:2px;">
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;estado = evaluar_deformacion(lectura)</code>
+              <span style="color:var(--text-muted); font-size:0.75rem; margin-left:8px;">← Aplica la función de la Lección 1.4 al dato del ciclo</span>
+            </div>
+            <div style="font-family:var(--font-mono); font-size:0.82rem; color:var(--text-main);">
+              <code>&nbsp;&nbsp;&nbsp;&nbsp;print(f"Medición: {lectura} mm -> {estado}")</code>
+              <span style="color:var(--text-muted); font-size:0.75rem; margin-left:8px;">← Comunica el diagnóstico a la consola</span>
             </div>
           </div>
         </div>
 
-        <div class="wb-rules-col">
-          <div class="wb-card-glass">
-            <h5 style="color:var(--accent-emerald); margin-top:0;">🎯 Los 3 Principios del <code>for</code> en Python</h5>
-            <ul class="bullet-list" style="margin-top:10px; font-size:0.88em; gap:10px;">
-              <li><strong>Sin contadores manuales:</strong> A diferencia de C o Java, en Python no necesitas <code>i = 0; i &lt; n; i++</code>. El <code>for</code> extrae directamente los valores reales de la lista.</li>
-              <li><strong>Auto-terminación:</strong> El bucle sabe exactamente cuándo termina la lista. Cuando se procesa el último elemento, sale automáticamente sin peligro de desbordamiento.</li>
-              <li><strong>El Patrón Acumulador:</strong> Creas una lista vacía <code>alertas = []</code> antes del bucle, y dentro usas <code>.append()</code> para guardar solo lo que te interesa.</li>
-            </ul>
-          </div>
-
-          <div class="wb-card-glass" style="margin-top:14px; border-left:3px solid var(--accent-blue);">
-            <h5 style="color:var(--accent-blue); margin-top:0;">⚡ Aplicación de Funciones</h5>
-            <p style="font-size:0.85em; color:var(--text-muted); margin:0;">
-              En instrumentación, un bucle <code>for</code> es el motor que aplica las funciones creadas en la Lección 1.4 a miles de datos de sensores provenientes de dataloggers en campo.
-            </p>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  function renderSimulatorMode() {
-    const total = state.readings.length;
-    const isCompleted = state.currentIndex >= total;
-    const currentItem = isCompleted ? null : state.readings[state.currentIndex];
-    const accumulated = computeResultsUpTo(isCompleted ? total - 1 : state.currentIndex);
-    const isCurrentAlert = currentItem && currentItem.val >= state.threshold;
-
-    return `
-      <div class="simulator-view animate-fade-in">
-        <!-- Barra de Control de Simulación -->
-        <div class="loop-toolbar">
+        <!-- 2. BARRA DE CONTROL DE LA SIMULACIÓN -->
+        <div class="loop-toolbar" style="margin-top: 0.35rem;">
           <div class="loop-buttons">
             <button class="loop-btn primary" id="loop-btn-step" ${isCompleted ? 'disabled' : ''}>
-              ▶ Siguiente Paso (${state.currentIndex + 1}/${total})
+              ${isCompleted ? '🏁 Bucle Concluido' : `▶ Siguiente Ciclo (${state.currentIndex + 1}/${total})`}
             </button>
             <button class="loop-btn secondary" id="loop-btn-play">
               ${state.isPlaying ? '⏸ Pausar' : '⚡ Auto Play'}
@@ -171,97 +153,135 @@
           </div>
 
           <div class="loop-progress-indicator">
-            <span class="prog-text">Progreso del Bucle:</span>
+            <span class="prog-text">Progreso:</span>
             <div class="prog-bar-track">
-              <div class="prog-bar-fill" style="width:${(state.currentIndex / total) * 100}%;"></div>
+              <div class="prog-bar-fill" style="width:${(Math.min(state.currentIndex, total) / total) * 100}%;"></div>
             </div>
-            <span class="prog-count">${Math.min(state.currentIndex, total)} / ${total}</span>
+            <span class="prog-count">${Math.min(state.currentIndex, total)} / ${total} lecturas</span>
           </div>
         </div>
 
-        <!-- Cinta de Lecturas (Conveyor Belt) -->
+        <!-- 3. CINTA TRANSPORTADORA DE MEDICIONES -->
         <div class="conveyor-belt-container">
           <div class="conveyor-track">
             ${state.readings.map((r, i) => {
               const isPast = i < state.currentIndex;
               const isCurrent = i === state.currentIndex && !isCompleted;
-              const isFuture = i > state.currentIndex || isCompleted;
+              const ev = evaluarDeformacion(r.val);
 
               let cardClass = "conveyor-item";
               if (isPast) cardClass += " item-processed";
               if (isCurrent) cardClass += " item-active pulse-ring";
-              if (r.val >= state.threshold) cardClass += " item-threshold-exceeded";
+              if (r.val >= 10.0) cardClass += " item-threshold-exceeded";
 
               return `
-                <div class="${cardClass}">
+                <div class="${cardClass}" title="Lectura ${r.id} (${r.val} mm)">
                   <div class="item-tag">${r.id} (${r.time})</div>
                   <div class="item-val">${r.val} <small>mm</small></div>
-                  <div class="item-status">
-                    ${r.val >= state.threshold ? '🚨 ALERTA' : '✅ NORMAL'}
+                  <div class="item-status" style="color:${ev.color};">
+                    ${ev.tag}
                   </div>
-                  ${isCurrent ? '<div class="item-pointer">▲ lectura actual</div>' : ''}
+                  ${isCurrent ? '<div class="item-pointer">▲ EN PROCESO</div>' : ''}
                 </div>
               `;
             }).join('')}
           </div>
         </div>
 
-        <!-- Trazador de Código e Indicador de Acumulación -->
+        <!-- 4. TRAZADO DE CÓDIGO Y TERMINAL EN TIEMPO REAL -->
         <div class="loop-execution-grid">
           <!-- Columna Izquierda: Código con línea activa iluminada -->
           <div class="loop-code-card">
             <div class="trace-header">
-              <span class="trace-tag">TRAZADO DE EJECUCIÓN</span>
+              <span class="trace-tag">TRAZADO DE CÓDIGO EN MEMORIA</span>
               <span class="trace-tag-right">
                 ${isCompleted ? '🏁 BUCLE FINALIZADO' : `Ciclo ${state.currentIndex + 1} de ${total}`}
               </span>
             </div>
-            <pre class="trace-pre"><code><span class="code-line">alertas_criticas = []</span>
-<span class="code-line ${!isCompleted ? 'line-highlight-active' : ''}">for lectura in lecturas:  <span class="tok-live-comment"># lectura = ${currentItem ? currentItem.val + ' mm' : 'Fin'}</span></span>
-<span class="code-line ${!isCompleted ? 'line-highlight-condition' : ''}">    if lectura >= 10.0:   <span class="tok-live-comment"># ¿${currentItem ? currentItem.val + ' >= 10.0' : '-'}? ➔ ${isCurrentAlert ? 'True' : 'False'}</span></span>
-<span class="code-line ${!isCompleted && isCurrentAlert ? 'line-highlight-append' : ''}">        alertas_criticas.append(lectura)</span>
-<span class="code-line ${isCompleted ? 'line-highlight-active' : ''}">print(f"Total alertas: {len(alertas_criticas)}")</span></code></pre>
+            <pre class="trace-pre"><code><span class="code-line"># 1. Definición previa de la función:</span>
+<span class="code-line">def evaluar_deformacion(lectura): ...</span>
+<span class="code-line"></span>
+<span class="code-line ${!isCompleted ? 'line-highlight-active' : ''}">for lectura in deformaciones:  <span class="tok-live-comment"># lectura = ${currentItem ? currentItem.val + ' mm' : 'Fin de la serie'}</span></span>
+<span class="code-line ${!isCompleted ? 'line-highlight-condition' : ''}">    estado = evaluar_deformacion(lectura)  <span class="tok-live-comment"># estado = "${currentEval ? currentEval.tag : '-'}"</span></span>
+<span class="code-line ${!isCompleted ? 'line-highlight-active' : ''}">    print(f"{lectura} mm -> {estado}")</span></code></pre>
           </div>
 
-          <!-- Columna Derecha: Estado de la Lista Acumuladora -->
+          <!-- Columna Derecha: Salida Impresa en Consola (Como en Jupyter/Terminal) -->
           <div class="loop-results-card">
             <div class="results-header">
-              <span class="res-title">Lista Acumuladora <code>alertas_criticas</code>:</span>
-              <span class="res-badge">${accumulated.length} evento(s)</span>
+              <span class="res-title">🖥️ Salida en Consola (<code>print</code>):</span>
+              <span class="res-badge" style="color:var(--accent-primary);">
+                ${printedLogs.length} línea(s) impresa(s)
+              </span>
             </div>
 
-            <div class="results-box">
-              [
-              ${accumulated.map(a => `
-                <span class="res-pill">
-                  <strong>${a.val} mm</strong> (${a.id})
-                </span>
-              `).join(', ')}
-              ${accumulated.length === 0 ? '<span class="res-empty">(Lista vacía por ahora...)</span>' : ''}
-              ]
+            <div class="for-terminal-output">
+              <div style="color:var(--text-dim); font-size:0.74rem; margin-bottom:4px;">
+                # Terminal interactiva de Python:
+              </div>
+              ${printedLogs.length > 0 ? printedLogs.map(l => `
+                <div style="line-height:1.45;">
+                  <span style="color:#38bdf8;">&gt;&gt;&gt;</span> 
+                  <span style="color:${l.color}; font-weight:600;">${l.text}</span>
+                </div>
+              `).join('') : `
+                <div style="color:var(--text-muted); font-style:italic; padding:0.5rem 0;">
+                  (Presiona "▶ Siguiente Ciclo" para iniciar la primera iteración...)
+                </div>
+              `}
+              ${isCompleted ? `
+                <div style="margin-top:6px; color:#10b981; font-weight:700; border-top:1px dashed #334155; padding-top:4px;">
+                  ✓ Proceso finalizado: Todas las lecturas fueron evaluadas e impresas.
+                </div>
+              ` : ''}
             </div>
 
             <div class="results-summary-row">
               <div class="sum-item">
-                <span class="sum-label">Lecturas Analizadas:</span>
+                <span class="sum-label">Lecturas Procesadas:</span>
                 <span class="sum-num">${Math.min(state.currentIndex, total)} / ${total}</span>
               </div>
               <div class="sum-item">
-                <span class="sum-label">Superaron Umbral:</span>
-                <span class="sum-num" style="color:var(--accent-red);">${accumulated.length}</span>
+                <span class="sum-label">Críticas (≥ 10 mm):</span>
+                <span class="sum-num" style="color:#ef4444; font-weight:800;">
+                  ${state.readings.slice(0, state.currentIndex).filter(r => r.val >= 10.0).length}
+                </span>
               </div>
               <div class="sum-item">
-                <span class="sum-label">En Rango Normal:</span>
-                <span class="sum-num" style="color:var(--accent-emerald);">${Math.min(state.currentIndex, total) - accumulated.length}</span>
+                <span class="sum-label">Normales / Preventivas:</span>
+                <span class="sum-num" style="color:#10b981; font-weight:800;">
+                  ${state.readings.slice(0, state.currentIndex).filter(r => r.val < 10.0).length}
+                </span>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- 5. FUNDAMENTOS GEOTÉCNICOS -->
+        <div class="idx-conceptual-footer" style="margin-top:1rem;">
+          <div class="idx-concept-pill-card">
+            <span class="idx-concept-icon">🎯</span>
+            <div class="idx-concept-text">
+              <strong>Sin Contadores Ni Índices Manuales:</strong><br>
+              A diferencia de otros entornos donde debes gestionar variables auxiliares (<code>i = 0, i++</code>), en Python el bucle <code>for valor in serie:</code> extrae directamente el dato físico medido en cada vuelta.
+            </div>
+          </div>
+          <div class="idx-concept-pill-card">
+            <span class="idx-concept-icon">⚙️</span>
+            <div class="idx-concept-text">
+              <strong>Aplicación Modular de Funciones:</strong><br>
+              La función empaqueta el criterio técnico de evaluación (Lección 1.4) y el bucle <code>for</code> se encarga de aplicarla automáticamente a cada lectura, comunicando los diagnósticos en pantalla mediante <code>print()</code>.
+            </div>
+          </div>
+        </div>
+
       </div>
     `;
+
+    attachEvents();
   }
 
-  function stepForward() {
+  function advanceStep() {
     if (state.currentIndex < state.readings.length) {
       state.currentIndex++;
       renderWidget();
@@ -270,12 +290,19 @@
     }
   }
 
+  function toggleAutoPlay() {
+    if (state.isPlaying) {
+      pauseAutoPlay();
+    } else {
+      startAutoPlay();
+    }
+  }
+
   function startAutoPlay() {
-    state.isPlaying = true;
     if (state.currentIndex >= state.readings.length) {
       state.currentIndex = 0;
     }
-    renderWidget();
+    state.isPlaying = true;
     state.timer = setInterval(() => {
       if (state.currentIndex < state.readings.length) {
         state.currentIndex++;
@@ -283,7 +310,8 @@
       } else {
         pauseAutoPlay();
       }
-    }, 1200);
+    }, 1100);
+    renderWidget();
   }
 
   function pauseAutoPlay() {
@@ -302,50 +330,13 @@
   }
 
   function attachEvents() {
-    const btnSim = document.getElementById("loop-mode-sim");
-    const btnWb = document.getElementById("loop-mode-wb");
-
-    if (btnSim) {
-      btnSim.addEventListener("click", () => {
-        pauseAutoPlay();
-        state.mode = "simulator";
-        renderWidget();
-      });
-    }
-    if (btnWb) {
-      btnWb.addEventListener("click", () => {
-        pauseAutoPlay();
-        state.mode = "whiteboard";
-        renderWidget();
-      });
-    }
-
     const btnStep = document.getElementById("loop-btn-step");
     const btnPlay = document.getElementById("loop-btn-play");
     const btnReset = document.getElementById("loop-btn-reset");
 
-    if (btnStep) {
-      btnStep.addEventListener("click", () => {
-        pauseAutoPlay();
-        stepForward();
-      });
-    }
-
-    if (btnPlay) {
-      btnPlay.addEventListener("click", () => {
-        if (state.isPlaying) {
-          pauseAutoPlay();
-        } else {
-          startAutoPlay();
-        }
-      });
-    }
-
-    if (btnReset) {
-      btnReset.addEventListener("click", () => {
-        resetLoop();
-      });
-    }
+    if (btnStep) btnStep.addEventListener("click", advanceStep);
+    if (btnPlay) btnPlay.addEventListener("click", toggleAutoPlay);
+    if (btnReset) btnReset.addEventListener("click", resetLoop);
   }
 
   window.initForLoopWidget = function () {

@@ -1,22 +1,19 @@
 /**
  * layout-resizer.js
- * Controlador interactivo para desplazar, redimensionar y ocultar/mostrar
- * los dos paneles principales (Teoría / Contenido a la izquierda vs Editor / Consola a la derecha).
+ * Divisor interactivo y minimalista entre el panel de Teoría y el Editor de Código.
  * 
  * Funcionalidades:
- * - Slider continuo (0% a 100%)
- * - Barra divisoria arrastrable (Splitter drag & drop)
- * - Botones rápidos de ajuste (100% Teoría, 65/35, 50/50, 35/65, 100% Editor)
- * - Chevrons de colapso y píldoras flotantes para restaurar
- * - Doble clic para centrar 50/50
+ * - Slider minimalista entre ambas secciones (drag & drop con mouse o touch)
+ * - Doble clic en el divisor para centrar al 50% / 50%
+ * - Rango acotado seguro (25% a 75%) para garantizar legibilidad en ambas secciones
  * - Refresco automático de CodeMirror al cambiar dimensiones
- * - Persistencia del estado en localStorage
+ * - Persistencia del ancho preferido en localStorage
  */
 
 (function () {
   let isProgrammaticResize = false;
   let state = {
-    theoryPct: 50, // porcentaje de ancho para el panel de teoría (0 a 100)
+    theoryPct: 50,
     isDragging: false,
     startX: 0,
     startPct: 50,
@@ -25,15 +22,13 @@
   const STORAGE_KEY = "geotech_workspace_split";
 
   function init() {
-    // Cargar preferencia guardada si existe (por defecto 55% para dar más aire a la teoría)
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved !== null) {
       const val = parseFloat(saved);
-      if (!isNaN(val) && val >= 0 && val <= 100) {
+      if (!isNaN(val) && val >= 25 && val <= 75) {
         state.theoryPct = val;
       }
     } else {
-      // Si la pantalla es amplia, 55% de inicio evita que la teoría se sienta apretada
       state.theoryPct = window.innerWidth > 1200 ? 55 : 50;
     }
 
@@ -42,78 +37,44 @@
   }
 
   function applyLayout(pct, save = true) {
-    pct = Math.max(0, Math.min(100, Math.round(pct)));
+    pct = Math.max(25, Math.min(75, Math.round(pct)));
     state.theoryPct = pct;
 
     const grid = document.getElementById("workspace-grid");
     const theoryPane = document.getElementById("theory-pane");
     const editorPane = document.getElementById("editor-pane");
-    const slider = document.getElementById("workspace-layout-slider");
     const resizer = document.getElementById("workspace-resizer");
-    const btnRestoreTheory = document.getElementById("btn-restore-theory");
-    const btnRestoreEditor = document.getElementById("btn-restore-editor");
-    const pctBadge = document.getElementById("layout-pct-badge");
 
     if (!grid || !theoryPane || !editorPane) return;
 
-    if (slider) slider.value = pct;
+    const savedSec = localStorage.getItem("ig_last_section");
+    const isTheory = grid.classList.contains("mode-theory-full") || 
+                     (window.courseApp && window.courseApp.currentSection === "teoria") ||
+                     (!window.courseApp && (!savedSec || savedSec === "teoria"));
 
-    if (pctBadge) {
-      if (pct === 0) {
-        pctBadge.textContent = "100% Editor";
-      } else if (pct === 100) {
-        pctBadge.textContent = "100% Teoría";
-      } else {
-        pctBadge.textContent = `${pct}% Teoría / ${100 - pct}% Editor`;
-      }
-    }
-
-    // Actualizar botones de preset activos
-    document.querySelectorAll(".layout-preset-btn").forEach(btn => {
-      const p = parseInt(btn.dataset.pct, 10);
-      btn.classList.toggle("active", p === pct);
-    });
-
-    if (pct <= 4) {
-      // Ocultar completamente el panel de teoría
-      grid.classList.add("theory-collapsed");
-      grid.classList.remove("editor-collapsed");
-      theoryPane.style.display = "none";
-      editorPane.style.display = "flex";
-      editorPane.style.flex = "1 1 100%";
+    if (isTheory) {
       if (resizer) resizer.style.display = "none";
-      if (btnRestoreTheory) btnRestoreTheory.classList.add("visible");
-      if (btnRestoreEditor) btnRestoreEditor.classList.remove("visible");
-    } else if (pct >= 96) {
-      // Ocultar completamente el panel del editor
-      grid.classList.add("editor-collapsed");
-      grid.classList.remove("theory-collapsed");
-      editorPane.style.display = "none";
+      if (editorPane) editorPane.style.display = "none";
       theoryPane.style.display = "flex";
       theoryPane.style.flex = "1 1 100%";
-      if (resizer) resizer.style.display = "none";
-      if (btnRestoreEditor) btnRestoreEditor.classList.add("visible");
-      if (btnRestoreTheory) btnRestoreTheory.classList.remove("visible");
-    } else {
-      // Ambos paneles visibles con su ancho relativo
-      grid.classList.remove("theory-collapsed", "editor-collapsed");
-      theoryPane.style.display = "flex";
-      editorPane.style.display = "flex";
-      if (resizer) resizer.style.display = "flex";
-
-      // Aplicar proporción fluida
-      theoryPane.style.flex = `0 0 calc(${pct}% - 7px)`;
-      editorPane.style.flex = `0 0 calc(${100 - pct}% - 7px)`;
-
-      if (btnRestoreTheory) btnRestoreTheory.classList.remove("visible");
-      if (btnRestoreEditor) btnRestoreEditor.classList.remove("visible");
+      theoryPane.style.width = "100%";
+      if (save) localStorage.setItem(STORAGE_KEY, pct);
+      return;
     }
+
+    // Modo Dividido (Módulos 1-3 y Sandbox)
+    theoryPane.style.display = "flex";
+    editorPane.style.display = "flex";
+    if (resizer) resizer.style.display = "flex";
+
+    // Proporciones fluidas seguras
+    theoryPane.style.flex = `0 0 calc(${pct}% - 5px)`;
+    editorPane.style.flex = `0 0 calc(${100 - pct}% - 5px)`;
 
     if (save) {
       localStorage.setItem(STORAGE_KEY, pct);
     }
 
-    // Notificar a CodeMirror y a la ventana para recalcular dimensiones
     refreshCodeMirror();
   }
 
@@ -129,70 +90,16 @@
   }
 
   function attachEvents() {
-    // 1. Slider de rango continuo
-    const slider = document.getElementById("workspace-layout-slider");
-    if (slider) {
-      slider.addEventListener("input", (e) => {
-        applyLayout(parseFloat(e.target.value));
-      });
-    }
-
-    // 2. Botones de Preset rápido
-    document.querySelectorAll(".layout-preset-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const targetPct = parseFloat(btn.dataset.pct);
-        applyLayout(targetPct);
-      });
-    });
-
-    // 3. Botones chevrons en el resizer
-    const btnColTheory = document.getElementById("btn-collapse-theory");
-    const btnColEditor = document.getElementById("btn-collapse-editor");
-
-    if (btnColTheory) {
-      btnColTheory.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if (state.theoryPct <= 10) {
-          applyLayout(55); // Restaurar a equilibrado
-        } else {
-          applyLayout(0); // Ocultar teoría
-        }
-      });
-    }
-
-    if (btnColEditor) {
-      btnColEditor.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if (state.theoryPct >= 90) {
-          applyLayout(55); // Restaurar a equilibrado
-        } else {
-          applyLayout(100); // Ocultar editor
-        }
-      });
-    }
-
-    // 4. Botones flotantes de restauración
-    const btnResTheory = document.getElementById("btn-restore-theory");
-    const btnResEditor = document.getElementById("btn-restore-editor");
-
-    if (btnResTheory) {
-      btnResTheory.addEventListener("click", () => applyLayout(55));
-    }
-    if (btnResEditor) {
-      btnResEditor.addEventListener("click", () => applyLayout(55));
-    }
-
-    // 5. Drag & Drop de la barra divisoria (Splitter)
     const resizer = document.getElementById("workspace-resizer");
     const grid = document.getElementById("workspace-grid");
 
     if (resizer && grid) {
-      // Doble clic para resetear a 50/50
+      // Doble clic para restablecer al 50% / 50%
       resizer.addEventListener("dblclick", () => {
-        applyLayout(55);
+        applyLayout(50);
       });
 
-      // Mouse drag
+      // Arrastre con Mouse
       resizer.addEventListener("mousedown", (e) => {
         state.isDragging = true;
         state.startX = e.clientX;
@@ -220,7 +127,7 @@
         }
       });
 
-      // Touch drag para móviles / tablets
+      // Arrastre Táctil (Móviles / Tablets)
       resizer.addEventListener("touchstart", (e) => {
         if (e.touches.length === 1) {
           state.isDragging = true;
@@ -250,21 +157,20 @@
       });
     }
 
-    // Reajustar al rotar o redimensionar pantalla
+    // Reajustar en cambio de tamaño de ventana
     window.addEventListener("resize", () => {
       if (isProgrammaticResize) return;
-      if (window.innerWidth <= 900) {
-        // En móviles la cuadrícula se apila verticalmente por CSS
-      } else {
+      if (window.innerWidth > 900) {
         applyLayout(state.theoryPct, false);
       }
     });
   }
 
-  // Exportar para acceso externo
+  // API pública
   window.workspaceResizer = {
     setSplit: applyLayout,
     getSplit: () => state.theoryPct,
+    applyCurrentLayout: () => applyLayout(state.theoryPct, false),
   };
 
   document.addEventListener("DOMContentLoaded", () => {

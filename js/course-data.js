@@ -532,271 +532,823 @@ print(df_ladera.describe().round(2))`,
   modulo2: {
     id: "modulo2",
     title: "Módulo 2: Visualización de Sensores Geotécnicos",
-    subtitle: "Series Temporales, Boxplots, Zonas de Alerta y Doble Eje",
+    subtitle: "Series Temporales, Subplots, Ejes Gemelos y Umbrales de Alerta",
     lessons: [
       {
         id: "m2_l1",
-        title: "2.1 Gráfica de Línea de Precipitación Diaria",
+        title: "2.1 Fundamentos de Matplotlib y Automatización de Gráficas de Sensores",
         concept: `
-          <p>Para crear un gráfico con <strong>Matplotlib</strong>, usamos <code>plt.plot(x, y)</code>, añadimos etiquetas y mostramos la figura con <code>plt.show()</code>:</p>
-          <div class="code-example-block">
-import matplotlib.pyplot as plt
-
-plt.figure(figsize=(9, 4))
-plt.plot(df.index, df['p'], color='royalblue', label='Lluvia (p)')
-plt.title('Precipitación Diaria')
-plt.xlabel('Fecha')
-plt.ylabel('Precipitación (mm/día)')
-plt.grid(True)
-plt.show()
+          <div class="theory-narrative-bridge">
+            <div class="bridge-tag">🔗 Conexión Pedagógica con el Módulo 1</div>
+            <p style="margin: 0 0 0.5rem 0;">
+              En el Módulo 1 aprendiste a compilar la matriz maestra <code>df_ancon</code> y exploraste sus resúmenes numéricos con <code>.describe()</code>.
+            </p>
+            <p style="margin: 0 0 0.5rem 0;">
+              Sin embargo, <strong>el resumen estadístico numérico es ciego a la evolución temporal</strong>: no nos dice cuándo inician los registros de cada instrumento, qué forma tienen las tormentas ni cómo fluctúan las variables a lo largo de los meses.
+            </p>
+            <p style="margin: 0;">
+              Para interpretar con rigor el comportamiento de la ladera de <strong>Ancón Norte</strong>, primero debemos dominar la estructura gráfica de <strong>Matplotlib</strong> y luego automatizar la visualización de todos los sensores mediante funciones modulares y bucles.
+            </p>
           </div>
-          <div class="theory-callout">
-            📌 <strong>Contexto Geotécnico de Ancón Norte:</strong><br>
-            Las perforaciones e inclinómetros identificaron superficies de falla a <strong>11 m, 16 m y 22 m</strong> de profundidad. La lluvia que estamos graficando es el agente que se infiltra hasta estas profundidades.
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Anatomía Estructural de una Figura en Matplotlib</h4>
+          <p>
+            Una figura científica no se dibuja en un solo bloque monolítico: cada llamada de Python añade una capa gráfica sobre el marco de trabajo.
+          </p>
+
+          <!-- Simulador Interactivo de Matplotlib (Lienzo Grande Paso a Paso) -->
+          <div id="matplotlib-anatomy-container" style="margin: 1.25rem 0;"></div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">2. Automatización Multisensores con Funciones y Bucles</h4>
+          <p>
+            En lugar de duplicar 15 líneas de código por cada instrumento, combinamos una <strong>función modular</strong> con un <strong>bucle <code>for</code></strong> tradicional para recorrer la lista de canales de Ancón Norte: <code>['p1', 'sh1', 'C1', 'B1', 'DE1']</code>.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 0.85rem; margin: 1rem 0;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-primary); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-primary);">1. La Función Modular (<code>grafica(sensor)</code>)</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Encapsula la configuración del lienzo (<code>figsize=(9, 4)</code>), el trazado de la serie (<code>df[sensor]</code>), el título en negrilla, las etiquetas de ejes, la leyenda y la cuadrícula punteada.
+              </p>
+              <code style="font-size: 0.78rem;">def grafica(sensor): ...</code>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-cyan); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-cyan);">2. El Bucle de Recorrido</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Itera secuencialmente sobre la lista de sensores para desplegar la evolución temporal de cada instrumento por separado:
+              </p>
+              <code style="font-size: 0.78rem;">for sensor in lista_sensores:<br>&nbsp;&nbsp;grafica(sensor)</code>
+            </div>
+          </div>
+
+          <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
+            <strong>💡 Tu Turno en el Editor: Automatización de Series Temporales</strong><br>
+            En el editor interactivo inferior definirás la función modular <code>grafica(sensor)</code> y la ejecutarás mediante un bucle <code>for</code> tradicional sobre la lista <code>['p1', 'sh1', 'C1', 'B1', 'DE1']</code> para generar las series temporales de todos los sensores.
           </div>
         `,
-        instruction: "Grafica la columna de lluvia <code>df['p']</code> en función del tiempo, añade el título <code>'Precipitación Diaria - Ancón Norte'</code> y llama a <code>plt.show()</code>.",
-        initialCode: `# -------------------------------------------------------------
-# EJERCICIO 2.1: Gráfico de Línea con Matplotlib
-# -------------------------------------------------------------
-import pandas as pd
+        instruction: "1. En el editor inferior, define la función modular <code>grafica(sensor)</code> que configure el lienzo (9x4 pulgadas), trace la serie temporal <code>df_ancon[sensor]</code> con ancho de línea 0.8, asigne título en negrilla, rotule los ejes 'Fecha' y el nombre del sensor, agregue leyenda en la esquina superior izquierda, cuadrícula punteada y despliegue con <code>plt.show()</code>.<br>2. Escribe un bucle <code>for</code> tradicional que recorra secuencialmente la lista de sensores <code>['p1', 'sh1', 'C1', 'B1', 'DE1']</code> invocando <code>grafica(sensor)</code> en cada iteración.<br>3. Ejecuta tu código para visualizar las 5 series temporales.",
+        initialCode: `# ==============================================================
+# EJERCICIO 2.1: Fundamentos de Matplotlib y Automatización Multisensores
+# La matriz df_ancon ya se encuentra disponible en memoria.
+# ==============================================================
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-df.index = pd.to_datetime(df.index)
+# Paso 1: Define la función modular grafica(sensor) con lienzo (figsize=(9, 4)),
+# trazado de la serie df_ancon[sensor] (linewidth=0.8), título en negrilla (fontsize=15),
+# rotulación de ejes 'Fecha' y sensor, leyenda ('upper left'), cuadrícula punteada y plt.show():
 
-plt.figure(figsize=(9, 3.8))
 
-# 1. Escribe la instrucción plt.plot con el índice y la columna 'p':
-# plt.plot(..., color='royalblue', label='Precipitación')
+# Paso 2: Escribe un bucle for tradicional que recorra cada sensor en ['p1', 'sh1', 'C1', 'B1', 'DE1']
+# e invoque grafica(sensor) para desplegar cada serie temporal por separado:
 
-# 2. Configura título y etiquetas:
-plt.title('Precipitación Diaria - Ancón Norte', fontweight='bold')
-plt.xlabel('Fecha')
-plt.ylabel('Precipitación (mm/día)')
-plt.grid(True, linestyle='--', alpha=0.5)
-
-# 3. Muestra la gráfica:
-# plt.show()
 `,
-        hint: "Descomenta `plt.plot(df.index, df['p'], color='royalblue', label='Precipitación')` y `plt.show()`.",
-        solution: `import pandas as pd
-import matplotlib.pyplot as plt
+        hint: `Escribe:
+def grafica(sensor):
+    plt.figure(figsize=(9, 4))
+    plt.plot(df_ancon.index, df_ancon[sensor], label=sensor, linewidth=0.8)
+    plt.title(sensor, fontsize=15, fontweight='bold')
+    plt.xlabel('Fecha')
+    plt.ylabel(sensor)
+    plt.legend(loc='upper left')
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.show()
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-df.index = pd.to_datetime(df.index)
+for sensor in ['p1', 'sh1', 'C1', 'B1', 'DE1']:
+    grafica(sensor)`,
+        solution: `import matplotlib.pyplot as plt
 
-plt.figure(figsize=(9, 3.8))
-plt.plot(df.index, df['p'], color='royalblue', label='Precipitación')
-plt.title('Precipitación Diaria - Ancón Norte', fontweight='bold')
-plt.xlabel('Fecha')
-plt.ylabel('Precipitación (mm/día)')
-plt.grid(True, linestyle='--', alpha=0.5)
-plt.show()`,
+def grafica(sensor):
+    plt.figure(figsize=(9, 4))
+    plt.plot(df_ancon.index, df_ancon[sensor], label=sensor, linewidth=0.8)
+    plt.title(sensor, fontsize=15, fontweight='bold')
+    plt.xlabel('Fecha')
+    plt.ylabel(sensor)
+    plt.legend(loc='upper left')
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.show()
+
+for sensor in ['p1', 'sh1', 'C1', 'B1', 'DE1']:
+    grafica(sensor)`,
         validator: (output, hasPlot) => hasPlot
       },
       {
         id: "m2_l2",
-        title: "2.2 Boxplot del Extensómetro y Umbrales de Outliers",
+        title: "2.2 Diagnóstico Visual de Telemetría y Saneamiento de Datos (NaN)",
         concept: `
-          <p>Un <strong>boxplot (diagrama de caja)</strong> resume la distribución estadística:</p>
-          
-          <!-- Contenedor Interactivo de Anatomía del Boxplot -->
-          <div id="boxplot-anatomy-container"></div>
-          <ul>
-            <li><strong>Caja:</strong> Rango intercuartílico (IQR = Q3 - Q1), donde está el 50% central de los días.</li>
-            <li><strong>Límite superior:</strong> <code>Q3 + 1.5 * IQR</code>. Todo punto por encima es un <strong>outlier</strong> (aceleración inusual de la grieta).</li>
-          </ul>
-          <div class="code-example-block">
-deformaciones = df[df['DE1'] > 0]['DE1']
-plt.boxplot(deformaciones)
-plt.show()
+          <div class="theory-narrative-bridge">
+            <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 2.1</div>
+            <p style="margin: 0 0 0.5rem 0;">
+              Al graficar secuencialmente todas las series en la lección 2.1, descubriste dos realidades físicas y operacionales de la instrumentación en Ancón Norte:
+            </p>
+            <ul style="margin: 0.35rem 0 0.85rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
+              <li><strong>Desfases Temporales de Instalación:</strong> El pluviómetro (<code>p1</code>) inició registros en mayo de 2019, mientras que las sondas de humedad e inclinómetros se instalaron a inicios de 2020.</li>
+              <li><strong>Anomalía Crítica en el Extensómetro (<code>DE1</code>):</strong> Al graficar la apertura de grieta, la gráfica aparece completamente distorsionada y aplastada contra el techo superior por la presencia de lecturas negativas abruptas como <code>-999.0</code>.</li>
+            </ul>
+            <p style="margin: 0;">
+              En telemetría geotécnica, <strong>los valores negativos extremos representan la codificación numérica de fallas de conexión o caída de voltaje en el datalogger</strong> (datos faltantes artificialmente codificados). En esta lección aprenderemos a diagnosticar y sanear estas anomalías.
+            </p>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Detección de Códigos Numéricos de Error en Telemetría</h4>
+          <p>
+            Los sistemas IoT y estaciones datalogger de campo frecuentemente asignan valores centinela (como <code>-999.0</code> o <code>-9999.0</code>) cuando un sensor se desconecta o pierde alimentación. Si se grafican directamente, Matplotlib expande el eje Y hasta incluir el número negativo extremo, reduciendo toda la señal física real (que varía de 0 a 15 mm) a una línea plana e imperceptible.
+          </p>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">2. Saneamiento de Telemetría: Imputación de <code>np.nan</code> con <code>.loc</code></h4>
+          <p>
+            Para devolver la serie a su escala física genuina sin perder la cronología de las fechas, ubicamos las filas anómalas mediante una <strong>máscara booleana</strong> y les asignamos el valor nulo estándar de punto flotante <code>np.nan</code> (Not a Number):
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 0.85rem; margin: 1rem 0;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-amber); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-amber);">1. Máscara Booleana de Negativos</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Identifica qué filas contienen la codificación numérica de error (valores menores a 0 en la apertura de grieta):
+              </p>
+              <code style="font-size: 0.78rem;">condicion = df_ancon['DE1'] &lt; 0</code>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-emerald); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-emerald);">2. Asignación de <code>np.nan</code> con <code>.loc</code></strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Sustituye los códigos erróneos por <code>np.nan</code>. Al graficar de nuevo, Matplotlib ignora los nulos y conecta los tramos continuos sin caer al abismo negativo:
+              </p>
+              <code style="font-size: 0.78rem;">df_ancon.loc[condicion, 'DE1'] = np.nan</code>
+            </div>
+          </div>
+
+          <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
+            <strong>💡 Tu Turno en el Editor: Saneamiento y Normalización de DE1</strong><br>
+            La matriz <code>df_ancon</code> y la función <code>grafica()</code> ya se encuentran en memoria. <strong>No es necesario volver a importar el CSV</strong>. Identifica la condición de valores negativos en <code>DE1</code>, asígnales <code>np.nan</code> mediante <code>.loc</code> y re-invoca <code>grafica('DE1')</code> para confirmar que la escala milimétrica real quede visible.
           </div>
         `,
-        instruction: "Filtra los días con deformación activa (`DE1 > 0`), calcula el límite superior de alerta (`Q3 + 1.5 * IQR`) e imprime su valor antes de graficar el boxplot.",
-        initialCode: `# -------------------------------------------------------------
-# EJERCICIO 2.2: Boxplot del Extensómetro
-# -------------------------------------------------------------
-import pandas as pd
-import matplotlib.pyplot as plt
+        instruction: "1. En el editor inferior, define la condición booleana para identificar los registros negativos en <code>DE1</code> (menores que 0): <code>condicion = df_ancon['DE1'] &lt; 0</code>.<br>2. Sustituye esos códigos de error por valores nulos usando <code>df_ancon.loc[condicion, 'DE1'] = np.nan</code>.<br>3. Vuelve a invocar <code>grafica('DE1')</code> para verificar que la gráfica se normalice sin distorsiones en su rango real de milímetros.<br>4. Ejecuta tu código para validar.",
+        initialCode: `# ==============================================================
+# EJERCICIO 2.2: Diagnóstico de Telemetría y Saneamiento de DE1
+# La matriz df_ancon y la función grafica() ya se encuentran en memoria.
+# NO debes volver a importar el archivo CSV.
+# ==============================================================
+import numpy as np
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-deformacion_activa = df[df['DE1'] > 0]['DE1']
+# Paso 1: Define la condición booleana para detectar lecturas erróneas
+# negativas en la columna 'DE1' (menores que 0):
 
-# 1. Calcula Q1, Q3 y el rango intercuartílico (IQR):
-q1 = deformacion_activa.quantile(0.25)
-q3 = deformacion_activa.quantile(0.75)
-iqr = q3 - q1
 
-# 2. Calcula el límite superior de alerta (Q3 + 1.5 * IQR):
-limite_alerta = None
+# Paso 2: Asigna np.nan a esas posiciones utilizando df_ancon.loc[condicion, 'DE1'] = np.nan:
 
-print(f"Límite superior de alerta: {limite_alerta:.3f} mm" if limite_alerta else "Calcula limite_alerta")
 
-# 3. Grafica el boxplot:
-plt.figure(figsize=(5, 4))
-plt.boxplot(deformacion_activa, patch_artist=True)
-plt.title('Boxplot de Deformación Diaria (DE1 > 0)')
-plt.ylabel('Deformación (mm/día)')
-plt.show()
+# Paso 3: Invoca grafica('DE1') para verificar que la serie de deformación
+# se despliegue en su escala física real sin distorsiones:
+
 `,
-        hint: "Escribe: `limite_alerta = q3 + 1.5 * iqr`.",
-        solution: `import pandas as pd
-import matplotlib.pyplot as plt
+        hint: `Escribe:
+condicion = df_ancon['DE1'] < 0
+df_ancon.loc[condicion, 'DE1'] = np.nan
+grafica('DE1')`,
+        solution: `import numpy as np
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-deformacion_activa = df[df['DE1'] > 0]['DE1']
-
-q1 = deformacion_activa.quantile(0.25)
-q3 = deformacion_activa.quantile(0.75)
-iqr = q3 - q1
-limite_alerta = q3 + 1.5 * iqr
-
-print(f"Límite superior de alerta: {limite_alerta:.3f} mm")
-
-plt.figure(figsize=(5, 4))
-plt.boxplot(deformacion_activa, patch_artist=True)
-plt.title('Boxplot de Deformación Diaria (DE1 > 0)')
-plt.ylabel('Deformación (mm/día)')
-plt.show()`,
-        validator: (output, hasPlot) => output.includes("Límite superior de alerta") && hasPlot
+condicion = df_ancon['DE1'] < 0
+df_ancon.loc[condicion, 'DE1'] = np.nan
+grafica('DE1')`,
+        validator: (output, hasPlot) => hasPlot
       },
       {
         id: "m2_l3",
-        title: "2.3 Semáforo de Alerta con Zonas Coloreadas",
+        title: "2.3 Paneles Múltiples (Subplots) y Sincronización Temporal (sharex)",
         concept: `
-          <p>Podemos colorear el fondo de una serie de tiempo con <code>plt.axhspan(y_min, y_max, color=..., alpha=...)</code> para crear un semáforo visual de alerta geotécnica:</p>
-          
-          <!-- Contenedor Interactivo de Semáforo de Umbrales -->
-          <div id="threshold-bands-container"></div>
-          <ul>
-            <li>🟢 Verde (Normal): Entre Q1 y Q3.</li>
-            <li>🟠 Naranja (Precaución): Entre cuartiles y bigotes.</li>
-            <li>🔴 Rojo (Alerta Crítica): Valores que superan el límite del boxplot.</li>
-          </ul>
+          <div class="theory-narrative-bridge">
+            <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 2.2</div>
+            <p style="margin: 0 0 0.5rem 0;">
+              En la lección previa aprendiste a graficar cada sensor en ventanas independientes y limpiaste la anomalía de telemetría en <code>DE1</code>.
+            </p>
+            <p style="margin: 0 0 0.5rem 0;">
+              Sin embargo, en el análisis de estabilidad de taludes, <strong>los procesos no ocurren de forma aislada</strong>: la precipitación se infiltra, incrementa la humedad del suelo y puede inducir rotaciones en el inclinómetro o aperturas en la grieta. Evaluar gráficos separados en ventanas desconectadas impide comparar visualmente los eventos simultáneos.
+            </p>
+            <p style="margin: 0;">
+              Para resolver esto, utilizamos <strong>Subplots Apilados</strong> (<code>plt.subplots</code>). Pero aquí surge un desafío fundamental: como los sensores iniciaron mediciones en fechas distintas, debemos forzar la sincronización temporal horizontal mediante <code>sharex=True</code>.
+            </p>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Arquitectura de Subplots Apilados</h4>
+          <p>
+            La función <code>plt.subplots(nrows, ncols, figsize=(ancho, alto))</code> crea una matriz de ejes gráficos en una sola figura:
+          </p>
+
+          <!-- Componente Visual Interactivo de Instanciación de Subplots -->
+          <div id="subplots-anatomy-container" style="margin: 1.25rem 0;"></div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">2. El Dilema Sin sharex vs. La Solución sharex=True</h4>
+          <p>
+            Comprende el impacto crítico de compartir el eje temporal horizontal:
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 0.85rem; margin: 1rem 0;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #ef4444; border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: #ef4444;">⚠️ Sin sharex (Desfase Cronológico)</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Cada panel auto-ajusta su escala de fechas según sus datos disponibles. Como la lluvia inició en mayo 2019 y los sensores geotécnicos en marzo 2020, las columnas verticales de tiempo quedan desalineadas, haciendo imposible ver si un aguacero coincidió con una deformación.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-emerald); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-emerald);">✅ Con sharex=True (Sincronización Total)</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Fuerza a todos los subplots a compartir una escala temporal unificada. Las fechas se ocultan en los paneles superiores para evitar saturación y solo se rotulan en el panel inferior, permitiendo una lectura vertical directa.
+              </p>
+            </div>
+          </div>
+
+          <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
+            <strong>💡 Tu Turno en el Editor: Paneles Sincronizados de Ancón Norte</strong><br>
+            En el editor interactivo inferior construirás los 4 subplots apilados (<code>figsize=(8, 10)</code>) con <code>sharex=True</code> para trazar en orden vertical la lluvia (<code>p1</code>), la humedad del suelo (<code>sh1</code>) y los componentes de aceleración/inclinación (<code>C1</code> y <code>B1</code>), obteniendo la primera radiografía sincrónica del talud.
+          </div>
         `,
-        instruction: "Colorea la zona de alerta crítica superior en rojo (desde `limite_superior` hasta el máximo de humedad) usando `plt.axhspan`.",
-        initialCode: `# -------------------------------------------------------------
-# EJERCICIO 2.3: Zonas Coloreadas de Alerta Temprana
-# -------------------------------------------------------------
-import pandas as pd
+        instruction: "1. En el editor inferior, crea una figura con 4 subplots apilados verticalmente de 8 pulgadas de ancho por 10 de alto compartiendo el eje horizontal con <code>sharex=True</code>.<br>2. En el primer panel (<code>axs[0]</code>), traza la precipitación <code>p1</code> con etiqueta <code>'p1'</code> y ancho de línea 0.8.<br>3. En el segundo panel (<code>axs[1]</code>), traza la humedad <code>sh1</code> con etiqueta <code>'sh1'</code>.<br>4. En el tercer y cuarto panel (<code>axs[2]</code> y <code>axs[3]</code>), traza respectivamente los canales de acelerómetro <code>C1</code> y <code>B1</code> con ancho 0.8.<br>5. Añade leyendas a los paneles, ajusta el diseño y despliega la figura con <code>plt.show()</code>.",
+        initialCode: `# ==============================================================
+# EJERCICIO 2.3: Subplots Apilados y Sincronización Temporal (sharex)
+# df_ancon ya se encuentra disponible en memoria.
+# ==============================================================
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-df.index = pd.to_datetime(df.index)
-humedad = df['sh1'].dropna()
+# Paso 1: Crea la figura y los 4 subplots apilados (4 filas, 1 columna, figsize=(8, 10))
+# forzando la sincronización temporal con sharex=True:
 
-q1 = humedad.quantile(0.25)
-q3 = humedad.quantile(0.75)
-iqr = q3 - q1
-lim_sup = q3 + 1.5 * iqr
 
-plt.figure(figsize=(10, 4))
+# Paso 2: Traza 'p1' en axs[0] con label='p1' y linewidth=0.8:
 
-# Zona Normal
-plt.axhspan(q1, q3, color='forestgreen', alpha=0.25, label='Normal (Q1-Q3)')
 
-# 1. Agrega la zona roja de alerta crítica usando axhspan:
-# plt.axhspan(lim_sup, humedad.max(), color='red', alpha=0.3, label='Alerta Crítica')
+# Paso 3: Traza 'sh1' en axs[1] con label='sh1' y linewidth=0.8:
 
-# Graficar la serie
-plt.plot(humedad.index, humedad, color='navy', label='Humedad del Suelo')
-plt.title('Sensor de Humedad con Zonas de Alerta')
-plt.ylabel('Humedad (%)')
-plt.legend()
-plt.show()
+
+# Paso 4: Traza 'C1' en axs[2] y 'B1' en axs[3] con linewidth=0.8:
+
+
+# Paso 5: Agrega leyendas a los paneles y despliega la figura con plt.show():
+
 `,
-        hint: "Descomenta la línea `plt.axhspan(lim_sup, humedad.max(), color='red', alpha=0.3, label='Alerta Crítica')`.",
-        solution: `import pandas as pd
-import matplotlib.pyplot as plt
+        hint: `Escribe:
+fig, axs = plt.subplots(4, 1, figsize=(8, 10), sharex=True)
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-df.index = pd.to_datetime(df.index)
-humedad = df['sh1'].dropna()
+axs[0].plot(df_ancon.index, df_ancon['p1'], label='p1', linewidth=0.8)
+axs[1].plot(df_ancon.index, df_ancon['sh1'], label='sh1', linewidth=0.8)
+axs[2].plot(df_ancon.index, df_ancon['C1'], label='C1', linewidth=0.8)
+axs[3].plot(df_ancon.index, df_ancon['B1'], label='B1', linewidth=0.8)
 
-q1 = humedad.quantile(0.25)
-q3 = humedad.quantile(0.75)
-iqr = q3 - q1
-lim_sup = q3 + 1.5 * iqr
+for ax in axs:
+    ax.legend(loc='upper left')
+    ax.grid(True, linestyle='--', alpha=0.5)
 
-plt.figure(figsize=(10, 4))
-plt.axhspan(q1, q3, color='forestgreen', alpha=0.25, label='Normal (Q1-Q3)')
-plt.axhspan(lim_sup, humedad.max(), color='red', alpha=0.3, label='Alerta Crítica')
-plt.plot(humedad.index, humedad, color='navy', label='Humedad del Suelo')
-plt.title('Sensor de Humedad con Zonas de Alerta')
-plt.ylabel('Humedad (%)')
-plt.legend()
+plt.tight_layout()
+plt.show()`,
+        solution: `import matplotlib.pyplot as plt
+
+fig, axs = plt.subplots(4, 1, figsize=(8, 10), sharex=True)
+
+axs[0].plot(df_ancon.index, df_ancon['p1'], label='p1', linewidth=0.8)
+axs[1].plot(df_ancon.index, df_ancon['sh1'], label='sh1', linewidth=0.8)
+axs[2].plot(df_ancon.index, df_ancon['C1'], label='C1', linewidth=0.8)
+axs[3].plot(df_ancon.index, df_ancon['B1'], label='B1', linewidth=0.8)
+
+for ax in axs:
+    ax.legend(loc='upper left')
+    ax.grid(True, linestyle='--', alpha=0.5)
+
+plt.tight_layout()
 plt.show()`,
         validator: (output, hasPlot) => hasPlot
       },
       {
         id: "m2_l4",
-        title: "2.4 Remuestreo y Gráfica de Doble Eje (Lluvia Invertida)",
+        title: "2.4 Doble Eje Y (twinx) y Lluvia Invertida para Procesos Acoplados",
         concept: `
-          <div class="theory-callout">
-            ⚖️ <strong>Regla Geotécnica de Remuestreo:</strong><br>
-            La lluvia se <strong>suma ('sum')</strong> porque es acumulativa, mientras que la humedad se <strong>promedia ('mean')</strong> porque representa un estado instantáneo.
+          <div class="theory-narrative-bridge">
+            <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 2.3</div>
+            <p style="margin: 0 0 0.5rem 0;">
+              En la lección previa aprendiste a comparar sensores en paneles apilados con <code>sharex=True</code>.
+            </p>
+            <p style="margin: 0 0 0.5rem 0;">
+              Sin embargo, para estudiar la <strong>interacción directa causa-efecto</strong> (por ejemplo, cómo cada pulso de precipitación eleva instantáneamente la humedad del suelo), los ingenieros geotécnicos necesitan ver ambas series superpuestas en un único gráfico temporal.
+            </p>
+            <p style="margin: 0;">
+              Como la precipitación (0 a 70 mm) y la humedad (45% a 65%) tienen magnitudes físicas totalmente distintas, dibujarlas en un mismo eje aplastaría la curva de lluvia. La solución estándar en hidrogeología es emplear un <strong>Doble Eje Y</strong> con <code>ax1.twinx()</code> e <strong>Invertir el Eje de Lluvia</strong> con <code>ax1.invert_yaxis()</code>: las tormentas descienden del cielo en azul, mientras la humedad evoluciona libremente desde el suelo en carmesí.
+            </p>
           </div>
-          <p>En ingeniería geológica, graficamos la lluvia en el eje superior derecho invertido (<code>ax2.invert_yaxis()</code>) para observar cómo cada aguacero impacta la humedad del terreno en el eje primario.</p>
-          
-          <!-- Contenedor Interactivo de Doble Eje con Lluvia Invertida -->
-          <div id="dual-axis-rain-container"></div>
+
+          <!-- Componente Visual Interactivo de Lluvia Invertida y Doble Eje -->
+          <div id="dual-axis-rain-container" style="margin: 1.25rem 0;"></div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Arquitectura de Dos Ejes con Escalas Independientes (twinx)</h4>
+          <p>
+            Matplotlib permite desacoplar los rangos verticales manteniendo un único eje horizontal de fechas:
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 0.85rem; margin: 1rem 0;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #1e3a8a; border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: #3b82f6;">1. Eje Primario (<code>ax1</code> - Atmósfera / Lluvia)</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                <code>fig, ax1 = plt.subplots(figsize=(12, 4))</code> crea el marco principal. Trazamos la precipitación en color <code>'royalblue'</code> y rotulamos su eje Y.
+              </p>
+              <code style="font-size: 0.78rem;">ax1.plot(..., color='royalblue')</code>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid #dc2626; border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: #ef4444;">2. Eje Gemelo Secundario (<code>ax2</code> - Subsuelo / Humedad)</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                <code>ax2 = ax1.twinx()</code> clona el eje X en el margen derecho. Trazamos la humedad en color <code>'crimson'</code> con su propia escala independiente de 0 a 100%.
+              </p>
+              <code style="font-size: 0.78rem;">ax2 = ax1.twinx()</code>
+            </div>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">2. La Convención Hidrogeológica de Lluvia Invertida</h4>
+          <p>
+            Al ejecutar <code>ax1.invert_yaxis()</code>, el cero de la lluvia se ancla en el techo de la figura y los picos de tormenta crecen hacia abajo. Esta disposición evita que las líneas de lluvia interfieran visualmente con el ascenso del agua en el perfil del suelo.
+          </p>
+
+          <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
+            <strong>💡 Tu Turno en el Editor: Lluvia Invertida y Respuesta de Humedad</strong><br>
+            En el editor interactivo inferior configurarás la figura panorámica de 12x4 pulgadas, trazarás <code>p1</code> en <code>ax1</code> en color <code>'royalblue'</code> con su eje Y invertido, crearás el eje gemelo <code>ax2</code> para trazar <code>sh1</code> en color <code>'crimson'</code> y rotularás ambos ejes con sus colores temáticos.
+          </div>
         `,
-        instruction: "Completa el remuestreo semanal de lluvia y humedad, y activa la inversión del eje Y con <code>ax2.invert_yaxis()</code>.",
-        initialCode: `# -------------------------------------------------------------
-# EJERCICIO 2.4: Gráfica de Doble Eje con Lluvia Invertida
-# -------------------------------------------------------------
-import pandas as pd
+        instruction: "1. En el editor inferior, crea la figura y el eje primario con <code>fig, ax1 = plt.subplots(figsize=(12, 4), sharex=True)</code>.<br>2. En <code>ax1</code>, traza la precipitación <code>p1</code> en color <code>'royalblue'</code> con ancho de línea 0.8, rotula el eje Y como <code>'Precipitación'</code> con el mismo color e invierte el eje con <code>ax1.invert_yaxis()</code>.<br>3. Crea el eje secundario con <code>ax2 = ax1.twinx()</code>.<br>4. En <code>ax2</code>, traza la humedad <code>sh1</code> en color <code>'crimson'</code> con ancho 0.8 y rotula su eje Y como <code>'Humedad'</code> con el color correspondiente.<br>5. Despliega la gráfica acoplada con <code>plt.show()</code>.",
+        initialCode: `# ==============================================================
+# EJERCICIO 2.4: Doble Eje Y (twinx) y Lluvia Invertida
+# df_ancon ya se encuentra disponible en memoria.
+# ==============================================================
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-df.index = pd.to_datetime(df.index)
+# Paso 1: Crea la figura y el eje primario ax1 con tamaño panorámico (12x4 pulgadas):
 
-# 1. Remuestreo semanal:
-df_sem = df.resample('1W').agg({'p': 'sum', 'sh1': 'mean'}).dropna()
 
-fig, ax1 = plt.subplots(figsize=(10, 4))
+# Paso 2: Traza 'p1' en ax1 (color='royalblue', linewidth=0.8), rotula el eje Y
+# como 'Precipitación' en color royalblue e invierte el eje Y con ax1.invert_yaxis():
 
-# Eje 1 (Humedad):
-ax1.plot(df_sem.index, df_sem['sh1'], color='darkblue', linewidth=2, label='Humedad (%)')
-ax1.set_ylabel('Humedad (%)', color='darkblue')
 
-# Eje 2 (Lluvia Invertida):
-ax2 = ax1.twinx()
-ax2.bar(df_sem.index, df_sem['p'], width=4, color='royalblue', alpha=0.4, label='Lluvia')
-ax2.set_ylabel('Lluvia (mm/sem)', color='royalblue')
+# Paso 3: Crea el eje gemelo secundario con ax2 = ax1.twinx():
 
-# 2. Invierte el eje de la lluvia para que caiga desde arriba:
-# ax2.invert_yaxis()
 
-plt.title('Relación Precipitación vs. Humedad a Escala Semanal')
-plt.show()
+# Paso 4: Traza 'sh1' en ax2 (color='crimson', linewidth=0.8) y rotula su eje Y
+# como 'Humedad' en color crimson:
+
+
+# Paso 5: Muestra la figura con plt.show():
+
 `,
-        hint: "Descomenta `ax2.invert_yaxis()`.",
-        solution: `import pandas as pd
-import matplotlib.pyplot as plt
+        hint: `Escribe:
+fig, ax1 = plt.subplots(figsize=(12, 4), sharex=True)
 
-df = pd.read_csv('df_ancon.csv', index_col=0)
-df.index = pd.to_datetime(df.index)
-
-df_sem = df.resample('1W').agg({'p': 'sum', 'sh1': 'mean'}).dropna()
-
-fig, ax1 = plt.subplots(figsize=(10, 4))
-ax1.plot(df_sem.index, df_sem['sh1'], color='darkblue', linewidth=2)
-ax1.set_ylabel('Humedad (%)', color='darkblue')
+ax1.plot(df_ancon.index, df_ancon['p1'], label='p1', linewidth=0.8, color='royalblue')
+ax1.set_ylabel('Precipitación', color='royalblue')
+ax1.invert_yaxis()
 
 ax2 = ax1.twinx()
-ax2.bar(df_sem.index, df_sem['p'], width=4, color='royalblue', alpha=0.4)
-ax2.set_ylabel('Lluvia (mm/sem)', color='royalblue')
-ax2.invert_yaxis()
+ax2.plot(df_ancon.index, df_ancon['sh1'], label='sh1', linewidth=0.8, color='crimson')
+ax2.set_ylabel('Humedad', color='crimson')
 
-plt.title('Relación Precipitación vs. Humedad a Escala Semanal')
+plt.show()`,
+        solution: `import matplotlib.pyplot as plt
+
+fig, ax1 = plt.subplots(figsize=(12, 4), sharex=True)
+
+ax1.plot(df_ancon.index, df_ancon['p1'], label='p1', linewidth=0.8, color='royalblue')
+ax1.set_ylabel('Precipitación', color='royalblue')
+ax1.invert_yaxis()
+
+ax2 = ax1.twinx()
+ax2.plot(df_ancon.index, df_ancon['sh1'], label='sh1', linewidth=0.8, color='crimson')
+ax2.set_ylabel('Humedad', color='crimson')
+
+plt.show()`,
+        validator: (output, hasPlot) => hasPlot
+      },
+      {
+        id: "m2_l5",
+        title: "2.5 Análisis de Dispersión con Boxplots Multivariables",
+        concept: `
+          <div class="theory-narrative-bridge">
+            <div class="bridge-tag">🔗 Conexión Pedagógica con las Lecciones 2.1 a 2.4</div>
+            <p style="margin: 0 0 0.5rem 0;">
+              En las lecciones anteriores aprendiste a visualizar las series temporales individuales, sincronizar paneles con <code>sharex=True</code> y acoplar lluvia con humedad mediante <code>twinx()</code>.
+            </p>
+            <p style="margin: 0 0 0.5rem 0;">
+              Sin embargo, las series en el tiempo no permiten comparar de un solo vistazo la <strong>dispersión estadística y los rangos operativos</strong> entre sensores que tienen escalas y unidades completamente diferentes.
+            </p>
+            <p style="margin: 0;">
+              Para resolver esto sin sesgos de distribución normal, la ingeniería geotécnica recurre al <strong>Diagrama de Caja y Bigotes (Boxplot de Tukey)</strong>, permitiendo evaluar la variabilidad, identificar asimetrías y aislar lecturas atípicas (outliers) en toda la red de monitoreo.
+            </p>
+          </div>
+
+          <!-- Componente Visual Interactivo de Boxplot de Tukey -->
+          <div id="boxplot-anatomy-container" style="margin: 1.25rem 0;"></div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Anatomía Estadística del Boxplot de Tukey</h4>
+          <p>
+            El boxplot resume la distribución de datos mediante 5 medidas clave sin asumir una campana de Gauss:
+          </p>
+
+          <ul style="margin: 0.35rem 0 0.85rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
+            <li><strong>Mediana ($Q_2$ / Percentil 50):</strong> Medida central robusta. Inmune a picos espurios o descargas electromagnéticas de telemetría.</li>
+            <li><strong>Caja Central ($IQR = Q_3 - Q_1$):</strong> Contiene el 50% central de las observaciones registradas. Refleja la estabilidad del sensor.</li>
+            <li><strong>Bigotes Superior e Inferior:</strong> Se extienden hasta el dato real más alejado que no exceda $1.5 \\times IQR$ desde los cuartiles.</li>
+            <li><strong>Outliers (Puntos Atípicos):</strong> Cualquier lectura fuera de los bigotes ($> Q_3 + 1.5 \\times IQR$). Requiere verificación para distinguir entre ruido instrumental y pulsos reales de movimiento.</li>
+          </ul>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">2. Comparación Multivariable con Subplots en Matplotlib</h4>
+          <p>
+            En una instrumentación real coexisten sensores con órdenes de magnitud dispares:
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.85rem; margin: 1rem 0;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-primary); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-primary);">1. El Problema de Escala Única</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Graficar piezómetros en kPa (0 a 100), humedad en % (40 a 70) y extensómetros en mm (0 a 25) en un solo eje aplastaría los sensores de menor magnitud.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-cyan); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-cyan);">2. Cuadrícula Horizontal de Subplots</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Instanciamos 5 subplots en una fila. Cada variable recibe su propio panel con escala vertical independiente y legible.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-emerald); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-emerald);">3. Iteración Limpia con .dropna()</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Matplotlib requiere que los valores <code>NaN</code> sean descartados antes de calcular cuartiles en cada canal.
+              </p>
+            </div>
+          </div>
+
+          <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
+            <strong>💡 Tu Turno en el Editor: Boxplots Multivariables de la Red Ancón Norte</strong><br>
+            En el editor inferior definirás la lista de los 5 sensores de monitoreo, crearás una cuadrícula horizontal de 5 subplots, iterarás para trazar el boxplot de cada variable y observarás las diferencias de dispersión y outliers en toda la estación.
+          </div>
+        `,
+        instruction: "1. Crea una lista con los identificadores de los 5 sensores de la ladera: precipitación (<code>p1</code>), humedad (<code>sh1</code>), piezómetros (<code>C1</code> y <code>B1</code>) y deformación (<code>DE1</code>).<br>2. Configura una cuadrícula panorámica de 5 subplots dispuestos en una única fila horizontal (1 fila &times; 5 columnas, con proporciones de 15 &times; 4 pulgadas).<br>3. Mediante un bucle de iteración, recorre cada sensor para generar su diagrama de caja y bigotes (boxplot) descartando los valores nulos, rellenando las cajas con color, titulando cada panel con el nombre del sensor y activando una cuadrícula tenue.<br>4. Ajusta la separación entre paneles para evitar solapamientos y renderiza la figura en pantalla.",
+        initialCode: `# ==============================================================
+# EJERCICIO 2.5: Boxplots Multivariables de Sensores Geotécnicos
+# df_ancon ya se encuentra disponible y saneado en memoria.
+# ==============================================================
+import matplotlib.pyplot as plt
+
+# Paso 1: Define la lista con los 5 sensores a comparar (lluvia, humedad, piezómetros y extensómetro):
+
+
+# Paso 2: Instancia una fila de 5 subplots en una figura panorámica (15x4 pulgadas):
+
+
+# Paso 3: Itera sobre cada sensor para graficar su boxplot (descartando nulos con .dropna()),
+# rellena las cajas con color, asigna el título del sensor a cada panel y añade la cuadrícula:
+
+
+# Paso 4: Ajusta los espacios entre paneles y muestra la gráfica:
+
+`,
+        hint: `Escribe:
+columnas = ['p1', 'sh1', 'C1', 'B1', 'DE1']
+fig, axs = plt.subplots(1, 5, figsize=(15, 4))
+
+for i, col in enumerate(columnas):
+    axs[i].boxplot(df_ancon[col].dropna(), patch_artist=True)
+    axs[i].set_title(col)
+    axs[i].grid(True, linestyle='--', alpha=0.5)
+
+plt.tight_layout()
+plt.show()`,
+        solution: `import matplotlib.pyplot as plt
+
+columnas = ['p1', 'sh1', 'C1', 'B1', 'DE1']
+fig, axs = plt.subplots(1, 5, figsize=(15, 4))
+
+for i, col in enumerate(columnas):
+    axs[i].boxplot(df_ancon[col].dropna(), patch_artist=True)
+    axs[i].set_title(col)
+    axs[i].grid(True, linestyle='--', alpha=0.5)
+
+plt.tight_layout()
+plt.show()`,
+        validator: (output, hasPlot) => hasPlot
+      },
+      {
+        id: "m2_l6",
+        title: "2.6 Semáforo Geotécnico y Bandas de Alerta con axhspan",
+        concept: `
+          <div class="theory-narrative-bridge">
+            <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 2.5</div>
+            <p style="margin: 0 0 0.5rem 0;">
+              En la lección anterior aprendiste a diagnosticar la dispersión e identificar outliers mediante el Boxplot de Tukey.
+            </p>
+            <p style="margin: 0 0 0.5rem 0;">
+              En la ingeniería de taludes y presas de relaves, los umbrales de alerta temprana <strong>nunca deben establecerse como números arbitrarios inventados a ciegas</strong>.
+            </p>
+            <p style="margin: 0;">
+              El protocolo geotécnico estándar deriva las fronteras operativas del semáforo directamente de la <strong>estadística de base del sensor mediante el Método de Tukey</strong>: usando los cuartiles ($Q_1, Q_3$) y el rango intercuartílico ($IQR$) para demarcar cuantitativamente la frontera entre variaciones normales, atención preventiva, alerta técnica y emergencia por falla.
+            </p>
+          </div>
+
+          <!-- Componente Visual Interactivo de Semáforo y Bandas de Alerta -->
+          <div id="threshold-bands-container" style="margin: 1.25rem 0;"></div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Zonificación de Riesgo Derivada del Método de Tukey</h4>
+          <p>
+            A partir de los cuantiles del sensor, el semáforo traduce la estadística a cuatro niveles operativos rigurosos:
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem; margin: 1rem 0;">
+            <div style="background: rgba(34, 197, 94, 0.08); border-left: 4px solid #22c55e; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong style="color: #16a34a;">🟢 Zona Verde: Normal (0 a $Q_3$)</strong>
+              <p style="font-size: 0.8rem; margin: 0.25rem 0; color: var(--text-muted);">
+                Abarca el 75% de las observaciones registradas. Representa el régimen elástico y las variaciones estacionales habituales sin aceleración.
+              </p>
+            </div>
+
+            <div style="background: rgba(234, 179, 8, 0.08); border-left: 4px solid #eab308; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong style="color: #ca8a04;">🟡 Zona Amarilla: Prevención ($Q_3$ a $Q_3 + 1.5 \\times IQR$)</strong>
+              <p style="font-size: 0.8rem; margin: 0.25rem 0; color: var(--text-muted);">
+                Zona comprendida en el bigote superior. La dispersión supera lo cotidiano pero aún se considera físicamente permisible. Incremento de vigilancia.
+              </p>
+            </div>
+
+            <div style="background: rgba(249, 115, 22, 0.08); border-left: 4px solid #f97316; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong style="color: #ea580c;">🟠 Zona Naranja: Alerta ($Q_3 + 1.5 \\times IQR$ a $Q_3 + 3.0 \\times IQR$)</strong>
+              <p style="font-size: 0.8rem; margin: 0.25rem 0; color: var(--text-muted);">
+                Supera el límite de Tukey (outliers moderados). Implica aceleración cinemática anómala o reptación activa: restricción de accesos y maquinaria pesada.
+              </p>
+            </div>
+
+            <div style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #ef4444; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong style="color: #dc2626;">🔴 Zona Roja: Emergencia ($> Q_3 + 3.0 \\times IQR$)</strong>
+              <p style="font-size: 0.8rem; margin: 0.25rem 0; color: var(--text-muted);">
+                Zona de outliers severos y deformación acelerada de tercer orden (falla inminente). Orden de evacuación inmediata del personal de la ladera.
+              </p>
+            </div>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">2. Trazado Continuo del Semáforo con axhspan</h4>
+          <p>
+            El método <code>ax.axhspan(ymin, ymax, color, alpha, label)</code> dibuja una franja horizontal que cubre todo el historial temporal, permitiendo comparar visualmente si la serie temporal cruza los umbrales de Tukey calculados para ese sensor.
+          </p>
+
+          <div class="theory-callout" style="border-left-color: var(--accent-emerald); margin: 0.85rem 0;">
+            <strong>💡 Tu Turno en el Editor: Semáforo Estadístico de Tukey en DE1</strong><br>
+            En el editor inferior calcularás los umbrales estadísticos de Tukey sobre la deformación activa del extensómetro (<code>DE1 &gt; 0</code>), y utilizarás los valores calculados de $Q_3$, <code>umbral_alerta</code> ($Q_3 + 1.5 \\times IQR$) y <code>umbral_emergencia</code> ($Q_3 + 3.0 \\times IQR$) como los límites de las franjas de <code>axhspan</code>.
+          </div>
+        `,
+        instruction: "1. Aísla las lecturas con deformación activa del extensómetro <code>DE1</code> (valores mayores que cero descartando los nulos).<br>2. Calcula estadísticamente el primer cuartil ($Q_1$), el tercer cuartil ($Q_3$) y el rango intercuartílico ($IQR$).<br>3. Determina mediante el método de Tukey los dos límites superiores: el <strong>umbral de alerta</strong> ($Q_3 + 1.5 \\times IQR$) y el <strong>umbral de emergencia</strong> ($Q_3 + 3.0 \\times IQR$).<br>4. Configura una figura de 10 &times; 4 pulgadas y dibuja la serie temporal completa de <code>DE1</code> en trazo negro continuo.<br>5. Superpón las 4 zonas del semáforo con <code>axhspan</code> usando las variables estadísticas calculadas como cotas:<br>&bull; <strong>Verde:</strong> desde 0 hasta el tercer cuartil ($Q_3$).<br>&bull; <strong>Amarillo:</strong> desde $Q_3$ hasta el umbral de alerta.<br>&bull; <strong>Naranja:</strong> desde el umbral de alerta hasta el umbral de emergencia.<br>&bull; <strong>Rojo:</strong> desde el umbral de emergencia hacia arriba.<br>6. Añade título, rotula los ejes, posiciona la leyenda en la esquina superior izquierda, activa la cuadrícula y muestra el gráfico.",
+        initialCode: `# ==============================================================
+# EJERCICIO 2.6: Semáforo de Umbrales Estadísticos (Método de Tukey)
+# df_ancon ya se encuentra disponible y saneado en memoria.
+# ==============================================================
+import matplotlib.pyplot as plt
+
+# Paso 1: Filtra las lecturas de deformación activa de DE1 (valores > 0 sin nulos):
+
+
+# Paso 2: Calcula los cuartiles Q1, Q3, el IQR y los umbrales de Tukey:
+# - umbral_alerta: Q3 + 1.5 * IQR
+# - umbral_emergencia: Q3 + 3.0 * IQR
+
+
+# Paso 3: Crea la figura y eje (10x4 pulgadas), y traza la serie de DE1 en negro:
+
+
+# Paso 4: Superpón las 4 bandas del semáforo usando las variables calculadas:
+# Verde (0 a Q3), Amarillo (Q3 a alerta), Naranja (alerta a emergencia), Rojo (> emergencia):
+
+
+# Paso 5: Configura título, etiquetas de ejes, leyenda, cuadrícula y despliega la figura:
+
+`,
+        hint: `Escribe:
+de1_activo = df_ancon[df_ancon['DE1'] > 0]['DE1'].dropna()
+
+q1 = de1_activo.quantile(0.25)
+q3 = de1_activo.quantile(0.75)
+iqr = q3 - q1
+umbral_alerta = q3 + 1.5 * iqr
+umbral_emergencia = q3 + 3.0 * iqr
+
+fig, ax = plt.subplots(figsize=(10, 4))
+ax.plot(df_ancon.index, df_ancon['DE1'], color='black', linewidth=1.2, label='DE1 (Extensómetro)')
+
+ax.axhspan(0, q3, color='green', alpha=0.15, label='Normal (<= Q3)')
+ax.axhspan(q3, umbral_alerta, color='gold', alpha=0.2, label='Prevención (Q3 a Q3+1.5*IQR)')
+ax.axhspan(umbral_alerta, umbral_emergencia, color='orange', alpha=0.25, label='Alerta (Q3+1.5*IQR a Q3+3*IQR)')
+ax.axhspan(umbral_emergencia, df_ancon['DE1'].max() * 1.05, color='red', alpha=0.25, label='Emergencia (> Q3+3*IQR)')
+
+ax.set_title('Semáforo Geotécnico con Umbrales Estadísticos de Tukey (DE1)')
+ax.set_ylabel('Deformación (mm)')
+ax.set_xlabel('Fecha')
+ax.legend(loc='upper left')
+ax.grid(True, linestyle='--', alpha=0.5)
+plt.tight_layout()
+plt.show()`,
+        solution: `import matplotlib.pyplot as plt
+
+de1_activo = df_ancon[df_ancon['DE1'] > 0]['DE1'].dropna()
+
+q1 = de1_activo.quantile(0.25)
+q3 = de1_activo.quantile(0.75)
+iqr = q3 - q1
+umbral_alerta = q3 + 1.5 * iqr
+umbral_emergencia = q3 + 3.0 * iqr
+
+fig, ax = plt.subplots(figsize=(10, 4))
+ax.plot(df_ancon.index, df_ancon['DE1'], color='black', linewidth=1.2, label='DE1 (Extensómetro)')
+
+ax.axhspan(0, q3, color='green', alpha=0.15, label='Normal (<= Q3)')
+ax.axhspan(q3, umbral_alerta, color='gold', alpha=0.2, label='Prevención (Q3 a Q3+1.5*IQR)')
+ax.axhspan(umbral_alerta, umbral_emergencia, color='orange', alpha=0.25, label='Alerta (Q3+1.5*IQR a Q3+3*IQR)')
+ax.axhspan(umbral_emergencia, df_ancon['DE1'].max() * 1.05, color='red', alpha=0.25, label='Emergencia (> Q3+3*IQR)')
+
+ax.set_title('Semáforo Geotécnico con Umbrales Estadísticos de Tukey (DE1)')
+ax.set_ylabel('Deformación (mm)')
+ax.set_xlabel('Fecha')
+ax.legend(loc='upper left')
+ax.grid(True, linestyle='--', alpha=0.5)
+plt.tight_layout()
+plt.show()`,
+        validator: (output, hasPlot) => hasPlot
+      },
+      {
+        id: "m2_l7",
+        title: "2.7 Histogramas, Estimación de Densidad Kernel (KDE) y Umbrales Paramétricos",
+        concept: `
+          <div class="theory-narrative-bridge">
+            <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 2.6</div>
+            <p style="margin: 0 0 0.5rem 0;">
+              En la lección anterior exploraste el método no paramétrico de Tukey, ideal para variables asimétricas o con tendencias unidireccionales (como la apertura acumulada del extensómetro <code>DE1</code>).
+            </p>
+            <p style="margin: 0 0 0.5rem 0;">
+              Sin embargo, en sensores que fluctúan estacional o térmicamente alrededor de un nivel de equilibrio físico (como la <strong>humedad volumétrica del suelo (<code>sh1</code>)</strong> o el cabeceo del inclinómetro (<code>C1</code>)), el marco estadístico de la <strong>Distribución Normal (Gaussiana)</strong> ofrece un método complementario fundamental.
+            </p>
+            <p style="margin: 0;">
+              En esta lección aprenderás a construir histogramas normalizados a densidad, superponer estimaciones continuas de densidad mediante núcleos (<strong>KDE</strong>) y derivar <strong>umbrales paramétricos de control basados en desviaciones estándar ($\mu \pm k\sigma$)</strong>.
+            </p>
+          </div>
+
+          <!-- Componente Visual Interactivo de Histograma, KDE y Campana de Gauss -->
+          <div id="histogram-kde-container" style="margin: 1.25rem 0;"></div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Histogramas de Frecuencia y Densidad de Probabilidad (<code>density=True</code>)</h4>
+          <p>
+            El histograma agrupa los datos continuos en un número finito de intervalos o columnas discretas (<code>bins</code>). Por defecto, Matplotlib grafica el conteo absoluto de observaciones en cada barra. Sin embargo, al activar <code>density=True</code>, Matplotlib normaliza las alturas para que el área total sume exactamente $1.0$:
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.85rem; margin: 1rem 0;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-primary); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-primary);">1. Sensibilidad al Parámetro <code>bins</code></strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Si seleccionas muy pocos intervalos (ej. <code>bins=5</code>), se pierde la forma de la campana. Si usas demasiados (ej. <code>bins=100</code>), aparecen valles y picos artificiales por escasez de datos. Un valor entre 20 y 30 es óptimo para series geotécnicas.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-cyan); border-radius: var(--radius-sm); padding: 0.85rem;">
+              <strong style="color: var(--accent-cyan);">2. ¿Por qué <code>density=True</code>?</strong>
+              <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
+                Transforma el histograma discreto a la misma escala matemática de las curvas continuas de densidad (KDE y Campana de Gauss), permitiendo graficarlas superpuestas en el mismo eje Y.
+              </p>
+            </div>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">2. Estimación de Densidad Kernel (KDE)</h4>
+          <p>
+            La <strong>Estimación de Densidad Kernel (KDE)</strong> supera la rigidez de los rectángulos del histograma: coloca una pequeña función de distribución simétrica (kernel gaussiano) centrada en cada dato observado y suma todas las contribuciones. El resultado es una curva suave y continua que describe la verdadera silueta probabilística del sensor.
+          </p>
+          <p>
+            En Pandas, se traza directamente sobre la serie con:
+          </p>
+          <pre class="trace-pre"><code>df_ancon['sh1'].dropna().plot.kde(color='#1e3a8a', linewidth=2.5, label='KDE')</code></pre>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">3. Umbrales Paramétricos Basados en la Desviación Estándar ($\mu \pm k\sigma$)</h4>
+          <p>
+            Bajo el supuesto de normalidad, la <strong>Regla Empírica de Gauss ($68 - 95 - 99.7\%$)</strong> y el control estadístico de procesos permiten establecer umbrales de alerta según la distancia a la media muestral ($\mu$):
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem; margin: 1rem 0;">
+            <div style="background: rgba(34, 197, 94, 0.08); border-left: 4px solid #22c55e; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong style="color: #16a34a;">🟢 Régimen Normal ($\mu \pm 1\sigma$)</strong>
+              <p style="font-size: 0.8rem; margin: 0.25rem 0; color: var(--text-muted);">
+                Abarca el <strong>68.3%</strong> de las observaciones históricas. Representa la variabilidad estacional típica del suelo en Ancón Norte.
+              </p>
+            </div>
+
+            <div style="background: rgba(234, 179, 8, 0.08); border-left: 4px solid #eab308; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong style="color: #ca8a04;">🟡 Umbral Preventivo ($\mu + 1\sigma$)</strong>
+              <p style="font-size: 0.8rem; margin: 0.25rem 0; color: var(--text-muted);">
+                Aproximadamente <strong>60.91%</strong> en <code>sh1</code>. Inicio de aumento significativo de saturación hídrica. Se activa inspección visual.
+              </p>
+            </div>
+
+            <div style="background: rgba(249, 115, 22, 0.08); border-left: 4px solid #f97316; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong style="color: #ea580c;">🟠 Umbral de Alerta ($\mu + 2\sigma$)</strong>
+              <p style="font-size: 0.8rem; margin: 0.25rem 0; color: var(--text-muted);">
+                Aproximadamente <strong>65.36%</strong> en <code>sh1</code>. Solo el 2.3% de los días supera esta cota por cola superior. Riesgo de incremento de presiones de poro.
+              </p>
+            </div>
+
+            <div style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #ef4444; padding: 0.75rem; border-radius: var(--radius-sm);">
+              <strong style="color: #dc2626;">🔴 Umbral de Emergencia ($\mu + 3\sigma$)</strong>
+              <p style="font-size: 0.8rem; margin: 0.25rem 0; color: var(--text-muted);">
+                Aproximadamente <strong>69.81%</strong> en <code>sh1</code>. Criterio $3\sigma$ de Shewhart. Probabilidad teórica $< 0.15\%$. Saturación crítica y amenaza de falla del talud.
+              </p>
+            </div>
+          </div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">4. Trazado de Umbrales Verticales con <code>plt.axvline</code></h4>
+          <p>
+            En un histograma, los umbrales se demarcan con líneas verticales mediante <code>plt.axvline(x, color, linestyle, linewidth, label)</code>, proyectando las desviaciones estándar sobre el dominio físico del sensor.
+          </p>
+
+          <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
+            <strong>💡 Tu Turno en el Editor: Histograma, KDE y Umbrales Paramétricos en sh1</strong><br>
+            En el editor interactivo inferior aislarás los registros de humedad volumétrica <code>sh1</code>, calcularás su media ($\mu$) y desviación estándar ($\sigma$), trazarás el histograma normalizado con la curva KDE y superpondrás los umbrales paramétricos con <code>axvline</code>.
+          </div>
+        `,
+        instruction: "1. Aísla la serie temporal de humedad volumétrica <code>sh1</code> de la matriz <code>df_ancon</code> descartando las observaciones nulas con <code>.dropna()</code>.<br>2. Calcula estadísticamente la media muestral (&mu;) con <code>.mean()</code> y la desviación estándar (&sigma;) con <code>.std()</code>.<br>3. Define dos umbrales paramétricos superiores:<br>&bull; <strong>Umbral preventivo:</strong> &mu; + 1&sigma;<br>&bull; <strong>Umbral de alerta:</strong> &mu; + 2&sigma;<br>4. Configura una figura de 9 &times; 4.5 pulgadas y traza el histograma normalizado a densidad de probabilidad (<code>density=True</code>) con 25 intervalos (<code>bins=25</code>), color celeste (<code>'#38bdf8'</code>), borde negro y transparencia <code>alpha=0.6</code>.<br>5. Superpón la curva continua de densidad Kernel (KDE) calculada sobre la serie con ancho de línea 2.5.<br>6. Traza líneas verticales con <code>plt.axvline()</code> para identificar la media (roja punteada), el umbral preventivo (dorada) y el umbral de alerta (naranja).<br>7. Asigna título en negrilla, rotula los ejes ('Humedad Volumétrica (%)' y 'Densidad de Probabilidad'), añade la leyenda explicativa, activa la cuadrícula y muestra el gráfico.",
+        initialCode: `# ==============================================================
+# EJERCICIO 2.7: Histogramas, KDE y Umbrales Paramétricos (μ ± kσ)
+# df_ancon ya se encuentra disponible y saneado en memoria.
+# ==============================================================
+import matplotlib.pyplot as plt
+
+# Paso 1: Extrae la serie del sensor de humedad sh1 sin valores nulos (.dropna()):
+
+
+# Paso 2: Calcula la media (media) y la desviación estándar (desv) del sensor:
+
+
+# Paso 3: Determina los dos umbrales paramétricos superiores basados en desviaciones:
+# - umbral_preventivo: media + 1 * desv
+# - umbral_alerta: media + 2 * desv
+
+
+# Paso 4: Crea la figura (figsize=(9, 4.5)) y traza el histograma con density=True (bins=25):
+
+
+# Paso 5: Superpón la curva KDE de densidad continua con .plot.kde():
+
+
+# Paso 6: Traza las líneas verticales con plt.axvline() para la media y los umbrales (+1σ y +2σ):
+
+
+# Paso 7: Configura título, etiquetas de ejes, leyenda, cuadrícula y despliega la gráfica:
+
+`,
+        hint: `Escribe:
+humedad = df_ancon['sh1'].dropna()
+media = humedad.mean()
+desv = humedad.std()
+
+umbral_preventivo = media + 1 * desv
+umbral_alerta = media + 2 * desv
+
+plt.figure(figsize=(9, 4.5))
+plt.hist(humedad, bins=25, density=True, color='#38bdf8', edgecolor='black', alpha=0.6, label='Histograma (Densidad)')
+humedad.plot.kde(color='#1e3a8a', linewidth=2.5, label='Curva KDE')
+
+plt.axvline(media, color='red', linestyle='--', linewidth=2, label=f'Media (μ = {media:.2f}%)')
+plt.axvline(umbral_preventivo, color='gold', linestyle=':', linewidth=2, label=f'Preventivo (μ+1σ = {umbral_preventivo:.2f}%)')
+plt.axvline(umbral_alerta, color='orange', linestyle=':', linewidth=2, label=f'Alerta (μ+2σ = {umbral_alerta:.2f}%)')
+
+plt.title('Distribución de Humedad sh1 y Umbrales Paramétricos', fontweight='bold')
+plt.xlabel('Humedad Volumétrica (%)')
+plt.ylabel('Densidad de Probabilidad')
+plt.legend(loc='upper right')
+plt.grid(True, linestyle='--', alpha=0.4)
+plt.tight_layout()
+plt.show()`,
+        solution: `import matplotlib.pyplot as plt
+
+humedad = df_ancon['sh1'].dropna()
+media = humedad.mean()
+desv = humedad.std()
+
+umbral_preventivo = media + 1 * desv
+umbral_alerta = media + 2 * desv
+
+plt.figure(figsize=(9, 4.5))
+plt.hist(humedad, bins=25, density=True, color='#38bdf8', edgecolor='black', alpha=0.6, label='Histograma (Densidad)')
+humedad.plot.kde(color='#1e3a8a', linewidth=2.5, label='Curva KDE')
+
+plt.axvline(media, color='red', linestyle='--', linewidth=2, label=f'Media (μ = {media:.2f}%)')
+plt.axvline(umbral_preventivo, color='gold', linestyle=':', linewidth=2, label=f'Preventivo (μ+1σ = {umbral_preventivo:.2f}%)')
+plt.axvline(umbral_alerta, color='orange', linestyle=':', linewidth=2, label=f'Alerta (μ+2σ = {umbral_alerta:.2f}%)')
+
+plt.title('Distribución de Humedad sh1 y Umbrales Paramétricos', fontweight='bold')
+plt.xlabel('Humedad Volumétrica (%)')
+plt.ylabel('Densidad de Probabilidad')
+plt.legend(loc='upper right')
+plt.grid(True, linestyle='--', alpha=0.4)
+plt.tight_layout()
 plt.show()`,
         validator: (output, hasPlot) => hasPlot
       }
     ]
   },
-
   // =========================================================================
   // SECCIÓN 3: MÓDULO 3 - ANÁLISIS TEMPORAL Y FEATURE ENGINEERING
   // =========================================================================

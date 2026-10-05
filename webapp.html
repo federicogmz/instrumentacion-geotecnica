@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
 
   <!-- Estilos CSS -->
-  <link rel="stylesheet" href="css/styles.css?v=5">
+  <link rel="stylesheet" href="css/styles.css?v=9">
 
   <!-- Favicon SVG -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
@@ -132,7 +132,7 @@
         </button>
         <button class="nav-tab-btn" data-target="modulo2" id="nav-btn-m2">
           <span>📊</span> M2: Gráficos
-          <span class="nav-progress-badge" id="nav-badge-modulo2">0/4</span>
+          <span class="nav-progress-badge" id="nav-badge-modulo2">0/5</span>
         </button>
         <button class="nav-tab-btn" data-target="modulo3" id="nav-btn-m3">
           <span>🔬</span> M3: Análisis
@@ -190,39 +190,11 @@
       <div class="badges-container" id="badges-container"></div>
     </section>
 
-    <!-- BARRA CONTROL DE DISPOSICIÓN -->
-    <div class="workspace-layout-bar" id="workspace-layout-bar">
-      <div class="layout-slider-group">
-        <span class="layout-label-text"><span>📖</span> <strong>Teoría</strong></span>
-        <div class="layout-slider-track-wrap">
-          <input type="range" min="0" max="100" value="55" step="1"
-                 id="workspace-layout-slider" class="workspace-split-slider"
-                 title="Arrastra para cambiar el ancho de los paneles">
-          <div class="layout-slider-ticks">
-            <span class="tick-label">0%</span>
-            <span class="tick-label">25%</span>
-            <span class="tick-label">50%</span>
-            <span class="tick-label">75%</span>
-            <span class="tick-label">100%</span>
-          </div>
-        </div>
-        <span class="layout-label-text"><strong>Editor</strong> <span>💻</span></span>
-        <span class="layout-badge" id="layout-pct-badge">55% Teoría / 45% Editor</span>
-      </div>
 
-      <div class="layout-presets-group">
-        <button class="layout-preset-btn" data-pct="100" title="Teoría al 100%">📖 100%</button>
-        <button class="layout-preset-btn" data-pct="65" title="65% Teoría / 35% Editor">📑 65/35</button>
-        <button class="layout-preset-btn" data-pct="55" title="Modo Equilibrado">⚖️ 55/45</button>
-        <button class="layout-preset-btn" data-pct="35" title="Código Amplio">💻 35/65</button>
-        <button class="layout-preset-btn" data-pct="0" title="Editor al 100%">⚡ 100% Ed.</button>
-      </div>
-    </div>
+    <!-- WORKSPACE GRID (por defecto en vista completa para Teoría/Introducción) -->
+    <div class="workspace-grid mode-theory-full" id="workspace-grid">
 
-    <!-- WORKSPACE GRID -->
-    <div class="workspace-grid" id="workspace-grid">
-
-      <!-- SIDEBAR: Mapa de Curso -->
+      <!-- SIDEBAR: Mapa de Curso (Colapsable) -->
       <aside class="course-sidebar" id="course-sidebar" style="display:none;" aria-label="Mapa de lecciones">
         <button class="btn-sidebar-toggle" id="btn-sidebar-toggle" title="Ocultar panel lateral">
           <span>◀</span> Lecciones
@@ -230,97 +202,94 @@
         <div class="sidebar-content" id="sidebar-content"></div>
       </aside>
 
-      <!-- PANEL IZQUIERDO: Teoría -->
-      <section class="theory-pane" id="theory-pane" aria-label="Contenido pedagógico y enunciados">
-        <!-- Rellenado dinámicamente por app.js -->
-      </section>
+      <!-- FLUJO PRINCIPAL DE APRENDIZAJE: TEORÍA ARRIBA -> EDITOR ABAJO -->
+      <div class="workspace-flow" id="workspace-flow">
 
-      <!-- DIVISOR DESLIZABLE -->
-      <div class="workspace-resizer" id="workspace-resizer" title="Arrastra para redimensionar o doble clic para 50/50">
-        <div class="resizer-handle">
-          <button class="resizer-btn btn-collapse-left"  id="btn-collapse-theory" title="Ocultar Teoría">◀</button>
-          <div class="resizer-dots"><span></span><span></span><span></span></div>
-          <button class="resizer-btn btn-collapse-right" id="btn-collapse-editor" title="Ocultar Editor">▶</button>
-        </div>
-      </div>
+        <!-- SECCIÓN SUPERIOR: Teoría, conceptos y reto práctico -->
+        <section class="theory-pane" id="theory-pane" aria-label="Contenido pedagógico y conceptos">
+          <!-- Rellenado dinámicamente por app.js -->
+        </section>
 
-      <!-- PANEL DERECHO: Editor -->
-      <section class="editor-pane" id="editor-pane" aria-label="Editor de código y consola interactiva">
+        <!-- SECCIÓN INFERIOR: Práctica interactiva en Editor de código -->
+        <section class="editor-pane" id="editor-pane" style="display:none;" aria-label="Editor de código y salida interactiva">
 
-        <!-- Tarjeta del Editor -->
-        <div class="editor-card">
-          <div class="editor-toolbar">
-            <div class="editor-title">
-              <span>🐍</span> editor.py &bull; <small style="color:var(--text-dim)">Python 3 WebAssembly</small>
+          <!-- Tarjeta del Editor -->
+          <div class="editor-card">
+            <div class="editor-toolbar">
+              <div class="editor-title">
+                <span>🐍</span> editor.py &bull; <small style="color:var(--text-dim)">Python 3 WebAssembly</small>
+              </div>
+              <div class="editor-actions">
+                <button class="btn-tool" id="btn-reset" title="Reiniciar código inicial"><span>🔄</span> Reiniciar</button>
+                <button class="btn-tool" id="btn-hint"  title="Ver pista"><span>💡</span> Pista</button>
+                <button class="btn-tool" id="btn-solution" title="Mostrar solución"><span>👁️</span> Solución</button>
+                <button class="btn-run" id="btn-run" disabled title="Ejecutar código (Ctrl+Enter)">
+                  <span>▶</span> Ejecutar Código
+                </button>
+              </div>
             </div>
-            <div class="editor-actions">
-              <button class="btn-tool" id="btn-reset" title="Reiniciar código inicial"><span>🔄</span> Reiniciar</button>
-              <button class="btn-tool" id="btn-hint"  title="Ver pista"><span>💡</span> Pista</button>
-              <button class="btn-tool" id="btn-solution" title="Mostrar solución"><span>👁️</span> Solución</button>
-              <button class="btn-run" id="btn-run" disabled title="Ejecutar código (Ctrl+Enter)">
-                <span>▶</span> Ejecutar Código
+
+            <!-- Pistas -->
+            <div class="accordion-box hint-accordion" id="hint-box" style="display:none; margin:0.5rem 1rem 0;">
+              <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
+                <span class="accordion-title">💡 Pista de Ayuda</span>
+                <span class="accordion-icon">▼</span>
+              </div>
+              <div class="accordion-body open" id="hint-content"></div>
+            </div>
+
+            <!-- Solución -->
+            <div class="accordion-box solution-accordion" id="solution-box" style="display:none; margin:0.5rem 1rem 0;">
+              <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
+                <span class="accordion-title">👁️ Solución Sugerida</span>
+                <span class="accordion-icon">▼</span>
+              </div>
+              <div class="accordion-body open">
+                <pre id="solution-content" class="solution-code"></pre>
+              </div>
+            </div>
+
+            <!-- Editor de código -->
+            <div class="code-area-wrapper">
+              <div class="line-numbers" id="line-numbers" aria-hidden="true"></div>
+              <textarea class="code-textarea" id="code-input" spellcheck="false"
+                        aria-label="Editor de código Python"
+                        placeholder="Escribe tu código Python aquí..."></textarea>
+            </div>
+          </div>
+
+          <!-- Banner de Validación -->
+          <div class="validation-banner" id="validation-banner">
+            🎉 ¡Excelente trabajo! Ejercicio completado con éxito.
+          </div>
+
+          <!-- Celda de Salida Unificada (Estilo Jupyter Notebook) -->
+          <div class="notebook-output-cell" id="notebook-output-cell">
+            <div class="output-header">
+              <div class="output-prompt">
+                <span class="prompt-badge">Out</span>
+                <span class="prompt-brackets">[<span id="output-execution-count"> </span>]:</span>
+                <span class="output-title">Salida de la Celda</span>
+              </div>
+              <button class="btn-clear-output" id="btn-clear-console" title="Limpiar salida de la celda">
+                <span>🗑️</span> Limpiar
               </button>
             </div>
-          </div>
-
-          <!-- Pistas -->
-          <div class="accordion-box hint-accordion" id="hint-box" style="display:none; margin:0.5rem 1rem 0;">
-            <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
-              <span class="accordion-title">💡 Pista de Ayuda</span>
-              <span class="accordion-icon">▼</span>
-            </div>
-            <div class="accordion-body open" id="hint-content"></div>
-          </div>
-
-          <!-- Solución -->
-          <div class="accordion-box solution-accordion" id="solution-box" style="display:none; margin:0.5rem 1rem 0;">
-            <div class="accordion-header" onclick="this.parentElement.querySelector('.accordion-body').classList.toggle('open')">
-              <span class="accordion-title">👁️ Solución Sugerida</span>
-              <span class="accordion-icon">▼</span>
-            </div>
-            <div class="accordion-body open">
-              <pre id="solution-content" class="solution-code"></pre>
+            <div class="unified-output-body" id="unified-output-body">
+              <div class="console-output-area" id="console-output" aria-live="polite">Esperando ejecución de código... Haz clic en "▶ Ejecutar Código" o presiona Ctrl + Enter.</div>
+              <div class="plot-display-area" id="plot-display" aria-label="Visualización de gráficos" style="display:none;"></div>
             </div>
           </div>
 
-          <!-- Editor de código -->
-          <div class="code-area-wrapper">
-            <div class="line-numbers" id="line-numbers" aria-hidden="true"></div>
-            <textarea class="code-textarea" id="code-input" spellcheck="false"
-                      aria-label="Editor de código Python"
-                      placeholder="Escribe tu código Python aquí..."></textarea>
-          </div>
-        </div>
+          <!-- Barra de navegación entre lecciones al final de la práctica -->
+          <div class="lesson-nav-bar" id="lesson-nav-bar"></div>
 
-        <!-- Banner de Validación -->
-        <div class="validation-banner" id="validation-banner">
-          🎉 ¡Excelente trabajo! Ejercicio completado con éxito.
-        </div>
+        </section>
 
-        <!-- Consola -->
-        <div class="console-card">
-          <div class="console-header">
-            <div class="console-tabs">
-              <button class="console-tab-btn active" id="tab-console">Terminal (Texto)</button>
-              <button class="console-tab-btn" id="tab-plot">Gráfico Matplotlib 📊</button>
-            </div>
-            <button class="clear-btn" id="btn-clear-console" title="Limpiar consola">Limpiar</button>
-          </div>
-          <div class="console-output-area" id="console-output" aria-live="polite">
-            Esperando ejecución de código... Haz clic en "Ejecutar Código" o presiona Ctrl + Enter.
-          </div>
-          <div class="plot-display-area" id="plot-display" aria-label="Visualización de gráficos">
-            <p style="color:var(--text-dim); font-size:0.85rem;">No hay gráficos generados aún. Llama a <code>plt.show()</code> en tu código.</p>
-          </div>
-        </div>
-
-      </section>
+      </div>
 
     </div>
 
-    <!-- Botones Flotantes de Restauración -->
-    <button class="floating-restore-pill restore-theory" id="btn-restore-theory" title="Restaurar panel de teoría">📖 Mostrar Teoría</button>
-    <button class="floating-restore-pill restore-editor" id="btn-restore-editor" title="Restaurar panel de editor">💻 Mostrar Editor</button>
 
   </main>
 
@@ -341,24 +310,26 @@
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"></script>
 
   <!-- Scripts -->
-  <script src="js/course-data.js?v=5"></script>
-  <script src="js/pyodide-runner.js?v=5"></script>
-  <script src="js/list-indexing.js?v=5"></script>
-  <script src="js/conditional-flow.js?v=5"></script>
-  <script src="js/function-anatomy.js?v=5"></script>
-  <script src="js/for-loop-flow.js?v=5"></script>
-  <script src="js/boolean-filter.js?v=5"></script>
-  <script src="js/dataframe-anatomy.js?v=5"></script>
-  <script src="js/sensor-concat.js?v=5"></script>
-  <script src="js/boxplot-anatomy.js?v=5"></script>
-  <script src="js/threshold-bands.js?v=5"></script>
-  <script src="js/dual-axis-rain.js?v=5"></script>
-  <script src="js/missing-data.js?v=5"></script>
-  <script src="js/rolling-window.js?v=5"></script>
-  <script src="js/velocity-acceleration.js?v=5"></script>
-  <script src="js/lag-correlation.js?v=5"></script>
-  <script src="js/layout-resizer.js?v=5"></script>
-  <script src="js/app.js?v=5"></script>
+  <script src="js/course-data.js?v=26"></script>
+  <script src="js/pyodide-runner.js?v=8"></script>
+  <script src="js/list-indexing.js?v=6"></script>
+  <script src="js/conditional-flow.js?v=7"></script>
+  <script src="js/function-anatomy.js?v=6"></script>
+  <script src="js/for-loop-flow.js?v=7"></script>
+  <script src="js/boolean-filter.js?v=7"></script>
+  <script src="js/dataframe-anatomy.js?v=7"></script>
+  <script src="js/sensor-concat.js?v=7"></script>
+  <script src="js/matplotlib-anatomy.js?v=3"></script>
+  <script src="js/subplots-anatomy.js?v=1"></script>
+  <script src="js/boxplot-anatomy.js?v=9"></script>
+  <script src="js/threshold-bands.js?v=8"></script>
+  <script src="js/histogram-kde.js?v=1"></script>
+  <script src="js/dual-axis-rain.js?v=6"></script>
+  <script src="js/missing-data.js?v=6"></script>
+  <script src="js/rolling-window.js?v=6"></script>
+  <script src="js/velocity-acceleration.js?v=6"></script>
+  <script src="js/lag-correlation.js?v=6"></script>
+  <script src="js/app.js?v=9"></script>
 
 </body>
 </html>

@@ -109,19 +109,22 @@ class CourseApp {
       solutionContent: document.getElementById("solution-content"),
       accordionHint:   document.getElementById("hint-box"),
       accordionSolution: document.getElementById("solution-box"),
-      tabConsole:      document.getElementById("tab-console"),
-      tabPlot:         document.getElementById("tab-plot"),
+      outputExecCount: document.getElementById("output-execution-count"),
+      notebookOutput:  document.getElementById("notebook-output-cell"),
       consoleOutput:   document.getElementById("console-output"),
       plotDisplay:     document.getElementById("plot-display"),
+      lessonNavBar:    document.getElementById("lesson-nav-bar"),
       validationBanner: document.getElementById("validation-banner"),
       sidebar:         document.getElementById("course-sidebar"),
       btnSidebarToggle: document.getElementById("btn-sidebar-toggle"),
       sidebarContent:  document.getElementById("sidebar-content"),
-      badgesContainer: document.getElementById("badges-container"),
-      confettiCanvas:  document.getElementById("confetti-canvas"),
+      badgesContainer:     document.getElementById("badges-container"),
+      confettiCanvas:      document.getElementById("confetti-canvas"),
       moduleCompleteModal: document.getElementById("module-complete-modal"),
+      workspaceGrid:       document.getElementById("workspace-grid"),
     };
 
+    this.executionCount = 0;
     this._init();
   }
 
@@ -164,12 +167,24 @@ class CourseApp {
     this.dom.btnHint.addEventListener("click",    () => this.toggleHint());
     this.dom.btnSolution.addEventListener("click",() => this.toggleSolution());
 
-    // Console tabs
-    this.dom.tabConsole.addEventListener("click", () => this.switchConsoleTab("console"));
-    this.dom.tabPlot.addEventListener("click",    () => this.switchConsoleTab("plot"));
-    document.getElementById("btn-clear-console").addEventListener("click", () => {
-      this.dom.consoleOutput.textContent = "";
-    });
+    // Limpiar salida unificada estilo Jupyter
+    const clearBtn = document.getElementById("btn-clear-console");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", () => {
+        if (this.dom.consoleOutput) {
+          this.dom.consoleOutput.textContent = 'Esperando ejecución de código... Haz clic en "▶ Ejecutar Código" o presiona Ctrl + Enter.';
+          this.dom.consoleOutput.className = "console-output-area";
+          this.dom.consoleOutput.style.display = "block";
+        }
+        if (this.dom.plotDisplay) {
+          this.dom.plotDisplay.innerHTML = "";
+          this.dom.plotDisplay.style.display = "none";
+        }
+        if (this.dom.outputExecCount) {
+          this.dom.outputExecCount.textContent = " ";
+        }
+      });
+    }
 
     // Sidebar toggle
     if (this.dom.btnSidebarToggle) {
@@ -311,27 +326,45 @@ class CourseApp {
       b.classList.toggle("active", b.dataset && b.dataset.target === sectionKey)
     );
 
-    const grid = document.querySelector(".workspace-grid");
+    const grid = this.dom.workspaceGrid || document.querySelector(".workspace-grid");
 
     if (sectionKey === "teoria") {
+      if (grid) {
+        grid.classList.add("mode-theory-full");
+      }
+      if (this.dom.theoryPane) {
+        this.dom.theoryPane.style.display = "flex";
+      }
+      if (this.dom.editorPane) {
+        this.dom.editorPane.style.display = "none";
+      }
+
       this.renderTheorySection();
-      this.dom.editorPane.style.display = "none";
-      grid.style.gridTemplateColumns = "1fr";
       this._hideSidebarForNonLesson();
-    } else if (sectionKey === "sandbox") {
-      this.dom.editorPane.style.display = "flex";
-      grid.style.gridTemplateColumns = this.sidebarOpen ? "var(--sidebar-w) 1fr 1fr" : "1fr 1fr";
-      this.renderSandboxSection();
-      if (this.editor) this.editor.refresh();
     } else {
-      this.dom.editorPane.style.display = "flex";
-      grid.style.gridTemplateColumns = this.sidebarOpen ? "var(--sidebar-w) 1fr 1fr" : "1fr 1fr";
-      this.renderLesson();
-      if (this.editor) this.editor.refresh();
+      if (grid) {
+        grid.classList.remove("mode-theory-full");
+      }
+      if (this.dom.theoryPane) {
+        this.dom.theoryPane.style.display = "flex";
+      }
+      if (this.dom.editorPane) {
+        this.dom.editorPane.style.display = "flex";
+      }
+
+      if (sectionKey === "sandbox") {
+        this.renderSandboxSection();
+        this._hideSidebarForNonLesson();
+        if (this.editor) setTimeout(() => this.editor.refresh(), 50);
+      } else {
+        this.renderLesson();
+        this.renderSidebar();
+        if (this.editor) setTimeout(() => this.editor.refresh(), 50);
+      }
     }
 
     this.updateNavBadges();
-    this.renderSidebar();
+    this.scrollToTop();
   }
 
   _hideSidebarForNonLesson() {
@@ -359,12 +392,6 @@ class CourseApp {
     } else {
       sidebar.classList.add("collapsed");
       if (btn) btn.innerHTML = '<span>▶</span> Ver mapa';
-    }
-
-    // Ajustar grid
-    const grid = document.querySelector(".workspace-grid");
-    if (grid && this.currentSection !== "teoria") {
-      grid.style.gridTemplateColumns = open ? "var(--sidebar-w) 1fr 1fr" : "1fr 1fr";
     }
   }
 
@@ -440,13 +467,15 @@ class CourseApp {
       b.classList.toggle("active", b.dataset && b.dataset.target === moduleKey)
     );
 
-    this.dom.editorPane.style.display = "flex";
-    document.querySelector(".workspace-grid").style.gridTemplateColumns =
-      this.sidebarOpen ? "var(--sidebar-w) 1fr 1fr" : "1fr 1fr";
+    const grid = this.dom.workspaceGrid || document.querySelector(".workspace-grid");
+    if (grid) grid.classList.remove("mode-theory-full");
+    if (this.dom.theoryPane) this.dom.theoryPane.style.display = "flex";
+    if (this.dom.editorPane) this.dom.editorPane.style.display = "flex";
 
     this.renderLesson();
     this.renderSidebar();
-    if (this.editor) this.editor.refresh();
+    if (this.editor) setTimeout(() => this.editor.refresh(), 50);
+    this.scrollToTop();
   }
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -481,97 +510,207 @@ class CourseApp {
     const pct = totalEx ? Math.round((doneEx / totalEx) * 100) : 0;
 
     let html = `
+      <!-- ENCABEZADO ESTÁNDAR DE LA LECCIÓN -->
       <div class="lesson-header">
-        <span class="lesson-tag">Investigación de Campo y Geomecánica</span>
+        <span class="lesson-tag">📖 Caso de Estudio &bull; Ancón Norte</span>
         <h2>${data.title}</h2>
         <p>${data.subtitle}</p>
       </div>
+
       <div class="theory-body">
-        <p>${data.intro}</p>
-        <div class="theory-callout" style="margin-top:1.25rem">
-          <strong>📍 Características del Movimiento en Masa:</strong><br>
-          Se localiza en el flanco oriental de la Cordillera Central, caracterizado por una cobertura de suelo residual y saprolito derivado de anfibolitas y esquistos. La principal zona de cizallamiento y deformación basal se identificó a <strong>22 metros de profundidad</strong>, con planos secundarios a 11 m y 16 m.
+        <div class="theory-callout" style="margin: 1.25rem 0 1.75rem; font-size: 0.95rem; line-height: 1.75;">
+          ${data.intro}
         </div>
 
-        <h3 style="margin:1.5rem 0 0.5rem; font-size:1.15rem; color:var(--text-main);">📡 Instrumentos de Monitoreo Geotécnico In-Situ</h3>
+      <!-- SECCIÓN 1: ¿POR QUÉ ANALIZAR DATOS CONTINUOS? -->
+      ${data.whyData ? `
+        <div class="geotech-section-header">
+          <h3><span>🌊</span> ${data.whyData.title}</h3>
+          <p>${data.whyData.subtitle}</p>
+        </div>
+        <div class="geotech-cards-grid">
+          ${data.whyData.items.map(item => `
+            <div class="geotech-card-item">
+              <div class="geotech-card-header">
+                <span class="geotech-card-icon">${item.icon}</span>
+                <div>
+                  <span class="sensor-role-tag" style="margin-bottom:0.25rem;">${item.tag}</span>
+                  <div class="geotech-card-title">${item.title}</div>
+                </div>
+              </div>
+              <div class="geotech-card-desc">${item.desc}</div>
+              <div class="geotech-card-footer">
+                <span class="card-footer-icon">🎯</span>
+                <span class="card-footer-text"><strong>Práctica:</strong> ${item.app || item.highlight || ""}</span>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      ` : ""}
+
+      <!-- SECCIÓN 2: ¿POR QUÉ PYTHON EN GEOTECNIA? -->
+      ${data.whyPython ? `
+        <div class="geotech-section-header">
+          <h3><span>🐍</span> ${data.whyPython.title}</h3>
+          <p>${data.whyPython.subtitle}</p>
+        </div>
+        <div class="geotech-cards-grid">
+          ${data.whyPython.items.map(item => `
+            <div class="geotech-card-item">
+              <div class="geotech-card-header">
+                <span class="geotech-card-icon">${item.icon}</span>
+                <div>
+                  <span class="sensor-role-tag" style="margin-bottom:0.25rem; background:rgba(16,185,129,0.12); color:var(--accent-emerald);">${item.tag}</span>
+                  <div class="geotech-card-title">${item.title}</div>
+                </div>
+              </div>
+              <div class="geotech-card-desc">${item.desc}</div>
+              <div class="geotech-card-footer footer-python">
+                <span class="card-footer-icon">💻</span>
+                <code>${item.codeHint}</code>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      ` : ""}
+
+      <!-- SECCIÓN 3: COMPARATIVA EXCEL VS PYTHON -->
+      ${data.comparison ? `
+        <div class="geotech-section-header">
+          <h3><span>⚖️</span> ${data.comparison.title}</h3>
+          <p>La transición indispensable de las hojas de cálculo rígidas hacia flujos de datos automatizados y reproducibles:</p>
+        </div>
+        <div class="versus-grid">
+          <div class="versus-column excel">
+            <div class="versus-col-header">
+              <div class="versus-col-title"><span>📊</span> ${data.comparison.excel.title}</div>
+              <span class="versus-col-tag">${data.comparison.excel.tag}</span>
+            </div>
+            <ul class="versus-list">
+              ${data.comparison.excel.points.map(pt => `
+                <li><span class="versus-icon-bad">✕</span> <span>${pt}</span></li>
+              `).join("")}
+            </ul>
+          </div>
+          <div class="versus-column python">
+            <div class="versus-col-header">
+              <div class="versus-col-title"><span>🐍</span> ${data.comparison.python.title}</div>
+              <span class="versus-col-tag">${data.comparison.python.tag}</span>
+            </div>
+            <ul class="versus-list">
+              ${data.comparison.python.points.map(pt => `
+                <li><span class="versus-icon-good">✓</span> <span>${pt}</span></li>
+              `).join("")}
+            </ul>
+          </div>
+        </div>
+      ` : ""}
+
+      <!-- SECCIÓN 4: PIPELINE DE EXTREMO A EXTREMO -->
+      ${data.pipeline ? `
+        <div class="geotech-section-header">
+          <h3><span>🔄</span> Flujo de Monitoreo Geotécnico de Extremo a Extremo</h3>
+          <p>El ciclo integral de ingeniería: desde el sensor in-situ en el talud hasta la toma de decisiones en tiempo real:</p>
+        </div>
+        <div class="pipeline-steps-grid">
+          ${data.pipeline.map(st => `
+            <div class="pipeline-step">
+              <span class="pipeline-step-badge">Fase ${st.step}</span>
+              <h4><span>${st.icon}</span> ${st.title}</h4>
+              <p>${st.desc}</p>
+              <span class="pipeline-step-tool">Herramienta: ${st.tool}</span>
+            </div>
+          `).join("")}
+        </div>
+      ` : ""}
+
+      <!-- SECCIÓN 5: CASO DE ESTUDIO ANCÓN NORTE -->
+      <div class="geotech-section-header">
+        <h3><span>🏔️</span> ${data.anconCase ? data.anconCase.title : "Caso de Estudio: Movimiento en Masa Ancón Norte"}</h3>
+        <p>${data.anconCase ? data.anconCase.subtitle : "Copacabana, Antioquia | SIATA"}</p>
+      </div>
+      <div>
+        <p>${data.anconCase ? data.anconCase.intro : data.intro}</p>
+        <div class="theory-callout" style="margin-top:1.25rem">
+          ${data.anconCase && data.anconCase.callout ? data.anconCase.callout : `
+            <strong>📍 Características del Movimiento en Masa:</strong><br>
+            Se localiza en el flanco oriental de la Cordillera Central, caracterizado por una cobertura de suelo residual y saprolito derivado de anfibolitas y esquistos. La principal zona de cizallamiento y deformación basal se identificó a <strong>22 metros de profundidad</strong>, con planos secundarios a 11 m y 16 m.
+          `}
+        </div>
+
+        <h4 style="margin:2rem 0 0.5rem; font-size:1.15rem; color:var(--text-main);">📡 Instrumentos de Monitoreo Geotécnico In-Situ</h4>
         <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">
-          Conoce los sensores que componen el esquema de monitoreo continuo de SIATA en el sitio:
+          Conoce los sensores reales que componen la estación de monitoreo y cuyos datos procesarás en este laboratorio:
         </p>
         <div class="sensor-cards-grid">
-    `;
-
-    data.sensors.forEach((s) => {
-      html += `
-        <div class="sensor-card">
-          <div class="sensor-card-top">
-            <span class="sensor-icon">${s.icon}</span>
-            <span class="sensor-role-tag">${s.tag}</span>
-          </div>
-          <h3>${s.name}</h3>
-          <div class="sensor-meta">Columnas: ${s.columns} | Muestreo: ${s.freq}</div>
-          <p>${s.desc}</p>
-          <p style="font-size:0.8rem; color:var(--accent-cyan); margin-top:auto;"><strong>Rol en el talud:</strong> ${s.impact}</p>
-        </div>
-      `;
-    });
-
-    // Roadmap del curso
-    html += `
-        </div>
-
-        <h3 style="margin:2rem 0 1rem; font-size:1.15rem; color:var(--text-main);">🗺️ Ruta de Aprendizaje del Curso</h3>
-        <div class="course-roadmap">
-    `;
-    this.MODULE_ORDER.forEach((modKey) => {
-      const mod     = COURSE_DATA[modKey];
-      const info    = this.MODULE_NAMES[modKey];
-      const done    = mod.lessons.filter(l => this.completedLessons.has(l.id)).length;
-      const total   = mod.lessons.length;
-      const modPct  = total ? Math.round((done/total)*100) : 0;
-      const allDone = done === total;
-      html += `
-          <div class="roadmap-module ${allDone ? "done" : done > 0 ? "in-progress" : ""}">
-            <div class="roadmap-module-icon">${info.emoji}</div>
-            <div class="roadmap-module-body">
-              <div class="roadmap-module-title">${info.label}</div>
-              <div class="roadmap-module-sub">${mod.title}</div>
-              <div class="roadmap-progress-mini">
-                <div class="roadmap-bar" style="width:${modPct}%"></div>
+          ${data.sensors.map(s => `
+            <div class="sensor-card">
+              <div class="sensor-card-top">
+                <span class="sensor-icon">${s.icon}</span>
+                <span class="sensor-role-tag">${s.tag}</span>
               </div>
-              <div class="roadmap-mod-count">${done} / ${total} ejercicios</div>
+              <h3>${s.name}</h3>
+              <div class="sensor-meta">Columnas: ${s.columns} | Muestreo: ${s.freq}</div>
+              <p>${s.desc}</p>
+              <p style="font-size:0.8rem; color:var(--accent-cyan); margin-top:auto;"><strong>Rol en el talud:</strong> ${s.impact}</p>
             </div>
-            <button class="btn-tool roadmap-btn" onclick="window.courseApp.switchSection('${modKey}')">
-              ${allDone ? "Repasar" : done > 0 ? "Continuar ➡" : "Comenzar ➡"}
+          `).join("")}
+        </div>
+
+        <!-- SECCIÓN 6: RUTA DE APRENDIZAJE -->
+        <div class="geotech-section-header" style="margin-top:2.5rem;">
+          <h3><span>🗺️</span> Ruta de Prácticas Computacionales en este Laboratorio</h3>
+          <p>Tres módulos progresivos diseñados para llevarte desde la sintaxis básica hasta el análisis cuantitativo de alerta temprana:</p>
+        </div>
+        <div class="course-roadmap">
+          ${this.MODULE_ORDER.map(modKey => {
+            const mod     = COURSE_DATA[modKey];
+            const info    = this.MODULE_NAMES[modKey];
+            const done    = mod.lessons.filter(l => this.completedLessons.has(l.id)).length;
+            const total   = mod.lessons.length;
+            const modPct  = total ? Math.round((done/total)*100) : 0;
+            const allDone = done === total;
+            return `
+              <div class="roadmap-module ${allDone ? "done" : done > 0 ? "in-progress" : ""}">
+                <div class="roadmap-module-icon">${info.emoji}</div>
+                <div class="roadmap-module-body">
+                  <div class="roadmap-module-title">${info.label}</div>
+                  <div class="roadmap-module-sub">${mod.title}</div>
+                  <div class="roadmap-progress-mini">
+                    <div class="roadmap-bar" style="width:${modPct}%"></div>
+                  </div>
+                  <div class="roadmap-mod-count">${done} / ${total} ejercicios</div>
+                </div>
+                <button class="btn-tool roadmap-btn" onclick="window.courseApp.switchSection('${modKey}')">
+                  ${allDone ? "Repasar" : done > 0 ? "Continuar ➡" : "Comenzar ➡"}
+                </button>
+              </div>
+            `;
+          }).join("")}
+        </div>
+
+        ${pct > 0 ? `
+          <div class="teoria-resume-banner">
+            <span>🚀 Progreso actual: <strong>${doneEx}/${totalEx} ejercicios (${pct}%)</strong></span>
+            <button class="btn-run" style="padding:0.5rem 1.25rem; font-size:0.88rem;" onclick="window.courseApp._resumeLastPosition()">
+              Continuar donde lo dejé →
             </button>
           </div>
-      `;
-    });
-    html += `</div>`;
+        ` : `
+          <div style="margin-top:2rem; padding:1.75rem; background:linear-gradient(135deg, rgba(56,189,248,0.1) 0%, rgba(16,185,129,0.08) 100%); border-radius:var(--radius-md); border:1px solid rgba(56,189,248,0.25); text-align:center;">
+            <h4 style="color:var(--text-main); font-size:1.15rem; margin-bottom:0.5rem;">🚀 ¿Listo para comenzar con Python?</h4>
+            <p style="color:var(--text-muted); font-size:0.9rem; max-width:650px; margin:0 auto 1.25rem; line-height:1.6;">
+              No necesitas experiencia previa programando. Aprenderás paso a paso a procesar y visualizar los datos de estos mismos sensores directamente en tu navegador.
+            </p>
+            <button class="btn-run" style="padding:0.85rem 2.25rem; font-size:1rem; margin:0 auto;" onclick="window.courseApp.switchSection('modulo1')">
+              Comenzar con Módulo 1: Fundamentos de Python y Pandas ➔
+            </button>
+          </div>
+        `}
 
-    if (pct > 0) {
-      html += `
-        <div class="teoria-resume-banner">
-          <span>🚀 Progreso actual: <strong>${doneEx}/${totalEx} ejercicios (${pct}%)</strong></span>
-          <button class="btn-run" style="padding:0.5rem 1.25rem; font-size:0.88rem;" onclick="window.courseApp._resumeLastPosition()">
-            Continuar donde lo dejé →
-          </button>
-        </div>
-      `;
-    } else {
-      html += `
-        <div style="margin-top:2rem; padding:1.5rem; background:rgba(56,189,248,0.08); border-radius:var(--radius-md); border:1px solid rgba(56,189,248,0.2); text-align:center;">
-          <h4 style="color:var(--text-main); font-size:1.1rem; margin-bottom:0.5rem;">🚀 ¿Listo para comenzar?</h4>
-          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:1.25rem;">
-            Aprenderás a procesar y visualizar estos mismos datos en Python desde cero.
-          </p>
-          <button class="btn-run" style="padding:0.75rem 2rem; font-size:1rem; margin:0 auto;" onclick="window.courseApp.switchSection('modulo1')">
-            Comenzar con Módulo 1: Fundamentos de Python ➔
-          </button>
-        </div>
-      `;
-    }
+      </div>
+    `;
 
-    html += `</div>`;
     this.dom.theoryPane.innerHTML = html;
   }
 
@@ -638,21 +777,27 @@ class CourseApp {
       <div class="theory-body">
         <div>${lesson.concept}</div>
         <div class="instruction-box" style="margin-top:1.25rem;">
-          <h4>🎯 Reto Práctico (Escribe tu código en el editor)</h4>
+          <h4>🎯 Reto Práctico (Escribe tu código en el editor inferior)</h4>
           <p>${lesson.instruction}</p>
         </div>
-      </div>
-      <div class="lesson-nav-bar">
-        <button class="btn-tool btn-prev-lesson"
-                onclick="window.courseApp.prevLesson()"
-                ${this.currentLessonIdx === 0 ? "disabled style='opacity:0.4'" : ""}>
-          ⬅ Anterior
-        </button>
-        ${nextBtn}
       </div>
     `;
 
     this.dom.theoryPane.innerHTML = html;
+
+    // Barra de navegación entre lecciones al final de la práctica interactiva
+    const navBar = this.dom.lessonNavBar || document.getElementById("lesson-nav-bar");
+    if (navBar) {
+      navBar.innerHTML = `
+        <button class="btn-tool btn-prev-lesson"
+                onclick="window.courseApp.prevLesson()"
+                ${this.currentLessonIdx === 0 ? "disabled style='opacity:0.4;cursor:not-allowed;'" : ""}>
+          ⬅ Lección Anterior
+        </button>
+        ${nextBtn}
+      `;
+      navBar.style.display = "flex";
+    }
 
     // Editor
     this.setCode(lesson.initialCode);
@@ -696,6 +841,17 @@ class CourseApp {
         </div>
       </div>
     `;
+
+    const navBar = this.dom.lessonNavBar || document.getElementById("lesson-nav-bar");
+    if (navBar) {
+      navBar.innerHTML = `
+        <button class="btn-tool" onclick="window.courseApp.switchSection('modulo1', 0)">
+          ⬅ Volver al Módulo 1 (Fundamentos)
+        </button>
+      `;
+      navBar.style.display = "flex";
+    }
+
     this.setCode(sandbox.initialCode);
     this.dom.accordionHint.style.display     = "none";
     this.dom.accordionSolution.style.display = "none";
@@ -714,9 +870,13 @@ class CourseApp {
       m1_l6: () => window.initDataFrameAnatomyWidget   && window.initDataFrameAnatomyWidget(),
       m1_l7: () => window.initBooleanFilterWidget      && window.initBooleanFilterWidget(),
       m1_l8: () => window.initSensorConcatWidget       && window.initSensorConcatWidget(),
-      m2_l2: () => window.initBoxplotWidget            && window.initBoxplotWidget(),
-      m2_l3: () => window.initThresholdBandsWidget     && window.initThresholdBandsWidget(),
+      m2_l1: () => window.initMatplotlibAnatomyWidget  && window.initMatplotlibAnatomyWidget(),
+      m2_l2: () => {},
+      m2_l3: () => window.initSubplotsAnatomyWidget    && window.initSubplotsAnatomyWidget(),
       m2_l4: () => window.initDualAxisRainWidget       && window.initDualAxisRainWidget(),
+      m2_l5: () => window.initBoxplotWidget        && window.initBoxplotWidget(),
+      m2_l6: () => window.initThresholdBandsWidget && window.initThresholdBandsWidget(),
+      m2_l7: () => window.initHistogramKdeWidget   && window.initHistogramKdeWidget(),
       m3_l1: () => window.initMissingDataWidget        && window.initMissingDataWidget(),
       m3_l2: () => window.initRollingWindowWidget      && window.initRollingWindowWidget(),
       m3_l3: () => window.initVelocityAccelerationWidget && window.initVelocityAccelerationWidget(),
@@ -732,6 +892,7 @@ class CourseApp {
     if (this.currentLessonIdx > 0) {
       this.currentLessonIdx--;
       this.renderLesson();
+      this.scrollToTop();
     }
   }
 
@@ -740,6 +901,14 @@ class CourseApp {
     if (moduleData && this.currentLessonIdx < moduleData.lessons.length - 1) {
       this.currentLessonIdx++;
       this.renderLesson();
+      this.scrollToTop();
+    }
+  }
+
+  scrollToTop() {
+    const target = this.dom.theoryPane || document.getElementById("theory-pane");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 
@@ -766,44 +935,57 @@ class CourseApp {
     box.style.display = (box.style.display === "none" || !box.style.display) ? "block" : "none";
   }
 
-  switchConsoleTab(tab) {
-    const isConsole = tab === "console";
-    this.dom.tabConsole.classList.toggle("active", isConsole);
-    this.dom.tabPlot.classList.toggle("active", !isConsole);
-    this.dom.consoleOutput.style.display = isConsole ? "block" : "none";
-    this.dom.plotDisplay.classList.toggle("active", !isConsole);
-  }
-
   // ───────────────────────────────────────────────────────────────────────────
-  //  EJECUCIÓN DE CÓDIGO
+  //  EJECUCIÓN DE CÓDIGO (Salida unificada estilo celda Jupyter Notebook)
   // ───────────────────────────────────────────────────────────────────────────
   async executeCurrentCode() {
     const code = this.getCode();
     this.dom.btnRun.disabled = true;
     this.dom.btnRun.innerHTML = '<span>⏳</span> Ejecutando...';
 
+    // Contador de ejecución estilo celda Jupyter Out [n]:
+    this.executionCount = (this.executionCount || 0) + 1;
+    if (this.dom.outputExecCount) {
+      this.dom.outputExecCount.textContent = String(this.executionCount);
+    }
+
     const result = await window.pyodideRunner.runCode(code);
 
     this.dom.btnRun.disabled = false;
     this.dom.btnRun.innerHTML = '<span>▶</span> Ejecutar Código <kbd style="font-size:0.7em;opacity:0.8;margin-left:4px">Ctrl+Enter</kbd>';
 
-    // Consola
-    this.dom.consoleOutput.textContent = result.output;
-    this.dom.consoleOutput.className   = result.success
-      ? "console-output-area" : "console-output-area error";
+    // Salida Unificada (Jupyter Notebook Cell Output)
+    const hasText = result.output && result.output.trim().length > 0;
+    const hasPlots = result.hasPlot && result.plots && result.plots.length > 0;
 
-    // Gráficos
-    if (result.hasPlot) {
+    // 1. Texto de consola (stdout y errores)
+    if (hasText) {
+      this.dom.consoleOutput.textContent = result.output;
+      this.dom.consoleOutput.className   = result.success
+        ? "console-output-area" : "console-output-area error";
+      this.dom.consoleOutput.style.display = "block";
+    } else if (!hasPlots) {
+      this.dom.consoleOutput.textContent = "(El código se ejecutó sin salida de texto ni errores)";
+      this.dom.consoleOutput.className   = "console-output-area dim";
+      this.dom.consoleOutput.style.display = "block";
+    } else {
+      this.dom.consoleOutput.style.display = "none";
+    }
+
+    // 2. Gráficos de Matplotlib (insertados inline en la misma celda de salida justo debajo del texto)
+    if (hasPlots) {
       this.dom.plotDisplay.innerHTML = "";
+      this.dom.plotDisplay.style.display = "flex";
       result.plots.forEach((b64) => {
         const img = document.createElement("img");
         img.src   = "data:image/png;base64," + b64;
         img.alt   = "Figura Matplotlib";
+        img.className = "notebook-plot-img";
         this.dom.plotDisplay.appendChild(img);
       });
-      this.switchConsoleTab("plot");
     } else {
-      this.switchConsoleTab("console");
+      this.dom.plotDisplay.innerHTML = "";
+      this.dom.plotDisplay.style.display = "none";
     }
 
     // Validación

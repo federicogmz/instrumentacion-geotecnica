@@ -37,11 +37,41 @@ class PyodideRunner {
         indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.2/full/"
       });
 
-      this.notifyStatus("Instalando paquetes científicos (numpy, pandas, matplotlib)...", "loading");
-      await this.pyodide.loadPackage(["numpy", "pandas", "matplotlib"]);
+      this.notifyStatus("Instalando paquetes científicos (numpy, pandas, matplotlib, scipy)...", "loading");
+      await this.pyodide.loadPackage(["numpy", "pandas", "matplotlib", "scipy"]);
 
       this.notifyStatus("Precargando registros de sensores de Ancón Norte...", "loading");
       await this.mountDataFiles();
+
+      // Pre-cargar df_ancon y función grafica en globals para que las lecciones no requieran reimportar CSV
+      try {
+        await this.pyodide.runPythonAsync(`
+import pandas as pd
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+try:
+    df_ancon = pd.read_csv('df_ancon.csv', index_col=0)
+    df_ancon.index = pd.to_datetime(df_ancon.index)
+except Exception as _e:
+    pass
+
+def grafica(sensor):
+    plt.figure(figsize=(9, 4))
+    if 'df_ancon' in globals() and sensor in df_ancon.columns:
+        plt.plot(df_ancon.index, df_ancon[sensor], label=sensor, linewidth=0.8)
+    plt.title(sensor, fontsize=15, fontweight='bold')
+    plt.xlabel('Fecha')
+    plt.ylabel(sensor)
+    plt.legend(loc='upper left')
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.show()
+`);
+      } catch (err) {
+        console.warn("Precarga inicial de df_ancon y grafica:", err);
+      }
 
       this.isReady = true;
       this.isLoading = false;
@@ -68,7 +98,8 @@ class PyodideRunner {
       { name: "df_ancon.csv", path: "./data/df_ancon.csv" },
       { name: "pluviometro.csv", path: "./data/pluviometro.csv" },
       { name: "humedad.csv", path: "./data/humedad.csv" },
-      { name: "extensometro.csv", path: "./data/extensometro.csv" }
+      { name: "extensometro.csv", path: "./data/extensometro.csv" },
+      { name: "acelerometro.csv", path: "./data/acelerometro.csv" }
     ];
 
     try {
@@ -106,7 +137,7 @@ class PyodideRunner {
     } catch (e) {}
 
     if (!existsAncon) {
-      let sampleCSV = "Unnamed: 0,sh1,p,C1,B1,Tem_1,DE1\n";
+      let sampleCSV = "Unnamed: 0,sh1,p,p1,C1,B1,Tem_1,DE1\n";
       const startDate = new Date("2020-03-24");
       for (let i = 0; i < 100; i++) {
         const cur = new Date(startDate);
@@ -117,8 +148,8 @@ class PyodideRunner {
         const c1 = (1.75 + i * 0.008 + (Math.random() - 0.5) * 0.02).toFixed(3);
         const b1 = (-0.6 + i * 0.004 + (Math.random() - 0.5) * 0.01).toFixed(3);
         const tem = (26 + Math.sin(i / 3) * 3).toFixed(1);
-        const de1 = (Math.random() > 0.8 ? (Math.random() * 1.5).toFixed(2) : "0.0");
-        sampleCSV += `${dStr},${sh1},${p},${c1},${b1},${tem},${de1}\n`;
+        const de1 = i === 40 || i === 70 ? "-999.0" : (Math.random() > 0.8 ? (Math.random() * 1.5).toFixed(2) : "0.0");
+        sampleCSV += `${dStr},${sh1},${p},${p},${c1},${b1},${tem},${de1}\n`;
       }
       this.pyodide.FS.writeFile("/df_ancon.csv", sampleCSV);
       this.pyodide.FS.writeFile("df_ancon.csv", sampleCSV);
@@ -184,6 +215,28 @@ class PyodideRunner {
       this.pyodide.FS.writeFile("/extensometro.csv", extCSV);
       this.pyodide.FS.writeFile("extensometro.csv", extCSV);
     }
+
+    // 5. Verificar y respaldar acelerometro.csv
+    let existsAccel = false;
+    try {
+      const stat = this.pyodide.FS.stat("/acelerometro.csv");
+      if (stat && stat.size > 100) existsAccel = true;
+    } catch (e) {}
+
+    if (!existsAccel) {
+      let accelCSV = ",C1,B1,Tem_1\n";
+      const startDate = new Date("2020-03-24T12:00:00");
+      for (let i = 0; i < 300; i++) {
+        const cur = new Date(startDate.getTime() + i * 3600000);
+        const dStr = cur.toISOString().replace("T", " ").substring(0, 19);
+        const c1 = "1.76";
+        const b1 = (-0.608 + (Math.random() - 0.5) * 0.001).toFixed(6);
+        const tem1 = (33.87 + (Math.random() - 0.5) * 0.2).toFixed(2);
+        accelCSV += `${dStr},${c1},${b1},${tem1}\n`;
+      }
+      this.pyodide.FS.writeFile("/acelerometro.csv", accelCSV);
+      this.pyodide.FS.writeFile("acelerometro.csv", accelCSV);
+    }
   }
 
   async runCode(code) {
@@ -216,6 +269,28 @@ try:
     import matplotlib.pyplot as plt
 except ImportError:
     plt = None
+
+# Garantizar que df_ancon esté en memoria global sin requerir read_csv en cada ejercicio
+if 'df_ancon' not in globals():
+    try:
+        import pandas as pd
+        df_ancon = pd.read_csv('df_ancon.csv', index_col=0)
+        df_ancon.index = pd.to_datetime(df_ancon.index)
+    except Exception:
+        pass
+
+if 'grafica' not in globals():
+    def grafica(sensor):
+        if plt:
+            plt.figure(figsize=(9, 4))
+            if 'df_ancon' in globals() and sensor in df_ancon.columns:
+                plt.plot(df_ancon.index, df_ancon[sensor], label=sensor, linewidth=0.8)
+            plt.title(sensor, fontsize=15, fontweight='bold')
+            plt.xlabel('Fecha')
+            plt.ylabel(sensor)
+            plt.legend(loc='upper left')
+            plt.grid(True, linestyle='--', alpha=0.5)
+            plt.show()
 
 try:
     # Ejecutar código del usuario
