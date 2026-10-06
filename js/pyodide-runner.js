@@ -37,8 +37,8 @@ class PyodideRunner {
         indexURL: "https://cdn.jsdelivr.net/pyodide/v0.26.2/full/"
       });
 
-      this.notifyStatus("Instalando paquetes científicos (numpy, pandas, matplotlib, scipy)...", "loading");
-      await this.pyodide.loadPackage(["numpy", "pandas", "matplotlib", "scipy"]);
+      this.notifyStatus("Instalando paquetes científicos (numpy, pandas, matplotlib, scipy, statsmodels)...", "loading");
+      await this.pyodide.loadPackage(["numpy", "pandas", "matplotlib", "scipy", "statsmodels"]);
 
       this.notifyStatus("Precargando registros de sensores de Ancón Norte...", "loading");
       await this.mountDataFiles();

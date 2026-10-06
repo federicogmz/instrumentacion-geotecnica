@@ -877,10 +877,13 @@ class CourseApp {
       m2_l5: () => window.initBoxplotWidget        && window.initBoxplotWidget(),
       m2_l6: () => window.initThresholdBandsWidget && window.initThresholdBandsWidget(),
       m2_l7: () => window.initHistogramKdeWidget   && window.initHistogramKdeWidget(),
-      m3_l1: () => window.initMissingDataWidget        && window.initMissingDataWidget(),
-      m3_l2: () => window.initRollingWindowWidget      && window.initRollingWindowWidget(),
-      m3_l3: () => window.initVelocityAccelerationWidget && window.initVelocityAccelerationWidget(),
-      m3_l4: () => window.initLagCorrelationWidget     && window.initLagCorrelationWidget(),
+      m3_l1: () => window.initMissingDataWidget          && window.initMissingDataWidget(),
+      m3_l2: () => window.initResamplingFlowWidget       && window.initResamplingFlowWidget(),
+      m3_l3: () => window.initRollingWindowWidget        && window.initRollingWindowWidget(),
+      m3_l4: () => window.initVelocityAccelerationWidget && window.initVelocityAccelerationWidget(),
+      m3_l5: () => window.initDecompositionFlowWidget   && window.initDecompositionFlowWidget(),
+      m3_l6: () => window.initCorrelationMatrixWidget    && window.initCorrelationMatrixWidget(),
+      m3_l7: () => window.initLagCorrelationWidget       && window.initLagCorrelationWidget(),
     };
     if (map[lessonId]) map[lessonId]();
   }
