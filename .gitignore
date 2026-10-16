@@ -118,3 +118,6 @@ ENV/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 */.ipynb_checkpoints/*
+
+# Indicaciones y documentos docentes temporales
+Indicaciones_*.docx

@@ -107,7 +107,7 @@
       <section>
         <h2>¿Qué causa las deformaciones?</h2>
         <table class="data-table" style="margin-top: 10px; font-size: 0.62em;">
-          <thead><tr><th style="width:17%">Familia</th><th>Ejemplos</th><th style="width:15%">Palanca</th><th style="width:26%">Variable a medir</th></tr></thead>
+          <thead><tr><th style="width:17%">Familia</th><th>Ejemplos</th><th style="width:21%">Variable que cambia</th><th style="width:24%">Qué se mide en campo</th></tr></thead>
           <tbody>
             <tr><td>💧 <strong>Agua</strong></td><td>Lluvia, ascenso del nivel freático, fugas de redes, bombeo</td><td>u y succión</td><td>Lluvia, presión de poros, humedad, succión</td></tr>
             <tr><td>🏗️ <strong>Cargas estáticas</strong></td><td>Peso propio, rellenos, terraplenes, cimentaciones</td><td>σ</td><td>Cargas, asentamientos</td></tr>
@@ -128,30 +128,75 @@
         <h2>Desplazamiento no es lo mismo que deformación</h2>
         <div class="split-2" style="margin-top: 10px; gap: 20px; align-items: center;">
           <div style="display:flex; flex-direction:column; gap:10px;">
-            <div class="card card-highlight" style="border-left:4px solid var(--eafit-blue); font-size:0.8em;">
-              <strong style="color:var(--eafit-blue);">Desplazamiento (δ)</strong>
-              <p style="margin-top:4px;">Cuánto se movió un punto respecto a una referencia. Unidades: mm o cm. Un punto o un perfil de puntos; <strong>siempre</strong> necesita referencia estable.</p>
+            <div class="card card-highlight" style="border-left:4px solid var(--eafit-blue); font-size:0.8em; padding:12px 16px;">
+              <strong style="color:var(--eafit-blue); font-size:1.05em;">Desplazamiento (δ)</strong>
+              <p style="margin-top:4px;">Cuánto se movió un punto respecto a una referencia fija. Unidades: mm o cm. Mide un punto o un perfil de puntos; <strong>siempre</strong> necesita referencia estable.</p>
             </div>
-            <div class="card card-highlight" style="border-left:4px solid var(--accent-emerald); font-size:0.8em;">
-              <strong style="color:var(--accent-emerald);">Deformación (ε = ΔL / L)</strong>
-              <p style="margin-top:4px;">Cuánto cambió la distancia o la forma entre puntos, en relación con su tamaño. Adimensional, % o με. Es local: depende de la longitud de medición y compara dos puntos entre sí.</p>
+            <div class="card card-highlight" style="border-left:4px solid var(--accent-emerald); font-size:0.8em; padding:12px 16px;">
+              <strong style="color:var(--accent-emerald); font-size:1.05em;">Deformación (ε = ΔL / L)</strong>
+              <p style="margin-top:4px;">Cuánto cambió la distancia o forma entre puntos, relativa a su tamaño inicial. Adimensional, % o με. Es local y depende de la longitud de medición (L): compara dos puntos entre sí.</p>
             </div>
-            <div style="font-size:0.74em; color: var(--text-muted);">Relación: δ = ∫ ε dL (el desplazamiento acumulado es la suma de las deformaciones a lo largo de la longitud).</div>
+            <div style="font-size:0.74em; color: var(--text-muted);">Relación: <strong>δ = ∫ ε dL</strong> (el desplazamiento acumulado en superficie es la suma de las deformaciones a lo largo del trayecto).</div>
           </div>
           <svg class="dg" style="max-height: 330px" viewBox="0 0 640 330" role="img" aria-label="Bloque que se desliza frente a estrato que se comprime">
-            <rect x="10" y="10" width="300" height="250" class="panel"/><rect x="330" y="10" width="300" height="250" class="panel"/>
-            <path d="M30,230 L290,130 L290,230 Z" class="f-soil-dry"/>
-            <rect x="110" y="88" width="90" height="46" rx="4" class="f-hum" transform="rotate(-21 155 111)"/>
-            <path d="M30,230 L290,130" class="s-rose" style="stroke-width:6; fill:none"/>
-            <line class="s-rose" style="stroke-width:4" x1="130" y1="60" x2="210" y2="91"/><polygon class="f-rose" points="218,94 200,98 205,84"/>
-            <text class="b s" x="160" y="285" text-anchor="middle">Bloque que se desliza</text>
-            <text class="s" x="160" y="308" text-anchor="middle">mucho δ, poca ε interna (la ε está en la franja de corte)</text>
-            <rect x="370" y="40" width="220" height="40" rx="4" class="f-gray"/><text class="w s" x="480" y="66" text-anchor="middle">terraplén</text>
-            <rect x="370" y="85" width="220" height="130" class="f-soil-sat"/><rect x="370" y="215" width="220" height="30" class="f-solid"/>
-            <g class="s-rose" style="stroke-width:4"><line x1="400" y1="95" x2="400" y2="190"/><line x1="480" y1="95" x2="480" y2="190"/><line x1="560" y1="95" x2="560" y2="190"/></g>
-            <g class="f-rose"><polygon points="400,196 392,180 408,180"/><polygon points="480,196 472,180 488,180"/><polygon points="560,196 552,180 568,180"/></g>
-            <text class="b s" x="480" y="285" text-anchor="middle">Estrato que se comprime</text>
-            <text class="s" x="480" y="308" text-anchor="middle">ε en toda su altura; δ = asentamiento</text>
+            <!-- Panel Izquierdo: Ladera / Deslizamiento -->
+            <rect x="10" y="10" width="300" height="240" class="panel" rx="8"/>
+            <rect x="20" y="18" width="280" height="26" rx="4" style="fill:rgba(0,75,133,0.15)"/>
+            <text class="b" x="160" y="36" text-anchor="middle" style="font-size:14px; fill:var(--eafit-blue)">Bloque que se desliza (Ladera)</text>
+            
+            <path d="M25,230 L25,205 L245,95 L290,95 L290,230 Z" class="f-soil-dry"/>
+            <text class="s" x="200" y="195" text-anchor="middle" style="font-size:12.5px; fill:var(--text-dim)">Macizo estable</text>
+            
+            <!-- Falla y bloque apoyado sobre ella -->
+            <line x1="25" y1="205" x2="245" y2="95" class="s-rose" style="stroke-width:4.5; stroke-dasharray:7 4"/>
+            <text class="rose-txt s" x="35" y="222" style="font-size:11px; font-weight:700;">Superficie de falla ↗</text>
+            <polygon points="85,175 205,115 205,78 85,138" class="f-hum" style="stroke:rgba(0,0,0,0.25); stroke-width:1"/>
+            <text class="w b s" x="145" y="127" text-anchor="middle" transform="rotate(-26.5 145 127)" style="font-size:12.5px;">Bloque móvil</text>
+            
+            <!-- Flecha desplazamiento cuesta abajo con etiqueta limpia -->
+            <rect x="105" y="46" width="130" height="22" rx="4" style="fill:var(--bg-card); stroke:var(--accent-rose); stroke-width:1.2"/>
+            <text class="rose-txt b s" x="170" y="62" text-anchor="middle" style="font-size:11.5px;">Desplazamiento δ ↙</text>
+            <line class="s-rose" style="stroke-width:3" x1="175" y1="72" x2="133" y2="93"/>
+            <polygon class="f-rose" points="126,96.5 137,88 139,99"/>
+            
+            <!-- Texto inferior panel 1 -->
+            <rect x="10" y="256" width="300" height="66" rx="6" style="fill:var(--bg-card); stroke:var(--border-subtle); stroke-width:1"/>
+            <text class="b s" x="20" y="278" style="font-size:12.5px; fill:var(--accent-rose)">• Desplazamiento (δ) del bloque</text>
+            <text class="s" x="20" y="296" style="font-size:12px; fill:var(--text-muted)">• Poca deformación interna (ε ≈ 0)</text>
+            <text class="s" x="20" y="312" style="font-size:12px; fill:var(--accent-rose)">• La deformación se concentra en la falla</text>
+
+            <!-- Panel Derecho: Terraplén / Compresión -->
+            <rect x="330" y="10" width="300" height="240" class="panel" rx="8"/>
+            <rect x="340" y="18" width="280" height="26" rx="4" style="fill:rgba(16,185,129,0.15)"/>
+            <text class="b" x="480" y="36" text-anchor="middle" style="font-size:14px; fill:var(--accent-emerald)">Compresión de estrato (Terraplén)</text>
+            
+            <rect x="355" y="52" width="250" height="32" rx="4" class="f-gray"/>
+            <text class="w s" x="480" y="73" text-anchor="middle" style="font-size:13.5px;">Sobrecarga (terraplén)</text>
+            
+            <!-- Estrato con flechas laterales que no chocan con el texto central -->
+            <rect x="355" y="88" width="250" height="95" class="f-soil-sat"/>
+            <g class="s-rose" style="stroke-width:3">
+              <line x1="385" y1="96" x2="385" y2="168"/>
+              <line x1="575" y1="96" x2="575" y2="168"/>
+            </g>
+            <g class="f-rose">
+              <polygon points="385,174 379,160 391,160"/>
+              <polygon points="575,174 569,160 581,160"/>
+            </g>
+            <!-- Etiquetas centrales sobre fondo limpio -->
+            <rect x="395" y="104" width="170" height="54" rx="6" style="fill:var(--bg-card); stroke:rgba(0,75,133,0.3); stroke-width:1.2"/>
+            <text class="b s" x="480" y="123" text-anchor="middle" style="font-size:12.5px; fill:var(--eafit-blue)">Estrato compresible</text>
+            <line x1="410" y1="132" x2="550" y2="132" style="stroke:var(--border-subtle); stroke-width:1"/>
+            <text class="rose-txt b s" x="480" y="148" text-anchor="middle" style="font-size:11.5px;">Deformación continua (ε)</text>
+            
+            <rect x="355" y="187" width="250" height="28" class="f-solid"/>
+            <text class="b s" x="480" y="206" text-anchor="middle" style="font-size:13px; fill:var(--text-main)">Estrato rígido basal</text>
+
+            <!-- Texto inferior panel 2 -->
+            <rect x="330" y="256" width="300" height="66" rx="6" style="fill:var(--bg-card); stroke:var(--border-subtle); stroke-width:1"/>
+            <text class="b s" x="340" y="278" style="font-size:12.5px; fill:var(--accent-emerald)">• Deformación (ε) en toda la altura</text>
+            <text class="s" x="340" y="296" style="font-size:12px; fill:var(--text-muted)">• Cada capa aporta acortamiento vertical</text>
+            <text class="s" x="340" y="312" style="font-size:12px; fill:var(--eafit-blue)">• En superficie: asentamiento acumulado δ</text>
           </svg>
         </div>
         <div class="grid-3" style="margin-top: 8px; gap: 10px; font-size:0.7em;">
@@ -371,144 +416,246 @@
 
 
 
-      <!-- SLIDE 10: INSTRUMENTOS: CLASIFICACIÓN Y ESCALAS -->
+      <!-- SLIDE 13 (docx 13): INSTRUMENTOS PARA MEDIR DESPLAZAMIENTO Y DEFORMACIÓN -->
       <section>
-        <h2>Instrumentos para medir deformaciones</h2>
-        <p style="font-size: 1.1em; margin-top: 10px;">
+        <h2>Instrumentos para medir desplazamiento y deformación</h2>
+        <p style="font-size: 1em; margin-top: 10px; color: var(--text-body);">
           La deformación en el terreno y las consecuencias asociadas se pueden monitorear a diferentes escalas temporales y espaciales.
         </p>
 
-        <div class="split-2" style="margin-top: 25px; gap: 25px;">
-          
+        <div class="split-2" style="margin-top: 20px; gap: 24px;">
           <div class="card card-highlight" style="border-left: 4px solid var(--eafit-blue);">
             <div class="card-title" style="color: var(--eafit-blue);">
               <span class="card-icon">📍</span>
-              <span>Sensores en sitio:</span>
+              <span>Sensores en sitio (contacto directo)</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
-              <li><strong>Extensómetros</strong></li>
-              <li><strong>Acelerómetros</strong></li>
-              <li><strong>GPS - GNSS</strong></li>
-              <li><strong>Inclinómetros</strong></li>
-              <li><strong>TDR</strong> - Fibra óptica para medición distribuida</li>
-            </ul>
+            <div style="margin-top: 10px; font-size: 0.88em; line-height: 1.55;">
+              <p><strong>En superficie:</strong></p>
+              <ul class="bullet-list" style="margin-bottom: 8px;">
+                <li>Prismas y estación total &bull; GNSS (GPS diferencial)</li>
+                <li>Extensómetros y fisurómetros &bull; Acelerómetros (MEMS)</li>
+              </ul>
+              <p><strong>En profundidad y en elementos:</strong></p>
+              <ul class="bullet-list">
+                <li>Inclinómetros (perfil vertical de desplazamiento)</li>
+                <li>TDR (Reflectometría) y fibra óptica distribuida</li>
+                <li>Celdas (de carga, deformación y presión total) &bull; Celdas de asentamiento</li>
+                <li>Deformímetros de cuerda vibrante</li>
+              </ul>
+            </div>
           </div>
 
           <div class="card card-highlight" style="border-left: 4px solid var(--accent-cyan);">
             <div class="card-title" style="color: var(--accent-cyan);">
               <span class="card-icon">🛰️</span>
-              <span>Sensores remotos:</span>
+              <span>Sensores remotos (sin contacto físico)</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 10px; font-size: 0.95em;">
-              <li><strong>Drones (UAV)</strong></li>
-              <li><strong>Satélites (Óptico & SAR)</strong></li>
-            </ul>
+            <div style="margin-top: 10px; font-size: 0.88em; line-height: 1.6;">
+              <p><strong>Plataformas aéreas y terrestres:</strong></p>
+              <ul class="bullet-list" style="margin-bottom: 12px;">
+                <li>Drones (UAV): fotogrametría y DEM diferencial multitemporal</li>
+                <li>Escáner láser terrestre (TLS / LiDAR): nubes de puntos 3D</li>
+              </ul>
+              <p><strong>Plataformas orbitales:</strong></p>
+              <ul class="bullet-list">
+                <li>Satélites ópticos: detección de cambios de cobertura y NDVI</li>
+                <li>Satélites de radar (InSAR): desplazamientos milimétricos en la línea de vista (LOS)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 14px; font-size: 0.78em;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-content">
+            <strong>Nota conceptual:</strong> El sistema GNSS utiliza satélites en el espacio, pero el receptor y la antena están firmemente instalados en el terreno: por eso se clasifica como un instrumento <strong>en sitio</strong>.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14 (docx 14): QUÉ MIDE REALMENTE CADA INSTRUMENTO -->
+      <section>
+        <h2>¿Qué mide realmente cada instrumento?</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Casi todo mide desplazamiento o rotación; la deformación se calcula
+        </h3>
+        <p style="font-size: 0.88em; margin-top: 6px; color: var(--text-muted);">
+          Comprender el principio físico directo evita confusiones entre lo que el sensor registra y lo que el ingeniero interpreta.
+        </p>
+
+        <table class="data-table" style="margin-top: 12px; font-size: 0.65em;">
+          <thead>
+            <tr>
+              <th style="width: 25%;">Mide directamente</th>
+              <th style="width: 42%;">Instrumentos representativos</th>
+              <th style="width: 33%;">Qué se calcula / interpreta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>📍 <strong>Posición de puntos</strong></td>
+              <td>Topografía (estación total), GNSS, Drones, LiDAR terrestre, InSAR (en la línea de vista)</td>
+              <td>Desplazamiento absoluto o relativo ($\delta$) y velocidad ($v = \Delta\delta / \Delta t$)</td>
+            </tr>
+            <tr>
+              <td>📏 <strong>Distancia entre dos puntos</strong></td>
+              <td>Extensómetros de varilla / cable, fisurómetros</td>
+              <td>Desplazamiento relativo ($\Delta L$) y deformación media ($\varepsilon = \Delta L / L_0$)</td>
+            </tr>
+            <tr>
+              <td>📐 <strong>Ángulo o inclinación</strong></td>
+              <td>Inclinómetros (sonda o fijos), acelerómetros MEMS</td>
+              <td>Desplazamiento lateral: puntual en MEMS; perfil continuo integrado en profundidad en inclinómetros</td>
+            </tr>
+            <tr>
+              <td>⚡ <strong>Resistencia o frecuencia</strong></td>
+              <td>Galgas extensométricas (resistencia), cuerda vibrante (frecuencia de resonancia)</td>
+              <td>Deformación ($\varepsilon$) y, mediante el módulo $E$ del acero, fuerza o esfuerzo ($\sigma$)</td>
+            </tr>
+            <tr>
+              <td>⏱️ <strong>Tiempo de retorno de pulso</strong></td>
+              <td>TDR (Time Domain Reflectometry con cable coaxial)</td>
+              <td>Profundidad donde se cizalla o deforma el cable por la falla (resolución de cm a dm)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout callout-warning" style="margin-top: 14px; font-size: 0.82em;">
+          <span class="callout-icon">⚡</span>
+          <div class="callout-content" style="font-weight: 700;">
+            La velocidad (mm/día) y la aceleración del deslizamiento se calculan derivando numéricamente la serie temporal de desplazamientos; el acelerómetro mide vibración e inclinación, no esa aceleración lenta de la masa.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 15 (docx 15): TOPOGRAFÍA Y GNSS -->
+      <section>
+        <h2>Topografía y GNSS: medir la posición de puntos</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Puntual (red de puntos)</span>
+        </div>
+
+        <div class="split-2" style="margin-top: 10px; gap: 20px; align-items: center;">
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card card-highlight" style="border-left: 4px solid var(--eafit-blue); font-size: 0.78em; padding: 12px 16px;">
+              <strong style="color:var(--eafit-blue); font-size:1.05em;">Estación Total con Prismas</strong>
+              <p style="margin-top:4px;">Prismas reflectores ópticos fijos en el terreno, medidos por distancia láser y ángulos desde un pilar estable fuera de la ladera.</p>
+              <div style="margin-top:6px; font-size:0.92em; color:var(--text-muted);">
+                <span style="color:var(--accent-emerald); font-weight:700;">Ventaja:</span> Muy alta precisión milimétrica y monitoreo de decenas a cientos de puntos con una sola estación.<br>
+                <span style="color:var(--accent-rose); font-weight:700;">Limitación:</span> Requiere línea de vista despejada (afectada por niebla o vegetación) y lectura periódica manual (salvo estación robotizada).
+              </div>
+            </div>
+
+            <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald); font-size: 0.78em; padding: 12px 16px;">
+              <strong style="color:var(--accent-emerald); font-size:1.05em;">GNSS (GPS Diferencial Geotécnico)</strong>
+              <p style="margin-top:4px;">Receptor fijo y antena geodésica instalados directamente sobre el bloque inestable, calculando coordenadas 3D continuas con estación base de referencia.</p>
+              <div style="margin-top:6px; font-size:0.92em; color:var(--text-muted);">
+                <span style="color:var(--accent-emerald); font-weight:700;">Ventaja:</span> Registro continuo 24/7 en tiempo real, opera con lluvia, niebla y noche, sin requerir línea de vista óptica.<br>
+                <span style="color:var(--accent-rose); font-weight:700;">Limitación:</span> Requiere cielo abierto (horizonte despejado, sin obstrucción por vegetación densa o paredes rocosas), costo más elevado por punto y mide un único punto por antena.
+              </div>
+            </div>
           </div>
 
+          <svg class="dg" style="max-height: 380px" viewBox="0 0 620 350" role="img" aria-label="Esquema ladera con estación total y GNSS">
+            <rect x="10" y="10" width="600" height="330" class="panel" rx="10"/>
+            <!-- Ladera y plano de falla -->
+            <path d="M20,280 L200,280 L440,110 L580,110 L580,310 L20,310 Z" class="f-soil-dry"/>
+            <path d="M215,270 Q340,220 480,110" class="s-rose" style="stroke-width:4; stroke-dasharray:7 4; fill:none"/>
+            <text class="rose-txt s" x="330" y="245" style="font-size:12.5px;">Superficie de falla</text>
+            <text class="rose-txt s" x="485" y="105" style="font-size:11px; font-weight:700;">Escarpe</text>
+
+            <!-- Estación Total fuera de la zona inestable (trípode apoyado SOBRE el terreno) -->
+            <polygon points="100,245 85,280 115,280" style="fill:var(--text-dim)"/>
+            <circle cx="100" cy="238" r="8" class="f-blue"/>
+            <rect x="94" y="226" width="12" height="12" rx="2" style="fill:var(--eafit-blue)"/>
+            <text class="b s" x="100" y="300" text-anchor="middle" style="font-size:12px; fill:var(--eafit-blue)">Estación Total (punto fijo)</text>
+
+            <!-- Rayos ópticos láser hacia prismas (color cian óptico, diferenciado de la falla) -->
+            <line style="stroke:var(--accent-cyan); stroke-width:2; stroke-dasharray:5 3" x1="106" y1="232" x2="285" y2="215"/>
+            <line style="stroke:var(--accent-cyan); stroke-width:2; stroke-dasharray:5 3" x1="106" y1="232" x2="350" y2="170"/>
+            <!-- Prismas reflectores -->
+            <polygon points="285,210 279,220 291,220" style="fill:var(--accent-amber)"/>
+            <polygon points="350,165 344,175 356,175" style="fill:var(--accent-amber)"/>
+            <text class="s" x="298" y="208" style="font-size:12.5px; fill:var(--accent-amber); font-weight:700;">Prisma 1</text>
+            <text class="s" x="365" y="165" style="font-size:12.5px; fill:var(--accent-amber); font-weight:700;">Prisma 2</text>
+            <text class="s" x="120" y="250" style="font-size:10.5px; fill:var(--accent-cyan); font-style:italic;">Línea de vista láser</text>
+
+            <!-- Receptor y antena GNSS instalado directamente sobre el bloque inestable -->
+            <line class="ax" style="stroke-width:3" x1="430" y1="117" x2="430" y2="92"/>
+            <ellipse cx="430" cy="88" rx="14" ry="7" style="fill:var(--accent-emerald); stroke:#fff; stroke-width:2"/>
+            <text class="b s" x="430" y="75" text-anchor="middle" style="font-size:12px; fill:var(--accent-emerald)">Antena GNSS continua</text>
+            <text class="s" x="430" y="61" text-anchor="middle" style="font-size:10.5px; fill:var(--text-muted);">(en bloque inestable)</text>
+            <!-- Señales satelitales -->
+            <path d="M415,50 Q430,40 445,50" class="s-pie" style="fill:none; stroke-width:2"/>
+            <path d="M405,40 Q430,28 455,40" class="s-pie" style="fill:none; stroke-width:2"/>
+            <text class="s" x="430" y="22" text-anchor="middle" style="font-size:11px;">🛰️ Satélites GNSS</text>
+          </svg>
         </div>
       </section>
 
-      <!-- NEW:04-instr -->
+      <!-- SLIDE 16 (docx 16): EXTENSÓMETROS Y FISURÓMETROS -->
       <section>
-        <h2>¿Qué instrumento uso?</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Cada sensor cubre una parte del problema
+        <h2>Extensómetros y fisurómetros</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Monitoreo de deformaciones superficiales
         </h3>
-
-        <div style="margin-top: 8px;">
-          <svg class="dg" style="max-height: 620px" viewBox="0 0 1200 500" role="img" aria-label="Mapa de instrumentos de deformación según profundidad y cobertura">
-<rect x="120" y="40" width="1020" height="400" class="panel" style="fill-opacity: 0.35"/>
-<line class="grid" x1="375.0" y1="40" x2="375.0" y2="440"/>
-<line class="grid" x1="630.0" y1="40" x2="630.0" y2="440"/>
-<line class="grid" x1="885.0" y1="40" x2="885.0" y2="440"/>
-<line class="grid" x1="120" y1="173.3" x2="1140" y2="173.3"/>
-<line class="grid" x1="120" y1="306.7" x2="1140" y2="306.7"/>
-<circle cx="211.8" cy="392.0" r="54" class="f-hum" style="fill-opacity: 0.88"/>
-<text class="w" x="211.8" y="397.0" text-anchor="middle" style="font-size: 14.5px">Extensómetro</text>
-<circle cx="385.2" cy="400.0" r="54" class="f-rain" style="fill-opacity: 0.88"/>
-<text class="w" x="385.2" y="405.0" text-anchor="middle" style="font-size: 14.5px">Acelerómetro</text>
-<circle cx="558.6" cy="392.0" r="54" class="f-gray" style="fill-opacity: 0.88"/>
-<text class="w" x="558.6" y="389.0" text-anchor="middle" style="font-size: 14.5px">Celda</text>
-<text class="w" x="558.6" y="408.0" text-anchor="middle" style="font-size: 14.5px">de carga</text>
-<circle cx="222.0" cy="288.0" r="54" class="f-ten" style="fill-opacity: 0.88"/>
-<text class="w" x="222.0" y="293.0" text-anchor="middle" style="font-size: 14.5px">GNSS</text>
-<circle cx="915.6" cy="392.0" r="54" class="f-pie" style="fill-opacity: 0.88"/>
-<text class="w" x="915.6" y="397.0" text-anchor="middle" style="font-size: 14.5px">Inclinómetro</text>
-<circle cx="732.0" cy="296.0" r="54" class="f-pie" style="fill-opacity: 0.88"/>
-<text class="w" x="732.0" y="293.0" text-anchor="middle" style="font-size: 14.5px">TDR /</text>
-<text class="w" x="732.0" y="312.0" text-anchor="middle" style="font-size: 14.5px">fibra óptica</text>
-<circle cx="222.0" cy="176.0" r="54" class="f-ao" style="fill-opacity: 0.88"/>
-<text class="w" x="222.0" y="173.0" text-anchor="middle" style="font-size: 14.5px">Drones</text>
-<text class="w" x="222.0" y="192.0" text-anchor="middle" style="font-size: 14.5px">(UAV)</text>
-<circle cx="252.6" cy="68.0" r="54" class="f-ar" style="fill-opacity: 0.88"/>
-<text class="w" x="252.6" y="65.0" text-anchor="middle" style="font-size: 14.5px">Satélites</text>
-<text class="w" x="252.6" y="84.0" text-anchor="middle" style="font-size: 14.5px">(InSAR)</text>
-<text class="b m" x="630" y="482" text-anchor="middle">Profundidad de la deformación que mide</text>
-<text class="s" x="X0" y="466"></text>
-<text class="s" x="120" y="470">superficie</text><text class="s" x="1140" y="470" text-anchor="end">profundidad (subsuelo)</text>
-<text class="b m" transform="translate(36,240) rotate(-90)" text-anchor="middle">Cobertura espacial</text>
-<text class="s" x="112" y="436" text-anchor="end">puntual</text><text class="s" x="112" y="56" text-anchor="end">regional</text>
-</svg>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Puntual (base corta entre 2 puntos)</span>
         </div>
-        <div class="callout callout-info" style="margin-top: 12px;">
-          <span class="callout-icon">🧩</span>
-          <div class="callout-content" style="font-weight: 600;">No hay un instrumento perfecto: <strong>los sensores remotos dan cobertura</strong> para saber <em>dónde</em> se mueve el terreno y <strong>los de campo dan precisión</strong> para saber <em>cuánto</em> y <em>a qué profundidad</em>.</div>
-        </div>
-      </section>
 
-
-
-      <!-- SLIDE 11: EXTENSÓMETROS: PRINCIPIO Y APLICACIONES -->
-      <section>
-        <h2>Extensómetros</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Monitoreo de las deformaciones superficiales
-        </h3>
-
-        <div class="split-2" style="margin-top: 20px; align-items: center;">
-          
+        <div class="split-2" style="margin-top: 15px; align-items: center;">
           <div>
             <div class="card">
-              <p style="font-size: 1.05em; line-height: 1.6;">
-                Miden el <strong>cambio de distancia entre dos puntos</strong> mediante la variación de posición entre sus extremos.
+              <p style="font-size: 0.95em; line-height: 1.6;">
+                Miden el <strong>cambio de distancia entre dos puntos</strong> mediante la variación de posición relativa entre sus extremos anclados.
               </p>
-
-              <div style="margin-top: 15px;">
-                <strong style="color: var(--eafit-blue);">Aplicaciones:</strong>
-                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.55;">
-                  Detectan alargamiento o contracción debido a fuerzas externas. Son muy útiles en el monitoreo de <strong>grietas en edificios o en el suelo, la convergencia en túneles, y el control de deformaciones en presas y taludes</strong>.
+              <div class="callout callout-info" style="margin-top: 12px; font-size: 0.85em;">
+                <span class="callout-icon">🔍</span>
+                <div class="callout-content">
+                  En grietas y juntas en roca, concreto o estructuras se les denomina <strong>fisurómetros</strong> (pueden ser de placa milimétrica visual, potenciómetro digital o cuerda vibrante).
+                </div>
+              </div>
+              <div style="margin-top: 14px;">
+                <strong style="color: var(--eafit-blue); font-size: 0.92em;">Aplicaciones en campo:</strong>
+                <p style="margin-top: 6px; font-size: 0.88em; line-height: 1.5;">
+                  Detectan alargamiento o contracción por empujes del terreno. Son clave en el monitoreo de <strong>grietas de tracción en la corona de taludes, convergencia en túneles, y juntas de expansión en presas y muros</strong>.
                 </p>
               </div>
             </div>
           </div>
 
           <div style="display: flex; gap: 10px; justify-content: center;">
-            <img src="img/p04/image7.jpeg" alt="Extensómetro 1" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 6px;">
-            <img src="img/p04/image8.jpeg" alt="Extensómetro 2" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 6px;">
-            <img src="img/p04/image9.jpeg" alt="Extensómetro 3" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 6px;">
+            <img src="img/p04/image7.jpeg" alt="Extensómetro de varilla" style="max-height: 310px; width: auto; object-fit: contain; border-radius: 6px;">
+            <img src="img/p04/image8.jpeg" alt="Fisurómetro en junta" style="max-height: 310px; width: auto; object-fit: contain; border-radius: 6px;">
+            <img src="img/p04/image9.jpeg" alt="Extensómetro digital en roca" style="max-height: 310px; width: auto; object-fit: contain; border-radius: 6px;">
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 12: EXTENSÓMETROS: VENTAJAS Y LIMITACIONES -->
+      <!-- SLIDE 17 (docx 17): EXTENSÓMETROS: VENTAJAS Y LIMITACIONES -->
       <section>
-        <h2>Extensómetros</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Monitoreo de las deformaciones superficiales
-        </h3>
+        <h2>Extensómetros y fisurómetros: ventajas y limitaciones</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Puntual</span>
+        </div>
 
-        <div class="split-2" style="margin-top: 30px; gap: 30px;">
-          
+        <div class="split-2" style="margin-top: 25px; gap: 30px;">
           <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
             <div class="card-title" style="color: var(--accent-emerald);">
               <span class="card-icon">✅</span>
               <span>Ventajas</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
-              <li><strong>Medición directa</strong> de deformaciones.</li>
-              <li>Alta precisión en la medición milimétrica.</li>
-              <li>Aplicable en diversas estructuras: presas, túneles, edificios y taludes.</li>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 0.95em; line-height: 1.55;">
+              <li><strong>Medición directa del desplazamiento relativo entre dos puntos:</strong> la deformación se obtiene dividiendo por la distancia base ($\varepsilon = \Delta L / L_0$).</li>
+              <li>Alta precisión milimétrica y submilimétrica directa sin modelos complejos.</li>
+              <li>Instalación rápida y lectura sencilla (mecánica, digital o telemétrica en tiempo real).</li>
+              <li>Aplicable en diversas obras: presas, túneles, edificios y laderas rocosas.</li>
             </ul>
           </div>
 
@@ -517,69 +664,95 @@
               <span class="card-icon">⚠️</span>
               <span>Limitaciones</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
-              <li><strong>Resolución espacial limitada:</strong> solo mide una grieta en un punto específico.</li>
-              <li>Pueden estar expuestos a daños físicos en condiciones adversas (movimientos bruscos o intemperie).</li>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 0.95em; line-height: 1.55;">
+              <li><strong>Resolución espacial estrictamente local:</strong> solo mide la grieta en el punto exacto donde fue colocado; si el talud abre una grieta 2 metros más arriba, no detecta nada.</li>
+              <li>Expuestos a <strong>daños físicos en superficie</strong> (caída de rocas, vegetación, animales o intemperie).</li>
+              <li>Rango de medición acotado: desplazamientos bruscos pueden descarrilar o romper el sensor.</li>
             </ul>
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 13: EXTENSÓMETROS EN CAMPO -->
+      <!-- SLIDE 18 (docx 18): EXTENSÓMETROS: REGISTRO EN CAMPO -->
       <section>
-        <h2>Extensómetros: Registro en campo</h2>
-        <div style="text-align: center; margin-top: 25px;">
-          <img src="img/p04/image10.png" alt="Registro de Extensómetro en Grieta" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
-        </div>
-      </section>
-
-      <!-- SLIDE 14: ACELERÓMETROS: PRINCIPIO Y APLICACIONES -->
-      <section>
-        <h2>Acelerómetros</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Monitoreo de las deformaciones superficiales y dinámicas
+        <h2>Extensómetros: registro en campo</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Registro en grieta &bull; La Bermejala
         </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Puntual (serie de tiempo)</span>
+        </div>
 
-        <div class="split-2" style="margin-top: 20px; align-items: center;">
-          
+        <div style="text-align: center; margin-top: 15px;">
+          <img src="img/p04/image10.png" alt="Registro de Extensómetro en Grieta La Bermejala" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 14px; font-size: 0.88em;">
+          <span class="callout-icon">🚨</span>
+          <div class="callout-content" style="font-weight: 700;">
+            Los principales escalones de movimiento coinciden con picos de lluvia: la causa y el efecto en una sola gráfica. Cada escalón es movimiento acumulado que no regresa.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 19 (docx 19): ACELERÓMETROS (MEMS) -->
+      <section>
+        <h2>Acelerómetros (MEMS): inclinación y vibración</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto (inclinación)</span>
+          <span class="sensor-tag tag-causa">📳 Causa (vibración)</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Puntual</span>
+        </div>
+
+        <div class="split-2" style="margin-top: 15px; align-items: center;">
           <div>
             <div class="card">
-              <p style="font-size: 1.05em; line-height: 1.6;">
-                Miden la <strong>aceleración de un objeto o estructura en uno o varios ejes</strong>, detectando cambios en su movimiento.
+              <p style="font-size: 0.95em; line-height: 1.6;">
+                Los sensores MEMS (Micro-Electro-Mechanical Systems) miden aceleración en uno, dos o tres ejes ortogonales mediante microrresortes de silicio:
               </p>
-
-              <div style="margin-top: 15px;">
-                <strong style="color: var(--eafit-blue);">Aplicaciones:</strong>
-                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.55;">
-                  Combinados con giroscopios, miden tanto la aceleración como la orientación y movimiento angular en el espacio. Responden a las fuerzas de inercia provocadas por movimientos, convirtiéndolas en <strong>señales eléctricas proporcionales a la aceleración</strong>.
-                </p>
+              <ul class="bullet-list" style="margin-top: 10px; font-size: 0.9em; line-height: 1.55;">
+                <li><strong>En reposo (estático):</strong> miden la <strong>inclinación (cabeceo y balanceo / pitch & roll)</strong> a partir del vector de la gravedad terrestre ($g$).</li>
+                <li><strong>En movimiento (dinámico):</strong> miden la <strong>vibración y aceleraciones transitorias</strong>.</li>
+              </ul>
+              <div class="callout callout-info" style="margin-top: 12px; font-size: 0.85em;">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content" style="font-weight: 700;">
+                  El mismo sensor mide un <strong>efecto</strong> (inclinación progresiva del terreno) y una <strong>causa</strong> (vibraciones por maquinaria, voladuras, tráfico o sismos).
+                </div>
               </div>
             </div>
           </div>
 
           <div style="display: flex; gap: 15px; justify-content: center;">
-            <img src="img/p04/image11.png" alt="Sensor Acelerómetro Triaxial" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 8px;">
-            <img src="img/p04/image12.jpeg" alt="Acelerómetro en Campo" style="max-height: 320px; width: auto; object-fit: contain; border-radius: 8px;">
+            <img src="img/p04/image11.png" alt="Sensor Acelerómetro Triaxial ejes" style="max-height: 310px; width: auto; object-fit: contain; border-radius: 8px;">
+            <img src="img/p04/image12.jpeg" alt="Acelerómetro en Campo" style="max-height: 310px; width: auto; object-fit: contain; border-radius: 8px;">
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 15: ACELERÓMETROS: VENTAJAS Y LIMITACIONES -->
+      <!-- SLIDE 20 (docx 20): ACELERÓMETROS: VENTAJAS Y LIMITACIONES -->
       <section>
-        <h2>Acelerómetros</h2>
-        <div class="split-2" style="margin-top: 30px; gap: 30px;">
-          
+        <h2>Acelerómetros (MEMS): ventajas y limitaciones</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-causa">📳 Causa</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Puntual</span>
+        </div>
+
+        <div class="split-2" style="margin-top: 25px; gap: 30px;">
           <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
             <div class="card-title" style="color: var(--accent-emerald);">
               <span class="card-icon">✅</span>
               <span>Ventajas</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
-              <li>Alta sensibilidad para detectar <strong>movimientos mínimos</strong>.</li>
-              <li>Bajo costo y dimensiones compactas.</li>
-              <li>Fáciles de integrar en sistemas de monitoreo continuo.</li>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 0.95em; line-height: 1.55;">
+              <li>Alta sensibilidad para detectar <strong>movimientos dinámicos e inclinaciones mínimas</strong>.</li>
+              <li>Bajo costo, muy bajo consumo eléctrico y dimensiones sumamente compactas.</li>
+              <li>Fáciles de integrar en redes inalámbricas IoT para monitoreo continuo en tiempo real.</li>
             </ul>
           </div>
 
@@ -588,67 +761,92 @@
               <span class="card-icon">⚠️</span>
               <span>Limitaciones</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 15px; font-size: 1.05em;">
-              <li>Resolución espacial: solo mide la placa o nodo en el que se encuentra.</li>
-              <li>Afectados por <strong>ruido e interferencias ambientales</strong> (requiere filtrado).</li>
-              <li>El análisis de los datos puede ser complejo.</li>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 0.95em; line-height: 1.55;">
+              <li><strong>Resolución espacial puntual:</strong> solo mide la rotación o aceleración del nodo o placa exacta donde está atornillado.</li>
+              <li>Afectados por <strong>ruido ambiental, cambios de temperatura y vibraciones espurias</strong> (requiere filtrado y calibración).</li>
+              <li>El cálculo de desplazamiento mediante doble integración de aceleración acumula deriva (drift) por ruido y sesgo del sensor.</li>
             </ul>
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 16: ACELERÓMETROS EN CAMPO -->
+      <!-- SLIDE 21 (docx 21): ACELERÓMETROS: SERIES DE TIEMPO -->
       <section>
-        <h2>Acelerómetros: Series de tiempo</h2>
-        <div style="text-align: center; margin-top: 25px;">
-          <img src="img/p04/image13.png" alt="Registro de Acelerómetro y Análisis Espectral" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
-        </div>
-      </section>
-
-      <!-- SLIDE 17: INCLINÓMETROS: PRINCIPIO -->
-      <section>
-        <h2>Inclinómetros</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Monitoreo de las deformaciones profundas
+        <h2>Acelerómetros: series de tiempo</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Registro en campo &bull; Manga Arriba (Girardota)
         </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-causa">📳 Causa</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Puntual</span>
+        </div>
 
-        <div class="split-2" style="margin-top: 20px; align-items: center;">
-          
+        <div style="text-align: center; margin-top: 15px;">
+          <img src="img/p04/image13.png" alt="Registro de Acelerómetro y Análisis Espectral en Manga Arriba" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+
+        <div class="callout callout-warning" style="margin-top: 14px; font-size: 0.88em;">
+          <span class="callout-icon">🌡️</span>
+          <div class="callout-content" style="font-weight: 700;">
+            Los ciclos que se repiten cada día pueden ser térmicos: hay que separar el efecto de la temperatura del movimiento real.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 22 (docx 22): INCLINÓMETROS -->
+      <section>
+        <h2>Inclinómetros: monitoreo de deformaciones profundas</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Profundidad</span>
+          <span class="sensor-tag tag-geo">Línea (perfil continuo)</span>
+        </div>
+
+        <div class="split-2" style="margin-top: 12px; align-items: center;">
           <div class="card">
-            <p style="font-size: 1.1em; line-height: 1.6;">
-              Los inclinómetros miden la <strong>deformación a través de una sonda que mide las variaciones de inclinación a lo largo de la profundidad</strong> dentro de una tubería ranurada instalada en una perforación.
+            <p style="font-size: 0.95em; line-height: 1.6;">
+              Miden la <strong>inclinación de un tubo a lo largo de la profundidad</strong>; de ahí se calcula el <strong>desplazamiento lateral</strong> acumulado respecto a la base empotrada en roca.
             </p>
-            <p style="font-size: 0.85em; color: var(--text-dim); margin-top: 15px;">
-              Componentes y esquema de la inclinometría convencional. Figuras adaptadas de Machan & Bennett (2008).
+            <div style="margin-top: 10px; font-size: 0.88em; line-height: 1.55;">
+              <p><strong>Modalidades de medición:</strong></p>
+              <ul class="bullet-list">
+                <li>Pueden ser de <strong>sonda portátil</strong> (lectura manual periódica con cable graduado).</li>
+                <li>O fijos con <strong>sensores MEMS</strong> en serie (IPI - In-Place Inclinometers) para lectura continua y automática.</li>
+              </ul>
+            </div>
+            <p style="font-size: 0.75em; color: var(--text-dim); margin-top: 12px;">
+              Componentes y esquema de la inclinometría convencional adaptados de Machan & Bennett (2008).
             </p>
           </div>
 
-          <div style="text-align: center;">
-            <img src="img/p04/image14.png" alt="Componentes Inclinómetro Machan Bennett" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <div style="display: flex; gap: 12px; justify-content: center; align-items: center;">
+            <img src="img/p04/image14.png" alt="Componentes Inclinómetro Machan Bennett" style="max-height: 340px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <img src="img/p04/image16.jpeg" alt="Lectura manual de inclinómetro en campo" style="max-height: 310px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 18: INCLINÓMETROS: VENTAJAS Y LIMITACIONES -->
+      <!-- SLIDE 23 (docx 23): INCLINÓMETROS: VENTAJAS Y LIMITACIONES -->
       <section>
-        <h2>Inclinómetros</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Monitoreo de las deformaciones profundas
-        </h3>
+        <h2>Inclinómetros: ventajas y limitaciones</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Profundidad</span>
+          <span class="sensor-tag tag-geo">Línea (perfil continuo)</span>
+        </div>
 
         <div class="split-2" style="margin-top: 25px; gap: 25px;">
-          
           <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
             <div class="card-title" style="color: var(--accent-emerald);">
               <span class="card-icon">✅</span>
               <span>Ventajas</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 12px; font-size: 1em;">
+            <ul class="bullet-list" style="margin-top: 12px; font-size: 0.95em; line-height: 1.55;">
               <li>Permiten <strong>mediciones precisas a lo largo de toda la perforación</strong>.</li>
-              <li>Permiten determinar la <strong>profundidad de las superficies de falla</strong> y la magnitud de la deformación.</li>
-              <li>Alta precisión en deformaciones horizontales acumuladas.</li>
+              <li>Permiten determinar con exactitud la <strong>profundidad de las superficies de falla</strong> y la magnitud del desplazamiento.</li>
+              <li>Alta precisión en deformaciones horizontales acumuladas milímetro a milímetro.</li>
             </ul>
           </div>
 
@@ -657,88 +855,104 @@
               <span class="card-icon">⚠️</span>
               <span>Limitaciones</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 12px; font-size: 0.92em;">
-              <li><strong>Alto costo</strong>, especialmente por las perforaciones profundas.</li>
+            <ul class="bullet-list" style="margin-top: 12px; font-size: 0.9em; line-height: 1.5;">
+              <li><strong>Alto costo</strong> de ejecución de perforaciones profundas e instalación de tubería ranurada.</li>
               <li>Mantenimiento de tubería: puede obstruirse o cizallarse.</li>
-              <li>La <strong>rotura total de la tubería imposibilita lecturas futuras</strong>.</li>
-              <li>Requiere personal especializado y logística periódica de lectura manual.</li>
+              <li>La <strong>rotura o cizallamiento total de la tubería imposibilita lecturas futuras</strong>.</li>
+              <li>Requiere personal especializado y logística periódica para lectura manual.</li>
             </ul>
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 19: INCLINÓMETROS: RESULTANTE BRISAS DEL JARDÍN -->
+      <!-- SLIDE 24 (docx 24): INCLINÓMETROS: REGISTRO EN CAMPO -->
       <section>
-        <h2>Inclinómetros: Desplazamiento Resultante</h2>
-        <h3 style="color: var(--eafit-blue); font-size: 1.2em; margin-top: 6px;">
-          Desplazamiento resultante inclinómetro Brisas del Jardín
+        <h2>Inclinómetros: registro en campo</h2>
+        <h3 style="color: var(--accent-emerald); font-size: 1.15em; margin-top: 6px;">
+          Identificación de la superficie de falla activa (señales deseadas)
         </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Profundidad</span>
+          <span class="sensor-tag tag-geo">Línea (perfil vertical)</span>
+        </div>
 
-        <div style="display: flex; gap: 15px; justify-content: center; align-items: center; margin-top: 20px;">
-          <img src="img/p04/image15.png" alt="Inclinómetro Brisas del Jardín 1" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
-          <img src="img/p04/image16.jpeg" alt="Inclinómetro Foto Campo" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
-          <img src="img/p04/image17.png" alt="Perfil Desplazamiento" style="max-height: 360px; width: auto; border-radius: 8px; box-shadow: var(--card-shadow);">
+        <div style="text-align: center; margin-top: 12px;">
+          <img src="img/p04/image18.png" alt="Perfiles Inclinométricos con Falla Definida" style="max-height: 360px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+
+        <div class="split-2" style="margin-top: 10px; gap: 15px;">
+          <div class="callout callout-danger" style="font-size: 0.82em; padding: 10px 14px;">
+            <span class="callout-icon">⚡</span>
+            <div class="callout-content">
+              <strong>Donde el perfil se quiebra (cerca de 9 m) está la superficie de falla.</strong>
+            </div>
+          </div>
+          <div class="callout callout-info" style="font-size: 0.82em; padding: 10px 14px;">
+            <span class="callout-icon">🧱</span>
+            <div class="callout-content">
+              <strong>Por encima, el bloque se mueve casi entero; por debajo no hay movimiento.</strong>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 20: INCLINÓMETROS: SEÑALES DESEADAS -->
-      <section>
-        <h2>Inclinómetros: Monitoreo profundo</h2>
-        <h3 style="color: var(--accent-emerald); font-size: 1.3em; margin-top: 8px;">
-          ¡Señales deseadas!
-        </h3>
-
-        <div style="text-align: center; margin-top: 20px;">
-          <img src="img/p04/image18.png" alt="Perfiles Inclinométricos con Falla Definida" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
-        </div>
-      </section>
-
-      <!-- SLIDE 21: TDR: PRINCIPIO Y APLICACIONES -->
+      <!-- SLIDE 25 (docx 25): TDR -->
       <section>
         <h2>TDR (Time Domain Reflectometry)</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Monitoreo de las deformaciones profundas
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Monitoreo de deformaciones profundas
         </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Profundidad</span>
+          <span class="sensor-tag tag-geo">Línea (cable continuo)</span>
+        </div>
 
-        <div class="split-2" style="margin-top: 20px; align-items: center;">
-          
-          <div>
-            <div class="card">
-              <p style="font-size: 1.05em; line-height: 1.6;">
-                Los sensores TDR (<strong>Reflectometría en el Dominio del Tiempo</strong>) miden la deformación a través del análisis del <strong>tiempo de retorno de un pulso electromagnético</strong> enviado a lo largo de una sonda o cable coaxial.
-              </p>
-
-              <div style="margin-top: 15px;">
-                <strong style="color: var(--eafit-blue);">Aplicaciones:</strong>
-                <p style="margin-top: 6px; font-size: 0.95em; line-height: 1.55;">
-                  Al registrar variaciones en la velocidad y forma del pulso debido a deformación mecánica del cable, mide desplazamientos internos. Utilizado para <strong>monitorear deslizamientos profundos, taludes y deformaciones en infraestructuras enterradas</strong>.
-                </p>
+        <div class="split-2" style="margin-top: 15px; align-items: center;">
+          <div class="card">
+            <p style="font-size: 0.95em; line-height: 1.6;">
+              Los sensores TDR <strong>detectan la profundidad donde se cizalla un cable coaxial enterrado</strong> a partir del tiempo de retorno de un pulso electromagnético, localizando la superficie de corte.
+            </p>
+            <div class="callout callout-info" style="margin-top: 12px; font-size: 0.85em;">
+              <span class="callout-icon">⚡</span>
+              <div class="callout-content">
+                Al registrar variaciones en la impedancia y forma del pulso debido a la deformación mecánica local del cable, localiza la cota de la superficie de corte con resolución de centímetros a decímetros.
               </div>
+            </div>
+            <div style="margin-top: 14px;">
+              <strong style="color: var(--eafit-blue); font-size: 0.92em;">Aplicaciones:</strong>
+              <p style="margin-top: 4px; font-size: 0.88em; line-height: 1.5;">
+                Monitoreo continuo de deslizamientos profundos, taludes viales, minería y deformaciones en infraestructuras enterradas.
+              </p>
             </div>
           </div>
 
           <div style="text-align: center;">
-            <img src="img/p04/image19.png" alt="Principio de Sensor TDR Coaxial" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+            <img src="img/p04/image19.png" alt="Principio de Sensor TDR Coaxial en Falla" style="max-height: 350px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 22: TDR: VENTAJAS Y LIMITACIONES -->
+      <!-- SLIDE 26 (docx 26): TDR: VENTAJAS Y LIMITACIONES -->
       <section>
-        <h2>TDR (Time Domain Reflectometry)</h2>
-        <div class="split-2" style="margin-top: 30px; gap: 30px;">
-          
+        <h2>TDR (Time Domain Reflectometry): ventajas y limitaciones</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Profundidad</span>
+          <span class="sensor-tag tag-geo">Línea (cable continuo)</span>
+        </div>
+
+        <div class="split-2" style="margin-top: 25px; gap: 30px;">
           <div class="card card-highlight" style="border-left: 4px solid var(--accent-emerald);">
             <div class="card-title" style="color: var(--accent-emerald);">
               <span class="card-icon">✅</span>
               <span>Ventajas</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 15px; font-size: 1em;">
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 0.95em; line-height: 1.55;">
               <li>Mediciones <strong>continuas a lo largo de toda la longitud</strong> de la sonda.</li>
               <li>Permiten determinar superficies de falla y magnitud de deformación.</li>
-              <li>Monitoreo automatizable en tiempo real.</li>
+              <li>Monitoreo continuo automatizable; el cable coaxial es más económico frente a tuberías ranuradas, aunque la perforación sigue teniendo costo importante.</li>
             </ul>
           </div>
 
@@ -747,42 +961,119 @@
               <span class="card-icon">⚠️</span>
               <span>Limitaciones</span>
             </div>
-            <ul class="bullet-list" style="margin-top: 15px; font-size: 0.95em;">
-              <li>Alto costo de perforaciones e instrumentación.</li>
-              <li>Los datos requieren un <strong>análisis técnico detallado</strong>; la interpretación puede ser compleja.</li>
-              <li>Factores como corrosión del cable pueden afectar la señal.</li>
+            <ul class="bullet-list" style="margin-top: 15px; font-size: 0.95em; line-height: 1.55;">
+              <li>Alto costo de perforaciones e instrumentación en roca o suelo duro.</li>
+              <li>Los datos requieren un <strong>análisis técnico detallado</strong>; la interpretación cuantitativa puede ser compleja.</li>
+              <li>Factores como corrosión del cable pueden afectar la señal electromagnética con los años.</li>
             </ul>
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 23: TDR EN CAMPO -->
+      <!-- SLIDE 27 (docx 27): TDR: REGISTRO EN CAMPO -->
       <section>
-        <h2>TDR: Registro en campo</h2>
-        <div style="text-align: center; margin-top: 25px;">
-          <img src="img/p04/image20.png" alt="Reflectograma TDR y Registro de Falla" style="max-height: 420px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        <h2>TDR: registro en campo</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Registro en Ancón II &bull; Copacabana
+        </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Profundidad</span>
+          <span class="sensor-tag tag-geo">Línea (cable continuo)</span>
+        </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+          <img src="img/p04/image20.png" alt="Reflectograma TDR y Registro de Falla en Ancón II" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+        </div>
+
+        <div class="callout callout-danger" style="margin-top: 14px; font-size: 0.88em;">
+          <span class="callout-icon">🔍</span>
+          <div class="callout-content" style="font-weight: 700;">
+            El salto cerca de los 22 m es la zona de corte: el movimiento se concentra en una franja delgada.
+          </div>
         </div>
       </section>
 
-      <!-- SLIDE 24: CELDAS DE DEFORMACIÓN VS CARGA -->
+      <!-- SLIDE 28 (docx 28): MEDICIÓN DISTRIBUIDA: TDR Y FIBRA ÓPTICA -->
+      <section>
+        <h2>Medición distribuida: TDR y fibra óptica</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Profundidad / Elementos</span>
+          <span class="sensor-tag tag-geo">Línea (distribuida)</span>
+        </div>
+
+        <div class="split-2" style="margin-top: 10px; gap: 20px; align-items: center;">
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card card-highlight" style="border-left: 4px solid var(--accent-rose); font-size: 0.8em; padding: 12px 16px;">
+              <strong style="color:var(--accent-rose); font-size:1.05em;">TDR (Cable Coaxial)</strong>
+              <p style="margin-top:4px;">Detecta <strong>dónde se deforma o cizalla un cable</strong>. Ideal para localizar superficies de falla en perforaciones.</p>
+              <p style="margin-top:4px; font-size:0.9em; color:var(--text-muted);">Robusto, económico y con interrogadores accesibles para monitoreo de roturas mecánicas.</p>
+            </div>
+
+            <div class="card card-highlight" style="border-left: 4px solid var(--accent-cyan); font-size: 0.8em; padding: 12px 16px;">
+              <strong style="color:var(--accent-cyan); font-size:1.05em;">Fibra Óptica Distribuida (DTS / BOTDA / DAS)</strong>
+              <p style="margin-top:4px;">Mide <strong>deformación continua (BOTDA / BOTDR, resolución en με), temperatura (DTS) y vibración/acústica (DAS)</strong> a lo largo de toda la fibra (alcance de kilómetros).</p>
+              <p style="margin-top:4px; font-size:0.9em; color:var(--text-muted);">Sensado distribuido para detectar deformaciones tempranas a lo largo de laderas enteras, túneles o tuberías.</p>
+            </div>
+          </div>
+
+          <svg class="dg" style="max-height: 360px" viewBox="0 0 620 340" role="img" aria-label="Esquema sensor distribuido en ladera">
+            <rect x="10" y="10" width="600" height="320" class="panel" rx="10"/>
+            <path d="M20,270 L180,270 L460,90 L580,90 L580,300 L20,300 Z" class="f-soil-dry"/>
+            <path d="M220,270 Q350,230 460,90" class="s-rose" style="stroke-width:4; stroke-dasharray:7 4; fill:none"/>
+            <text class="rose-txt s" x="330" y="240" style="font-size:13px;">Zona de falla</text>
+
+            <!-- Línea de fibra óptica exactamente a lo largo del perfil de ladera -->
+            <path d="M70,270 L180,270 L460,90 L560,90" style="stroke:var(--accent-cyan); stroke-width:4.5; fill:none"/>
+            <circle cx="70" cy="270" r="7" style="fill:var(--accent-cyan)"/>
+            <circle cx="560" cy="90" r="7" style="fill:var(--accent-cyan)"/>
+            <text class="s" x="550" y="78" text-anchor="end" style="font-size:12px; fill:var(--accent-cyan); font-weight:700;">Línea de fibra óptica continua</text>
+
+            <!-- Perforación vertical con TDR desde la superficie (y=206) y conexión a interrogador -->
+            <line x1="280" y1="206" x2="280" y2="295" style="stroke:var(--accent-rose); stroke-width:5"/>
+            <circle cx="280" cy="245" r="7" style="fill:var(--accent-rose)"/>
+            <text class="rose-txt s" x="270" y="280" text-anchor="end" style="font-size:12px;">TDR coaxial</text>
+            <line x1="272" y1="276" x2="279" y2="276" style="stroke:var(--accent-rose); stroke-width:1.5"/>
+            <line x1="90" y1="255" x2="280" y2="206" style="stroke:var(--accent-rose); stroke-width:1.2; stroke-dasharray:3 3"/>
+
+            <!-- Caseta interrogador -->
+            <rect x="50" y="240" width="40" height="30" rx="3" style="fill:var(--bg-card); stroke:var(--border-subtle); stroke-width:1.5"/>
+            <text class="s" x="70" y="232" text-anchor="middle" style="font-size:11px; font-weight:700;">Interrogador</text>
+          </svg>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 12px; font-size: 0.84em; text-align: center; justify-content: center;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-content" style="font-weight: 700;">
+            Ambos dan una medición continua a lo largo de una línea, no solo en un punto.
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 29 (docx 29): CELDAS: EFECTO FRENTE A CAUSA -->
       <section>
         <h2>Celdas: Deformación vs. Carga</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
-          Monitoreo de las deformaciones superficiales y esfuerzos
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Monitoreo de deformaciones y esfuerzos en elementos estructurales
         </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto (Deformación)</span>
+          <span class="sensor-tag tag-causa">🏗️ Causa (Carga)</span>
+          <span class="sensor-tag tag-lugar">En elementos</span>
+          <span class="sensor-tag tag-geo">Puntual</span>
+        </div>
 
-        <div class="split-2" style="margin-top: 20px; gap: 25px;">
-          
+        <div class="split-2" style="margin-top: 18px; gap: 25px;">
           <div class="card">
             <div class="card-title" style="color: var(--eafit-blue);">
               <span class="card-icon">📏</span>
               <span>Celda de deformación</span>
             </div>
-            <p style="font-size: 1em; margin-top: 10px;">
+            <p style="font-size: 0.95em; margin-top: 10px; line-height: 1.55;">
               Sensor que mide cambios muy pequeños en la deformación de un material mediante la <strong>variación de su resistencia eléctrica</strong> (mide qué tanto se estira o comprime un elemento).
             </p>
-            <div class="callout callout-info" style="margin-top: 15px;">
+            <div class="callout callout-info" style="margin-top: 14px;">
               <strong>Celda de deformación &rarr; Mide el EFECTO</strong>
             </div>
           </div>
@@ -792,96 +1083,163 @@
               <span class="card-icon">⚖️</span>
               <span>Celda de carga</span>
             </div>
-            <p style="font-size: 1em; margin-top: 10px;">
+            <p style="font-size: 0.95em; margin-top: 10px; line-height: 1.55;">
               <strong>Mide fuerza directamente</strong> (anclajes, pilotes, cimentaciones).
             </p>
-            <div class="callout callout-warning" style="margin-top: 15px;">
+            <div class="callout callout-warning" style="margin-top: 14px;">
               <strong>⚠️ Una celda de carga mide fuerza porque internamente mide deformación &rarr; Mide la CAUSA</strong>
             </div>
           </div>
-
         </div>
 
-        <div class="callout callout-success" style="margin-top: 20px; text-align: center; justify-content: center;">
+        <div class="callout callout-success" style="margin-top: 18px; text-align: center; justify-content: center;">
           <span class="callout-icon">💡</span>
-          <div class="callout-content" style="font-size: 1.05em; font-weight: 600;">
+          <div class="callout-content" style="font-size: 0.95em; font-weight: 700;">
             Entonces… ¿son diferentes? Sí… pero usan el <strong>MISMO principio interno</strong>.
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 25: GALGAS EXTENSOMÉTRICAS -->
+      <!-- SLIDE 30 (docx 30): CELDAS: DE LA GALGA A LA FUERZA -->
       <section>
-        <h2>Celdas: Galga Extensométrica</h2>
-        <div class="split-2" style="margin-top: 20px; align-items: center;">
-          
-          <div class="card">
-            <p style="font-size: 1.05em; line-height: 1.65;">
-              El principio se basa en el uso de una <strong>galga extensométrica (strain gauge)</strong>.
-            </p>
-            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
-              Las galgas son un <strong>hilo metálico muy delgado pegado a una pieza metálica</strong>. Tienen un diseño simple pero efectivo basado en la transferencia entre una fuerza aplicada, la deformación del material y el flujo de electricidad.
-            </p>
-          </div>
-
-          <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
-            <img src="img/p04/image21.png" alt="Galga Extensométrica Hilo Metálico" style="max-height: 160px; width: auto;">
-            <img src="img/p04/image22.png" alt="Célula de Presión Galga" style="max-height: 160px; width: auto;">
-          </div>
-
+        <h2>Celdas: de la galga a la fuerza</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto (Deformación)</span>
+          <span class="sensor-tag tag-causa">🏗️ Causa (Fuerza)</span>
+          <span class="sensor-tag tag-lugar">En elementos</span>
+          <span class="sensor-tag tag-geo">Puntual</span>
         </div>
-      </section>
 
-      <!-- SLIDE 26: LEY DE HOOKE Y CELDAS -->
-      <section>
-        <h2>Celdas: De deformación a fuerza</h2>
-        <div class="split-2" style="margin-top: 25px; align-items: center;">
-          
+        <div class="split-2" style="margin-top: 15px; align-items: center; gap: 24px;">
           <div class="card card-highlight">
-            <p style="font-size: 1.05em; line-height: 1.6;">
-              Los cambios en la resistencia eléctrica son muy pequeños, pero los equipos electrónicos pueden detectarlos con extrema sensibilidad.
+            <p style="font-size: 0.92em; line-height: 1.55;">
+              La <strong>galga es un hilo metálico pegado a una pieza</strong>; al estirarse cambia su resistencia eléctrica.
             </p>
             
-            <div style="text-align: center; font-size: 1.6em; padding: 15px; margin: 18px 0; background: rgba(0,75,133,0.08); border-radius: 8px; font-family: var(--font-mono);">
+            <div style="text-align: center; font-size: 1.4em; padding: 10px; margin: 12px 0; background: rgba(0,75,133,0.08); border-radius: 8px; font-family: var(--font-mono);">
               $$\sigma = E \cdot \varepsilon$$
             </div>
 
-            <ul class="bullet-list" style="font-size: 1.1em;">
+            <ul class="bullet-list" style="font-size: 0.88em; line-height: 1.5;">
               <li>La <strong>galga mide deformación</strong> ($\varepsilon$).</li>
-              <li>La <strong>celda de carga convierte esa deformación en fuerza / esfuerzo</strong> ($\sigma$).</li>
+              <li>La <strong>celda de carga la convierte en esfuerzo</strong> ($\sigma = E \cdot \varepsilon$) y de allí en fuerza ($F = \sigma \cdot A$).</li>
             </ul>
+
+            <div class="callout callout-warning" style="margin-top: 10px; font-size: 0.82em;">
+              <span class="callout-icon">⚠️</span>
+              <div class="callout-content">
+                Esta relación lineal es válida para el metal de la celda. El suelo, como vimos, no la sigue.
+              </div>
+            </div>
+
+            <p style="font-size: 0.8em; color: var(--text-muted); margin-top: 8px;">
+              Otro principio de medición es la <strong>cuerda vibrante</strong> (mide frecuencia de resonancia), el mismo de los piezómetros.
+            </p>
           </div>
 
-          <div style="text-align: center;">
-            <img src="img/p04/image24.png" alt="Celda de Carga en Anclaje" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+            <div style="display: flex; gap: 10px; justify-content: center;">
+              <img src="img/p04/image21.png" alt="Galga extensométrica de hilo metálico" style="max-height: 150px; width: auto; border-radius: 6px;">
+              <img src="img/p04/image22.png" alt="Célula de presión con galga" style="max-height: 150px; width: auto; border-radius: 6px;">
+            </div>
+            <img src="img/p04/image24.png" alt="Celda de carga anular en anclaje" style="max-height: 180px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 27: DRONES PARA DEFORMACIONES -->
+      <!-- SLIDE 31 (docx 31): OTROS INSTRUMENTOS COMUNES EN OBRA -->
+      <section>
+        <h2>Otros instrumentos comunes en obra</h2>
+        <p style="font-size: 0.9em; margin-top: 6px; color: var(--text-muted);">
+          Tres instrumentos esenciales para el control de esfuerzos, asentamientos y elementos estructurales.
+        </p>
+
+        <div class="grid-3" style="margin-top: 18px; gap: 20px;">
+          <div class="card card-highlight" style="border-top: 4px solid var(--eafit-blue); font-size: 0.85em; padding: 16px;">
+            <div class="card-title" style="color: var(--eafit-blue);">
+              <span class="card-icon">📉</span>
+              <span>Celda de asentamiento</span>
+            </div>
+            <div class="sensor-meta-tags" style="margin: 8px 0;">
+              <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+              <span class="sensor-tag tag-lugar">Profundidad</span>
+              <span class="sensor-tag tag-geo">Puntual</span>
+            </div>
+            <p style="margin-top: 8px; line-height: 1.5;">
+              Mide el <strong>asentamiento vertical bajo terraplenes y rellenos</strong>. Se acompaña del piezómetro (consolidación).
+            </p>
+            <div class="callout callout-info" style="margin-top: 10px; font-size: 0.88em;">
+              Permite controlar los tiempos de disipación de presión de poros y asentamiento en suelos blandos.
+            </div>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-emerald); font-size: 0.85em; padding: 16px;">
+            <div class="card-title" style="color: var(--accent-emerald);">
+              <span class="card-icon">🪢</span>
+              <span>Deformímetro de cuerda vibrante</span>
+            </div>
+            <div class="sensor-meta-tags" style="margin: 8px 0;">
+              <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+              <span class="sensor-tag tag-lugar">En elementos</span>
+              <span class="sensor-tag tag-geo">Puntual</span>
+            </div>
+            <p style="margin-top: 8px; line-height: 1.5;">
+              Mide la <strong>deformación en anclajes, pilotes y muros</strong>, con lectura remota y alta estabilidad temporal.
+            </p>
+            <div class="callout callout-info" style="margin-top: 10px; font-size: 0.88em;">
+              Ideal para monitoreo a largo plazo en estructuras de contención y túneles.
+            </div>
+          </div>
+
+          <div class="card card-highlight" style="border-top: 4px solid var(--accent-rose); font-size: 0.85em; padding: 16px;">
+            <div class="card-title" style="color: var(--accent-rose);">
+              <span class="card-icon">🗜️</span>
+              <span>Celda de presión total</span>
+            </div>
+            <div class="sensor-meta-tags" style="margin: 8px 0;">
+              <span class="sensor-tag tag-causa">🏗️ Causa (σ)</span>
+              <span class="sensor-tag tag-lugar">Profundidad / Elementos</span>
+              <span class="sensor-tag tag-geo">Puntual</span>
+            </div>
+            <p style="margin-top: 8px; line-height: 1.5;">
+              Mide el <strong>esfuerzo total (σ)</strong> en el suelo o contra una estructura. Junto con el piezómetro da el esfuerzo efectivo:
+            </p>
+            <div style="text-align:center; font-weight:700; font-size:1.15em; margin-top:6px; color:var(--text-main); font-family:var(--font-mono);">
+              $$\sigma' = \sigma - u$$
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 32 (docx 32): DRONES PARA LA DETECCIÓN DE DEFORMACIONES -->
       <section>
         <h2>Drones para la detección de deformaciones</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.2em; margin-top: 6px;">
-          Monitoreo con sensores remotos
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Monitoreo con sensores remotos locales
         </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Área (DEM / nube de puntos)</span>
+        </div>
 
-        <div class="split-2" style="margin-top: 15px; align-items: center;">
-          
+        <div class="split-2" style="margin-top: 14px; align-items: center;">
           <div>
             <div class="card">
-              <p style="font-size: 0.95em; line-height: 1.55;">
+              <p style="font-size: 0.9em; line-height: 1.55;">
                 Permite analizar cambios en el terreno utilizando tanto imágenes ópticas como <strong>modelos digitales de elevación (DEM)</strong>. Los drones equipados con cámaras de alta resolución y sensores láser permiten realizar inspecciones detalladas a nivel local con alta precisión.
               </p>
-              <p style="font-size: 0.92em; line-height: 1.5; margin-top: 8px; color: var(--text-muted);">
-                Al comparar vuelos multitemporales, es posible detectar hundimientos, agrietamientos y frentes de avance en taludes inaccesibles.
-              </p>
-            </div>
-
-            <div class="callout callout-info" style="margin-top: 12px;">
-              <span class="callout-icon">🗺️</span>
-              <div class="callout-content" style="font-size: 0.88em;">
-                <strong>Análisis entre 14 y 25 de julio de 2023:</strong> Zonas rojas indican desplazamientos negativos (hundimientos); zonas azules indican desplazamientos positivos (depositación).
+              <div class="callout callout-info" style="margin-top: 10px; font-size: 0.85em;">
+                <span class="callout-icon">📡</span>
+                <div class="callout-content">
+                  También existe el <strong>escáner láser terrestre (TLS)</strong>, que da una nube de puntos desde el suelo.
+                </div>
+              </div>
+              <div class="callout callout-warning" style="margin-top: 10px; font-size: 0.85em;">
+                <span class="callout-icon">🗺️</span>
+                <div class="callout-content">
+                  <strong>Análisis del 14 al 25 de julio de 2023:</strong> Zonas rojas indican desplazamientos negativos (hundimientos); zonas azules indican desplazamientos positivos (depositación).
+                </div>
               </div>
             </div>
           </div>
@@ -890,63 +1248,346 @@
             <img src="img/p04/image25.png" alt="DEM Diferencial Dron" style="max-height: 330px; width: auto; border-radius: 6px;">
             <img src="img/p04/image26.png" alt="Ortofoto y Deformación Dron" style="max-height: 330px; width: auto; border-radius: 6px;">
           </div>
-
         </div>
       </section>
 
-      <!-- SLIDE 28: MONITOREO SATELITAL -->
+      <!-- SLIDE 33 (docx 33): SATÉLITES Y MISIONES -->
       <section>
-        <h2>Satélites y Misiones para Deformaciones</h2>
-        <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
+        <h2>Satélites y misiones para deformaciones</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
           Monitoreo de deformaciones con sensores remotos
         </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Área (regional)</span>
+        </div>
 
-        <div class="card card-highlight" style="margin-top: 25px; padding: 25px;">
-          <p style="font-size: 1.1em; line-height: 1.65;">
+        <div class="card card-highlight" style="margin-top: 16px; padding: 20px;">
+          <p style="font-size: 1em; line-height: 1.6;">
             El <strong>monitoreo satelital de deformaciones</strong> se ha convertido en una herramienta clave en la geotecnia para el control de movimientos del terreno y estructuras a gran escala.
           </p>
-          <p style="font-size: 1.05em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
+          <p style="font-size: 0.95em; line-height: 1.6; margin-top: 8px; color: var(--text-muted);">
             Este tipo de monitoreo utiliza dos tecnologías principales: <strong>imágenes ópticas</strong> y <strong>radar de apertura sintética (SAR)</strong>. Ambas permiten medir desplazamientos y deformaciones del terreno de forma remota, sin necesidad de instalar sensores físicos en el sitio.
           </p>
         </div>
+
+        <div class="split-2" style="margin-top: 16px; gap: 20px;">
+          <div class="card" style="border-left:4px solid var(--eafit-blue); font-size:0.85em; padding:12px 16px;">
+            <strong style="color:var(--eafit-blue);">🛰️ Misiones de Radar (SAR):</strong>
+            <ul class="bullet-list" style="margin-top:6px; font-size:0.95em;">
+              <li><strong>Sentinel-1</strong> (Copernicus / ESA) &bull; Banda C, acceso abierto mundial</li>
+              <li><strong>SAOCOM</strong> (CONAE) &bull; Banda L, penetración en cobertura vegetal</li>
+              <li><strong>TerraSAR-X / PAZ</strong> &bull; Banda X, muy alta resolución submétrica</li>
+            </ul>
+          </div>
+
+          <div class="card" style="border-left:4px solid var(--accent-cyan); font-size:0.85em; padding:12px 16px;">
+            <strong style="color:var(--accent-cyan);">📷 Misiones Ópticas:</strong>
+            <ul class="bullet-list" style="margin-top:6px; font-size:0.95em;">
+              <li><strong>Sentinel-2</strong> (Copernicus / ESA) &bull; Multiespectral, 10 m de píxel</li>
+              <li><strong>Landsat 8/9</strong> (NASA / USGS) &bull; Serie histórica continua</li>
+              <li><strong>PlanetScope</strong> &bull; Constelación de alta revisita diaria</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
-      <!-- SLIDE 29: SATÉLITES: IMÁGENES ÓPTICAS -->
+      <!-- SLIDE 34 (docx 34): IMÁGENES ÓPTICAS -->
       <section>
-        <h2>Monitoreo con Imágenes Ópticas</h2>
-        <div class="split-2" style="margin-top: 20px; align-items: center;">
-          
-          <div class="card">
-            <p style="font-size: 1.05em; line-height: 1.6;">
-              Las imágenes ópticas satelitales proporcionan una vista detallada de la superficie terrestre y permiten <strong>detectar deformaciones mediante el análisis de diferencias entre imágenes tomadas en diferentes momentos</strong>.
-            </p>
-            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px; color: var(--text-muted);">
-              Comparando las posiciones de puntos específicos en imágenes capturadas en fechas distintas, se pueden identificar desplazamientos horizontales y deformaciones superficiales. También permiten realizar <strong>análisis de cambios de coberturas</strong>.
-            </p>
+        <h2>Monitoreo con imágenes ópticas satelitales</h2>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Área (regional)</span>
+        </div>
+
+        <div class="split-2" style="margin-top: 15px; align-items: center;">
+          <div>
+            <div class="card">
+              <p style="font-size: 0.95em; line-height: 1.6;">
+                Las imágenes ópticas satelitales proporcionan una vista detallada de la superficie terrestre y permiten <strong>detectar deformaciones mediante el análisis de diferencias entre imágenes tomadas en diferentes momentos</strong>.
+              </p>
+              <p style="font-size: 0.9em; line-height: 1.55; margin-top: 10px; color: var(--text-muted);">
+                Comparando las posiciones de puntos específicos en imágenes capturadas en fechas distintas, se pueden identificar desplazamientos horizontales y deformaciones superficiales. También permiten realizar análisis de cambios de coberturas.
+              </p>
+              <div class="callout callout-warning" style="margin-top: 12px; font-size: 0.85em;">
+                <span class="callout-icon">🌿</span>
+                <div class="callout-content" style="font-weight: 700;">
+                  El NDVI mide vegetación, no desplazamiento: los cambios de cobertura son un indicio indirecto.
+                </div>
+              </div>
+            </div>
           </div>
 
           <div style="text-align: center;">
             <img src="img/p04/image27.png" alt="Comparación Óptica Satelital" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
           </div>
-
         </div>
       </section>
 
+      <!-- SLIDE 35 (docx 35): InSAR -->
+      <section>
+        <h2>Monitoreo con Interferometría de Radar (InSAR)</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 6px;">
+          Medición milimétrica desde el espacio
+        </h3>
+        <div class="sensor-meta-tags">
+          <span class="sensor-tag tag-efecto">↔️ Efecto</span>
+          <span class="sensor-tag tag-lugar">Superficie</span>
+          <span class="sensor-tag tag-geo">Área (regional)</span>
+        </div>
 
-      <!-- NEW:lecturas -->
+        <div class="split-2" style="margin-top: 15px; align-items: center;">
+          <div class="card card-highlight">
+            <p style="font-size: 0.95em; line-height: 1.6;">
+              La <strong>Interferometría SAR (InSAR)</strong> compara la fase de señales de radar multitemporales capturadas en sucesivos pasos orbitales para medir deformaciones del terreno con <strong>precisión milimétrica</strong>.
+            </p>
+            <div class="callout callout-info" style="margin-top: 12px; font-size: 0.82em;">
+              <span class="callout-icon">🛰️</span>
+              <div class="callout-content">
+                Mide el desplazamiento en la <strong>línea de vista del satélite (LOS)</strong>; combinando órbitas ascendente y descendente se estima el vertical y el horizontal.
+              </div>
+            </div>
+            <div class="callout callout-warning" style="margin-top: 10px; font-size: 0.82em;">
+              <span class="callout-icon">⚠️</span>
+              <div class="callout-content">
+                En laderas muy empinadas y con mucha vegetación puede perderse la señal.
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <img src="img/p04/image28.png" alt="Interferograma InSAR Desplazamientos Milimétricos" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 36 (docx 36): QUÉ INSTRUMENTO USO -->
+      <section>
+        <h2>¿Qué instrumento uso?</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 4px;">
+          Cada sensor cubre una parte del problema
+        </h3>
+
+        <div class="split-2-1" style="margin-top: 8px; gap: 20px; align-items: center;">
+          <svg class="dg" style="max-height: 450px" viewBox="0 0 1100 500" role="img" aria-label="Mapa de instrumentos según profundidad y cobertura">
+            <!-- Banner conceptual de exclusión: Celdas de carga y esfuerzo (fuera de la cuadrícula de deformación) -->
+            <rect x="100" y="8" width="970" height="48" rx="6" style="fill:rgba(244,63,94,0.12); stroke:var(--accent-rose); stroke-width:1.5"/>
+            <text class="b s" x="120" y="27" style="fill:var(--accent-rose); font-size:13px;">⚖️ Nota conceptual sobre Celdas de carga y Presión total:</text>
+            <text class="s" x="120" y="45" style="fill:var(--text-body); font-size:12px;">Miden fuerza o esfuerzo (CAUSA), no deformación directa del terreno. Por eso quedan fuera de este mapa.</text>
+
+            <!-- Cuadrícula de fondo -->
+            <rect x="100" y="65" width="970" height="375" class="panel" style="fill-opacity: 0.35"/>
+            <line class="grid" x1="420" y1="65" x2="420" y2="440"/>
+            <line class="grid" x1="740" y1="65" x2="740" y2="440"/>
+            <line class="grid" x1="100" y1="185" x2="1070" y2="185"/>
+            <line class="grid" x1="100" y1="310" x2="1070" y2="310"/>
+
+            <!-- FILA 1: COBERTURA ÁREA / REGIONAL (y: 65 - 185) -->
+            <!-- Superficie / Área -->
+            <rect x="120" y="78" width="175" height="44" rx="8" style="fill:#b91c1c; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="207" y="96" text-anchor="middle" style="font-size:13px; font-weight:800;">Satélites orbitales</text>
+            <text class="w" x="207" y="112" text-anchor="middle" style="font-size:12px; font-weight:700;">Óptico &amp; InSAR</text>
+
+            <rect x="120" y="130" width="175" height="44" rx="8" style="fill:#c2410c; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="207" y="148" text-anchor="middle" style="font-size:13px; font-weight:800;">Drones (UAV) /</text>
+            <text class="w" x="207" y="164" text-anchor="middle" style="font-size:12px; font-weight:700;">LiDAR terrestre (TLS)</text>
+
+            <!-- FILA 2: COBERTURA LÍNEA CONTINUA (y: 185 - 310) -->
+            <!-- Elementos / Línea -->
+            <rect x="500" y="225" width="195" height="46" rx="8" style="fill:#0284c7; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="597" y="244" text-anchor="middle" style="font-size:13px; font-weight:800;">Fibra óptica distribuida</text>
+            <text class="w" x="597" y="260" text-anchor="middle" style="font-size:12px; font-weight:700;">(elementos y terreno)</text>
+
+            <!-- Profundidad / Línea -->
+            <rect x="760" y="225" width="140" height="46" rx="8" style="fill:#6d28d9; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="830" y="244" text-anchor="middle" style="font-size:13px; font-weight:800;">TDR coaxial</text>
+            <text class="w" x="830" y="260" text-anchor="middle" style="font-size:12px; font-weight:700;">(cable en pozo)</text>
+
+            <rect x="915" y="225" width="145" height="46" rx="8" style="fill:#7e22ce; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="987" y="244" text-anchor="middle" style="font-size:13px; font-weight:800;">Inclinómetro</text>
+            <text class="w" x="987" y="260" text-anchor="middle" style="font-size:12px; font-weight:700;">(perfil continuo)</text>
+
+            <!-- FILA 3: COBERTURA PUNTUAL (y: 310 - 440) -->
+            <!-- Superficie / Puntual -->
+            <rect x="115" y="325" width="145" height="44" rx="8" style="fill:#1d4ed8; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="187" y="343" text-anchor="middle" style="font-size:13px; font-weight:800;">GNSS /</text>
+            <text class="w" x="187" y="359" text-anchor="middle" style="font-size:12px; font-weight:700;">Estación total</text>
+
+            <rect x="115" y="380" width="145" height="44" rx="8" style="fill:#0369a1; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="187" y="398" text-anchor="middle" style="font-size:13px; font-weight:800;">Extensómetro /</text>
+            <text class="w" x="187" y="414" text-anchor="middle" style="font-size:12px; font-weight:700;">Fisurómetro</text>
+
+            <rect x="270" y="352" width="135" height="44" rx="8" style="fill:#0f766e; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="337" y="370" text-anchor="middle" style="font-size:13px; font-weight:800;">Acelerómetro</text>
+            <text class="w" x="337" y="386" text-anchor="middle" style="font-size:12px; font-weight:700;">MEMS (ejes)</text>
+
+            <!-- Elementos / Puntual -->
+            <rect x="520" y="352" width="165" height="44" rx="8" style="fill:#4338ca; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="602" y="370" text-anchor="middle" style="font-size:13px; font-weight:800;">Deformímetro</text>
+            <text class="w" x="602" y="386" text-anchor="middle" style="font-size:12px; font-weight:700;">cuerda vibrante</text>
+
+            <!-- Profundidad / Puntual -->
+            <rect x="835" y="352" width="155" height="44" rx="8" style="fill:#047857; stroke:#ffffff; stroke-width:1.5;"/>
+            <text class="w" x="912" y="370" text-anchor="middle" style="font-size:13px; font-weight:800;">Celda de</text>
+            <text class="w" x="912" y="386" text-anchor="middle" style="font-size:12px; font-weight:700;">asentamiento</text>
+
+            <!-- Ejes -->
+            <text class="s" x="260" y="462" text-anchor="middle" style="font-weight:700;">Superficie</text>
+            <text class="s" x="580" y="462" text-anchor="middle" style="font-weight:700;">Elementos / Estructuras</text>
+            <text class="s" x="900" y="462" text-anchor="middle" style="font-weight:700;">Profundidad (Subsuelo)</text>
+            <text class="b m" x="585" y="488" text-anchor="middle">Ubicación / Profundidad de la medición</text>
+
+            <text class="b m" transform="translate(25,250) rotate(-90)" text-anchor="middle">Cobertura espacial (Geometría)</text>
+            <text class="s" x="90" y="125" text-anchor="end" style="font-weight:700;">Área</text>
+            <text class="s" x="90" y="250" text-anchor="end" style="font-weight:700;">Línea</text>
+            <text class="s" x="90" y="378" text-anchor="end" style="font-weight:700;">Puntual</text>
+          </svg>
+
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <table class="data-table" style="font-size:0.60em; line-height:1.35;">
+              <thead>
+                <tr><th>Criterio</th><th>En sitio (campo)</th><th>Remoto (drones / satélites)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Cobertura</strong></td><td>Puntual / líneas (localizada)</td><td>Área amplia / regional (ladera entera)</td></tr>
+                <tr><td><strong>Frecuencia</strong></td><td>Continua (tiempo real) o periódica</td><td>Periódica (días según órbita o vuelo)</td></tr>
+                <tr><td><strong>Profundidad</strong></td><td>Superficie y subsuelo (decenas de m)</td><td>Estrictamente superficial</td></tr>
+                <tr><td><strong>Precisión</strong></td><td>Milimétrica y submilimétrica</td><td>Milimétrica (InSAR) / Centimétrica (UAV)</td></tr>
+                <tr><td><strong>Ideal para</strong></td><td>Saber <em>cuánto, a qué profundidad y qué tan rápido</em></td><td>Saber <em>dónde</em> se mueve el terreno</td></tr>
+              </tbody>
+            </table>
+
+            <div class="callout callout-info" style="font-size: 0.70em; padding: 8px 10px;">
+              <span class="callout-icon">🧩</span>
+              <div class="callout-content" style="font-weight: 700;">
+                No hay un instrumento perfecto: los remotos dan cobertura para saber dónde se mueve el terreno y los de campo dan precisión para saber cuánto y a qué profundidad.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 37 (docx 37): COMBINAR PARA ALERTAR -->
+      <section>
+        <h2>Combinar para alertar</h2>
+        <h3 style="color: var(--eafit-yellow-text); font-size: 1.15em; margin-top: 4px;">
+          Cuatro pasos en secuencia
+        </h3>
+
+        <div class="split-2" style="margin-top: 10px; gap: 20px; align-items: center;">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div class="step-card" style="border-left: 4px solid var(--accent-cyan); font-size:0.75em; padding:10px 14px;">
+              <strong style="color:var(--accent-cyan); font-size:1.1em;">Remoto: ¿Dónde se mueve?</strong>
+              <p style="margin-top:3px;">(InSAR, drones).</p>
+            </div>
+
+            <div class="step-card" style="border-left: 4px solid var(--eafit-blue); font-size:0.75em; padding:10px 14px;">
+              <strong style="color:var(--eafit-blue); font-size:1.1em;">En sitio: ¿Cuánto, a qué profundidad y qué tan rápido?</strong>
+              <p style="margin-top:3px;">(inclinómetro, extensómetro, TDR, GNSS).</p>
+            </div>
+
+            <div class="step-card" style="border-left: 4px solid var(--accent-amber); font-size:0.75em; padding:10px 14px;">
+              <strong style="color:var(--accent-amber); font-size:1.1em;">Causas: ¿Por qué?</strong>
+              <p style="margin-top:3px;">(pluviómetro, piezómetro, celdas, acelerómetros).</p>
+            </div>
+
+            <div class="step-card" style="border-left: 4px solid var(--accent-rose); font-size:0.75em; padding:10px 14px;">
+              <strong style="color:var(--accent-rose); font-size:1.1em;">Decisión: Velocidad y aceleración frente a umbrales</strong>
+              <p style="margin-top:3px;">(paso de la etapa 2 a la 3 de la fluencia lenta).</p>
+            </div>
+          </div>
+
+          <svg class="dg" style="max-height: 380px" viewBox="0 0 620 370" role="img" aria-label="Cuatro capas integradas de monitoreo en ladera">
+            <rect x="10" y="10" width="600" height="350" class="panel" rx="10"/>
+            <!-- Capa 1: Remoto cielo -->
+            <rect x="20" y="16" width="580" height="46" rx="6" style="fill:rgba(56,189,248,0.12); stroke:var(--accent-cyan); stroke-width:1"/>
+            <text class="b s" x="35" y="34" style="fill:var(--accent-cyan); font-size:13px;">1. REMOTO: ¿Dónde se mueve?</text>
+            <text class="s" x="35" y="50" style="font-size:12px; fill:var(--text-body);">InSAR &bull; Drones (cobertura espacial de ladera)</text>
+
+            <!-- Ladera física -->
+            <path d="M20,290 L160,290 L450,90 L580,90 L580,310 L20,310 Z" class="f-soil-dry"/>
+            <path d="M220,290 Q340,240 450,90" class="s-rose" style="stroke-width:4; stroke-dasharray:6 4; fill:none"/>
+            <text class="rose-txt s" x="350" y="248" style="font-size:12px;">Superficie de falla</text>
+
+            <!-- Capa 3: Causas (en espacio libre a la izquierda con línea guía hacia piezómetro en ladera) -->
+            <rect x="25" y="105" width="230" height="32" rx="4" style="fill:var(--bg-card); stroke:var(--accent-amber); stroke-width:1.2"/>
+            <text class="b s" x="35" y="126" style="font-size:11.5px; fill:var(--accent-amber);">3. CAUSAS: Piezómetro (u) &bull; Lluvia</text>
+            <text class="s" x="260" y="100" style="font-size:13px;">🌧️</text>
+            <!-- Piezómetro en sondeo en ladera -->
+            <line x1="390" y1="131" x2="390" y2="164" style="stroke:var(--accent-amber); stroke-width:3; stroke-dasharray:4 2"/>
+            <circle cx="390" cy="164" r="5" style="fill:var(--accent-amber)"/>
+            <rect x="402" y="155" width="84" height="18" rx="3" style="fill:var(--bg-card); stroke:var(--accent-amber); stroke-width:0.8"/>
+            <text class="s" x="444" y="168" text-anchor="middle" style="font-size:10px; fill:var(--accent-amber); font-weight:700;">[u] Piezómetro</text>
+            <line x1="255" y1="121" x2="386" y2="131" style="stroke:var(--accent-amber); stroke-width:1.2; stroke-dasharray:3 3"/>
+
+            <!-- Capa 2: Sensores en sitio (superficie GNSS e inclinómetro en profundidad) -->
+            <line x1="435" y1="100" x2="435" y2="82" class="ax" style="stroke-width:2.5"/>
+            <circle cx="435" cy="79" r="5" style="fill:var(--eafit-blue)"/>
+            <text class="s" x="446" y="82" style="font-size:11px; fill:var(--eafit-blue); font-weight:700;">GNSS</text>
+
+            <rect x="25" y="180" width="190" height="30" rx="4" style="fill:var(--bg-card); stroke:var(--eafit-blue); stroke-width:1.2"/>
+            <text class="b s" x="35" y="200" style="font-size:11.5px; fill:var(--eafit-blue);">2. EN SITIO: Inclinómetro</text>
+            <!-- Tubería de inclinómetro en ladera -->
+            <line x1="320" y1="180" x2="320" y2="280" style="stroke:var(--eafit-blue); stroke-width:4"/>
+            <line x1="215" y1="195" x2="316" y2="195" style="stroke:var(--eafit-blue); stroke-width:1.2; stroke-dasharray:3 3"/>
+
+            <!-- Capa 4: Decisión umbrales -->
+            <rect x="20" y="315" width="580" height="38" rx="6" style="fill:rgba(244,63,94,0.15); stroke:var(--accent-rose); stroke-width:1"/>
+            <text class="b s" x="35" y="338" style="fill:var(--accent-rose); font-size:11.5px;">4. DECISIÓN: Alerta por aceleración</text>
+            <text class="s" x="310" y="338" style="font-size:11.5px; fill:var(--text-body);">Paso de etapa 2 a 3 (fluencia lenta)</text>
+          </svg>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 10px; font-size: 0.88em; text-align: center; justify-content: center;">
+          <span class="callout-icon">⚡</span>
+          <div class="callout-content" style="font-weight: 700;">
+            El agua y las cargas cambian el equilibrio, el suelo se deforma, el desplazamiento y su velocidad alertan.
+          </div>
+        </div>
+        <div style="font-size: 0.70em; color: var(--text-muted); text-align: right; margin-top: 4px;">
+          * Los umbrales los define cada proyecto; no hay valores genéricos.
+        </div>
+      </section>
+
+      <!-- SLIDE 38 (docx 38): LECTURAS PARA PROFUNDIZAR -->
       <section>
         <h2>Lecturas para profundizar</h2>
         <h3 style="color: var(--eafit-yellow-text); font-size: 1.25em; margin-top: 8px;">
           Complementan este módulo
         </h3>
 
-        <div class="split-2-1" style="margin-top: 14px; align-items: center; gap: 30px;">
-
-          <div class="reading-list">
-          <div class="reading-row"><span class="lv esencial">⭐ Esencial</span><div class="rd"><strong>Casagli et al. (2023)</strong> · Panorama actual de los sensores remotos para deslizamientos.<span class="how">↳ Marco general para «Satélites y misiones», «Drones» e InSAR: qué técnica sirve para detectar, cuál para monitorear y cuál para predecir.</span></div></div>
-          <div class="reading-row"><span class="lv esencial">⭐ Esencial</span><div class="rd"><strong>Carlà et al. (2017)</strong> · Guía práctica del método de la velocidad inversa y de cómo fijar alarmas.<span class="how">↳ Es la base de «Fluencia lenta: las tres etapas» y de la diapositiva de velocidad inversa del módulo 5: cómo suavizar los datos y cómo fijar niveles…</span></div></div>
-          <div class="reading-row"><span class="lv">Complementaria</span><div class="rd"><strong>Carlà et al. (2019)</strong> · Sentinel-1 mostró aceleración días o semanas antes de tres fallas catastróficas.<span class="how">↳ Une InSAR con la velocidad inversa: tres casos en que la aceleración era visible desde el espacio antes de la falla.</span></div></div>
-          <div class="reading-row"><span class="lv">Complementaria</span><div class="rd"><strong>Solari et al. (2020)</strong> · Más de 250 trabajos de InSAR en deslizamientos, resumidos.<span class="how">↳ Complementa la diapositiva de InSAR con un balance de aplicaciones reales: qué se detecta bien y qué no.</span></div></div>
+        <div class="split-2-1" style="margin-top: 10px; align-items: center; gap: 20px;">
+          <div class="reading-list" style="font-size: 0.88em;">
+            <div class="reading-row">
+              <span class="lv esencial">⭐ Esencial</span>
+              <div class="rd">
+                <strong>Casagli et al. (2023)</strong> &bull; Panorama actual de los sensores remotos para deslizamientos.
+                <span class="how">↳ Marco general para «Satélites y misiones», «Drones» e InSAR: qué técnica sirve para detectar, cuál para monitorear y cuál para predecir.</span>
+              </div>
+            </div>
+            <div class="reading-row">
+              <span class="lv esencial">⭐ Esencial</span>
+              <div class="rd">
+                <strong>Carlà et al. (2017)</strong> &bull; Guía práctica del método de la velocidad inversa y de cómo fijar alarmas.
+                <span class="how">↳ Es la base de «Fluencia lenta: las tres etapas» y de la diapositiva de velocidad inversa del módulo 5: cómo suavizar los datos y cómo fijar niveles…</span>
+              </div>
+            </div>
+            <div class="reading-row">
+              <span class="lv">Complementaria</span>
+              <div class="rd">
+                <strong>Carlà et al. (2019)</strong> &bull; Sentinel-1 mostró aceleración días o semanas antes de tres fallas catastróficas.
+                <span class="how">↳ Une InSAR con la velocidad inversa: tres casos en que la aceleración era visible desde el espacio antes de la falla.</span>
+              </div>
+            </div>
+            <div class="reading-row">
+              <span class="lv">Complementaria</span>
+              <div class="rd">
+                <strong>Solari et al. (2020)</strong> &bull; Más de 250 trabajos de InSAR en deslizamientos, resumidos.
+                <span class="how">↳ Complementa la diapositiva de InSAR con un balance de aplicaciones reales: qué se detecta bien y qué no.</span>
+              </div>
+            </div>
           </div>
 
           <div class="qr-card">
@@ -955,41 +1596,16 @@
             <span>Todas las lecturas del módulo, con PDF, preguntas guía y su relación con estas diapositivas</span>
             <code>federicogmz.github.io/instrumentacion-geotecnica/lecturas.html#m4</code>
           </div>
-
         </div>
-        <div class="callout callout-info" style="margin-top: 14px;">
-          <span class="callout-icon">📚</span>
-          <div class="callout-content" style="font-weight: 600;">Antes de la próxima clase: lee las <strong>⭐ esenciales</strong> y responde la <strong>pregunta guía</strong> de cada una.</div>
-        </div>
-      </section>
 
-      <!-- SLIDE 30: SATÉLITES: INTERFEROMETRÍA DE RADAR (InSAR) -->
-      <section class="slide-cover">
-        <div class="cover-badge">Módulo 04 &bull; Teledetección Avanzada</div>
-        <h2 style="font-size: 2em; margin-top: 15px;">
-          Monitoreo con Interferometría de Radar (InSAR)
-        </h2>
-
-        <div class="split-2" style="margin-top: 25px; align-items: center; text-align: left;">
-          
-          <div class="card card-highlight">
-            <p style="font-size: 1.05em; line-height: 1.6;">
-              El <strong>SAR (Synthetic Aperture Radar)</strong> es una tecnología avanzada que mide deformaciones de la superficie terrestre con <strong>precisión milimétrica</strong>.
-            </p>
-            <p style="font-size: 1em; line-height: 1.6; margin-top: 12px;">
-              El método más común, conocido como <strong>Interferometría SAR (InSAR)</strong>, compara fases de señales de radar capturadas en diferentes momentos para identificar movimientos verticales y en la línea de vista (LOS) del satélite.
-            </p>
-            <div style="margin-top: 20px;">
-              <a href="05_analisis_datos_umbrales.html" class="header-btn" style="display: inline-flex; font-size: 1em; padding: 10px 20px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none;">
-                <span>📊</span> Ir al Módulo 5 &bull; Análisis de Datos
-              </a>
-            </div>
+        <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+          <div class="callout callout-info" style="margin: 0; flex: 1;">
+            <span class="callout-icon">📚</span>
+            <div class="callout-content" style="font-weight: 600; font-size: 0.88em;">Antes de la próxima clase: lee las <strong>⭐ esenciales</strong> y responde la <strong>pregunta guía</strong> de cada una.</div>
           </div>
-
-          <div style="text-align: center;">
-            <img src="img/p04/image28.png" alt="Interferograma InSAR Desplazamientos Milimétricos" style="max-height: 380px; width: auto; object-fit: contain; border-radius: 8px; box-shadow: var(--card-shadow);">
-          </div>
-
+          <a href="05_analisis_datos_umbrales.html" class="header-btn" style="display: inline-flex; font-size: 0.82em; padding: 8px 16px; background: var(--eafit-blue); color: white; border-radius: 8px; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
+            <span>📊</span> Ir al Módulo 5 &bull; Análisis de Datos
+          </a>
         </div>
       </section>
 

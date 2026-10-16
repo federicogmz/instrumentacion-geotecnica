@@ -277,3 +277,77 @@
 .qr-card strong { font-size: 0.9em; color: #002855; }
 .qr-card span { font-size: 0.62em; line-height: 1.3; color: #334155; }
 .qr-card code { font-family: var(--font-mono); font-size: 0.5em; color: #004B85; word-break: break-all; }
+
+/* ---------- Etiquetas de clasificación de sensores (hilo conductor) ---------- */
+.sensor-meta-tags {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 4px 0 14px 0;
+  flex-wrap: wrap;
+}
+.sensor-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.60em;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-body);
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+}
+.sensor-tag.tag-efecto {
+  border-color: rgba(2, 132, 199, 0.45);
+  color: #0369a1;
+  background: rgba(2, 132, 199, 0.10);
+}
+[data-theme="dark"] .sensor-tag.tag-efecto {
+  border-color: rgba(56, 189, 248, 0.55);
+  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.14);
+}
+
+.sensor-tag.tag-causa {
+  border-color: rgba(225, 29, 72, 0.45);
+  color: #be123c;
+  background: rgba(225, 29, 72, 0.10);
+}
+[data-theme="dark"] .sensor-tag.tag-causa {
+  border-color: rgba(244, 63, 94, 0.55);
+  color: var(--accent-rose);
+  background: rgba(244, 63, 94, 0.14);
+}
+
+.sensor-tag.tag-lugar {
+  border-color: rgba(217, 119, 6, 0.45);
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.12);
+}
+[data-theme="dark"] .sensor-tag.tag-lugar {
+  border-color: rgba(251, 191, 36, 0.55);
+  color: var(--accent-amber);
+  background: rgba(251, 191, 36, 0.14);
+}
+
+.sensor-tag.tag-geo {
+  border-color: rgba(5, 150, 105, 0.45);
+  color: #047857;
+  background: rgba(16, 185, 129, 0.10);
+}
+[data-theme="dark"] .sensor-tag.tag-geo {
+  border-color: rgba(16, 185, 129, 0.55);
+  color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.14);
+}
+
+.step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: var(--card-shadow);
+}
