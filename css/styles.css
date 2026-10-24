@@ -5262,6 +5262,141 @@ code, pre, kbd, samp, .CodeMirror, .CodeMirror *, [class*="code"], [class*="mono
 [data-theme="light"] .md-code-footer { background: #1e293b; }
 
 /* -------------------------------------------------------------
+   WIDGET 3.1: REMUESTREO TEMPORAL (.resample()) & BOTONES DE AGREGACIÓN
+   ------------------------------------------------------------- */
+.rf-freq-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.65rem 0.85rem;
+  margin: 0.85rem 0 0.65rem 0;
+}
+
+[data-theme="light"] .rf-freq-toolbar {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.rf-toolbar-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.rf-freq-group {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  background: rgba(9, 13, 22, 0.45);
+  padding: 0.3rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+[data-theme="light"] .rf-freq-group {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+.rf-freq-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .rf-freq-btn {
+  color: #475569;
+}
+
+.rf-freq-btn:hover {
+  color: var(--text-main);
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.28);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .rf-freq-btn:hover {
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.7);
+  border-color: #94a3b8;
+}
+
+.rf-freq-btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+.rf-freq-btn.active {
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  color: #ffffff;
+  border-color: #38bdf8;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.38);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .rf-freq-btn.active {
+  background: linear-gradient(135deg, #0284c7 0%, #1d4ed8 100%);
+  color: #ffffff;
+  border-color: #0284c7;
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);
+}
+
+.rf-code-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.38rem;
+  border-radius: 4px;
+  background: rgba(148, 163, 184, 0.16);
+  color: var(--accent-cyan);
+}
+
+[data-theme="light"] .rf-code-tag {
+  background: rgba(15, 23, 42, 0.08);
+  color: #0369a1;
+}
+
+.rf-freq-btn.active .rf-code-tag {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.rf-scale-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-size: 0.77rem;
+  color: var(--text-muted);
+  background: rgba(56, 189, 248, 0.07);
+  border-left: 3px solid #0284c7;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 0.45rem 0.75rem;
+  margin-bottom: 0.65rem;
+}
+
+/* -------------------------------------------------------------
    WIDGET 3.2: VENTANA MÓVIL (ROLLING) & LLUVIA ANTECEDENTE
    ------------------------------------------------------------- */
 .wb-rolling-schematic {

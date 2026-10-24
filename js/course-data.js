@@ -1355,45 +1355,194 @@ plt.show()`,
   modulo3: {
     id: "modulo3",
     title: "Módulo 3: Análisis Temporal y Feature Engineering",
-    subtitle: "Interpolación, Remuestreo, Descomposición, Matrices de Correlación y Lags",
+    subtitle: "Remuestreo Temporal, Interpolación, Ventanas Móviles, Descomposición, Matrices de Correlación y Lags",
     lessons: [
       {
         id: "m3_l1",
-        title: "3.1 Diagnóstico de Datos Faltantes e Interpolación Lineal",
+        title: "3.1 Remuestreo Temporal (resample), Consolidación de Lluvia (p) y Agregaciones Físicas",
         concept: `
           <div class="theory-narrative-bridge">
             <div class="bridge-tag">🔗 Conexión Pedagógica con los Módulos 1 y 2</div>
             <p style="margin: 0 0 0.5rem 0;">
-              En los módulos anteriores aprendiste a consolidar la matriz maestra <code>df_ancon</code>, limpiar códigos centinela (como <code>-999.0</code>), generar paneles sincronizados con <code>sharex=True</code> y trazar semáforos de alerta tanto con Tukey como con la aproximación Normal.
+              En el Módulo 1 concatenamos los archivos crudos de los instrumentos con <code>pd.concat(..., axis=1)</code>. Sin embargo, al unir sensores con cadencias de muestreo distintas —extensómetro cada <strong>1 minuto</strong> (<code>DE1</code>), pluviómetro y humedad cada <strong>5 minutos</strong> (<code>p1</code>, <code>p2</code>, <code>sh1</code>) y acelerómetro cada <strong>1 hora</strong> (<code>C1</code>, <code>B1</code>, <code>Tem_1</code>)— el DataFrame resultante <strong>no tiene frecuencia definida (<code>freq=None</code>) y presenta intervalos temporales variables</strong>.
             </p>
             <p style="margin: 0 0 0.5rem 0;">
-              Ahora iniciamos el <strong>Módulo 3: Análisis Temporal y Feature Engineering</strong>. En la modelación cuantitativa de taludes (cálculo de cinemática, ventanas móviles, descomposición y modelos predictivos), los algoritmos <strong>exigen una condición rigurosa: un paso temporal constante e ininterrumpido ($\\Delta t$ regular)</strong>.
+              Por ello, <strong>antes de hablar de datos faltantes (<code>NaN</code>) e interpolación</strong>, el primer paso obligatorio del preprocesamiento temporal es:
             </p>
+            <ol style="margin: 0.35rem 0 0.65rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
+              <li><strong>Consolidar <code>p1</code> y <code>p2</code> en una única variable <code>p</code>:</strong> Tomamos el valor máximo entre ambos balancines (<code>df['p'] = df[['p1', 'p2']].max(axis=1)</code>) para continuar todo el análisis con una sola variable de precipitación (<code>p</code>).</li>
+              <li><strong>Regularizar la frecuencia con <code>.resample('5min')</code>:</strong> Pasamos todo el DataFrame al mismo paso temporal uniforme de <strong>5 minutos</strong> (y posteriormente a escalas diarias <code>'1D'</code>, semanales <code>'1W'</code> o mensuales <code>'1ME'</code>) aplicando a cada sensor su función física de agregación.</li>
+            </ol>
+            <p style="margin: 0 0 0.35rem 0;">
+              En geotecnia, <strong>cada variable física exige una operación matemática coherente</strong> al agregarse en el tiempo:
+            </p>
+            <ul style="margin: 0.25rem 0 0.25rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
+              <li><strong>Precipitación consolidada (<code>p</code>):</strong> Variable de flujo / volumen. Se agrega con <code>sum()</code> para conservar el total de lluvia caída en el intervalo.</li>
+              <li><strong>Humedad e Inclinación (<code>sh1</code>, <code>C1</code>, <code>B1</code>, <code>Tem_1</code>):</strong> Variables de estado o condición. Se agregan con <code>mean()</code> para representar el estado promedio del periodo.</li>
+              <li><strong>Deformación de Extensómetros (<code>DE1</code>):</strong> Variable cinemática incremental. Se agrega con <code>sum()</code> para obtener el <strong>acumulado de deformaciones</strong> registradas durante el intervalo.</li>
+            </ul>
+          </div>
+
+          <!-- Contenedor Interactivo de Remuestreo Temporal -->
+          <div id="resampling-flow-container" style="margin: 1.25rem 0;"></div>
+
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Consolidación de Precipitación (<code>p</code>) y Paso Uniforme a 5 Minutos</h4>
+          <p>
+            A partir del DataFrame concatenado de intervalos variables (<code>df_crudo</code>), consolidamos <code>p</code> con el máximo de <code>p1</code> y <code>p2</code> y regularizamos toda la matriz a <code>'5min'</code> (y luego a escalas mayores como <code>'1D'</code> y <code>'1W'</code>):
+          </p>
+          <pre class="trace-pre"><code># 1. Consolidar p1 y p2 en 'p' con el máximo para continuar con una sola variable de lluvia:
+df_crudo['p'] = df_crudo[['p1', 'p2']].max(axis=1)
+
+# 2. Pasar el DataFrame de intervalos variables (freq=None) al mismo paso de 5 minutos ('5min'):
+df_5min = df_crudo.resample('5min').agg({
+    'p': 'sum',      # Acumulado de precipitación (mm)
+    'sh1': 'mean',   # Humedad volumétrica promedio (%)
+    'DE1': 'sum',    # Acumulado de deformaciones (mm)
+    'C1': 'mean', 'B1': 'mean', 'Tem_1': 'mean'
+})</code></pre>
+
+          <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
+            <strong>💡 Tu Turno en el Editor: De Intervalos Variables a <code>'5min'</code> y Agregación Semanal (<code>'1W'</code>)</strong><br>
+            En memoria dispones de <code>df_crudo</code> (ventana multisensor concatenada con intervalos variables de 1 min, 5 min y 1 h, <code>freq=None</code>) y de <code>df_ancon</code> (la serie histórica diaria ya generada con este mismo flujo: consolidando <code>p = max(p1, p2)</code> a 5 min y sumando por día). Primero consolidarás <code>p = max(p1, p2)</code> y pasarás <code>df_crudo</code> a paso uniforme de 5 minutos (<code>'5min'</code>); luego tomarás <code>df_ancon</code> y lo agregarás a escala semanal (<code>'1W'</code>) sumando tanto <code>p</code> como <code>DE1</code>.
+          </div>
+        `,
+        instruction: "1. En <code>df_crudo</code> (que tiene intervalos variables de 1 min, 5 min y 1 h), consolida los canales <code>p1</code> y <code>p2</code> en una sola variable <code>df_crudo['p'] = df_crudo[['p1', 'p2']].max(axis=1)</code>.<br>2. Pasa <code>df_crudo</code> al mismo paso temporal de 5 minutos con <code>df_5min = df_crudo.resample('5min').agg({'p': 'sum', 'sh1': 'mean', 'DE1': 'sum', 'C1': 'mean', 'B1': 'mean', 'Tem_1': 'mean'})</code> y muestra en consola la lluvia consolidada total (<code>df_5min['p'].sum()</code>).<br>3. En <code>df_ancon</code> (que ya contiene la serie diaria con <code>p</code> consolidada desde 5 min), aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code>, reemplaza el centinela <code>-999.0</code> en <code>DE1</code> por <code>0</code> (<code>.replace(-999.0, 0)</code>) y remuestrea a escala semanal (<code>'1W'</code>) con <code>.agg({'p': 'sum', 'sh1': 'mean', 'DE1': 'sum'})</code> en <code>df_semanal</code>.<br>4. Muestra en consola la lluvia semanal máxima (<code>df_semanal['p'].max()</code>) y la deformación semanal acumulada máxima (<code>df_semanal['DE1'].max()</code>).<br>5. Grafica <code>df_semanal['p']</code> en barras (<code>plt.bar</code>, ancho 5 días, color <code>'darkcyan'</code>) con <code>plt.show()</code>.",
+        initialCode: `# ==============================================================
+# EJERCICIO 3.1: Consolidación de 'p', Remuestreo a '5min' y Agregación '1W'
+# df_crudo (intervalos variables 1min/5min/1h) y df_ancon están en memoria.
+# ==============================================================
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Paso 1: En df_crudo, consolida p1 y p2 en 'p' con el máximo (.max(axis=1)):
+
+
+# Paso 2: Pasa df_crudo al mismo paso de 5 minutos (.resample('5min').agg(...)) en df_5min
+# e imprime la lluvia consolidada total del evento:
+
+
+# Paso 3: Aísla df_activo desde '2020-03-24' (donde 'p' ya viene consolidada por día),
+# reemplaza -999.0 por 0 en DE1 y remuestrea a escala semanal ('1W') con .agg({'p': 'sum', 'sh1': 'mean', 'DE1': 'sum'}):
+
+
+# Paso 4: Muestra en consola la lluvia semanal máxima y la deformación semanal acumulada máxima:
+
+
+# Paso 5: Grafica la precipitación semanal 'p' en barras (plt.bar) de ancho 5 días, color 'darkcyan',
+# configura título, etiquetas, cuadrícula y despliega con plt.show():
+
+`,
+        hint: `Escribe:
+df_crudo['p'] = df_crudo[['p1', 'p2']].max(axis=1)
+
+df_5min = df_crudo.resample('5min').agg({
+    'p': 'sum',
+    'sh1': 'mean',
+    'DE1': 'sum',
+    'C1': 'mean',
+    'B1': 'mean',
+    'Tem_1': 'mean'
+})
+print(f"Lluvia consolidada a 5min: {df_5min['p'].sum():.2f} mm (p1={df_crudo['p1'].sum():.2f}, p2={df_crudo['p2'].sum():.2f})")
+
+df_activo = df_ancon.loc['2020-03-24':].copy()
+df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
+
+df_semanal = df_activo.resample('1W').agg({
+    'p': 'sum',
+    'sh1': 'mean',
+    'DE1': 'sum'
+})
+
+print(f"Lluvia semanal máxima: {df_semanal['p'].max():.1f} mm")
+print(f"Deformación semanal acumulada máxima: {df_semanal['DE1'].max():.2f} mm")
+
+plt.figure(figsize=(10, 4))
+plt.bar(df_semanal.index, df_semanal['p'], width=5, color='darkcyan', edgecolor='black', alpha=0.8)
+plt.title('Precipitación Semanal Acumulada (p) - Ancón Norte', fontweight='bold')
+plt.xlabel('Fecha')
+plt.ylabel('Lluvia Semanal (mm)')
+plt.grid(True, linestyle='--', alpha=0.4)
+plt.tight_layout()
+plt.show()`,
+        solution: `import pandas as pd
+import matplotlib.pyplot as plt
+
+df_crudo['p'] = df_crudo[['p1', 'p2']].max(axis=1)
+
+df_5min = df_crudo.resample('5min').agg({
+    'p': 'sum',
+    'sh1': 'mean',
+    'DE1': 'sum',
+    'C1': 'mean',
+    'B1': 'mean',
+    'Tem_1': 'mean'
+})
+print(f"Lluvia consolidada a 5min: {df_5min['p'].sum():.2f} mm (p1={df_crudo['p1'].sum():.2f}, p2={df_crudo['p2'].sum():.2f})")
+
+df_activo = df_ancon.loc['2020-03-24':].copy()
+df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
+
+df_semanal = df_activo.resample('1W').agg({
+    'p': 'sum',
+    'sh1': 'mean',
+    'DE1': 'sum'
+})
+
+print(f"Lluvia semanal máxima: {df_semanal['p'].max():.1f} mm")
+print(f"Deformación semanal acumulada máxima: {df_semanal['DE1'].max():.2f} mm")
+
+plt.figure(figsize=(10, 4))
+plt.bar(df_semanal.index, df_semanal['p'], width=5, color='darkcyan', edgecolor='black', alpha=0.8)
+plt.title('Precipitación Semanal Acumulada (p) - Ancón Norte', fontweight='bold')
+plt.xlabel('Fecha')
+plt.ylabel('Lluvia Semanal (mm)')
+plt.grid(True, linestyle='--', alpha=0.4)
+plt.tight_layout()
+plt.show()`,
+        validator: (output, hasPlot) => /\b24\.05\b/.test(output) && (output.includes("142.4") || output.includes("433.3")) && hasPlot
+      },
+      {
+        id: "m3_l2",
+        title: "3.2 Diagnóstico de Datos Faltantes (NaN) e Interpolación Lineal",
+        concept: `
+          <div class="theory-narrative-bridge">
+            <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 3.1</div>
+            <p style="margin: 0 0 0.5rem 0;">
+              En la <strong>Lección 3.1</strong> aprendiste a consolidar la precipitación en una sola variable <code>p</code> y a aplicar <code>.resample('5min')</code> (y <code>'1D'</code> / <code>'1W'</code>) para que todos los sensores compartan exactamente el mismo paso temporal uniforme ($\\Delta t$ constante).
+            </p>
+            <p style="margin: 0 0 0.5rem 0;">
+              Al imponer esta malla temporal regular a 5 minutos (o diaria), emergen inevitablemente valores faltantes (<code>NaN</code>) por dos causas físicas:
+            </p>
+            <ul style="margin: 0.25rem 0 0.65rem 1.25rem; font-size: 0.88rem; line-height: 1.55;">
+              <li><strong>Diferencia de resolución al remuestrear a <code>'5min'</code>:</strong> Un sensor horario (como el acelerómetro <code>C1</code>, <code>B1</code>) llevado a una malla de 5 minutos deja 11 marcas de tiempo intermedias con <code>NaN</code> en cada hora (792 <code>NaN</code> en los 864 intervalos de <code>df_5min</code>).</li>
+              <li><strong>Caídas de telemetría o energía solar:</strong> Durante tormentas severas en Ancón Norte, instrumentos como la sonda de humedad <code>sh1</code> pierden conexión temporalmente (37 días con <code>NaN</code> en el periodo coactivo).</li>
+            </ul>
             <p style="margin: 0;">
-              En instrumentación geotécnica remota (como Ancón Norte), las tormentas severas, caídas de voltaje solar o pérdidas de telemetría generan huecos (<code>NaN</code>). En esta lección aprenderás a diagnosticarlos y aplicar <strong>interpolación lineal físicamente consistente</strong> sin destruir la cronología.
+              En esta lección aprenderás por qué nunca debes destruir el índice regular con <code>dropna()</code> y cómo reconstruir la continuidad física mediante <strong>interpolación lineal</strong> (<code>.interpolate(method='linear')</code>).
             </p>
           </div>
 
           <!-- Contenedor Interactivo de Datos Faltantes -->
           <div id="missing-data-container" style="margin: 1.25rem 0;"></div>
 
-          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. El Peligro Geotécnico de <code>dropna()</code> en Series de Tiempo</h4>
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. El Peligro Geotécnico de <code>dropna()</code> en Series Ya Regularizadas</h4>
           <p>
-            Descartar filas con datos nulos mediante <code>.dropna()</code> es una práctica común en tablas estáticas, pero <strong>en series cronológicas es un error metodológico crítico</strong>:
+            Descartar filas con datos nulos mediante <code>.dropna()</code> anularía todo el trabajo de regularización temporal logrado con <code>.resample()</code> en la Lección 3.1:
           </p>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.85rem; margin: 1rem 0;">
             <div style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #ef4444; border-radius: var(--radius-sm); padding: 0.85rem;">
               <strong style="color: #dc2626;">❌ Ruptura del Paso Temporal ($\\Delta t$) con <code>dropna()</code></strong>
               <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
-                Si un sensor pierde señal durante 4 días y borramos esas filas, el día 5 quedará adyacente al día 1. Al calcular velocidades ($\\Delta x / \\Delta t$), Pandas dividirá entre 1 día en lugar de 4, generando falsas aceleraciones críticas.
+                Si un sensor pierde señal durante 4 intervalos y borramos esas filas, el registro 5 quedará adyacente al 1. Al calcular velocidades ($\\Delta x / \\Delta t$), Pandas dividirá entre 1 paso en lugar de 4, generando falsas aceleraciones críticas.
               </p>
             </div>
 
             <div style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid #10b981; border-radius: var(--radius-sm); padding: 0.85rem;">
               <strong style="color: #059669;">✔️ Preservación Cronológica con <code>interpolate()</code></strong>
               <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
-                Mantiene intactas todas las marcas de tiempo. Estima la trayectoria física trazando una pendiente continua entre la última lectura válida y la primera tras la reactivación del sensor.
+                Mantiene intacta la malla regular creada con <code>.resample()</code>. Estima el estado físico intermedio trazando una recta continua entre la última lectura válida y la primera tras la reactivación.
               </p>
             </div>
           </div>
@@ -1409,9 +1558,9 @@ plt.show()`,
             Aislarás el periodo coactivo (desde el 24 de marzo de 2020), diagnosticarás los huecos de telemetría en la sonda <code>sh1</code> y reconstruirás la serie continua mediante interpolación lineal y relleno de bordes.
           </div>
         `,
-        instruction: "1. A partir de <code>df_ancon</code>, aísla en <code>df_activo</code> la ventana temporal desde <code>'2020-03-24'</code> en adelante utilizando <code>.loc</code> y <code>.copy()</code>.<br>2. Cuenta y muestra en consola los valores nulos (<code>NaN</code>) en la columna <code>sh1</code> antes de intervenir la serie con <code>.isnull().sum()</code>.<br>3. Aplica interpolación lineal en <code>df_activo['sh1']</code> encadenando <code>.interpolate(method='linear')</code> con <code>.bfill()</code> y <code>.ffill()</code>.<br>4. Vuelve a consultar y muestra en consola los valores nulos en <code>df_activo['sh1']</code>, comprobando que se reduzcan exitosamente a 0.",
+        instruction: "1. A partir de <code>df_ancon</code>, aísla en <code>df_activo</code> la ventana temporal desde <code>'2020-03-24'</code> en adelante utilizando <code>.loc</code> y <code>.copy()</code>.<br>2. Cuenta y muestra en consola los valores nulos (<code>NaN</code>) en la columna <code>sh1</code> antes de intervenir la serie con <code>.isnull().sum()</code>.<br>3. Aplica interpolación lineal en <code>df_activo['sh1']</code> encadenando <code>.interpolate(method='linear')</code> con <code>.bfill()</code> y <code>.ffill()</code>.<br>4. Vuelve a consultar y muestra en consola los valores nulos en <code>df_activo['sh1']</code>, comprobando que pasen de <code>37</code> a <code>0</code>.",
         initialCode: `# ==============================================================
-# EJERCICIO 3.1: Diagnóstico de Gaps e Interpolación Lineal
+# EJERCICIO 3.2: Diagnóstico de Gaps (NaN) e Interpolación Lineal
 # La matriz df_ancon ya se encuentra disponible en memoria.
 # ==============================================================
 import pandas as pd
@@ -1450,124 +1599,22 @@ df_activo['sh1'] = df_activo['sh1'].interpolate(method='linear').bfill().ffill()
 
 nulos_despues = df_activo['sh1'].isnull().sum()
 print(f"Valores nulos después de interpolar: {nulos_despues}")`,
-        validator: (output) => (output.includes("después de interpolar: 0") || output.includes("después: 0") || (output.includes("0") && !output.includes("None"))) && !output.includes("Error")
-      },
-      {
-        id: "m3_l2",
-        title: "3.2 Remuestreo Temporal (resample) y Agregaciones Físicas Coherentes",
-        concept: `
-          <div class="theory-narrative-bridge">
-            <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 3.1</div>
-            <p style="margin: 0 0 0.5rem 0;">
-              Una vez garantizada la regularidad del paso temporal, frecuentemente necesitamos cambiar la escala de análisis: de registros diarios a resúmenes semanales (<code>'1W'</code>) o mensuales (<code>'1ME'</code>).
-            </p>
-            <p style="margin: 0 0 0.5rem 0;">
-              En geotecnia, <strong>cada tipo de sensor exige una función de agregación físicamente coherente</strong> con la variable que mide:
-            </p>
-            <ul style="margin: 0.35rem 0 0.85rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
-              <li><strong>Precipitación (<code>p1</code>):</strong> Variable de flujo / masa. Debe agregarse con <code>sum()</code> para preservar el volumen total de agua caída en la cuenca.</li>
-              <li><strong>Humedad y Piezómetros (<code>sh1</code>, <code>C1</code>):</strong> Variables de estado o nivel. Deben agregarse con <code>mean()</code> para reflejar la condición hídrica promedio del periodo.</li>
-              <li><strong>Deformación de Extensómetros (<code>DE1</code>):</strong> Variable cinemática crítica. Se agrega con <code>max()</code> para retener el pico extremo de desplazamiento alcanzado.</li>
-            </ul>
-          </div>
-
-          <!-- Contenedor Interactivo de Remuestreo Temporal -->
-          <div id="resampling-flow-container" style="margin: 1.25rem 0;"></div>
-
-          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. La Sintaxis Maestra de Agregación Multivariable</h4>
-          <p>
-            En lugar de calcular cada columna por separado, pasamos un diccionario de funciones físicas a <code>.agg()</code>:
-          </p>
-          <pre class="trace-pre"><code>df_semanal = df_activo.resample('1W').agg({
-    'p1': 'sum',    # Lluvia semanal total (mm)
-    'sh1': 'mean',  # Humedad media semanal (%)
-    'DE1': 'max'    # Pico máximo de deformación (mm)
-})</code></pre>
-
-          <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
-            <strong>💡 Tu Turno en el Editor: Agregación Semanal y Gráfico de Barras de Lluvia</strong><br>
-            Remuestrearás la matriz <code>df_activo</code> a escala semanal (<code>'1W'</code>) aplicando la agregación física correspondiente, y graficarás el acumulado de precipitación semanal mediante un gráfico de barras.
-          </div>
-        `,
-        instruction: "1. Aísla en <code>df_activo</code> la ventana temporal coactiva desde <code>'2020-03-24'</code> en adelante a partir de <code>df_ancon</code>.<br>2. Remuestrea a escala semanal con <code>.resample('1W')</code> aplicando <code>.agg()</code> con <code>sum</code> para la lluvia (<code>'p1'</code> o <code>'p'</code>), <code>mean</code> para la humedad (<code>'sh1'</code>) y <code>max</code> para la deformación (<code>'DE1'</code>), guardando el resultado en <code>df_semanal</code>.<br>3. Muestra en consola la lluvia semanal máxima registrada con <code>.max()</code>.<br>4. Configura una figura de 10 &times; 4 pulgadas y grafica la precipitación semanal en un gráfico de barras (<code>plt.bar</code>) con ancho de 5 días, color <code>'darkcyan'</code>, título en negrilla, rotulado de ejes, cuadrícula tenue y despliega con <code>plt.show()</code>.",
-        initialCode: `# ==============================================================
-# EJERCICIO 3.2: Remuestreo Semanal y Agregaciones Físicas
-# La matriz df_ancon ya se encuentra disponible en memoria.
-# ==============================================================
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# Paso 1: Aísla el periodo coactivo (desde '2020-03-24' en adelante) en df_activo:
-
-
-# Paso 2: Remuestrea a escala semanal ('1W') con .agg({'p1': 'sum', 'sh1': 'mean', 'DE1': 'max'}):
-
-
-# Paso 3: Muestra en consola la lluvia semanal máxima registrada:
-
-
-# Paso 4: Grafica la precipitación semanal en barras (plt.bar) de ancho 5 días, color 'darkcyan',
-# configura título, etiquetas, cuadrícula y despliega con plt.show():
-
-`,
-        hint: `Escribe:
-df_activo = df_ancon.loc['2020-03-24':].copy()
-p_col = 'p1' if 'p1' in df_activo.columns else 'p'
-
-df_semanal = df_activo.resample('1W').agg({
-    p_col: 'sum',
-    'sh1': 'mean',
-    'DE1': 'max'
-})
-
-print(f"Lluvia semanal máxima: {df_semanal[p_col].max():.1f} mm")
-
-plt.figure(figsize=(10, 4))
-plt.bar(df_semanal.index, df_semanal[p_col], width=5, color='darkcyan', edgecolor='black', alpha=0.8)
-plt.title('Precipitación Semanal Acumulada - Ancón Norte', fontweight='bold')
-plt.xlabel('Fecha')
-plt.ylabel('Lluvia Semanal (mm)')
-plt.grid(True, linestyle='--', alpha=0.4)
-plt.tight_layout()
-plt.show()`,
-        solution: `import pandas as pd
-import matplotlib.pyplot as plt
-
-df_activo = df_ancon.loc['2020-03-24':].copy()
-p_col = 'p1' if 'p1' in df_activo.columns else 'p'
-
-df_semanal = df_activo.resample('1W').agg({
-    p_col: 'sum',
-    'sh1': 'mean',
-    'DE1': 'max'
-})
-
-print(f"Lluvia semanal máxima: {df_semanal[p_col].max():.1f} mm")
-
-plt.figure(figsize=(10, 4))
-plt.bar(df_semanal.index, df_semanal[p_col], width=5, color='darkcyan', edgecolor='black', alpha=0.8)
-plt.title('Precipitación Semanal Acumulada - Ancón Norte', fontweight='bold')
-plt.xlabel('Fecha')
-plt.ylabel('Lluvia Semanal (mm)')
-plt.grid(True, linestyle='--', alpha=0.4)
-plt.tight_layout()
-plt.show()`,
-        validator: (output, hasPlot) => output.includes("Lluvia semanal máxima") && hasPlot
+        validator: (output) => /\b37\b/.test(output) && /despu[eé]s[^0-9\n]*0\b/i.test(output) && !output.includes("Error")
       },
       {
         id: "m3_l3",
         title: "3.3 Feature Engineering: Ventanas Móviles (rolling) y Lluvia Antecedente",
         concept: `
           <div class="theory-narrative-bridge">
-            <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 3.2</div>
+            <div class="bridge-tag">🔗 Conexión Pedagógica con las Lecciones 3.1 y 3.2</div>
             <p style="margin: 0 0 0.5rem 0;">
-              En la lección anterior agregaste datos en bloques fijos discretos (semanas y meses).
+              En las lecciones anteriores regularizaste la frecuencia temporal con <code>.resample()</code>, consolidaste la precipitación en la variable única <code>p</code> e interpolaste los vacíos <code>NaN</code> para obtener una serie continua sin huecos.
             </p>
             <p style="margin: 0 0 0.5rem 0;">
-              Sin embargo, en el monitoreo diario de alerta temprana necesitamos evaluar <strong>cómo evoluciona el estado hídrico del talud día tras día</strong> considerando el agua infiltrada en las semanas previas: la <strong>lluvia antecedente móvil</strong>.
+              En el monitoreo diario de alerta temprana necesitamos evaluar <strong>cómo evoluciona el estado hídrico del talud día tras día</strong> considerando el agua infiltrada en las semanas previas: la <strong>lluvia antecedente móvil</strong>.
             </p>
             <p style="margin: 0;">
-              En geotecnia (modelo de Chleborad y umbrales de USGS), se analizan dos horizontes temporales móviles: la lluvia de evento (3 días) y la lluvia acumulada profunda (30 días). En esta lección aprenderás a construir estas variables predictivas mediante <code>.rolling()</code> y <code>.cumsum()</code>.
+              En geotecnia (modelo de Chleborad y umbrales de USGS), se analizan dos horizontes temporales móviles sobre la lluvia consolidada <code>p</code>: la lluvia de evento (3 días) y la lluvia acumulada profunda (30 días). En esta lección aprenderás a construir estas variables predictivas mediante <code>.rolling()</code> y <code>.cumsum()</code>.
             </p>
           </div>
 
@@ -1576,17 +1623,17 @@ plt.show()`,
 
           <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Ventanas Móviles Continuas en Pandas</h4>
           <p>
-            El método <code>.rolling(window=30, min_periods=1)</code> desplaza una ventana de 30 días continuos. El parámetro <code>min_periods=1</code> es fundamental: calcula la suma con los días disponibles al inicio de la serie evitando generar 29 valores <code>NaN</code> iniciales.
+            El método <code>.rolling(window=30, min_periods=1)</code> desplaza una ventana de 30 días continuos sobre la precipitación <code>p</code>. El parámetro <code>min_periods=1</code> es fundamental: calcula la suma con los días disponibles al inicio de la serie evitando generar 29 valores <code>NaN</code> iniciales.
           </p>
-          <pre class="trace-pre"><code>df_activo['lluvia_30d'] = df_activo['p1'].rolling(window=30, min_periods=1).sum()
+          <pre class="trace-pre"><code>df_activo['lluvia_30d'] = df_activo['p'].rolling(window=30, min_periods=1).sum()
 df_activo['acumulado_DE1'] = df_activo['DE1'].cumsum()</code></pre>
 
           <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
             <strong>💡 Tu Turno en el Editor: Lluvia Antecedente Móvil y Desplazamiento Acumulado</strong><br>
-            Calcularás la lluvia antecedente móvil de 30 días y la deformación acumulada, graficando ambas series en dos subplots verticales sincronizados para contrastar detonante vs respuesta del talud.
+            Calcularás la lluvia antecedente móvil de 30 días sobre <code>p</code> y la deformación acumulada, graficando ambas series en dos subplots verticales sincronizados para contrastar detonante vs respuesta del talud.
           </div>
         `,
-        instruction: "1. Aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code>.<br>2. Calcula la lluvia antecedente móvil de 30 días usando <code>.rolling(window=30, min_periods=1).sum()</code> y guárdala en <code>df_activo['lluvia_30d']</code>.<br>3. Calcula la deformación acumulada histórica usando <code>.cumsum()</code> sobre <code>df_activo['DE1']</code> y guárdala en <code>df_activo['acumulado_DE1']</code>.<br>4. Configura una figura de 2 subplots verticales (<code>2, 1</code>, 10 &times; 6 pulgadas) sincronizados con <code>sharex=True</code>:<br>&bull; Panel superior: lluvia antecedente de 30 días en color azul marino con línea horizontal roja punteada en su valor medio.<br>&bull; Panel inferior: deformación superficial acumulada en color púrpura.<br>5. Añade títulos, etiquetas de ejes, leyendas, cuadrículas y despliega con <code>plt.show()</code>.",
+        instruction: "1. Aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code> y limpia el centinela <code>-999.0</code> en <code>DE1</code> con <code>.replace(-999.0, 0)</code>.<br>2. Calcula la lluvia antecedente móvil de 30 días sobre la variable consolidada <code>df_activo['p']</code> usando <code>.rolling(window=30, min_periods=1).sum()</code> y guárdala en <code>df_activo['lluvia_30d']</code>.<br>3. Calcula la deformación acumulada histórica usando <code>.cumsum()</code> sobre <code>df_activo['DE1']</code> y guárdala en <code>df_activo['acumulado_DE1']</code>.<br>4. Configura una figura de 2 subplots verticales (<code>2, 1</code>, 10 &times; 6 pulgadas) sincronizados con <code>sharex=True</code>:<br>&bull; Panel superior: lluvia antecedente de 30 días en color azul marino.<br>&bull; Panel inferior: deformación superficial acumulada en color púrpura.<br>5. Añade títulos, etiquetas de ejes, leyendas, cuadrículas y despliega con <code>plt.show()</code>.",
         initialCode: `# ==============================================================
 # EJERCICIO 3.3: Lluvia Antecedente Móvil y Acumulados Históricos
 # La matriz df_ancon ya se encuentra disponible en memoria.
@@ -1594,10 +1641,11 @@ df_activo['acumulado_DE1'] = df_activo['DE1'].cumsum()</code></pre>
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Paso 1: Aísla el periodo coactivo (desde '2020-03-24' en adelante) en df_activo:
+# Paso 1: Aísla el periodo coactivo (desde '2020-03-24' en adelante) en df_activo
+# y reemplaza -999.0 por 0 en DE1:
 
 
-# Paso 2: Calcula la lluvia antecedente móvil de 30 días (.rolling(30, min_periods=1).sum()):
+# Paso 2: Calcula la lluvia antecedente móvil de 30 días sobre df_activo['p'] (.rolling(30, min_periods=1).sum()):
 
 
 # Paso 3: Calcula la deformación acumulada histórica (.cumsum()):
@@ -1609,9 +1657,9 @@ import matplotlib.pyplot as plt
 `,
         hint: `Escribe:
 df_activo = df_ancon.loc['2020-03-24':].copy()
-p_col = 'p1' if 'p1' in df_activo.columns else 'p'
+df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
 
-df_activo['lluvia_30d'] = df_activo[p_col].rolling(window=30, min_periods=1).sum()
+df_activo['lluvia_30d'] = df_activo['p'].rolling(window=30, min_periods=1).sum()
 df_activo['acumulado_DE1'] = df_activo['DE1'].cumsum()
 
 fig, axs = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
@@ -1634,9 +1682,9 @@ plt.show()`,
 import matplotlib.pyplot as plt
 
 df_activo = df_ancon.loc['2020-03-24':].copy()
-p_col = 'p1' if 'p1' in df_activo.columns else 'p'
+df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
 
-df_activo['lluvia_30d'] = df_activo[p_col].rolling(window=30, min_periods=1).sum()
+df_activo['lluvia_30d'] = df_activo['p'].rolling(window=30, min_periods=1).sum()
 df_activo['acumulado_DE1'] = df_activo['DE1'].cumsum()
 
 fig, axs = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
@@ -1659,64 +1707,66 @@ plt.show()`,
       },
       {
         id: "m3_l4",
-        title: "3.4 Análisis Cinemático: Tasas de Deformación y Velocidad de Movimiento (.diff)",
+        title: "3.4 Análisis Cinemático: Tasas de Deformación y Aceleración (.diff)",
         concept: `
           <div class="theory-narrative-bridge">
             <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 3.3</div>
             <p style="margin: 0 0 0.5rem 0;">
-              El desplazamiento acumulado solo cuantifica cuánto se ha movido la masa en total, pero no advierte sobre la inminencia de una rotura catastrófica.
+              El desplazamiento acumulado (<code>DE1.cumsum()</code>) cuantifica cuánto se ha movido la masa en total, mientras que la deformación diaria <code>DE1</code> (sumada por día en mm/día) representa la <strong>tasa o velocidad diaria de apertura</strong> ($v = \\Delta s / \\Delta t$).
             </p>
             <p style="margin: 0 0 0.5rem 0;">
-              El parámetro crítico para el monitoreo y evacuación de taludes es la <strong>velocidad de deformación</strong> ($v = \\Delta s / \\Delta t$).
+              Para advertir la inminencia de una rotura catastrófica necesitamos evaluar el cambio en esa velocidad día tras día: la <strong>aceleración de deformación</strong> ($a = \\Delta v / \\Delta t$, en mm/día²).
             </p>
             <p style="margin: 0;">
-              Según el <strong>Método de la Velocidad Inversa de Fukuzono y Saito</strong>, cuando una masa inestable entra en fluencia terciaria acelerada hacia el colapso, su velocidad tiende al infinito ($v \to \infty$) y su recíproco tiende a cero ($1/v \to 0$). En Pandas, la velocidad diaria se calcula mediante la primera diferencia discreta: <code>.diff()</code>.
+              Según el <strong>Método de Fukuzono y Saito</strong>, cuando una masa inestable entra en fluencia terciaria acelerada hacia el colapso ($a = \\Delta v / \\Delta t &gt; 0$), su velocidad se dispara ($v \to \infty$) y su recíproco tiende a cero ($1/v \to 0$). En Pandas, la diferencia discreta entre registros consecutivos se calcula con <code>.diff()</code>.
             </p>
           </div>
 
           <!-- Contenedor Interactivo de Velocidad y Aceleración -->
           <div id="velocity-acceleration-container" style="margin: 1.25rem 0;"></div>
 
-          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Velocidad Diaria Discreta</h4>
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Diferencia Temporal Discreta con <code>.diff()</code></h4>
           <p>
-            Para datos con paso diario ($\\Delta t = 1$), la velocidad de apertura de grieta ($mm/\\text{día}$) se obtiene restando la medición del día anterior:
+            Como en <code>df_ancon</code> la columna <code>DE1</code> ya contiene la deformación acumulada en cada día (velocidad diaria en mm/día, $\\Delta t = 1\\text{ día}$), aplicar <code>.diff()</code> directamente sobre <code>DE1</code> entrega el cambio de velocidad respecto al día anterior, es decir, la <strong>aceleración diaria</strong> (mm/día²):
           </p>
-          <pre class="trace-pre"><code>df_activo['velocidad_DE1'] = df_activo['DE1'].diff().fillna(0)</code></pre>
+          <pre class="trace-pre"><code>df_activo['aceleracion_DE1'] = df_activo['DE1'].diff().fillna(0)</code></pre>
 
           <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
-            <strong>💡 Tu Turno en el Editor: Velocidad Diaria de Apertura y Gráfico de Doble Eje</strong><br>
-            Calcularás la velocidad diaria de apertura de grieta en <code>DE1</code>, identificarás la velocidad máxima registrada y graficarás en un lienzo con doble eje (<code>twinx()</code>) la velocidad frente al desplazamiento acumulado.
+            <strong>💡 Tu Turno en el Editor: Aceleración Diaria de Apertura y Gráfico de Doble Eje</strong><br>
+            Calcularás la aceleración diaria aplicando <code>.diff()</code> sobre <code>DE1</code>, identificarás el pico máximo registrado y graficarás en un lienzo con doble eje (<code>twinx()</code>) la aceleración frente al desplazamiento acumulado.
           </div>
         `,
-        instruction: "1. Aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code>.<br>2. Calcula la tasa diaria de apertura (velocidad en mm/día) aplicando <code>.diff()</code> sobre <code>df_activo['DE1']</code> y reemplaza el primer valor nulo con <code>.fillna(0)</code> en la columna <code>df_activo['velocidad_DE1']</code>.<br>3. Muestra en consola la velocidad máxima de apertura registrada con <code>.max()</code>.<br>4. Configura una figura de 10 &times; 4.5 pulgadas y genera un gráfico de doble eje (<code>twinx()</code>):<br>&bull; Eje 1 (izquierdo): serie de velocidad diaria en color naranja (<code>'darkorange'</code>) con ancho de línea 1.5.<br>&bull; Eje 2 (derecho): deformación total acumulada (<code>df_activo['DE1'].cumsum()</code>) en color púrpura.<br>5. Añade título en negrilla, rótulos en ambos ejes Y, cuadrícula y despliega con <code>plt.show()</code>.",
+        instruction: "1. Aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code> y limpia el centinela <code>-999.0</code> en <code>DE1</code> con <code>.replace(-999.0, 0)</code>.<br>2. Calcula la aceleración diaria aplicando <code>.diff()</code> sobre <code>df_activo['DE1']</code> y reemplaza el primer valor nulo con <code>.fillna(0)</code> en la columna <code>df_activo['aceleracion_DE1']</code>.<br>3. Muestra en consola el valor máximo registrado con <code>.max()</code>.<br>4. Configura una figura de 10 &times; 4.5 pulgadas y genera un gráfico de doble eje (<code>twinx()</code>):<br>&bull; Eje 1 (izquierdo): serie <code>aceleracion_DE1</code> en color naranja (<code>'darkorange'</code>) con ancho de línea 1.5.<br>&bull; Eje 2 (derecho): deformación total acumulada (<code>df_activo['DE1'].cumsum()</code>) en color púrpura.<br>5. Añade título en negrilla, rótulos en ambos ejes Y, cuadrícula y despliega con <code>plt.show()</code>.",
         initialCode: `# ==============================================================
-# EJERCICIO 3.4: Velocidad de Deformación y Doble Eje Cinemático
+# EJERCICIO 3.4: Aceleración de Deformación (.diff) y Doble Eje Cinemático
 # La matriz df_ancon ya se encuentra disponible en memoria.
 # ==============================================================
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Paso 1: Aísla el periodo coactivo (desde '2020-03-24' en adelante) en df_activo:
+# Paso 1: Aísla el periodo coactivo (desde '2020-03-24' en adelante) en df_activo
+# y reemplaza -999.0 por 0 en DE1:
 
 
-# Paso 2: Calcula la tasa diaria de velocidad con .diff().fillna(0) en df_activo['velocidad_DE1']:
+# Paso 2: Calcula la aceleración diaria con .diff().fillna(0) en df_activo['aceleracion_DE1']:
 
 
-# Paso 3: Muestra en consola la velocidad máxima registrada (.max()):
+# Paso 3: Muestra en consola la aceleración máxima registrada (.max()):
 
 
-# Paso 4: Crea la figura y el eje gemelo con ax1.twinx(), grafica velocidad y desplazamiento acumulado,
+# Paso 4: Crea la figura y el eje gemelo con ax1.twinx(), grafica aceleracion_DE1 y desplazamiento acumulado,
 # rotula ambos ejes Y, añade título, cuadrícula y muestra la figura:
 
 `,
         hint: `Escribe:
 df_activo = df_ancon.loc['2020-03-24':].copy()
-df_activo['velocidad_DE1'] = df_activo['DE1'].diff().fillna(0)
-print(f"Velocidad máxima registrada: {df_activo['velocidad_DE1'].max():.3f} mm/día")
+df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
+df_activo['aceleracion_DE1'] = df_activo['DE1'].diff().fillna(0)
+print(f"Aceleración máxima registrada: {df_activo['aceleracion_DE1'].max():.3f} mm/día²")
 
 fig, ax1 = plt.subplots(figsize=(10, 4.5))
-ax1.plot(df_activo.index, df_activo['velocidad_DE1'], color='darkorange', label='Velocidad (mm/día)', linewidth=1.5)
-ax1.set_ylabel('Velocidad de apertura (mm/día)', color='darkorange', fontweight='bold')
+ax1.plot(df_activo.index, df_activo['aceleracion_DE1'], color='darkorange', label='Aceleración (mm/día²)', linewidth=1.5)
+ax1.set_ylabel('Aceleración de apertura (mm/día²)', color='darkorange', fontweight='bold')
 ax1.tick_params(axis='y', labelcolor='darkorange')
 ax1.grid(True, linestyle='--', alpha=0.4)
 
@@ -1725,19 +1775,20 @@ ax2.plot(df_activo.index, df_activo['DE1'].cumsum(), color='purple', label='Desp
 ax2.set_ylabel('Desplazamiento total (mm)', color='purple', fontweight='bold')
 ax2.tick_params(axis='y', labelcolor='purple')
 
-plt.title('Cinemática del Talud: Velocidad Diaria vs. Desplazamiento Acumulado', fontweight='bold')
+plt.title('Cinemática del Talud: Aceleración Diaria vs. Desplazamiento Acumulado', fontweight='bold')
 plt.tight_layout()
 plt.show()`,
         solution: `import pandas as pd
 import matplotlib.pyplot as plt
 
 df_activo = df_ancon.loc['2020-03-24':].copy()
-df_activo['velocidad_DE1'] = df_activo['DE1'].diff().fillna(0)
-print(f"Velocidad máxima registrada: {df_activo['velocidad_DE1'].max():.3f} mm/día")
+df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
+df_activo['aceleracion_DE1'] = df_activo['DE1'].diff().fillna(0)
+print(f"Aceleración máxima registrada: {df_activo['aceleracion_DE1'].max():.3f} mm/día²")
 
 fig, ax1 = plt.subplots(figsize=(10, 4.5))
-ax1.plot(df_activo.index, df_activo['velocidad_DE1'], color='darkorange', label='Velocidad (mm/día)', linewidth=1.5)
-ax1.set_ylabel('Velocidad de apertura (mm/día)', color='darkorange', fontweight='bold')
+ax1.plot(df_activo.index, df_activo['aceleracion_DE1'], color='darkorange', label='Aceleración (mm/día²)', linewidth=1.5)
+ax1.set_ylabel('Aceleración de apertura (mm/día²)', color='darkorange', fontweight='bold')
 ax1.tick_params(axis='y', labelcolor='darkorange')
 ax1.grid(True, linestyle='--', alpha=0.4)
 
@@ -1746,10 +1797,10 @@ ax2.plot(df_activo.index, df_activo['DE1'].cumsum(), color='purple', label='Desp
 ax2.set_ylabel('Desplazamiento total (mm)', color='purple', fontweight='bold')
 ax2.tick_params(axis='y', labelcolor='purple')
 
-plt.title('Cinemática del Talud: Velocidad Diaria vs. Desplazamiento Acumulado', fontweight='bold')
+plt.title('Cinemática del Talud: Aceleración Diaria vs. Desplazamiento Acumulado', fontweight='bold')
 plt.tight_layout()
 plt.show()`,
-        validator: (output, hasPlot) => output.includes("Velocidad máxima registrada:") && hasPlot
+        validator: (output, hasPlot) => output.includes("198.96") && hasPlot
       },
       {
         id: "m3_l5",
@@ -1885,7 +1936,7 @@ plt.show()`,
           <div class="theory-narrative-bridge">
             <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 3.5</div>
             <p style="margin: 0 0 0.5rem 0;">
-              Al monitorear múltiples canales de instrumentación (lluvia, humedad, inclinación, temperatura y grietas), es imprescindible determinar qué variables se mueven en sincronía física.
+              Al monitorear múltiples canales de instrumentación (precipitación consolidada <code>p</code>, humedad <code>sh1</code>, inclinación <code>C1</code>/<code>B1</code>, temperatura <code>Tem_1</code> y grietas <code>DE1</code>), es imprescindible determinar qué variables se mueven en sincronía física.
             </p>
             <p style="margin: 0 0 0.5rem 0;">
               En la estadística clásica se utiliza el <strong>coeficiente de correlación lineal de Pearson ($r$)</strong>. Sin embargo, en geotecnia muchas respuestas son <strong>marcadamente no lineales</strong> (por ejemplo, la apertura de una grieta frente a la rotación del inclinómetro no es una línea recta, sino un proceso monótono con saltos y fluencia).
@@ -1925,10 +1976,10 @@ plt.show()`,
 
           <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
             <strong>💡 Tu Turno en el Editor: Construcción del Heatmap de Spearman</strong><br>
-            Calcularás la matriz de correlación monotónica de Spearman sobre los sensores activos de Ancón Norte y graficarás el mapa de calor anotado con Matplotlib.
+            Calcularás la matriz de correlación monotónica de Spearman sobre los sensores activos de Ancón Norte (usando la variable de precipitación consolidada <code>p</code>) y graficarás el mapa de calor anotado con Matplotlib.
           </div>
         `,
-        instruction: "1. Aísla en <code>df_activo</code> el periodo coactivo desde <code>'2020-03-24'</code> e interpola los nulos con <code>.interpolate().bfill().ffill()</code>.<br>2. Define la lista de canales a comparar: <code>cols = ['p1', 'sh1', 'C1', 'B1', 'Tem_1', 'DE1']</code> (usando <code>'p'</code> si <code>'p1'</code> no está disponible).<br>3. Calcula la matriz de correlación monotónica aplicando <code>df_activo[cols].corr(method='spearman')</code>.<br>4. Configura una figura de 8 &times; 6.5 pulgadas y traza el mapa de calor con <code>plt.imshow(matriz_spearman, cmap='coolwarm', vmin=-1, vmax=1)</code>, añadiendo barra de color (<code>plt.colorbar()</code>) y rotulando los ejes con los nombres de los sensores.<br>5. Mediante un bucle anidado, superpón el valor numérico en el centro de cada celda con <code>plt.text()</code>.<br>6. Asigna título en negrilla y despliega con <code>plt.show()</code>.",
+        instruction: "1. Aísla en <code>df_activo</code> el periodo coactivo desde <code>'2020-03-24'</code> e interpola los nulos con <code>.interpolate().bfill().ffill()</code>.<br>2. Define la lista de canales a comparar: <code>cols = ['p', 'sh1', 'C1', 'B1', 'Tem_1', 'DE1']</code>.<br>3. Calcula la matriz de correlación monotónica aplicando <code>df_activo[cols].corr(method='spearman')</code>.<br>4. Configura una figura de 8 &times; 6.5 pulgadas y traza el mapa de calor con <code>plt.imshow(matriz_spearman, cmap='coolwarm', vmin=-1, vmax=1)</code>, añadiendo barra de color (<code>plt.colorbar()</code>) y rotulando los ejes con los nombres de los sensores.<br>5. Mediante un bucle anidado, superpón el valor numérico en el centro de cada celda con <code>plt.text()</code>.<br>6. Asigna título en negrilla y despliega con <code>plt.show()</code>.",
         initialCode: `# ==============================================================
 # EJERCICIO 3.6: Matriz de Correlación de Spearman y Heatmap
 # La matriz df_ancon ya se encuentra disponible en memoria.
@@ -1939,7 +1990,7 @@ import matplotlib.pyplot as plt
 # Paso 1: Aísla el periodo coactivo (desde '2020-03-24':) e interpola nulos:
 
 
-# Paso 2: Define la lista de columnas y calcula la matriz con .corr(method='spearman'):
+# Paso 2: Define cols = ['p', 'sh1', 'C1', 'B1', 'Tem_1', 'DE1'] y calcula .corr(method='spearman'):
 
 
 # Paso 3: Crea la figura (8x6.5 pulgadas) y traza el mapa de calor con plt.imshow:
@@ -1953,8 +2004,7 @@ import matplotlib.pyplot as plt
 `,
         hint: `Escribe:
 df_activo = df_ancon.loc['2020-03-24':].copy().interpolate(method='linear').bfill().ffill()
-p_col = 'p1' if 'p1' in df_activo.columns else 'p'
-cols = [p_col, 'sh1', 'C1', 'B1', 'Tem_1', 'DE1']
+cols = ['p', 'sh1', 'C1', 'B1', 'Tem_1', 'DE1']
 
 matriz_spearman = df_activo[cols].corr(method='spearman')
 
@@ -1980,8 +2030,7 @@ plt.show()`,
 import matplotlib.pyplot as plt
 
 df_activo = df_ancon.loc['2020-03-24':].copy().interpolate(method='linear').bfill().ffill()
-p_col = 'p1' if 'p1' in df_activo.columns else 'p'
-cols = [p_col, 'sh1', 'C1', 'B1', 'Tem_1', 'DE1']
+cols = ['p', 'sh1', 'C1', 'B1', 'Tem_1', 'DE1']
 
 matriz_spearman = df_activo[cols].corr(method='spearman')
 
@@ -2012,13 +2061,13 @@ plt.show()`,
           <div class="theory-narrative-bridge">
             <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 3.6</div>
             <p style="margin: 0 0 0.5rem 0;">
-              En la matriz de correlación de la lección anterior observaste que la correlación instantánea entre la lluvia diaria y la deformación en el mismo día es baja.
+              En la matriz de correlación de la lección anterior observaste que la correlación instantánea entre la lluvia diaria <code>p</code> y la deformación en el mismo día es baja.
             </p>
             <p style="margin: 0 0 0.5rem 0;">
               Esto no significa que la lluvia no sea el detonante: significa que <strong>el agua requiere tiempo para infiltrarse a través del perfil del suelo, alcanzar las superficies de falla y elevar las presiones de poros</strong>.
             </p>
             <p style="margin: 0;">
-              Para descubrir cuantitativamente el desfase temporal físico, aplicamos <strong>Correlación Rezagada (*Time-Lagged Cross-Correlation*)</strong>: desplazamos la serie detonante en el tiempo mediante <code>.shift(lag)</code> para una ventana de retardos ($-14$ a $+14$ días). El retardo que alcance el pico de máxima correlación ($r_{\\max}$) define el <strong>tiempo de percolación y tránsito hidráulico</strong> de la ladera de Ancón Norte.
+              Para descubrir cuantitativamente el desfase temporal físico, aplicamos <strong>Correlación Rezagada (*Time-Lagged Cross-Correlation*)</strong>: desplazamos la serie detonante <code>p</code> en el tiempo mediante <code>.shift(lag)</code> para una ventana de retardos ($-14$ a $+14$ días). El retardo que alcance el pico de máxima correlación ($r_{\\max}$) define el <strong>tiempo de percolación y tránsito hidráulico</strong> de la ladera de Ancón Norte.
             </p>
           </div>
 
@@ -2027,10 +2076,10 @@ plt.show()`,
 
           <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Desplazamiento Temporal con <code>.shift(lag)</code></h4>
           <p>
-            Al calcular la correlación desplazada:
+            Al calcular la correlación desplazada sobre la variable de lluvia consolidada <code>p</code>:
           </p>
-          <pre class="trace-pre"><code># Desplaza la lluvia 'lag' días hacia adelante:
-correlacion = df_activo['sh1'].corr(df_activo['p1'].shift(lag))</code></pre>
+          <pre class="trace-pre"><code># Desplaza la lluvia consolidada 'p' un número 'lag' de días hacia adelante:
+correlacion = df_activo['sh1'].corr(df_activo['p'].shift(lag))</code></pre>
           <ul style="margin: 0.35rem 0 0.85rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
             <li><strong>Lag &gt; 0:</strong> La lluvia ocurre antes del incremento en la variable de respuesta (comportamiento causal físico).</li>
             <li><strong>Pico de Máxima Correlación:</strong> Representa los días que tarda el frente húmedo en viajar desde la superficie hasta la profundidad de la sonda.</li>
@@ -2038,10 +2087,10 @@ correlacion = df_activo['sh1'].corr(df_activo['p1'].shift(lag))</code></pre>
 
           <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
             <strong>💡 Tu Turno en el Editor: Descubrimiento del Tiempo de Infiltración</strong><br>
-            Calcularás la correlación rezagada entre la lluvia y la humedad para retardos de -14 a +14 días, identificarás el lag óptimo del pico máximo y trazarás el correlograma con su línea de cota crítica.
+            Calcularás la correlación rezagada entre la lluvia consolidada <code>p</code> y la humedad <code>sh1</code> para retardos de -14 a +14 días, identificarás el lag óptimo del pico máximo y trazarás el correlograma con su línea de cota crítica.
           </div>
         `,
-        instruction: "1. Aísla en <code>df_activo</code> la ventana temporal desde <code>'2020-03-24'</code> en adelante y asegura continuidad aplicando <code>.interpolate().bfill().ffill()</code>.<br>2. Define el rango de retardos temporales de -14 a +14 días: <code>lags = range(-14, 15)</code>.<br>3. Mediante una lista por comprensión o un bucle, calcula la correlación de Pearson entre la humedad <code>df_activo['sh1']</code> y la lluvia desplazada <code>df_activo['p1'].shift(lag)</code> (o <code>'p'</code>) para cada valor de lag.<br>4. Identifica el retardo que alcanza la correlación máxima (<code>mejor_lag</code>) y el valor de correlación pico (<code>max_r</code>), y muéstralos en consola.<br>5. Configura una figura de 8.5 &times; 3.8 pulgadas, grafica los puntos del correlograma con marcadores circulares y línea verde azulada (<code>'teal'</code>), añade una línea vertical roja punteada en el lag del pico con <code>plt.axvline()</code>, titula, rotula ejes, cuadrícula y despliega con <code>plt.show()</code>.",
+        instruction: "1. Aísla en <code>df_activo</code> la ventana temporal desde <code>'2020-03-24'</code> en adelante y asegura continuidad aplicando <code>.interpolate().bfill().ffill()</code>.<br>2. Define el rango de retardos temporales de -14 a +14 días: <code>lags = range(-14, 15)</code>.<br>3. Mediante una lista por comprensión o un bucle, calcula la correlación de Pearson entre la humedad <code>df_activo['sh1']</code> y la lluvia consolidada desplazada <code>df_activo['p'].shift(lag)</code> para cada valor de lag.<br>4. Identifica el retardo que alcanza la correlación máxima (<code>mejor_lag</code>) y el valor de correlación pico (<code>max_r</code>), y muéstralos en consola.<br>5. Configura una figura de 8.5 &times; 3.8 pulgadas, grafica los puntos del correlograma con marcadores circulares y línea verde azulada (<code>'teal'</code>), añade una línea vertical roja punteada en el lag del pico con <code>plt.axvline()</code>, titula, rotula ejes, cuadrícula y despliega con <code>plt.show()</code>.",
         initialCode: `# ==============================================================
 # EJERCICIO 3.7: Correlación Rezagada (Tiempo de Infiltración)
 # La matriz df_ancon ya se encuentra disponible en memoria.
@@ -2056,7 +2105,7 @@ import matplotlib.pyplot as plt
 # Paso 2: Define el rango de retardos temporales (lags) de -14 a +14 días (range(-14, 15)):
 
 
-# Paso 3: Calcula la correlación entre sh1 y la lluvia desplazada .shift(lag) para cada lag:
+# Paso 3: Calcula la correlación entre sh1 y la lluvia desplazada df_activo['p'].shift(lag) para cada lag:
 
 
 # Paso 4: Encuentra el lag del pico máximo de correlación y muéstralo en consola:
@@ -2067,10 +2116,9 @@ import matplotlib.pyplot as plt
 `,
         hint: `Escribe:
 df_activo = df_ancon.loc['2020-03-24':].interpolate().bfill().ffill()
-p_col = 'p1' if 'p1' in df_activo.columns else 'p'
 
 lags = range(-14, 15)
-corrs = [df_activo['sh1'].corr(df_activo[p_col].shift(lag)) for lag in lags]
+corrs = [df_activo['sh1'].corr(df_activo['p'].shift(lag)) for lag in lags]
 
 mejor_lag = list(lags)[np.argmax(corrs)]
 max_r = max(corrs)
@@ -2080,7 +2128,7 @@ plt.figure(figsize=(8.5, 3.8))
 plt.plot(list(lags), corrs, marker='o', color='teal', linewidth=1.5)
 plt.axvline(mejor_lag, color='crimson', linestyle='--', label=f'Pico: {mejor_lag} días (r={max_r:.3f})')
 plt.axhline(0, color='gray', linestyle=':')
-plt.title('Correlación Rezagada: Lluvia vs. Humedad en Ancón Norte', fontweight='bold')
+plt.title('Correlación Rezagada: Lluvia (p) vs. Humedad (sh1) en Ancón Norte', fontweight='bold')
 plt.xlabel('Lag (días de retardo)')
 plt.ylabel('Correlación de Pearson (r)')
 plt.legend()
@@ -2092,10 +2140,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 df_activo = df_ancon.loc['2020-03-24':].interpolate().bfill().ffill()
-p_col = 'p1' if 'p1' in df_activo.columns else 'p'
 
 lags = range(-14, 15)
-corrs = [df_activo['sh1'].corr(df_activo[p_col].shift(lag)) for lag in lags]
+corrs = [df_activo['sh1'].corr(df_activo['p'].shift(lag)) for lag in lags]
 
 mejor_lag = list(lags)[np.argmax(corrs)]
 max_r = max(corrs)
@@ -2105,7 +2152,7 @@ plt.figure(figsize=(8.5, 3.8))
 plt.plot(list(lags), corrs, marker='o', color='teal', linewidth=1.5)
 plt.axvline(mejor_lag, color='crimson', linestyle='--', label=f'Pico: {mejor_lag} días (r={max_r:.3f})')
 plt.axhline(0, color='gray', linestyle=':')
-plt.title('Correlación Rezagada: Lluvia vs. Humedad en Ancón Norte', fontweight='bold')
+plt.title('Correlación Rezagada: Lluvia (p) vs. Humedad (sh1) en Ancón Norte', fontweight='bold')
 plt.xlabel('Lag (días de retardo)')
 plt.ylabel('Correlación de Pearson (r)')
 plt.legend()

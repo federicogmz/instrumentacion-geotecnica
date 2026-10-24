@@ -55,6 +55,8 @@ import matplotlib.pyplot as plt
 try:
     df_ancon = pd.read_csv('df_ancon.csv', index_col=0)
     df_ancon.index = pd.to_datetime(df_ancon.index)
+    df_crudo = pd.read_csv('df_crudo.csv', index_col=0)
+    df_crudo.index = pd.to_datetime(df_crudo.index)
 except Exception as _e:
     pass
 
@@ -96,6 +98,7 @@ def grafica(sensor):
   async mountDataFiles() {
     const files = [
       { name: "df_ancon.csv", path: "./data/df_ancon.csv" },
+      { name: "df_crudo.csv", path: "./data/df_crudo.csv" },
       { name: "pluviometro.csv", path: "./data/pluviometro.csv" },
       { name: "humedad.csv", path: "./data/humedad.csv" },
       { name: "extensometro.csv", path: "./data/extensometro.csv" },
@@ -143,16 +146,45 @@ def grafica(sensor):
         const cur = new Date(startDate);
         cur.setDate(startDate.getDate() + i);
         const dStr = cur.toISOString().split("T")[0];
-        const sh1 = (55 + Math.sin(i / 5) * 15 + Math.random() * 2).toFixed(2);
-        const p = Math.random() > 0.7 ? (Math.random() * 35).toFixed(1) : "0.0";
-        const c1 = (1.75 + i * 0.008 + (Math.random() - 0.5) * 0.02).toFixed(3);
-        const b1 = (-0.6 + i * 0.004 + (Math.random() - 0.5) * 0.01).toFixed(3);
+        const sh1 = (i >= 10 && i < 47) ? "" : (55 + Math.sin(i / 5) * 15).toFixed(2);
+        const p = i === 0 ? "142.4" : (i % 7 === 0 ? "18.5" : "0.0");
+        const c1 = (1.75 + i * 0.008).toFixed(3);
+        const b1 = (-0.6 + i * 0.004).toFixed(3);
         const tem = (26 + Math.sin(i / 3) * 3).toFixed(1);
-        const de1 = i === 40 || i === 70 ? "-999.0" : (Math.random() > 0.8 ? (Math.random() * 1.5).toFixed(2) : "0.0");
+        const de1 = i === 40 || i === 70 ? "-999.0" : (i === 1 ? "198.965" : "0.0");
         sampleCSV += `${dStr},${sh1},${p},${p},${c1},${b1},${tem},${de1}\n`;
       }
       this.pyodide.FS.writeFile("/df_ancon.csv", sampleCSV);
       this.pyodide.FS.writeFile("df_ancon.csv", sampleCSV);
+    }
+
+    // 1b. Verificar y respaldar df_crudo.csv (intervalos variables 1min, 5min y 1h, freq=None)
+    let existsCrudo = false;
+    try {
+      const stat = this.pyodide.FS.stat("/df_crudo.csv");
+      if (stat && stat.size > 100) existsCrudo = true;
+    } catch (e) {}
+
+    if (!existsCrudo) {
+      let crudoCSV = ",p1,p2,sh1,DE1,C1,B1,Tem_1\n";
+      const startDate = new Date("2020-05-18T00:00:00Z");
+      for (let m = 0; m < 720; m++) {
+        const is5m = m % 5 === 0;
+        const is1h = m % 60 === 0;
+        if (!is5m && m >= 360) continue; // Primeras 6h a 1min, siguientes 6h a 5min -> intervalos variables
+        const cur = new Date(startDate.getTime() + m * 60000);
+        const dStr = cur.toISOString().replace("T", " ").substring(0, 19);
+        const p1 = m === 0 ? "22.10" : (is5m ? "0.0" : "");
+        const p2 = m === 0 ? "18.37" : (m === 5 ? "1.95" : (is5m ? "0.0" : ""));
+        const sh1 = is1h ? (54.0 + m * 0.005).toFixed(2) : "";
+        const de1 = m === 420 ? "0.37" : (m < 360 ? "0.0" : "");
+        const c1 = is1h ? "1.85" : "";
+        const b1 = is1h ? "-0.59" : "";
+        const tem = is1h ? "25.4" : "";
+        crudoCSV += `${dStr},${p1},${p2},${sh1},${de1},${c1},${b1},${tem}\n`;
+      }
+      this.pyodide.FS.writeFile("/df_crudo.csv", crudoCSV);
+      this.pyodide.FS.writeFile("df_crudo.csv", crudoCSV);
     }
 
     // 2. Verificar y respaldar pluviometro.csv
@@ -270,12 +302,20 @@ try:
 except ImportError:
     plt = None
 
-# Garantizar que df_ancon esté en memoria global sin requerir read_csv en cada ejercicio
+# Garantizar que df_ancon y df_crudo estén en memoria global sin requerir read_csv en cada ejercicio
 if 'df_ancon' not in globals():
     try:
         import pandas as pd
         df_ancon = pd.read_csv('df_ancon.csv', index_col=0)
         df_ancon.index = pd.to_datetime(df_ancon.index)
+    except Exception:
+        pass
+
+if 'df_crudo' not in globals():
+    try:
+        import pandas as pd
+        df_crudo = pd.read_csv('df_crudo.csv', index_col=0)
+        df_crudo.index = pd.to_datetime(df_crudo.index)
     except Exception:
         pass
 

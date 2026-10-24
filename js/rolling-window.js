@@ -39,7 +39,7 @@
         <!-- Encabezado Unificado -->
         <div class="flow-header">
           <div class="flow-title-group">
-            <span class="flow-badge">Módulo 3 &bull; Lección 3.2 &bull; Pizarra Conceptual &amp; Simulador Integrado</span>
+            <span class="flow-badge">Módulo 3 &bull; Lección 3.3 &bull; Pizarra Conceptual &amp; Simulador Integrado</span>
             <h4 class="flow-title">⏳ Ventana Móvil (<code>.rolling()</code>): Lluvia Antecedente Acumulada</h4>
           </div>
           <div class="bp-status-pill ${res.isNaN ? 'pill-warn' : 'pill-ok'}">

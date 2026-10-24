@@ -40,7 +40,7 @@
         <!-- Encabezado Unificado -->
         <div class="flow-header">
           <div class="flow-title-group">
-            <span class="flow-badge">Módulo 3 &bull; Lección 3.3 &bull; Pizarra Conceptual &amp; Simulador Integrado</span>
+            <span class="flow-badge">Módulo 3 &bull; Lección 3.4 &bull; Pizarra Conceptual &amp; Simulador Integrado</span>
             <h4 class="flow-title">📈 Cinemática de Laderas: Velocidad y Aceleración de Falla con <code>.diff()</code></h4>
           </div>
           <div class="bp-status-pill ${isCritical ? 'pill-alert' : 'pill-ok'}">
@@ -49,7 +49,7 @@
         </div>
 
         <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.55;">
-          El desplazamiento acumulado puede ocultar el peligro; <strong>la derivada discreta de velocidad (<code>.diff()</code>) revela si la ladera está acelerando hacia el colapso</strong>. A continuación se integran el modelo teórico de Saito y el simulador de cálculo dinámico:
+          El desplazamiento acumulado puede ocultar el peligro; <strong>la derivada discreta (<code>.diff()</code>) revela si la ladera está acelerando hacia el colapso</strong>. A continuación se integran el modelo teórico de Saito y el simulador de cálculo dinámico:
         </p>
 
         <!-- 1. ESQUEMA CONCEPTUAL DE PIZARRA (LAS 3 FASES DE SAITO) -->
@@ -81,11 +81,11 @@
           <div class="wb-rules-col">
             <div class="wb-card-glass">
               <h5 style="color:var(--accent-primary); margin-top:0;">⚡ Derivadas Numéricas con Pandas</h5>
-              <div class="wb-code-block" style="font-size:0.77rem;"># 1. Velocidad de deformación (mm/día):
-df['velocidad'] = df['DE1'].diff()
+              <div class="wb-code-block" style="font-size:0.75rem;"># 1. Desplazamiento acumulado (mm):
+df['acumulado_DE1'] = df['DE1'].cumsum()
 
-# 2. Aceleración cinemática (mm/día²):
-df['aceleracion'] = df['velocidad'].diff()</div>
+# 2. Aceleración diaria (mm/día²):
+df['aceleracion_DE1'] = df['DE1'].diff()</div>
               <ul class="bullet-list" style="margin-top:8px; font-size:0.86em; gap:8px;">
                 <li><strong><code>.diff()</code>:</strong> Resta a cada fila el valor de la fila anterior ($y_t - y_{t-1}$).</li>
                 <li><strong>Fila inicial:</strong> El primer registro siempre resulta en <code>NaN</code> porque no tiene dato anterior contra el cual restarse.</li>

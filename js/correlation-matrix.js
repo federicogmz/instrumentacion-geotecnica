@@ -9,24 +9,24 @@
     method: "pearson", // 'pearson' o 'spearman'
   };
 
-  const sensors = ["p1", "sh1", "C1", "B1", "Tem_1", "DE1"];
+  const sensors = ["p", "sh1", "C1", "B1", "Tem_1", "DE1"];
 
   const pearsonData = {
-    "p1":    { "p1": 1.0,  "sh1": 0.26,  "C1": 0.09,  "B1": -0.05, "Tem_1": -0.37, "DE1": -0.05 },
-    "sh1":   { "p1": 0.26, "sh1": 1.0,   "C1": 0.38,  "B1": -0.26, "Tem_1": -0.42, "DE1": -0.00 },
-    "C1":    { "p1": 0.09, "sh1": 0.38,  "C1": 1.0,   "B1": -0.91, "Tem_1": -0.14, "DE1": -0.03 },
-    "B1":    { "p1": -0.05,"sh1": -0.26, "C1": -0.91, "B1": 1.0,   "Tem_1": 0.12,  "DE1": 0.05 },
-    "Tem_1": { "p1": -0.37,"sh1": -0.42, "C1": -0.14, "B1": 0.12,  "Tem_1": 1.0,   "DE1": -0.00 },
-    "DE1":   { "p1": -0.05,"sh1": -0.00, "C1": -0.03, "B1": 0.05,  "Tem_1": -0.00, "DE1": 1.0 }
+    "p":     { "p": 1.0,   "sh1": 0.26,  "C1": 0.09,  "B1": -0.05, "Tem_1": -0.37, "DE1": -0.05 },
+    "sh1":   { "p": 0.26,  "sh1": 1.0,   "C1": 0.38,  "B1": -0.26, "Tem_1": -0.42, "DE1": -0.00 },
+    "C1":    { "p": 0.09,  "sh1": 0.38,  "C1": 1.0,   "B1": -0.91, "Tem_1": -0.14, "DE1": -0.03 },
+    "B1":    { "p": -0.05, "sh1": -0.26, "C1": -0.91, "B1": 1.0,   "Tem_1": 0.12,  "DE1": 0.05 },
+    "Tem_1": { "p": -0.37, "sh1": -0.42, "C1": -0.14, "B1": 0.12,  "Tem_1": 1.0,   "DE1": -0.00 },
+    "DE1":   { "p": -0.05, "sh1": -0.00, "C1": -0.03, "B1": 0.05,  "Tem_1": -0.00, "DE1": 1.0 }
   };
 
   const spearmanData = {
-    "p1":    { "p1": 1.0,  "sh1": 0.30,  "C1": 0.19,  "B1": -0.18, "Tem_1": -0.47, "DE1": 0.18 },
-    "sh1":   { "p1": 0.30, "sh1": 1.0,   "C1": 0.35,  "B1": -0.19, "Tem_1": -0.43, "DE1": 0.12 },
-    "C1":    { "p1": 0.19, "sh1": 0.35,  "C1": 1.0,   "B1": -0.85, "Tem_1": -0.09, "DE1": 0.69 },
-    "B1":    { "p1": -0.18,"sh1": -0.19, "C1": -0.85, "B1": 1.0,   "Tem_1": 0.06,  "DE1": -0.83 },
-    "Tem_1": { "p1": -0.47,"sh1": -0.43, "C1": -0.09, "B1": 0.06,  "Tem_1": 1.0,   "DE1": -0.06 },
-    "DE1":   { "p1": 0.18, "sh1": 0.12,  "C1": 0.69,  "B1": -0.83, "Tem_1": -0.06, "DE1": 1.0 }
+    "p":     { "p": 1.0,   "sh1": 0.30,  "C1": 0.19,  "B1": -0.18, "Tem_1": -0.47, "DE1": 0.18 },
+    "sh1":   { "p": 0.30,  "sh1": 1.0,   "C1": 0.35,  "B1": -0.19, "Tem_1": -0.43, "DE1": 0.12 },
+    "C1":    { "p": 0.19,  "sh1": 0.35,  "C1": 1.0,   "B1": -0.85, "Tem_1": -0.09, "DE1": 0.69 },
+    "B1":    { "p": -0.18, "sh1": -0.19, "C1": -0.85, "B1": 1.0,   "Tem_1": 0.06,  "DE1": -0.83 },
+    "Tem_1": { "p": -0.47, "sh1": -0.43, "C1": -0.09, "B1": 0.06,  "Tem_1": 1.0,   "DE1": -0.06 },
+    "DE1":   { "p": 0.18,  "sh1": 0.12,  "C1": 0.69,  "B1": -0.83, "Tem_1": -0.06, "DE1": 1.0 }
   };
 
   function getColor(val) {
@@ -110,7 +110,7 @@
         <!-- Código Python generado -->
         <div class="tb-code-footer" style="margin-top:0.75rem;">
           <pre class="trace-pre"><code><span class="tok-comment"># Matriz de correlación ${isPearson ? 'lineal de Pearson' : 'monotónica de Spearman'}:</span>
-cols = [<span class="tok-str">'p1'</span>, <span class="tok-str">'sh1'</span>, <span class="tok-str">'C1'</span>, <span class="tok-str">'B1'</span>, <span class="tok-str">'Tem_1'</span>, <span class="tok-str">'DE1'</span>]
+cols = [<span class="tok-str">'p'</span>, <span class="tok-str">'sh1'</span>, <span class="tok-str">'C1'</span>, <span class="tok-str">'B1'</span>, <span class="tok-str">'Tem_1'</span>, <span class="tok-str">'DE1'</span>]
 matriz_corr = df_activo[cols].corr(method=<span class="tok-str">'${isPearson ? 'pearson' : 'spearman'}'</span>)
 
 <span class="tok-comment"># Visualización de mapa de calor (Heatmap) con Matplotlib:</span>

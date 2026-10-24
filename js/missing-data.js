@@ -1,6 +1,6 @@
 /**
  * missing-data.js
- * Componente visual interactivo y esquema de pizarra integrado para la Lección 3.1.
+ * Componente visual interactivo y esquema de pizarra integrado para la Lección 3.2.
  * Tratamiento de Datos Faltantes (NaN) e Interpolación Lineal en Telemetría Geotécnica.
  * 
  * Integra en un único lienzo:
@@ -76,7 +76,7 @@
         <!-- Encabezado Unificado -->
         <div class="flow-header">
           <div class="flow-title-group">
-            <span class="flow-badge">Módulo 3 &bull; Lección 3.1 &bull; Pizarra Conceptual &amp; Simulador Integrado</span>
+            <span class="flow-badge">Módulo 3 &bull; Lección 3.2 &bull; Pizarra Conceptual &amp; Simulador Integrado</span>
             <h4 class="flow-title">🔬 Tratamiento de Datos Faltantes (<code>NaN</code>): El Dilema de la Telemetría</h4>
           </div>
           <div class="bp-status-pill ${state.method === 'interpolate' ? 'pill-ok' : state.method === 'dropna' ? 'pill-alert' : 'pill-warn'}">
@@ -85,7 +85,7 @@
         </div>
 
         <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted); line-height: 1.55;">
-          En telemetría geotécnica, las caídas de señal generan huecos (<code>NaN</code>). <strong>Eliminar filas con <code>dropna()</code> destruye la regularidad del paso temporal ($\\Delta t$)</strong>, imposibilitando calcular derivadas de velocidad o acumulados móviles con rigor. A continuación se integran la comparativa de métodos y el simulador de reconstrucción:
+          Una vez que la serie tiene una frecuencia regular definida gracias a <code>.resample()</code> (Lección 3.1), los sensores de menor frecuencia (p. ej., acelerómetro horario llevado a 5 min) o las caídas de telemetría aparecen como huecos (<code>NaN</code>). <strong>Eliminar filas con <code>dropna()</code> destruye ese paso temporal uniforme ($\\Delta t$)</strong>; por ello empleamos interpolación lineal:
         </p>
 
         <!-- 1. ESQUEMA CONCEPTUAL DE PIZARRA (COMPARATIVA METODOLÓGICA) -->

@@ -69,7 +69,7 @@
         <!-- Encabezado Unificado -->
         <div class="flow-header">
           <div class="flow-title-group">
-            <span class="flow-badge">Módulo 3 &bull; Lección 3.4 &bull; Pizarra Conceptual &amp; Simulador Integrado</span>
+            <span class="flow-badge">Módulo 3 &bull; Lección 3.7 &bull; Pizarra Conceptual &amp; Simulador Integrado</span>
             <h4 class="flow-title">⏱️ Correlación Rezagada (<code>.shift()</code>): Retardo Hidrogeológico</h4>
           </div>
           <div class="bp-status-pill ${isOptimal ? 'pill-ok' : 'pill-warn'}">
