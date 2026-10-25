@@ -814,6 +814,17 @@ class CourseApp {
       this.dom.validationBanner.style.display = "none";
     }
 
+    // Limpiar salida de ejecución de la lección previa
+    if (this.dom.consoleOutput) {
+      this.dom.consoleOutput.textContent = "Presiona 'Ejecutar Código' (Ctrl+Enter) para ver el resultado aquí...";
+      this.dom.consoleOutput.className = "console-output-area dim";
+      this.dom.consoleOutput.style.display = "block";
+    }
+    if (this.dom.plotDisplay) {
+      this.dom.plotDisplay.innerHTML = "";
+      this.dom.plotDisplay.style.display = "none";
+    }
+
     // Widgets pedagógicos
     this._initWidgets(lesson.id);
 
@@ -894,6 +905,7 @@ class CourseApp {
   prevLesson() {
     if (this.currentLessonIdx > 0) {
       this.currentLessonIdx--;
+      localStorage.setItem("ig_last_lesson", String(this.currentLessonIdx));
       this.renderLesson();
       this.scrollToTop();
     }
@@ -903,16 +915,28 @@ class CourseApp {
     const moduleData = COURSE_DATA[this.currentSection];
     if (moduleData && this.currentLessonIdx < moduleData.lessons.length - 1) {
       this.currentLessonIdx++;
+      localStorage.setItem("ig_last_lesson", String(this.currentLessonIdx));
       this.renderLesson();
       this.scrollToTop();
     }
   }
 
   scrollToTop() {
-    const target = this.dom.theoryPane || document.getElementById("theory-pane");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (document.activeElement && typeof document.activeElement.blur === "function") {
+      document.activeElement.blur();
     }
+    const doScroll = () => {
+      const htmlEl = document.documentElement;
+      const prevBehavior = htmlEl.style.scrollBehavior;
+      htmlEl.style.scrollBehavior = "auto";
+      window.scrollTo(0, 0);
+      htmlEl.scrollTop = 0;
+      document.body.scrollTop = 0;
+      htmlEl.style.scrollBehavior = prevBehavior;
+    };
+    doScroll();
+    requestAnimationFrame(doScroll);
+    setTimeout(doScroll, 65);
   }
 
   // ───────────────────────────────────────────────────────────────────────────

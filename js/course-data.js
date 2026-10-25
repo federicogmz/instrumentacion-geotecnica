@@ -1603,7 +1603,7 @@ print(f"Valores nulos después de interpolar: {nulos_despues}")`,
       },
       {
         id: "m3_l3",
-        title: "3.3 Feature Engineering: Ventanas Móviles (rolling) y Lluvia Antecedente",
+        title: "3.3 Feature Engineering: Lluvia Acumulada (.cumsum) y Ventanas Móviles (.rolling)",
         concept: `
           <div class="theory-narrative-bridge">
             <div class="bridge-tag">🔗 Conexión Pedagógica con las Lecciones 3.1 y 3.2</div>
@@ -1611,31 +1611,38 @@ print(f"Valores nulos después de interpolar: {nulos_despues}")`,
               En las lecciones anteriores regularizaste la frecuencia temporal con <code>.resample()</code>, consolidaste la precipitación en la variable única <code>p</code> e interpolaste los vacíos <code>NaN</code> para obtener una serie continua sin huecos.
             </p>
             <p style="margin: 0 0 0.5rem 0;">
-              En el monitoreo diario de alerta temprana necesitamos evaluar <strong>cómo evoluciona el estado hídrico del talud día tras día</strong> considerando el agua infiltrada en las semanas previas: la <strong>lluvia antecedente móvil</strong>.
+              Para analizar el efecto hidrogeotécnico de la lluvia sobre un talud, necesitamos construir dos indicadores complementarios a partir de la precipitación diaria <code>p</code>:
             </p>
-            <p style="margin: 0;">
-              En geotecnia (modelo de Chleborad y umbrales de USGS), se analizan dos horizontes temporales móviles sobre la lluvia consolidada <code>p</code>: la lluvia de evento (3 días) y la lluvia acumulada profunda (30 días). En esta lección aprenderás a construir estas variables predictivas mediante <code>.rolling()</code> y <code>.cumsum()</code>.
-            </p>
+            <ul style="margin: 0.35rem 0 0.5rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
+              <li><strong>Lluvia Acumulada Total Histórica (<code>.cumsum()</code>):</strong> Suma progresivamente toda el agua caída desde el Día 1 de la campaña ($\\sum_{i=1}^{t} p_i$). Forma una curva tipo escalera cuya pendiente revela las temporadas invernales (rápido ascenso) frente a los veranos secos (mesetas horizontales).</li>
+              <li><strong>Lluvia Antecedente en Ventana Móvil (<code>.rolling(window=30).sum()</code>):</strong> Suma únicamente la lluvia de los últimos 30 días ($\\sum_{i=t-29}^{t} p_i$). A diferencia de <code>.cumsum()</code>, esta curva <strong>sube con las tormentas y desciende en días secos</strong>, modelando la recarga y el drenaje natural de la presión de poros en el suelo (criterio de Chleborad / USGS).</li>
+            </ul>
           </div>
 
-          <!-- Contenedor Interactivo de Ventana Móvil -->
+          <!-- Contenedor Interactivo de Ventana Móvil vs Cumsum -->
           <div id="rolling-window-container" style="margin: 1.25rem 0;"></div>
 
-          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Ventanas Móviles Continuas en Pandas</h4>
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Acumulado Histórico (<code>.cumsum()</code>) vs. Ventana Móvil (<code>.rolling()</code>) en Pandas</h4>
           <p>
-            El método <code>.rolling(window=30, min_periods=1)</code> desplaza una ventana de 30 días continuos sobre la precipitación <code>p</code>. El parámetro <code>min_periods=1</code> es fundamental: calcula la suma con los días disponibles al inicio de la serie evitando generar 29 valores <code>NaN</code> iniciales.
+            Mientras <code>.cumsum()</code> acumula indefinidamente desde el primer registro, <code>.rolling(window=30, min_periods=1).sum()</code> desplaza un lente de 30 días continuos sobre <code>p</code>. El argumento <code>min_periods=1</code> calcula la suma parcial desde el Día 1 para evitar generar 29 valores <code>NaN</code> al inicio de la serie:
           </p>
-          <pre class="trace-pre"><code>df_activo['lluvia_30d'] = df_activo['p'].rolling(window=30, min_periods=1).sum()
+          <pre class="trace-pre"><code># 1. Lluvia acumulada total desde el inicio del monitoreo (mm):
+df_activo['lluvia_acum'] = df_activo['p'].cumsum()
+
+# 2. Lluvia antecedente móvil de los últimos 30 días (mm):
+df_activo['lluvia_30d'] = df_activo['p'].rolling(window=30, min_periods=1).sum()
+
+# 3. Deformación acumulada del extensómetro (mm):
 df_activo['acumulado_DE1'] = df_activo['DE1'].cumsum()</code></pre>
 
           <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
-            <strong>💡 Tu Turno en el Editor: Lluvia Antecedente Móvil y Desplazamiento Acumulado</strong><br>
-            Calcularás la lluvia antecedente móvil de 30 días sobre <code>p</code> y la deformación acumulada, graficando ambas series en dos subplots verticales sincronizados para contrastar detonante vs respuesta del talud.
+            <strong>💡 Tu Turno en el Editor: Lluvia Acumulada (<code>.cumsum</code>), Lluvia Antecedente (<code>.rolling</code>) y Deformación</strong><br>
+            Calcularás la lluvia total acumulada con <code>.cumsum()</code>, la lluvia antecedente móvil de 30 días con <code>.rolling()</code> y la deformación acumulada, contrastando su evolución en subgráficos sincronizados.
           </div>
         `,
-        instruction: "1. Aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code> y limpia el centinela <code>-999.0</code> en <code>DE1</code> con <code>.replace(-999.0, 0)</code>.<br>2. Calcula la lluvia antecedente móvil de 30 días sobre la variable consolidada <code>df_activo['p']</code> usando <code>.rolling(window=30, min_periods=1).sum()</code> y guárdala en <code>df_activo['lluvia_30d']</code>.<br>3. Calcula la deformación acumulada histórica usando <code>.cumsum()</code> sobre <code>df_activo['DE1']</code> y guárdala en <code>df_activo['acumulado_DE1']</code>.<br>4. Configura una figura de 2 subplots verticales (<code>2, 1</code>, 10 &times; 6 pulgadas) sincronizados con <code>sharex=True</code>:<br>&bull; Panel superior: lluvia antecedente de 30 días en color azul marino.<br>&bull; Panel inferior: deformación superficial acumulada en color púrpura.<br>5. Añade títulos, etiquetas de ejes, leyendas, cuadrículas y despliega con <code>plt.show()</code>.",
+        instruction: "1. Aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code> y limpia el centinela <code>-999.0</code> en <code>DE1</code> con <code>.replace(-999.0, 0)</code>.<br>2. Calcula la <strong>lluvia acumulada histórica</strong> usando <code>df_activo['p'].cumsum()</code> en la columna <code>df_activo['lluvia_acum']</code> e imprime su valor total final (<code>df_activo['lluvia_acum'].iloc[-1]</code>).<br>3. Calcula la <strong>lluvia antecedente móvil de 30 días</strong> con <code>df_activo['p'].rolling(window=30, min_periods=1).sum()</code> en <code>df_activo['lluvia_30d']</code> y la deformación acumulada con <code>df_activo['DE1'].cumsum()</code> en <code>df_activo['acumulado_DE1']</code>.<br>4. Configura una figura de 3 subplots verticales (<code>3, 1</code>, 10 &times; 7.5 pulgadas) sincronizados con <code>sharex=True</code>:<br>&bull; Panel 0: <code>lluvia_acum</code> (<code>.cumsum()</code>) en color verde azulado (<code>'teal'</code>).<br>&bull; Panel 1: <code>lluvia_30d</code> (<code>.rolling(30).sum()</code>) en color azul marino (<code>'navy'</code>).<br>&bull; Panel 2: <code>acumulado_DE1</code> en color púrpura (<code>'purple'</code>).<br>5. Añade títulos, etiquetas, cuadrículas y despliega con <code>plt.show()</code>.",
         initialCode: `# ==============================================================
-# EJERCICIO 3.3: Lluvia Antecedente Móvil y Acumulados Históricos
+# EJERCICIO 3.3: Lluvia Acumulada (.cumsum) y Ventana Móvil (.rolling)
 # La matriz df_ancon ya se encuentra disponible en memoria.
 # ==============================================================
 import pandas as pd
@@ -1645,36 +1652,47 @@ import matplotlib.pyplot as plt
 # y reemplaza -999.0 por 0 en DE1:
 
 
-# Paso 2: Calcula la lluvia antecedente móvil de 30 días sobre df_activo['p'] (.rolling(30, min_periods=1).sum()):
+# Paso 2: Calcula la lluvia acumulada total con .cumsum() en df_activo['lluvia_acum']
+# e imprime el acumulado total al final del periodo:
 
 
-# Paso 3: Calcula la deformación acumulada histórica (.cumsum()):
+# Paso 3: Calcula la lluvia antecedente móvil de 30 días (.rolling(30, min_periods=1).sum())
+# en df_activo['lluvia_30d'] y la deformación acumulada en df_activo['acumulado_DE1']:
 
 
-# Paso 4: Crea los 2 subplots (2, 1, sharex=True, figsize=(10, 6)), grafica ambas series,
-# configura títulos, etiquetas, cuadrículas y despliega la gráfica:
+# Paso 4: Crea los 3 subplots verticales (3, 1, sharex=True, figsize=(10, 7.5)),
+# grafica lluvia_acum, lluvia_30d y acumulado_DE1, y despliega con plt.show():
 
 `,
         hint: `Escribe:
 df_activo = df_ancon.loc['2020-03-24':].copy()
 df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
 
+df_activo['lluvia_acum'] = df_activo['p'].cumsum()
+print(f"Lluvia total acumulada en el periodo: {df_activo['lluvia_acum'].iloc[-1]:.2f} mm")
+
 df_activo['lluvia_30d'] = df_activo['p'].rolling(window=30, min_periods=1).sum()
 df_activo['acumulado_DE1'] = df_activo['DE1'].cumsum()
 
-fig, axs = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
-axs[0].plot(df_activo.index, df_activo['lluvia_30d'], color='navy', label='Lluvia 30d (mm)')
-axs[0].set_title('Lluvia Antecedente Móvil a 30 Días', fontweight='bold')
-axs[0].set_ylabel('Precipitación 30d (mm)')
-axs[0].legend()
+fig, axs = plt.subplots(3, 1, figsize=(10, 7.5), sharex=True)
+axs[0].plot(df_activo.index, df_activo['lluvia_acum'], color='teal', label='Lluvia Acumulada .cumsum() (mm)')
+axs[0].set_title('Lluvia Total Acumulada Histórica (.cumsum)', fontweight='bold')
+axs[0].set_ylabel('Acumulado (mm)')
+axs[0].legend(loc='upper left')
 axs[0].grid(True, alpha=0.4)
 
-axs[1].plot(df_activo.index, df_activo['acumulado_DE1'], color='purple', label='Deformación Acumulada (mm)')
-axs[1].set_title('Deformación Acumulada DE1', fontweight='bold')
-axs[1].set_ylabel('Apertura Acumulada (mm)')
-axs[1].set_xlabel('Fecha')
-axs[1].legend()
+axs[1].plot(df_activo.index, df_activo['lluvia_30d'], color='navy', label='Lluvia Antecedente 30d .rolling() (mm)')
+axs[1].set_title('Lluvia Antecedente Móvil a 30 Días (.rolling)', fontweight='bold')
+axs[1].set_ylabel('Lluvia 30d (mm)')
+axs[1].legend(loc='upper left')
 axs[1].grid(True, alpha=0.4)
+
+axs[2].plot(df_activo.index, df_activo['acumulado_DE1'], color='purple', label='Deformación Acumulada DE1 (mm)')
+axs[2].set_title('Deformación Acumulada Superficial (DE1)', fontweight='bold')
+axs[2].set_ylabel('Apertura (mm)')
+axs[2].set_xlabel('Fecha')
+axs[2].legend(loc='upper left')
+axs[2].grid(True, alpha=0.4)
 
 plt.tight_layout()
 plt.show()`,
@@ -1684,123 +1702,140 @@ import matplotlib.pyplot as plt
 df_activo = df_ancon.loc['2020-03-24':].copy()
 df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
 
+df_activo['lluvia_acum'] = df_activo['p'].cumsum()
+print(f"Lluvia total acumulada en el periodo: {df_activo['lluvia_acum'].iloc[-1]:.2f} mm")
+
 df_activo['lluvia_30d'] = df_activo['p'].rolling(window=30, min_periods=1).sum()
 df_activo['acumulado_DE1'] = df_activo['DE1'].cumsum()
 
-fig, axs = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
-axs[0].plot(df_activo.index, df_activo['lluvia_30d'], color='navy', label='Lluvia 30d (mm)')
-axs[0].set_title('Lluvia Antecedente Móvil a 30 Días', fontweight='bold')
-axs[0].set_ylabel('Precipitación 30d (mm)')
-axs[0].legend()
+fig, axs = plt.subplots(3, 1, figsize=(10, 7.5), sharex=True)
+axs[0].plot(df_activo.index, df_activo['lluvia_acum'], color='teal', label='Lluvia Acumulada .cumsum() (mm)')
+axs[0].set_title('Lluvia Total Acumulada Histórica (.cumsum)', fontweight='bold')
+axs[0].set_ylabel('Acumulado (mm)')
+axs[0].legend(loc='upper left')
 axs[0].grid(True, alpha=0.4)
 
-axs[1].plot(df_activo.index, df_activo['acumulado_DE1'], color='purple', label='Deformación Acumulada (mm)')
-axs[1].set_title('Deformación Acumulada DE1', fontweight='bold')
-axs[1].set_ylabel('Apertura Acumulada (mm)')
-axs[1].set_xlabel('Fecha')
-axs[1].legend()
+axs[1].plot(df_activo.index, df_activo['lluvia_30d'], color='navy', label='Lluvia Antecedente 30d .rolling() (mm)')
+axs[1].set_title('Lluvia Antecedente Móvil a 30 Días (.rolling)', fontweight='bold')
+axs[1].set_ylabel('Lluvia 30d (mm)')
+axs[1].legend(loc='upper left')
 axs[1].grid(True, alpha=0.4)
+
+axs[2].plot(df_activo.index, df_activo['acumulado_DE1'], color='purple', label='Deformación Acumulada DE1 (mm)')
+axs[2].set_title('Deformación Acumulada Superficial (DE1)', fontweight='bold')
+axs[2].set_ylabel('Apertura (mm)')
+axs[2].set_xlabel('Fecha')
+axs[2].legend(loc='upper left')
+axs[2].grid(True, alpha=0.4)
 
 plt.tight_layout()
 plt.show()`,
-        validator: (output, hasPlot) => hasPlot
+        validator: (output, hasPlot) => output.includes("2173.9") && hasPlot
       },
       {
         id: "m3_l4",
-        title: "3.4 Análisis Cinemático: Tasas de Deformación y Aceleración (.diff)",
+        title: "3.4 Análisis Cinemático: Velocidad y Aceleración del Cabeceo Diario (.diff)",
         concept: `
           <div class="theory-narrative-bridge">
             <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 3.3</div>
             <p style="margin: 0 0 0.5rem 0;">
-              El desplazamiento acumulado (<code>DE1.cumsum()</code>) cuantifica cuánto se ha movido la masa en total, mientras que la deformación diaria <code>DE1</code> (sumada por día en mm/día) representa la <strong>tasa o velocidad diaria de apertura</strong> ($v = \\Delta s / \\Delta t$).
+              En la lección anterior empleaste operadores de integración temporal (<code>.cumsum()</code> y <code>.rolling().sum()</code>) para acumular variables. Ahora realizaremos la operación matemática inversa: la <strong>derivación discreta mediante diferencias finitas (<code>.diff()</code>)</strong> aplicada sobre el <strong>cabeceo diario del inclinómetro (<code>C1</code>, en grados <code>°</code>)</strong>.
             </p>
             <p style="margin: 0 0 0.5rem 0;">
-              Para advertir la inminencia de una rotura catastrófica necesitamos evaluar el cambio en esa velocidad día tras día: la <strong>aceleración de deformación</strong> ($a = \\Delta v / \\Delta t$, en mm/día²).
+              A diferencia del extensómetro diario (que permanece en cero la mayor parte del año salvo saltos puntuales), el ángulo de cabeceo diario <code>C1</code> es una <strong>variable de estado continua</strong> que registra día a día la posición angular del talud ($\\theta_t$, desde $1.70^\\circ$ hasta $2.56^\\circ$).
             </p>
             <p style="margin: 0;">
-              Según el <strong>Método de Fukuzono y Saito</strong>, cuando una masa inestable entra en fluencia terciaria acelerada hacia el colapso ($a = \\Delta v / \\Delta t &gt; 0$), su velocidad se dispara ($v \to \infty$) y su recíproco tiende a cero ($1/v \to 0$). En Pandas, la diferencia discreta entre registros consecutivos se calcula con <code>.diff()</code>.
+              Aplicar <code>.diff()</code> una vez sobre <code>C1</code> nos entrega la <strong>velocidad angular diaria</strong> ($\\omega_t = \\theta_t - \\theta_{t-1}$, en <code>°/día</code>), y aplicar <code>.diff()</code> por segunda vez sobre dicha velocidad revela la <strong>aceleración angular diaria</strong> ($\\alpha_t = \\omega_t - \\omega_{t-1}$, en <code>°/día²</code>). Mientras que el criterio clásico de Saito/Fukuzono evalúa aceleraciones monótonas hacia la falla ($\\alpha &gt; 0$), en series reales de campo <code>.diff()</code> también permite identificar variaciones bidireccionales ($\\omega &lt; 0$ y $\\omega &gt; 0$) y pulsos bruscos de rotación.
             </p>
           </div>
 
-          <!-- Contenedor Interactivo de Velocidad y Aceleración -->
+          <!-- Contenedor Interactivo de Velocidad y Aceleración en C1 -->
           <div id="velocity-acceleration-container" style="margin: 1.25rem 0;"></div>
 
-          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Diferencia Temporal Discreta con <code>.diff()</code></h4>
+          <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Velocidad y Aceleración Angular con <code>.diff()</code> sobre <code>C1</code></h4>
           <p>
-            Como en <code>df_ancon</code> la columna <code>DE1</code> ya contiene la deformación acumulada en cada día (velocidad diaria en mm/día, $\\Delta t = 1\\text{ día}$), aplicar <code>.diff()</code> directamente sobre <code>DE1</code> entrega el cambio de velocidad respecto al día anterior, es decir, la <strong>aceleración diaria</strong> (mm/día²):
+            Cada llamada a <code>.diff()</code> resta al valor del día actual el valor del día inmediatamente anterior ($y_t - y_{t-1}$). La primera derivada deja 1 registro inicial en <code>NaN</code> y la segunda derivada deja los 2 primeros registros en <code>NaN</code>:
           </p>
-          <pre class="trace-pre"><code>df_activo['aceleracion_DE1'] = df_activo['DE1'].diff().fillna(0)</code></pre>
+          <pre class="trace-pre"><code># 1ª Derivada discreta: Velocidad angular diaria de cabeceo (°/día)
+df_activo['vel_C1'] = df_activo['C1'].diff()
+
+# 2ª Derivada discreta: Aceleración angular diaria de cabeceo (°/día²)
+df_activo['acel_C1'] = df_activo['vel_C1'].diff()</code></pre>
 
           <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
-            <strong>💡 Tu Turno en el Editor: Aceleración Diaria de Apertura y Gráfico de Doble Eje</strong><br>
-            Calcularás la aceleración diaria aplicando <code>.diff()</code> sobre <code>DE1</code>, identificarás el pico máximo registrado y graficarás en un lienzo con doble eje (<code>twinx()</code>) la aceleración frente al desplazamiento acumulado.
+            <strong>💡 Tu Turno en el Editor: Cinemática del Cabeceo Diario <code>C1</code></strong><br>
+            Calcularás la velocidad angular diaria (<code>vel_C1</code>) y la aceleración angular diaria (<code>acel_C1</code>) del inclinómetro <code>C1</code>, imprimirás sus valores máximos y graficarás en doble eje (<code>twinx()</code>) la velocidad angular frente al ángulo de cabeceo diario <code>C1</code>.
           </div>
         `,
-        instruction: "1. Aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code> y limpia el centinela <code>-999.0</code> en <code>DE1</code> con <code>.replace(-999.0, 0)</code>.<br>2. Calcula la aceleración diaria aplicando <code>.diff()</code> sobre <code>df_activo['DE1']</code> y reemplaza el primer valor nulo con <code>.fillna(0)</code> en la columna <code>df_activo['aceleracion_DE1']</code>.<br>3. Muestra en consola el valor máximo registrado con <code>.max()</code>.<br>4. Configura una figura de 10 &times; 4.5 pulgadas y genera un gráfico de doble eje (<code>twinx()</code>):<br>&bull; Eje 1 (izquierdo): serie <code>aceleracion_DE1</code> en color naranja (<code>'darkorange'</code>) con ancho de línea 1.5.<br>&bull; Eje 2 (derecho): deformación total acumulada (<code>df_activo['DE1'].cumsum()</code>) en color púrpura.<br>5. Añade título en negrilla, rótulos en ambos ejes Y, cuadrícula y despliega con <code>plt.show()</code>.",
+        instruction: "1. Aísla el periodo coactivo desde <code>'2020-03-24'</code> en <code>df_activo</code>.<br>2. Calcula la <strong>velocidad angular diaria de cabeceo</strong> aplicando <code>.diff()</code> sobre <code>df_activo['C1']</code> y guárdala en <code>df_activo['vel_C1']</code>.<br>3. Calcula la <strong>aceleración angular diaria</strong> aplicando <code>.diff()</code> sobre <code>df_activo['vel_C1']</code> y guárdala en <code>df_activo['acel_C1']</code>.<br>4. Muestra en consola los valores máximos de <code>vel_C1</code> y <code>acel_C1</code> con <code>.max()</code>.<br>5. Configura una figura de 10 &times; 4.5 pulgadas con doble eje (<code>twinx()</code>):<br>&bull; Eje 1 (izquierdo): velocidad angular diaria <code>vel_C1</code> (<code>°/día</code>) en color naranja (<code>'darkorange'</code>).<br>&bull; Eje 2 (derecho): ángulo de cabeceo diario <code>C1</code> (<code>°</code>) en color púrpura (<code>'purple'</code>).<br>6. Añade título, rótulos en ambos ejes Y, cuadrícula y despliega con <code>plt.show()</code>.",
         initialCode: `# ==============================================================
-# EJERCICIO 3.4: Aceleración de Deformación (.diff) y Doble Eje Cinemático
+# EJERCICIO 3.4: Cinemática del Cabeceo Diario C1 (.diff)
 # La matriz df_ancon ya se encuentra disponible en memoria.
 # ==============================================================
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Paso 1: Aísla el periodo coactivo (desde '2020-03-24' en adelante) en df_activo
-# y reemplaza -999.0 por 0 en DE1:
+# Paso 1: Aísla el periodo coactivo (desde '2020-03-24' en adelante) en df_activo:
 
 
-# Paso 2: Calcula la aceleración diaria con .diff().fillna(0) en df_activo['aceleracion_DE1']:
+# Paso 2: Calcula la velocidad angular diaria en df_activo['vel_C1'] con C1.diff()
+# y la aceleración angular diaria en df_activo['acel_C1'] con vel_C1.diff():
 
 
-# Paso 3: Muestra en consola la aceleración máxima registrada (.max()):
+# Paso 3: Muestra en consola la velocidad máxima y la aceleración máxima (.max()):
 
 
-# Paso 4: Crea la figura y el eje gemelo con ax1.twinx(), grafica aceleracion_DE1 y desplazamiento acumulado,
-# rotula ambos ejes Y, añade título, cuadrícula y muestra la figura:
+# Paso 4: Crea la figura y el eje gemelo con ax1.twinx(), grafica vel_C1 (°/día) en ax1
+# y el cabeceo diario C1 (°) en ax2, añade título y muestra la figura:
 
 `,
         hint: `Escribe:
 df_activo = df_ancon.loc['2020-03-24':].copy()
-df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
-df_activo['aceleracion_DE1'] = df_activo['DE1'].diff().fillna(0)
-print(f"Aceleración máxima registrada: {df_activo['aceleracion_DE1'].max():.3f} mm/día²")
+df_activo['vel_C1'] = df_activo['C1'].diff()
+df_activo['acel_C1'] = df_activo['vel_C1'].diff()
+
+print(f"Velocidad angular máxima: {df_activo['vel_C1'].max():.4f} °/día")
+print(f"Aceleración angular máxima: {df_activo['acel_C1'].max():.4f} °/día²")
 
 fig, ax1 = plt.subplots(figsize=(10, 4.5))
-ax1.plot(df_activo.index, df_activo['aceleracion_DE1'], color='darkorange', label='Aceleración (mm/día²)', linewidth=1.5)
-ax1.set_ylabel('Aceleración de apertura (mm/día²)', color='darkorange', fontweight='bold')
+ax1.plot(df_activo.index, df_activo['vel_C1'], color='darkorange', label='Velocidad C1 (°/día)', linewidth=1.3)
+ax1.set_ylabel('Velocidad de cabeceo (°/día)', color='darkorange', fontweight='bold')
 ax1.tick_params(axis='y', labelcolor='darkorange')
 ax1.grid(True, linestyle='--', alpha=0.4)
 
 ax2 = ax1.twinx()
-ax2.plot(df_activo.index, df_activo['DE1'].cumsum(), color='purple', label='Desplazamiento Acumulado (mm)', linewidth=2)
-ax2.set_ylabel('Desplazamiento total (mm)', color='purple', fontweight='bold')
+ax2.plot(df_activo.index, df_activo['C1'], color='purple', label='Cabeceo Diario C1 (°)', linewidth=2)
+ax2.set_ylabel('Ángulo de cabeceo C1 (°)', color='purple', fontweight='bold')
 ax2.tick_params(axis='y', labelcolor='purple')
 
-plt.title('Cinemática del Talud: Aceleración Diaria vs. Desplazamiento Acumulado', fontweight='bold')
+plt.title('Cinemática del Inclinómetro: Velocidad Angular Diaria vs. Cabeceo C1', fontweight='bold')
 plt.tight_layout()
 plt.show()`,
         solution: `import pandas as pd
 import matplotlib.pyplot as plt
 
 df_activo = df_ancon.loc['2020-03-24':].copy()
-df_activo['DE1'] = df_activo['DE1'].replace(-999.0, 0)
-df_activo['aceleracion_DE1'] = df_activo['DE1'].diff().fillna(0)
-print(f"Aceleración máxima registrada: {df_activo['aceleracion_DE1'].max():.3f} mm/día²")
+df_activo['vel_C1'] = df_activo['C1'].diff()
+df_activo['acel_C1'] = df_activo['vel_C1'].diff()
+
+print(f"Velocidad angular máxima: {df_activo['vel_C1'].max():.4f} °/día")
+print(f"Aceleración angular máxima: {df_activo['acel_C1'].max():.4f} °/día²")
 
 fig, ax1 = plt.subplots(figsize=(10, 4.5))
-ax1.plot(df_activo.index, df_activo['aceleracion_DE1'], color='darkorange', label='Aceleración (mm/día²)', linewidth=1.5)
-ax1.set_ylabel('Aceleración de apertura (mm/día²)', color='darkorange', fontweight='bold')
+ax1.plot(df_activo.index, df_activo['vel_C1'], color='darkorange', label='Velocidad C1 (°/día)', linewidth=1.3)
+ax1.set_ylabel('Velocidad de cabeceo (°/día)', color='darkorange', fontweight='bold')
 ax1.tick_params(axis='y', labelcolor='darkorange')
 ax1.grid(True, linestyle='--', alpha=0.4)
 
 ax2 = ax1.twinx()
-ax2.plot(df_activo.index, df_activo['DE1'].cumsum(), color='purple', label='Desplazamiento Acumulado (mm)', linewidth=2)
-ax2.set_ylabel('Desplazamiento total (mm)', color='purple', fontweight='bold')
+ax2.plot(df_activo.index, df_activo['C1'], color='purple', label='Cabeceo Diario C1 (°)', linewidth=2)
+ax2.set_ylabel('Ángulo de cabeceo C1 (°)', color='purple', fontweight='bold')
 ax2.tick_params(axis='y', labelcolor='purple')
 
-plt.title('Cinemática del Talud: Aceleración Diaria vs. Desplazamiento Acumulado', fontweight='bold')
+plt.title('Cinemática del Inclinómetro: Velocidad Angular Diaria vs. Cabeceo C1', fontweight='bold')
 plt.tight_layout()
 plt.show()`,
-        validator: (output, hasPlot) => output.includes("198.96") && hasPlot
+        validator: (output, hasPlot) => output.includes("0.104") && output.includes("0.136") && hasPlot
       },
       {
         id: "m3_l5",
@@ -1809,16 +1844,16 @@ plt.show()`,
           <div class="theory-narrative-bridge">
             <div class="bridge-tag">🔗 Conexión Pedagógica con la Lección 3.4</div>
             <p style="margin: 0 0 0.5rem 0;">
-              Una serie de monitoreo geotécnico como la inclinación <code>C1</code> no es puramente aleatoria ni puramente monótona: superpone múltiples procesos físicos acoplados.
+              En la lección anterior observaste que la derivada diaria de <code>C1</code> mezcla una rotación lenta del terreno con oscilaciones cíclicas y saltos bruscos. Para no confundir una dilatación térmica o estacional con una falla real del talud, necesitamos separar matemáticamente esos fenómenos.
             </p>
             <p style="margin: 0 0 0.5rem 0;">
-              Mediante la <strong>descomposición aditiva clásica</strong> de series temporales, separamos algebraicamente la señal original $Y(t)$ en tres componentes independientes:
-              $$Y(t) = \\text{Tendencia}(t) + \\text{Estacionalidad}(t) + \\text{Residuo}(t)$$
+              Mediante la <strong>descomposición aditiva clásica</strong> (<code>seasonal_decompose</code>), desglosamos la señal observada $Y(t)$ en tres capas físicas aditivas:
+              $$Y(t) = \\text{Tendencia}\\,T(t) + \\text{Estacionalidad}\\,S(t) + \\text{Residuo}\\,R(t)$$
             </p>
             <ul style="margin: 0.35rem 0 0.85rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
-              <li><strong>Tendencia $T(t)$ (Largo Plazo):</strong> Movimiento plástico irreversible o rotación progresiva de la masa inestable.</li>
-              <li><strong>Estacionalidad $S(t)$ (Cíclica):</strong> Fluctuaciones periódicas de dilatación/contracción térmica día-noche o ciclos mensuales de humedad.</li>
-              <li><strong>Residuo $R(t)$ (Anomalías y Ruido):</strong> Variaciones de alta frecuencia. En geotecnia, los picos residuales extremos marcan <strong>eventos detonantes súbitos de movimiento no atribuibles a ciclos estacionales</strong>.</li>
+              <li><strong>1. Tendencia $T(t)$ (Deriva Geotécnica a Largo Plazo):</strong> Se extrae aplicando una media móvil centrada de longitud <code>period=P</code>. Filtra el ruido y los ciclos cortos para revelar la rotación plástica neta del talud (por eso deja $P/2$ valores <code>NaN</code> en cada extremo de la serie).</li>
+              <li><strong>2. Estacionalidad $S(t)$ (Ciclo Periódico de Media Cero):</strong> Promedia el patrón repetitivo de periodo $P$ sobre la serie sin tendencia ($Y - T$). Captura fluctuaciones cíclicas reversibles que suman cero a lo largo de cada periodo.</li>
+              <li><strong>3. Residuo $R(t) = Y(t) - T(t) - S(t)$ (Anomalías Súbitas):</strong> Contiene las desviaciones no explicadas ni por la tendencia ni por el ciclo. Los picos residuales que superan $\\pm 2\\sigma$ permiten detectar con exactitud las fechas de eventos extremos o perturbaciones mecánicas.</li>
             </ul>
           </div>
 
@@ -1827,7 +1862,7 @@ plt.show()`,
 
           <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Implementación con <code>statsmodels</code></h4>
           <p>
-            Utilizamos la función <code>seasonal_decompose</code> de <code>statsmodels.tsa.seasonal</code> con un periodo mensual (<code>period=30</code>) sobre la serie saneada:
+            Utilizamos la función <code>seasonal_decompose</code> de <code>statsmodels.tsa.seasonal</code> con un periodo mensual (<code>period=30</code> días) sobre la serie continua de cabeceo <code>C1</code>:
           </p>
           <pre class="trace-pre"><code>from statsmodels.tsa.seasonal import seasonal_decompose
 
@@ -1838,7 +1873,7 @@ df_activo['C1_residuo'] = descomp.resid</code></pre>
 
           <div class="theory-callout" style="border-left-color: var(--accent-cyan); margin: 0.85rem 0;">
             <strong>💡 Tu Turno en el Editor: Descomposición del Inclinómetro C1</strong><br>
-            Descompondrás la inclinación <code>C1</code> en sus tres componentes aditivas y graficarás la figura de 4 paneles alineados para aislar la rotación real de la ladera de los efectos estacionales.
+            Descompondrás la inclinación <code>C1</code> en sus tres componentes aditivas y graficarás la figura de 4 paneles alineados para aislar la rotación real de la ladera de los efectos estacionales y detectar anomalías en el residuo.
           </div>
         `,
         instruction: "1. Aísla en <code>df_activo</code> el periodo coactivo desde <code>'2020-03-24'</code> y asegura la continuidad de <code>C1</code> aplicando <code>.interpolate().bfill().ffill()</code>.<br>2. Importa <code>seasonal_decompose</code> desde <code>statsmodels.tsa.seasonal</code> y calcula la descomposición aditiva con <code>period=30</code> sobre <code>df_activo['C1']</code>.<br>3. Asigna las componentes a tres nuevas columnas: <code>'C1_tendencia'</code> (<code>descomp.trend</code>), <code>'C1_estacional'</code> (<code>descomp.seasonal</code>) y <code>'C1_residuo'</code> (<code>descomp.resid</code>).<br>4. Configura una figura de 4 subplots verticales (<code>figsize=(10, 8)</code>, <code>sharex=True</code>) graficando en orden: Original, Tendencia, Estacionalidad y Residuo, asignando títulos o etiquetas de ejes a cada panel.<br>5. Muestra en pantalla la figura con <code>plt.show()</code>.",
