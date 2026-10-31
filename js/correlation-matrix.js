@@ -109,17 +109,40 @@
 
         <!-- Código Python generado -->
         <div class="tb-code-footer" style="margin-top:0.75rem;">
-          <pre class="trace-pre"><code><span class="tok-comment"># Matriz de correlación ${isPearson ? 'lineal de Pearson' : 'monotónica de Spearman'}:</span>
-cols = [<span class="tok-str">'p'</span>, <span class="tok-str">'sh1'</span>, <span class="tok-str">'C1'</span>, <span class="tok-str">'B1'</span>, <span class="tok-str">'Tem_1'</span>, <span class="tok-str">'DE1'</span>]
-matriz_corr = df_activo[cols].corr(method=<span class="tok-str">'${isPearson ? 'pearson' : 'spearman'}'</span>)
+          <pre class="trace-pre"><code><span class="tok-kw">import</span> pandas <span class="tok-kw">as</span> pd
+<span class="tok-kw">import</span> matplotlib.pyplot <span class="tok-kw">as</span> plt
 
-<span class="tok-comment"># Visualización de mapa de calor (Heatmap) con Matplotlib:</span>
-plt.figure(figsize=(8, 6))
-plt.imshow(matriz_corr, cmap=<span class="tok-str">'coolwarm'</span>, vmin=-1, vmax=1)
-plt.colorbar()
-plt.xticks(range(len(cols)), cols, rotation=45)
-plt.yticks(range(len(cols)), cols)
-plt.title(<span class="tok-str">'Matriz de Correlación de ${isPearson ? 'Pearson' : 'Spearman'}'</span>, fontweight=<span class="tok-str">'bold'</span>)
+<span class="tok-comment"># 1. Preparar el periodo coactivo e interpolar huecos puntuales</span>
+df_activo = df_ancon.loc[<span class="tok-str">'2020-03-24'</span>:].copy().interpolate(method=<span class="tok-str">'linear'</span>).bfill().ffill()
+
+<span class="tok-comment"># 2. Definir variables y método ('pearson' o 'spearman')</span>
+cols = [<span class="tok-str">'p'</span>, <span class="tok-str">'sh1'</span>, <span class="tok-str">'C1'</span>, <span class="tok-str">'B1'</span>, <span class="tok-str">'Tem_1'</span>, <span class="tok-str">'DE1'</span>]
+metodo = <span class="tok-str">'${isPearson ? 'pearson' : 'spearman'}'</span>  <span class="tok-comment"># Cambia a '${isPearson ? 'spearman' : 'pearson'}' si deseas correlación ${isPearson ? 'monotónica' : 'lineal'}</span>
+matriz_corr = df_activo[cols].corr(method=metodo)
+
+<span class="tok-comment"># 3. Graficar Heatmap con Matplotlib</span>
+fig, ax = plt.subplots(figsize=(8, 6.5))
+cax = ax.imshow(matriz_corr, cmap=<span class="tok-str">'coolwarm'</span>, vmin=-1, vmax=1)
+fig.colorbar(cax, shrink=0.8, label=<span class="tok-str">f'Coeficiente de correlación ({metodo.capitalize()})'</span>)
+
+<span class="tok-comment"># Configurar etiquetas de los ejes</span>
+ax.set_xticks(range(len(cols)))
+ax.set_xticklabels(cols, rotation=45, ha=<span class="tok-str">'right'</span>)
+ax.set_yticks(range(len(cols)))
+ax.set_yticklabels(cols)
+
+<span class="tok-comment"># 4. Incluir las etiquetas con los valores de correlación en cada celda</span>
+<span class="tok-kw">for</span> i <span class="tok-kw">in</span> range(len(cols)):
+    <span class="tok-kw">for</span> j <span class="tok-kw">in</span> range(len(cols)):
+        val = matriz_corr.iloc[i, j]
+        ax.text(
+            j, i, <span class="tok-str">f"{val:.2f}"</span>,
+            ha=<span class="tok-str">'center'</span>, va=<span class="tok-str">'center'</span>,
+            color=<span class="tok-str">'white'</span> <span class="tok-kw">if</span> abs(val) &gt; 0.55 <span class="tok-kw">else</span> <span class="tok-str">'black'</span>,
+            fontweight=<span class="tok-str">'bold'</span>
+        )
+
+plt.title(<span class="tok-str">f'Matriz de Correlación de {metodo.capitalize()}'</span>, fontweight=<span class="tok-str">'bold'</span>)
 plt.tight_layout()
 plt.show()</code></pre>
         </div>
