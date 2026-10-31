@@ -1977,7 +1977,7 @@ plt.show()`,
               En la estadística clásica se utiliza el <strong>coeficiente de correlación lineal de Pearson ($r$)</strong>. Sin embargo, en geotecnia muchas respuestas son <strong>marcadamente no lineales</strong> (por ejemplo, la apertura de una grieta frente a la rotación del inclinómetro no es una línea recta, sino un proceso monótono con saltos y fluencia).
             </p>
             <p style="margin: 0;">
-              Aquí es donde el <strong>coeficiente de Spearman ($\rho$)</strong> resulta indispensable: evalúa la <strong>monotonicidad de los rangos</strong> sin exigir proporcionalidad lineal estricta. En esta lección construirás y compararás ambas matrices mediante un mapa de calor (Heatmap).
+              Aquí es donde el <strong>coeficiente de Spearman ($\\rho$)</strong> resulta indispensable: evalúa la <strong>monotonicidad de los rangos</strong> sin exigir proporcionalidad lineal estricta. En esta lección construirás y compararás ambas matrices mediante un mapa de calor (Heatmap).
             </p>
           </div>
 
@@ -1997,7 +1997,7 @@ plt.show()`,
             </div>
 
             <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--accent-emerald); border-radius: var(--radius-sm); padding: 0.85rem;">
-              <strong style="color: var(--accent-emerald);">Spearman ($\rho = +0.69$) &bull; Sensibilidad Monótona</strong>
+              <strong style="color: var(--accent-emerald);">Spearman ($\\rho = +0.69$) &bull; Sensibilidad Monótona</strong>
               <p style="font-size: 0.82rem; margin: 0.35rem 0; color: var(--text-muted);">
                 Al evaluar el orden de los rangos, Spearman revela una fuerte concordancia física: cuando el ángulo de inclinación avanza, la grieta superficial se abre monótonamente.
               </p>
