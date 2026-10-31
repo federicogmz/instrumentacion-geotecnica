@@ -2111,10 +2111,11 @@ plt.show()`,
 
           <h4 style="margin: 1.25rem 0 0.5rem; color: var(--text-main);">1. Desplazamiento Temporal con <code>.shift(lag)</code></h4>
           <p>
-            Al calcular la correlación desplazada sobre la variable de lluvia consolidada <code>p</code>:
+            Al calcular la correlación desplazada sobre la variable de lluvia consolidada <code>p</code> en el periodo coactivo (<code>df_coactivo</code>):
           </p>
           <pre class="trace-pre"><code># Desplaza la lluvia consolidada 'p' un número 'lag' de días hacia adelante:
-correlacion = df_activo['sh1'].corr(df_activo['p'].shift(lag))</code></pre>
+lags = range(-14, 15)
+correlaciones_lag = [df_coactivo['sh1'].corr(df_coactivo['p'].shift(lag)) for lag in lags]</code></pre>
           <ul style="margin: 0.35rem 0 0.85rem 1.25rem; font-size: 0.88rem; line-height: 1.6;">
             <li><strong>Lag &gt; 0:</strong> La lluvia ocurre antes del incremento en la variable de respuesta (comportamiento causal físico).</li>
             <li><strong>Pico de Máxima Correlación:</strong> Representa los días que tarda el frente húmedo en viajar desde la superficie hasta la profundidad de la sonda.</li>
@@ -2125,7 +2126,7 @@ correlacion = df_activo['sh1'].corr(df_activo['p'].shift(lag))</code></pre>
             Calcularás la correlación rezagada entre la lluvia consolidada <code>p</code> y la humedad <code>sh1</code> para retardos de -14 a +14 días, identificarás el lag óptimo del pico máximo y trazarás el correlograma con su línea de cota crítica.
           </div>
         `,
-        instruction: "1. Aísla en <code>df_activo</code> la ventana temporal desde <code>'2020-03-24'</code> en adelante y asegura continuidad aplicando <code>.interpolate().bfill().ffill()</code>.<br>2. Define el rango de retardos temporales de -14 a +14 días: <code>lags = range(-14, 15)</code>.<br>3. Mediante una lista por comprensión o un bucle, calcula la correlación de Pearson entre la humedad <code>df_activo['sh1']</code> y la lluvia consolidada desplazada <code>df_activo['p'].shift(lag)</code> para cada valor de lag.<br>4. Identifica el retardo que alcanza la correlación máxima (<code>mejor_lag</code>) y el valor de correlación pico (<code>max_r</code>), y muéstralos en consola.<br>5. Configura una figura de 8.5 &times; 3.8 pulgadas, grafica los puntos del correlograma con marcadores circulares y línea verde azulada (<code>'teal'</code>), añade una línea vertical roja punteada en el lag del pico con <code>plt.axvline()</code>, titula, rotula ejes, cuadrícula y despliega con <code>plt.show()</code>.",
+        instruction: "1. Aísla en <code>df_coactivo</code> la ventana temporal desde <code>'2020-03-24'</code> en adelante y asegura continuidad aplicando <code>.copy().interpolate(method='linear').bfill().ffill()</code>.<br>2. Define el rango de retardos temporales de -14 a +14 días: <code>lags = range(-14, 15)</code>.<br>3. Mediante una lista por comprensión, calcula <code>correlaciones_lag = [df_coactivo['sh1'].corr(df_coactivo['p'].shift(lag)) for lag in lags]</code>.<br>4. Identifica el retardo de máxima correlación con <code>max_idx = np.argmax(correlaciones_lag)</code>, <code>mejor_lag = list(lags)[max_idx]</code> y <code>max_r = correlaciones_lag[max_idx]</code>.<br>5. Configura una figura de 9 &times; 4 pulgadas, grafica el correlograma con marcadores circulares y color <code>'teal'</code>, añade la línea vertical roja en <code>mejor_lag</code> (<code>plt.axvline()</code>) y horizontal en <code>0</code> (<code>plt.axhline()</code>), titula, muestra el gráfico e imprime el resultado en consola.",
         initialCode: `# ==============================================================
 # EJERCICIO 3.7: Correlación Rezagada (Tiempo de Infiltración)
 # La matriz df_ancon ya se encuentra disponible en memoria.
@@ -2134,67 +2135,75 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Paso 1: Aísla df_activo (desde '2020-03-24':) y asegura continuidad con .interpolate().bfill().ffill():
+# Paso 1: Aísla df_coactivo (desde '2020-03-24':) y asegura continuidad con .interpolate(method='linear').bfill().ffill():
 
 
-# Paso 2: Define el rango de retardos temporales (lags) de -14 a +14 días (range(-14, 15)):
+# Paso 2: Define el rango de desfase temporal de -14 a +14 días (lags = range(-14, 15)):
 
 
-# Paso 3: Calcula la correlación entre sh1 y la lluvia desplazada df_activo['p'].shift(lag) para cada lag:
+# Paso 3: Calcula correlaciones_lag entre df_coactivo['sh1'] y df_coactivo['p'].shift(lag):
 
 
-# Paso 4: Encuentra el lag del pico máximo de correlación y muéstralo en consola:
+# Paso 4: Identifica el desfase de máxima correlación (max_idx, mejor_lag, max_r):
 
 
-# Paso 5: Grafica el correlograma (lags vs correlación), añade línea vertical en el pico y muestra la figura:
+# Paso 5: Grafica el correlograma (9x4), añade axvline/axhline, muestra la figura e imprime el resultado:
 
 `,
         hint: `Escribe:
-df_activo = df_ancon.loc['2020-03-24':].interpolate().bfill().ffill()
+df_coactivo = df_ancon.loc['2020-03-24':].copy().interpolate(method='linear').bfill().ffill()
 
+# Rango de desfase temporal: de -14 a +14 días
 lags = range(-14, 15)
-corrs = [df_activo['sh1'].corr(df_activo['p'].shift(lag)) for lag in lags]
+correlaciones_lag = [df_coactivo['sh1'].corr(df_coactivo['p'].shift(lag)) for lag in lags]
 
-mejor_lag = list(lags)[np.argmax(corrs)]
-max_r = max(corrs)
-print(f"Máxima correlación alcanzada: r = {max_r:.3f} en lag = {mejor_lag} días")
+# Identificar el desfase de máxima correlación
+max_idx = np.argmax(correlaciones_lag)
+mejor_lag = list(lags)[max_idx]
+max_r = correlaciones_lag[max_idx]
 
-plt.figure(figsize=(8.5, 3.8))
-plt.plot(list(lags), corrs, marker='o', color='teal', linewidth=1.5)
-plt.axvline(mejor_lag, color='crimson', linestyle='--', label=f'Pico: {mejor_lag} días (r={max_r:.3f})')
+plt.figure(figsize=(9, 4))
+plt.plot(lags, correlaciones_lag, marker='o', color='teal', linewidth=1.5)
+plt.axvline(mejor_lag, color='red', linestyle='--', label=f'Máxima correlación: r={max_r:.3f} en lag={mejor_lag} días')
 plt.axhline(0, color='gray', linestyle=':')
-plt.title('Correlación Rezagada: Lluvia (p) vs. Humedad (sh1) en Ancón Norte', fontweight='bold')
-plt.xlabel('Lag (días de retardo)')
-plt.ylabel('Correlación de Pearson (r)')
+plt.title('Correlación Rezagada: Precipitación vs. Humedad del Suelo', fontweight='bold')
+plt.xlabel('Desfase temporal [Lag en días] (Lluvia retrasada respecto a Humedad)')
+plt.ylabel('Coeficiente de Correlación (r)')
 plt.legend()
 plt.grid(True, alpha=0.5)
 plt.tight_layout()
-plt.show()`,
+plt.show()
+
+print(f"📌 Resultado: La máxima correlación ocurre en un lag de {mejor_lag} días (r = {max_r:.3f}).")`,
         solution: `import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df_activo = df_ancon.loc['2020-03-24':].interpolate().bfill().ffill()
+df_coactivo = df_ancon.loc['2020-03-24':].copy().interpolate(method='linear').bfill().ffill()
 
+# Rango de desfase temporal: de -14 a +14 días
 lags = range(-14, 15)
-corrs = [df_activo['sh1'].corr(df_activo['p'].shift(lag)) for lag in lags]
+correlaciones_lag = [df_coactivo['sh1'].corr(df_coactivo['p'].shift(lag)) for lag in lags]
 
-mejor_lag = list(lags)[np.argmax(corrs)]
-max_r = max(corrs)
-print(f"Máxima correlación alcanzada: r = {max_r:.3f} en lag = {mejor_lag} días")
+# Identificar el desfase de máxima correlación
+max_idx = np.argmax(correlaciones_lag)
+mejor_lag = list(lags)[max_idx]
+max_r = correlaciones_lag[max_idx]
 
-plt.figure(figsize=(8.5, 3.8))
-plt.plot(list(lags), corrs, marker='o', color='teal', linewidth=1.5)
-plt.axvline(mejor_lag, color='crimson', linestyle='--', label=f'Pico: {mejor_lag} días (r={max_r:.3f})')
+plt.figure(figsize=(9, 4))
+plt.plot(lags, correlaciones_lag, marker='o', color='teal', linewidth=1.5)
+plt.axvline(mejor_lag, color='red', linestyle='--', label=f'Máxima correlación: r={max_r:.3f} en lag={mejor_lag} días')
 plt.axhline(0, color='gray', linestyle=':')
-plt.title('Correlación Rezagada: Lluvia (p) vs. Humedad (sh1) en Ancón Norte', fontweight='bold')
-plt.xlabel('Lag (días de retardo)')
-plt.ylabel('Correlación de Pearson (r)')
+plt.title('Correlación Rezagada: Precipitación vs. Humedad del Suelo', fontweight='bold')
+plt.xlabel('Desfase temporal [Lag en días] (Lluvia retrasada respecto a Humedad)')
+plt.ylabel('Coeficiente de Correlación (r)')
 plt.legend()
 plt.grid(True, alpha=0.5)
 plt.tight_layout()
-plt.show()`,
-        validator: (output, hasPlot) => output.includes("Máxima correlación") && hasPlot
+plt.show()
+
+print(f"📌 Resultado: La máxima correlación ocurre en un lag de {mejor_lag} días (r = {max_r:.3f}).")`,
+        validator: (output, hasPlot) => (output.includes("Resultado") || /m[aá]xima correlaci[oó]n/i.test(output)) && hasPlot
       }
     ]
   },
